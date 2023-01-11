@@ -1,8 +1,6 @@
 .container{
     background: rgb(64, 64, 64);
     width: 100%;
-    bottom : 0px;
-    position: absolute;
     color: rgb(95, 95, 95);
     text-align: left;
     font-size: 14px;
