@@ -1,8 +1,14 @@
 import React from 'react'
 
+import '../../../css/header.css'
+import Header from '../../../components/Header'
+
 const T_main = () => {
   return (
-    <div>T_main</div>
+    <div className='T_mainTopDiv'>
+        <Header/>
+        
+    </div>
   )
 }
 
