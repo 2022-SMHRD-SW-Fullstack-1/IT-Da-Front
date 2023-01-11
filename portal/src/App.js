@@ -1,11 +1,13 @@
 import './css/App.css';
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+
+import T_main from './pages/Course/Teacher/T_main'
 
 function App() {
   return (
     <div className="App">
       <Routes>
-
+        <Route path='/' element={<T_main/>}></Route>
       </Routes>
     </div>
   );
