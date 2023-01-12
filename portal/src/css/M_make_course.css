@@ -1,0 +1,27 @@
+.head_title {
+    font-size: 27px;
+    margin-left: 250px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.container {
+    width: 70%;
+    height: 530px;
+    background-color: #f4f4f4;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 30px;
+    font-size: 18px
+}
+
+.container_inner{
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.make_course_input{
+    padding: 10px;
+    font-weight: 800;
+}

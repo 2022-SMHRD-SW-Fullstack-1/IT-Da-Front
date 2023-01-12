@@ -4,7 +4,7 @@ import logo from "../asset/img/logo_cwl.png"
 
 const Footer = () => {
   return (
-    <div className='container'>
+    <div className='footer_container'>
       <div className='container_inner'>
       <div className='footer_top_holder'>
         <div className='footer_top_container'>
