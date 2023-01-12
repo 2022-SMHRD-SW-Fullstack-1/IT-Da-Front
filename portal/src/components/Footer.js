@@ -21,7 +21,7 @@ const Footer = () => {
           <div className='footer_bottom_container_inner'>
             <div className='footer_bottom_container_inner_left'>
               <dl>
-                <dt class="title">
+                <dt className="title">
                   (사)스마트인재개발원
                 </dt>
                 <dd>
@@ -48,7 +48,7 @@ const Footer = () => {
             </div>
             <div className='footer_bottom_container_inner_right'>
               <dl>
-                <dt class="title">고객센터</dt>
+                <dt className="title">고객센터</dt>
                 <dd>
                   전화상담:<span className='emphasize'>062-655-3510, 9</span>
                   <br/>    
