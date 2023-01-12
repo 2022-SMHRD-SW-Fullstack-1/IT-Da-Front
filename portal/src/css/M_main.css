@@ -1,0 +1,35 @@
+.head_title {
+    font-size: 27px;
+    margin-left: 0px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.basic_container {
+    width: 80%;
+    height: 530px;
+    background-color: #f4f4f4;
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-bottom: 30px;
+    font-size: 18px
+}
+
+.edit_course_edit_title{
+    font-size: 18px;
+    margin: 20px;
+}
+
+.edit_course_edit_title > th{
+    padding-bottom: 10px;
+}
+
+.edit_course_edit_content{
+    font-weight: 100;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.edit_course_edit_content > th{
+    
+}
