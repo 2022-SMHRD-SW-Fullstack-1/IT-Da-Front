@@ -24,6 +24,11 @@
   color: #61dafb;
 }
 
+:root {
+  --mainGray : #f4f4f4;
+  --mainBlue : #008ACC;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
