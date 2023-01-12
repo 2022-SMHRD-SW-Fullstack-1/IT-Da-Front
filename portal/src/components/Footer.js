@@ -26,7 +26,7 @@ const Footer = () => {
 
               <Row>
                 <Col xs={12} lg={3}>
-                  (사)스마트인재개발원
+                  <p>(사)스마트인재개발원</p>
                 </Col>
                 <Col xs={12} lg={9}>
                   대표자:차준섭
@@ -35,17 +35,17 @@ const Footer = () => {
                   <br />
                   사업자번호:178-82-00065
                   <br />
-                  <span className='emphasize'>광주본점:</span>광주 동구 예술길 31-15 3~5, 7층
+                  <span className='emphasize'>광주본점 : </span>광주 동구 예술길 31-15 3~5, 7층
                   <br />
-                  <span className='emphasize'>광주남구점:</span>광주 남구 송암로 60 2층
+                  <span className='emphasize'>광주남구점 : </span>광주 남구 송암로 60 2층
                   <br />
-                  <span className='emphasize'>서울점:</span>서울시 성동구 성수일로 99 1201호
+                  <span className='emphasize'>서울점 : </span>서울시 성동구 성수일로 99 1201호
                   <br />
-                  <span className='emphasize'>순천점:</span>전라남도 순천시 중앙로 260
+                  <span className='emphasize'>순천점 : </span>전라남도 순천시 중앙로 260
                   <br />
-                  <span className='emphasize'>FAX:</span>062-655-3510
+                  <span className='emphasize'>FAX : </span>062-655-3510
                   <br />
-                  <span className='emphasize'>E-Mail:</span>smhrd@smhrd.or.kr
+                  <span className='emphasize'>E-Mail : </span>smhrd@smhrd.or.kr
                   <br />
                 </Col>
               </Row>
@@ -54,22 +54,22 @@ const Footer = () => {
             <Col xs={12} lg={6} className='footerInnerBottomR'>
               <Row>
                 <Col xs={12} lg={2}>
-                  고객센터
+                  <p>고객센터</p>
                 </Col>
                 <Col xs={12} lg={10}>
-                  전화상담:<span className='emphasize'>062-655-3510, 9</span>
+                  전화상담 : <span className='emphasize'>062-655-3510, 9</span>
                   <br />
-                  카카오톡:<span className='emphasize'>@스마트인재개발원</span>
+                  카카오톡 : <span className='emphasize'>@스마트인재개발원</span>
                   <br />
-                  홈페이지:<span className='emphasize'>상담신청 메뉴 클릭</span>
+                  홈페이지 : <span className='emphasize'>상담신청 메뉴 클릭</span>
                   <br />
                   상담시간
                   <br />
-                  <span className='emphasize'>전화상담:</span>09시~19시(월~금)
+                  <span className='emphasize'>전화상담 : </span>09시~19시(월~금)
                   <br />
-                  <span className='emphasize'>홈페이지:</span>09시~22시(연중무휴)
+                  <span className='emphasize'>홈페이지 : </span>09시~22시(연중무휴)
                   <br />
-                  <span className='emphasize'>카카오톡:</span>09시~22시(연중무휴)
+                  <span className='emphasize'>카카오톡 : </span>09시~22시(연중무휴)
                   <br />
                   *홈페이지 내 취업/수료율은 2021년도 수치로
                   <br />
