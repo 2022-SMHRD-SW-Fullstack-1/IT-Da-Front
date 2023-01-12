@@ -10,6 +10,7 @@
    align-items: center;
 }
 
+
 /*Announcement 컴포넌트*/
 .annHead {
    display: flex;
@@ -44,7 +45,6 @@
 } 
 
 
-
 /*Attemdamce 컴포넌트*/
 .attTable {
    width: 100%;
@@ -58,3 +58,23 @@
 } .attTable td {
    width: 33%;
 }
+
+
+/*Navbar 컴포넌트*/
+.navbarTopDiv {
+   background-color: var(--mainGray);
+   width: 15rem;
+   height: 100%;
+}
+.navContentBox {
+   padding: 1rem;
+}
+.navTitle {
+   margin-left: 1rem;
+   font-weight: bold;
+}
+.navSubtitle {
+   font-size: 0.9rem;
+}
+
+
