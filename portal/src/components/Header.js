@@ -6,9 +6,6 @@ import profileImg from '../asset/img/img_user.PNG'
 
 const Header = () => {
 
-
-    let name = '체크'
-
     return (
         <div className='headerTopDiv'>
             <div className='headerInnerDiv'>
