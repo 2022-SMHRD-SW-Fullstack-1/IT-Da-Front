@@ -12,11 +12,11 @@ const T_main = () => {
   return (
     <Container>
       <Row>
-        <Col xs={12} lg={5}>
+        <Col lg={12} xl={5}>
           <Attendance />
           <Announcement />
         </Col>
-        <Col xs={12} lg={7}>
+        <Col lg={12} xl={7}>
           <Schedule />
         </Col>
       </Row>
