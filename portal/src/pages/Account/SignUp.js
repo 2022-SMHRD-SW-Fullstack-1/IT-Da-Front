@@ -20,7 +20,7 @@ import * as Yup from 'yup';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
-const Signup = () => {
+const SignUp = () => {
   // 폼 크기 조절입니다
   const paperStyle = { padding: 20, width: 500, margin: '0 auto' };
   const headerStyle = { margin: 0 };
@@ -38,7 +38,7 @@ const Signup = () => {
     addRess: '',
     birthDate: '',
     expire: '',
-    termsAndConditions: false,
+    // termsAndConditions: false,
   };
 
   // 유효성 검사 역할입니다
@@ -48,9 +48,9 @@ const Signup = () => {
       .email('올바른 이메일을 입력해주세요.')
       .required('이메일을 입력해주세요.'),
     gender: Yup.string()
-      .oneOf(['male', 'female'], '성별 뭐지?')
+      .oneOf(['m', 'w'], '성별을 선택해주세요.')
       .required('성별을 선택해주세요.'),
-    phoneNumber: Yup.number()
+    phoneNumber: Yup.string()
       .typeError('올바른 전화번호를 입력해주세요')
       .required('전화번호를 입력해주세요.'),
     password: Yup.string()
@@ -128,7 +128,7 @@ const Signup = () => {
               <br />
               <Field
                 as={TextField}
-                Width
+                fullWidth
                 name="name"
                 label="이름"
                 helperText={<ErrorMessage name="name" />}
@@ -146,7 +146,7 @@ const Signup = () => {
               <br />
               <Field
                 as={TextField}
-                Width
+                fullWidth
                 name="phoneNumber"
                 label="전화번호"
                 helperText={<ErrorMessage name="phoneNumber" />}
@@ -155,7 +155,7 @@ const Signup = () => {
               <br />
               <Field
                 as={TextField}
-                Width
+                fullWidth
                 name="birthDate"
                 label="생년월일"
                 helperText={<ErrorMessage name="birthDate" />}
@@ -222,10 +222,9 @@ const Signup = () => {
               </div>
               {/* 약관동의 */}
               {/* <FormControlLabel
-                                control={<Field as={Checkbox} name="termsAndConditions" />}
-                                label="I accept the terms and conditions."
-                            /> */}
-              <br />
+                control={<Field as={Checkbox} name="termsAndConditions" />}
+                label="I accept the terms and conditions."
+              /> */}
               <Button
                 fullWidth
                 type="submit"
@@ -244,4 +243,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SignUp;

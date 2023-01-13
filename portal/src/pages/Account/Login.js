@@ -19,19 +19,19 @@ import Footer from '../../components/Footer';
 const Login = ({ handleChange }) => {
   const paperStyle = {
     padding: 20,
-    height: '73vh',
+    height: 'vh',
     width: 500,
     margin: '0 auto',
   };
   const avatarStyle = { backgroundColor: '#1bbd7e' };
   const btnstyle = { margin: '8px 0' };
   const initialValues = {
-    username: '',
+    email: '',
     password: '',
     remember: false,
   };
   const validationSchema = Yup.object().shape({
-    username: Yup.string().email('please enter valid email'),
+    email: Yup.string().email('please enter valid email'),
     password: Yup.string(),
   });
   const onSubmit = (values, props) => {
@@ -97,7 +97,7 @@ const Login = ({ handleChange }) => {
         <Typography>
           {' '}
           아직 가입하지 않으셨나요?
-          <Link href="#" onClick={() => handleChange('event', 1)}>
+          <Link href="/signUp" onClick={() => handleChange('event', 1)}>
             회원가입
           </Link>
         </Typography>
