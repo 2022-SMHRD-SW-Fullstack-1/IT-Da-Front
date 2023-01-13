@@ -1,0 +1,102 @@
+.container {
+   padding: 1rem;
+   width: 100%;
+}
+.container>p {
+   font-weight: bold;
+   font-size: larger;
+   margin-left: 2rem;
+}
+.content {
+   background-color: var(--mainGray);
+   width: 100%;
+   border-radius: 10px;
+   max-width: 50rem;
+   padding: 1rem;
+}
+.content>table {
+   width: 100%;
+   text-align: center;
+}
+.content>table>thead {
+   font-weight: bold;
+}
+.content>table td {
+   padding: 0.5rem 0;
+}
+.content>table>tbody>tr {
+   border-top: 1px solid rgb(214, 214, 214);
+}
+
+/*announcement write*/
+.annWriteTitle, .annWriteContent {
+   display: flex;
+   margin: 1rem;
+}
+.annWriteTitle>p, .annWriteContent>p {
+   width: 8rem;
+   margin: 0;
+}
+.annWriteTitle>input, .annWriteContent>input {
+   flex-grow: 1;
+   border: 1px solid rgb(209, 209, 209);
+   border-radius: 5px;
+}
+.annWriteContent {
+   vertical-align: top;
+}
+.annWriteContent input {
+   height: 16rem;
+   vertical-align: top;
+}
+.annWriteButton {
+   display: flex;
+   justify-content: flex-end;
+}
+.annWriteButton>img {
+   height: 1.8rem;
+   margin: 1rem;
+}
+
+/*announcement view*/
+.annViewTitle {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+
+   padding: 1rem 0.5rem;
+   border-top: 1px solid black;
+   border-bottom: 1px solid rgb(209, 209, 209);
+}
+.annViewTitle>p {
+   margin: 0;
+   font-size: 0.95rem;
+   color: rgb(81, 81, 81);
+}
+.annViewTitle>p:first-child {
+   font-size: 1.5rem;
+   font-weight: 500;
+   color: black;
+}
+.annViewContent {
+   min-height: 20rem;
+   border-bottom: 1px solid rgb(209, 209, 209);
+}
+.annViewContent>p {
+   margin: 1rem 0;
+   line-height: 3rem;
+}
+.annViewButton {
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   padding: 1rem 0;
+}
+.annViewButton>button {
+   margin-left: 1rem;
+   border: none;
+   padding: 0.3rem 0.5rem;
+
+   color: white;
+   background-color: rgb(99, 99, 99);
+}
