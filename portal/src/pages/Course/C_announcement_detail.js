@@ -1,14 +1,24 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 import '../../css/Course.css'
 
 const C_announcement_detail = () => {
-   
-  const navigate = useNavigate()
-  const goToWrite = () => {
-    navigate('./write')
-  }
+
+   const navigate = useNavigate()
+   const goToWrite = () => {
+      navigate('./write')
+   }
+
+   const axiosTest = () => {
+      axios
+         .post("/announcement/detail")
+         .then(res => console.log(res))
+         .catch(e => console.log(e));
+   }
+
+
 
    return (
       <div className='container'>
@@ -24,7 +34,7 @@ const C_announcement_detail = () => {
          </div>
          <div className='annViewButton'>
             <button onClick={goToWrite}>글수정</button>
-            <button>글삭제</button>
+            <button onClick={axiosTest}>글삭제</button>
          </div>
       </div>
    )
