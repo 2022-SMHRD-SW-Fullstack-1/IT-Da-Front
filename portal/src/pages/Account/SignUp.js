@@ -1,196 +1,247 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {
+  Grid,
+  Paper,
+  Avatar,
+  Typography,
+  TextField,
+  Button,
+} from '@material-ui/core';
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { FormHelperText } from '@material-ui/core';
+import * as Yup from 'yup';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { useState, useEffect } from 'react';
 
-const SignUp = () => {
-  const [allCheck, setAllCheck] = useState(false);
-  const [ageCheck, setAgeCheck] = useState(false);
-  const [useCheck, setUseCheck] = useState(false);
-  const [marketingCheck, setMarketingCheck] = useState(false);
+const Signup = () => {
+  // 폼 크기 조절입니다
+  const paperStyle = { padding: 20, width: 500, margin: '0 auto' };
+  const headerStyle = { margin: 0 };
+  const avatarStyle = { backgroundColor: '#1bbd7e' };
+  const marginTop = { marginTop: 5 };
 
-  const allBtnEvent = () => {
-    if (allCheck === false) {
-      setAllCheck(true);
-      setAgeCheck(true);
-      setUseCheck(true);
-      setMarketingCheck(true);
-    } else {
-      setAllCheck(false);
-      setAgeCheck(false);
-      setUseCheck(false);
-      setMarketingCheck(false);
-    }
+  //입력 값을 모아주는 역할입니다
+  const initialValues = {
+    name: '',
+    email: '',
+    gender: '',
+    phoneNumber: '',
+    password: '',
+    confirmPassword: '',
+    addRess: '',
+    birthDate: '',
+    expire: '',
+    termsAndConditions: false,
   };
 
-  const ageBtnEvent = () => {
-    if (ageCheck === false) {
-      setAgeCheck(true);
-    } else {
-      setAgeCheck(false);
-    }
+  // 유효성 검사 역할입니다
+  const validationSchema = Yup.object().shape({
+    name: Yup.string().required('이름을 입력해주세요.'),
+    email: Yup.string()
+      .email('올바른 이메일을 입력해주세요.')
+      .required('이메일을 입력해주세요.'),
+    gender: Yup.string()
+      .oneOf(['male', 'female'], '성별 뭐지?')
+      .required('성별을 선택해주세요.'),
+    phoneNumber: Yup.number()
+      .typeError('올바른 전화번호를 입력해주세요')
+      .required('전화번호를 입력해주세요.'),
+    password: Yup.string()
+      .min(8, '비밀번호는 8자리 이상 입력해주세요.')
+      .required('비밀번호를 입력해주세요.'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password')], '비밀번호가 다릅니다.')
+      .required('비밀번호 확인해주세요.'),
+    addRess: Yup.string().required('주소를 입력해주세요.'),
+    birthDate: Yup.string().required('생년월일을 입력해주세요.'),
+    expire: Yup.string()
+      .oneOf(['1year', '3year', 'userWithdrawal'])
+      .required('유효기간을 선택해주세요.'),
+
+    //약관 체크박스 온 & 오프 역할입니다.
+    // termsAndConditions: Yup.string().oneOf(
+    //   ['true'],
+    //   'Accept terms & conditions'
+    // ),
+  });
+
+  const onSubmit = (values, props) => {
+    console.log(values);
+    console.log(props);
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
   };
-
-  const useBtnEvent = () => {
-    if (useCheck === false) {
-      setUseCheck(true);
-    } else {
-      setUseCheck(false);
-    }
-  };
-
-  const marketingBtnEvent = () => {
-    if (marketingCheck === false) {
-      setMarketingCheck(true);
-    } else {
-      setMarketingCheck(false);
-    }
-  };
-
-  useEffect(() => {
-    if (ageCheck === true && useCheck === true && marketingCheck === true) {
-      setAllCheck(true);
-    } else {
-      setAllCheck(false);
-    }
-  }, [ageCheck, useCheck, marketingCheck]);
-
-  const navigate = useNavigate();
-
-  const goToMain = () => {
-    navigate('/');
-  };
-
   return (
-    <div className="signUpForm">
+    //상단 이름
+    <Grid>
       <Header />
-
-      <form>
-        <h1>개인회원가입</h1>
-
-        <div>
-          <label>약관동의</label>
-          <div>
-            <div>
-              <input
-                type="checkbox"
-                id="all-check"
-                checked={allCheck}
-                onChange={allBtnEvent}
+      <Paper style={paperStyle}>
+        <Grid align="center">
+          <h2 style={headerStyle}>회원가입</h2>
+          <Typography variant="caption" gutterBottom>
+            스마트인재개발원 포털에 오신걸 환영합니다!
+          </Typography>
+        </Grid>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {(props) => (
+            <Form>
+              <Field
+                as={TextField}
+                fullWidth
+                name="email"
+                label="이메일"
+                helperText={<ErrorMessage name="email" />}
               />
-              <label htmlFor="all-check">전체동의</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="check1"
-                checked={ageCheck}
-                onChange={ageBtnEvent}
+              <br />
+              <br />
+              <Field
+                as={TextField}
+                fullWidth
+                name="password"
+                type="password"
+                label="비밀번호"
+                helperText={<ErrorMessage name="password" />}
               />
-              <label htmlFor="check1">
-                만 14세 이상입니다 <span>(필수)</span>
-              </label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="check2"
-                checked={useCheck}
-                onChange={useBtnEvent}
+              <br />
+              <Field
+                as={TextField}
+                fullWidth
+                name="confirmPassword"
+                type="password"
+                label="비밀번호 확인"
+                helperText={<ErrorMessage name="confirmPassword" />}
               />
-              <label htmlFor="check2">
-                이용약관 <span>(필수)</span>
-              </label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                id="check3"
-                checked={marketingCheck}
-                onChange={marketingBtnEvent}
+              <br />
+              <br />
+              <Field
+                as={TextField}
+                Width
+                name="name"
+                label="이름"
+                helperText={<ErrorMessage name="name" />}
               />
-              <label htmlFor="check3">
-                마케팅 동의 <span>(선택)</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <input
-            className="signUpId"
-            type="text"
-            placeholder="아이디[4~15자 영문,숫자]"
-          ></input>
-          <button className="signUpDc">중복확인</button>
-        </div>
-        <div>
-          <input
-            className="signUpPw"
-            type="password"
-            placeholder="비밀번호[8자 이상 영문,숫자]"
-          ></input>
-        </div>
-        <div>
-          <input
-            className="signUpPwCk"
-            type="password"
-            placeholder="비밀번호를 재입력해주세요"
-          ></input>
-        </div>
-        <div>
-          <input
-            className="signUpName"
-            type="text"
-            placeholder="이름을 입력해주세요"
-          ></input>
-        </div>
-        <div>
-          <input
-            className="signUpBirth"
-            type="text"
-            placeholder="생년월일 8자리 입력. 성별[선택]"
-          ></input>
-          <input type="radio" name="gender" value="male"></input>남
-          <input type="radio" name="gender" value="female"></input>여
-        </div>
-        <div>
-          <input
-            className="signUpEmail"
-            type="text"
-            placeholder="이메일을 입력해주세요"
-          ></input>
-        </div>
-        <div>
-          <input
-            className="signUpPhone"
-            type="text"
-            placeholder="'-'없이 입력하세요"
-          ></input>
-          <button>인증번호전송</button>
-        </div>
-        <div>
-          <input
-            className="signUpPhoneCk"
-            type="text"
-            placeholder="인증번호"
-          ></input>
-          <button>확인</button>
-        </div>
-        <h3>개인정보 유효기간 선택</h3>
-        <div>
-          <input type="radio" name="delete" value="1year"></input>1년
-          <input type="radio" name="delete" value="3year"></input>3년
-          <input type="radio" name="delete" value="userQuit"></input>회원탈퇴시
-        </div>
-        <button className="signUpButton" type="submit" onClick={goToMain}>
-          가입하기
-        </button>
-      </form>
+              <br />
+              <br />
+              <Field
+                as={TextField}
+                fullWidth
+                name="addRess"
+                label="주소"
+                helperText={<ErrorMessage name="addRess" />}
+              />
+              <br />
+              <br />
+              <Field
+                as={TextField}
+                Width
+                name="phoneNumber"
+                label="전화번호"
+                helperText={<ErrorMessage name="phoneNumber" />}
+              />
+              <br />
+              <br />
+              <Field
+                as={TextField}
+                Width
+                name="birthDate"
+                label="생년월일"
+                helperText={<ErrorMessage name="birthDate" />}
+              />
+              <br />
+              <br />
+              {/* 성별 선택 */}
+              <div>
+                <FormControl component="fieldset" style={marginTop}>
+                  <FormLabel component="legend">성별</FormLabel>
+                  <Field
+                    as={RadioGroup}
+                    aria-label="gender"
+                    name="gender"
+                    style={{ display: 'initial' }}
+                  >
+                    <FormControlLabel
+                      value="w"
+                      control={<Radio />}
+                      label="여자"
+                    />
+                    <FormControlLabel
+                      value="m"
+                      control={<Radio />}
+                      label="남자"
+                    />
+                  </Field>
+                  <FormHelperText>
+                    <ErrorMessage name="gender" />
+                  </FormHelperText>
+                </FormControl>
+              </div>
+              <br />
+              {/* 개인정보 유효기간 */}
+              <div>
+                <FormControl component="fieldset" style={marginTop}>
+                  <FormLabel component="legend">개인정보 유효기간</FormLabel>
+                  <Field
+                    as={RadioGroup}
+                    aria-label="expire"
+                    name="expire"
+                    style={{ display: 'initial' }}
+                  >
+                    <FormControlLabel
+                      value="1year"
+                      control={<Radio />}
+                      label="1년"
+                    />
+                    <FormControlLabel
+                      value="3year"
+                      control={<Radio />}
+                      label="3년"
+                    />
+                    <FormControlLabel
+                      value="userWithdrawal"
+                      control={<Radio />}
+                      label="회원탈퇴시"
+                    />
+                  </Field>
+                  <FormHelperText>
+                    <ErrorMessage name="expire" />
+                  </FormHelperText>
+                </FormControl>
+              </div>
+              {/* 약관동의 */}
+              {/* <FormControlLabel
+                                control={<Field as={Checkbox} name="termsAndConditions" />}
+                                label="I accept the terms and conditions."
+                            /> */}
+              <br />
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                disabled={props.isSubmitting}
+                color="primary"
+              >
+                {props.isSubmitting ? 'Loading' : '가입하기'}
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </Paper>
       <Footer />
-    </div>
+    </Grid>
   );
 };
 
-export default SignUp;
+export default Signup;

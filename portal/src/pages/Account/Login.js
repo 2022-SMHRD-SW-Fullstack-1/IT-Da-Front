@@ -1,87 +1,109 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import {
+  Grid,
+  Paper,
+  Avatar,
+  TextField,
+  Button,
+  Typography,
+  Link,
+} from '@material-ui/core';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-const Login = () => {
-  // const onClickLogin = (e) => {
-  //   e.preventDefault();
-  //   console.log('click login');
-  //   console.log('ID : ', inputId);
-  //   console.log('PW : ', inputPw);
 
-  //   axios
-  //     .post('/api/login', {
-  //       user_id: inputId,
-  //       user_pw: inputPw,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       console.log('로그인 시 데이터: ', res.data);
-
-  //       console.log('로그인 시 받아오는 데이터: ', res.config.data);
-  //       const js = JSON.parse(res.config.data);
-  //       console.log(js.user_id);
-
-  //       console.log(res.data);
-
-  //       if (res.data === 'success') {
-  //         //alert('로그인에 성공했습니다');
-  //         localStorage.setItem('user_id', js.user_id);
-  //         setIsLogin(js.user_id);
-  //         navigate('/');
-  //       } else {
-  //         alert('아이디 또는 비밀번호를 확인해주세요');
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
-
-  const navigate = useNavigate();
-
-  const goToSignUp = () => {
-    navigate('/signup');
-    //회원가입으로 보내준다
+const Login = ({ handleChange }) => {
+  const paperStyle = {
+    padding: 20,
+    height: '73vh',
+    width: 500,
+    margin: '0 auto',
   };
-
+  const avatarStyle = { backgroundColor: '#1bbd7e' };
+  const btnstyle = { margin: '8px 0' };
+  const initialValues = {
+    username: '',
+    password: '',
+    remember: false,
+  };
+  const validationSchema = Yup.object().shape({
+    username: Yup.string().email('please enter valid email'),
+    password: Yup.string(),
+  });
+  const onSubmit = (values, props) => {
+    console.log(values);
+    setTimeout(() => {
+      props.resetForm();
+      props.setSubmitting(false);
+    }, 2000);
+  };
   return (
-    <div className="loginForm">
-      <Header />
-
-      <form>
-        <div>
-          <input
-            className="loginID"
-            type="text"
-            placeholder="아이디를 입력해주세요"
-          ></input>
-        </div>
-        <div>
-          <input
-            className="loginPW"
-            type="password"
-            placeholder="비밀번호를 입력해주세요"
-          ></input>
-        </div>
-        <input className="loginKeep" value="" type="checkbox"></input>로그인
-        유지
-        <input className="idSave" value="" type="checkbox"></input>아이디 저장
-        <div>
-          <button type="submit" className="loginButton">
-            로그인
-          </button>
-          <div>
-            <label className="loginIdSearch">아이디 찾기</label>
-            <label> | </label>
-            <label className="loginPwSearch">비밀번호 찾기</label>
-            <label> | </label>
-            <label className="loginSignUpMoveButton" onClick={goToSignUp}>
-              회원가입
-            </label>
-          </div>
-        </div>
-      </form>
+    <Grid>
+      <Header />;
+      <Paper style={paperStyle}>
+        <Grid align="center">
+          <h2>로그인</h2>
+        </Grid>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          {(props) => (
+            <Form>
+              <Field
+                as={TextField}
+                label="이메일"
+                name="email"
+                fullWidth
+                required
+                helperText={<ErrorMessage name="email" />}
+              />
+              <Field
+                as={TextField}
+                label="비밀번호"
+                name="password"
+                type="password"
+                fullWidth
+                required
+                helperText={<ErrorMessage name="password" />}
+              />
+              <Field
+                as={FormControlLabel}
+                name="remember"
+                control={<Checkbox color="primary" />}
+                label="계정 기억하기"
+              />
+              <Button
+                type="submit"
+                color="primary"
+                variant="contained"
+                disabled={props.isSubmitting}
+                style={btnstyle}
+                fullWidth
+              >
+                {props.isSubmitting ? 'Loading' : '로그인'}
+              </Button>
+            </Form>
+          )}
+        </Formik>
+        <Typography>
+          <Link href="#">비밀번호를 잊으셨나요?</Link>
+        </Typography>
+        <Typography>
+          {' '}
+          아직 가입하지 않으셨나요?
+          <Link href="#" onClick={() => handleChange('event', 1)}>
+            회원가입
+          </Link>
+        </Typography>
+      </Paper>
       <Footer />
-    </div>
+    </Grid>
   );
 };
 
