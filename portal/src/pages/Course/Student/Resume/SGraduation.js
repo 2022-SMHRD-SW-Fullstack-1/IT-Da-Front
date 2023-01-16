@@ -1,31 +1,23 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
+import GraduationCom from './ResumeCom/GraduationCom'
 
 const SGraduation = (props) => {
 
-  const gradTypeList = ['재학', '휴학', '졸업예정', '졸업']
-
-  const gradSchoolRef = useRef()
-  const schoolTypeRef = useRef()
-  const gradDtRef = useRef()
-  const gradTypeRef = useRef()
-  const gradScoreRef = useRef()
+  // const gradTypeList = ['재학', '휴학', '졸업예정', '졸업']
 
   useEffect(() => {
-    gradSchoolRef.current.value = props.item.gradSchool;
-    schoolTypeRef.current.value = props.item.schoolType;
-    gradDtRef.current.value = props.item.gradDt;
-    gradTypeRef.current.value = props.item.gradType;
-    gradScoreRef.current.value = props.item.gradScore;
   }, [props.item])
 
-  const setValue = () => {
-    props.setValue({
-      gradSchool: gradSchoolRef.current.value,
-      schoolType: schoolTypeRef.current.value,
-      gradDt: gradDtRef.current.value,
-      gradType: gradTypeRef.current.value,
-      gradScore: gradScoreRef.current.value
-    })
+  const handleAdd = (newItem) => {
+    console.log('handleGraduation', newItem)
+    // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
+    props.setValue(props.item.concat([{
+      gradSchool: props.item.gradSchool||'',
+      schoolType: props.item.schoolType||'',
+      gradDt: props.item.gradDt||'',
+      gradType: props.item.gradType||'',
+      gradScore: props.item.gradScore||'',
+    }]))
   }
 
   return (
@@ -38,23 +30,11 @@ const SGraduation = (props) => {
         <div>상태</div>
         <div>학점</div>
       </div>
-      <div className='sRContentDiv'>
-        <div><input type='text' name='grad_school' onChange={setValue} ref={gradSchoolRef} /></div>
-        <div><input type='text' name='school_type' onChange={setValue} ref={schoolTypeRef} /></div>
-        <div><input type='text' name='grad_dt' onChange={setValue} ref={gradDtRef} /></div>
-        <div>
-          <select name='grad_type' onChange={setValue} ref={gradTypeRef}>
-            {gradTypeList.map((item) => (
-              <option value={item} key={item}>
-                {item}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div><input type='text' name='grad_score' onChange={setValue} ref={gradScoreRef} /></div>
-      </div>
+      {props.item.map((item, idx) => (
+        <GraduationCom item={item} idx={idx} key={idx} setValue={props.setValue} />
+      ))}
       <div className='sRBtnDiv'>
-        <button className='sRAddBtn'>추가하기</button>
+        <button className='sRAddBtn' onClick={handleAdd} >추가하기</button>
       </div>
     </div>
   )

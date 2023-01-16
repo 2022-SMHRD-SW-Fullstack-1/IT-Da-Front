@@ -1,23 +1,19 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
+import PrizeCom from './ResumeCom/PrizeCom'
 
 const SPrize = (props) => {
 
-  const prizeNameRef = useRef()
-  const prizeOrgRef = useRef()
-  const prizeDtRef = useRef()
-
   useEffect(() => {
-    prizeNameRef.current.value = props.item.name;
-    prizeOrgRef.current.value = props.item.org;
-    prizeDtRef.current.value = props.item.dt;
   }, [props.item])
 
-  const setValue = () => {
-    props.setValue({
-      name: prizeNameRef.current.value,
-      org: prizeOrgRef.current.value,
-      dt: prizeDtRef.current.value
-    })
+  const handleAdd = (newItem) => {
+    console.log('handleCareer', newItem)
+    // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
+    props.setValue(props.item.concat([{
+      org: props.item.org || '',
+      name: props.item.name || '',
+      dt: props.item.dt || '',
+    }]))
   }
 
   return (
@@ -28,13 +24,11 @@ const SPrize = (props) => {
         <div>수상명</div>
         <div>수상일자</div>
       </div>
-      <div className='sRContentDiv'>
-        <div><input type='text' name='prize_org' onChange={setValue} ref={prizeOrgRef} /></div>
-        <div><input type='text' name='prize_name' onChange={setValue} ref={prizeNameRef} /></div>
-        <div><input type='text' name='prize_dt' onChange={setValue} ref={prizeDtRef} /></div>
-      </div>
+      {props.item.map((item, idx) => (
+        <PrizeCom item={item} idx={idx} key={idx} setValue={props.setValue} />
+      ))}
       <div className='sRBtnDiv'>
-        <button className='sRAddBtn'>추가하기</button>
+        <button className='sRAddBtn' onClick={handleAdd}>추가하기</button>
       </div>
     </div>
   )

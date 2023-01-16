@@ -1,26 +1,20 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
+import CareerCom from './ResumeCom/CareerCom'
 
 const SCareer = (props) => {
 
-  const crOrganizationRef = useRef()
-  const crPositionRef = useRef()
-  const crDtRef = useRef()
-  const crActivityRef = useRef()
-
   useEffect(() => {
-    crOrganizationRef.current.value = props.item.organization;
-    crPositionRef.current.value = props.item.position;
-    crDtRef.current.value = props.item.dt;
-    crActivityRef.current.value = props.item.activity;
   }, [props.item])
 
-  const setValue = () => {
-    props.setValue({
-      organization: crOrganizationRef.current.value,
-      position: crPositionRef.current.value,
-      dt: crDtRef.current.value,
-      activity: crActivityRef.current.value
-    })
+  const handleAdd = (newItem) => {
+    console.log('handleCareer', newItem)
+    // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
+    props.setValue(props.item.concat([{
+      organization: props.item.organization||'',
+      position: props.item.position||'',
+      dt: props.item.dt||'',
+      activity: props.item.activity||'',
+    }]))
   }
 
   return (
@@ -32,14 +26,11 @@ const SCareer = (props) => {
         <div>기간</div>
         <div>직무/활동사항</div>
       </div>
-      <div className='sRContentDiv'>
-        <div><input type='text' name='cr_organization' onChange={setValue} ref={crOrganizationRef} /></div>
-        <div><input type='text' name='cr_position' onChange={setValue} ref={crPositionRef} /></div>
-        <div><input type='text' name='cr_dt' onChange={setValue} ref={crDtRef} /></div>
-        <div><input type='text' name='cr_activity' onChange={setValue} ref={crActivityRef} /></div>
-      </div>
+      {props.item.map((item, idx) => (
+        <CareerCom item={item} idx={idx} key={idx} setValue={props.setValue} />
+      ))}
       <div className='sRBtnDiv'>
-        <button className='sRAddBtn'>추가하기</button>
+        <button className='sRAddBtn' onClick={handleAdd}>추가하기</button>
       </div>
     </div>
   )

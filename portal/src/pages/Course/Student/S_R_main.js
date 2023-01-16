@@ -32,40 +32,46 @@ function S_R_main() {
     wishSalary: '내규에 따름',
   })
   //추가버튼있음
-  const [graduation, setGraduation] = useState({
+  const [graduation, setGraduation] = useState([{
     gradSchool: '00학교',
     schoolType: '대학원',
     gradDt: '2022.02.25',
     gradType: '휴학',
     gradScore: '2.7/4.5',
-  })
+  }])
   //추가버튼있음
-  const [career, setCareer] = useState({
-    organization: '스인재',
+  const [careers, setCareer] = useState([
+    {organization: '스마트인재개발원',
     position: '대리',
     dt: '3년',
-    activity: '',
-  })
+    activity: '',},
+
+    {organization: '유티소프트',
+    position: '차장',
+    dt: '3년',
+    activity: '',},
+    
+  ])
   //추가버튼있음
-  const [certification, setCertification] = useState({
+  const [certification, setCertification] = useState([{
     name: '정보처리기사',
     dt: '20230223',
     org: '산업인력공단',
-  })
+  }])
   //추가버튼있음
-  const [prize, setPrize] = useState({
+  const [prize, setPrize] = useState([{
     name: '대상',
     org: '과기부',
     dt: '20220202',
-  })
+  }])
   //추가버튼있음
-  const [military, setMilitary] = useState({
+  const [military, setMilitary] = useState([{
     title: '면제',
     army: '육군',
     sDt: '2000',
     eDt: '2000',
     veteranYn: 'X',
-  })
+  }])
 
   /**저장하기 버튼 */
   const btnResume = () => {
@@ -78,7 +84,7 @@ function S_R_main() {
     console.log(wishArea)
     console.log(wishSalary)
     console.log(graduation)
-    console.log(career)
+    console.log(careers)
     console.log(certification)
     console.log(prize)
     console.log(military)
@@ -104,7 +110,7 @@ function S_R_main() {
         {/* 아래의 컴포넌트는 추가 버튼이 있어서 버튼을 누를 때마다 map으로 추가해야함 */}
         <div>
           <SGraduation item={graduation} setValue={setGraduation} />
-          <SCareer item={career} setValue={setCareer} />
+          <SCareer item={careers} setValue={setCareer} />
         </div>
         <div>
           <SCertification item={certification} setValue={setCertification} />

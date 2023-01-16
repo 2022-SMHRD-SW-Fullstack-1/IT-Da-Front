@@ -1,23 +1,19 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
+import CertificationCom from './ResumeCom/CertificationCom'
 
 const SCertification = (props) => {
 
-  const certOrgRef = useRef()
-  const certNameRef = useRef()
-  const certDtRef = useRef()
-
   useEffect(() => {
-    certOrgRef.current.value = props.item.org;
-    certNameRef.current.value = props.item.name;
-    certDtRef.current.value = props.item.dt;
   }, [props.item])
 
-  const setValue = () => {
-    props.setValue({
-      org: certOrgRef.current.value,
-      name: certNameRef.current.value,
-      dt: certDtRef.current.value
-    })
+  const handleAdd = (newItem) => {
+    console.log('handleCertification', newItem)
+    // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
+    props.setValue(props.item.concat([{
+      org: props.item.org||'',
+      name: props.item.name||'',
+      dt: props.item.dt||'',
+    }]))
   }
 
   return (
@@ -28,13 +24,11 @@ const SCertification = (props) => {
         <div>자격증명</div>
         <div>발행일</div>
       </div>
-      <div className='sRContentDiv'>
-        <div><input type='text' name='cert_org' onChange={setValue} ref={certOrgRef} /></div>
-        <div><input type='text' name='cert_name' onChange={setValue} ref={certNameRef} /></div>
-        <div><input type='text' name='cert_dt' onChange={setValue} ref={certDtRef} /></div>
-      </div>
+      {props.item.map((item, idx) => (
+        <CertificationCom item={item} idx={idx} key={idx} setValue={props.setValue} />
+      ))}
       <div className='sRBtnDiv'>
-        <button className='sRAddBtn'>추가하기</button>
+        <button className='sRAddBtn' onClick={handleAdd}>추가하기</button>
       </div>
     </div>
   )
