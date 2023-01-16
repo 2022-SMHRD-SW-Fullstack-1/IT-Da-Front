@@ -1,23 +1,39 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
 
-import T_main from '../pages/Course/Teacher/T_main'
-import M_main from '../pages/Manager/M_main'
-import C_announcement from '../pages/Course/C_announcement';
-import M_make_course from '../pages/Manager/M_make_course';
-import M_edit_course from '../pages/Manager/M_edit_course';
-import M_make_e_key from '../pages/Manager/M_make_e_key';
+import T_Routes from './T_Routes'
+import S_Routes from './S_Routes';
+import M_Routes from './M_Routes';
+import Navbar from '../components/Navbar';
 
 const ITDaRoutes = () => {
+
+   //Navbar용 메뉴 리스트
+   const menuList = [{ title: "수업관리", subtitle: [{ title: "공지사항", url: "/C_announcement" }, { title: "강의 일정", url: "/" }, { title: "공유 자료실", url: "/" }, { title: "연장사용 신청서", url: "/" }] }, { title: "프로젝트", subtitle: [{ title: "프로젝트 관리", url: "/" }] }, { title: "학생관리", subtitle: [{ title: "출결 관리", url: "/" }, { title: "학생 정보", url: "/" }] }]
+
    return (
-      <Routes>
-         <Route path='/' element={<T_main />}></Route>
-         <Route path='/announcement' element={<C_announcement />}></Route>
-         <Route path='/m_main' element={<M_main/>}></Route>
-         <Route path='/make_course' element={<M_make_course/>}></Route>
-         <Route path='/edit_course' element={<M_edit_course/>}></Route>
-         <Route path='/make_e_key' element={<M_make_e_key/>}></Route>
-      </Routes>
+
+      <div className='T_mainInner'>
+         <div className='T_mainInnerL'>
+            <Navbar menuList={menuList} />
+         </div>
+         {(window.sessionStorage.getItem("role") === 's') && (
+            <div className='T_mainInnerR'>
+               <S_Routes />
+            </div>
+         )}
+         {(window.sessionStorage.getItem("role") === 't') && (
+            <div className='T_mainInnerR'>
+               <T_Routes />
+            </div>
+         )}
+         {(window.sessionStorage.getItem("role") === 'a') && (
+            <div className='T_mainInnerR'>
+               <M_Routes />
+            </div>
+         )}
+      </div>
+
+
    )
 }
 

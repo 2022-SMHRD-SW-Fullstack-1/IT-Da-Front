@@ -1,10 +1,13 @@
 import React, { useState, useRef } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 import '../../css/Register.css'
 import Agreement from './Agreement'
 
 const Register = () => {
+
+   const navigate = useNavigate()
 
    const [id, setId] = useState('');
    const onIdChange = e => {
@@ -62,8 +65,12 @@ const Register = () => {
       // console.log(address)
       // console.log(expire)
 
-
-      
+      //back으로 회원가입 데이터 전송
+      axios
+         .post("/member/register", { id: id, pw: pw, name: name, bd: bd, gender: gender, tel: tel, address: address, expire: expire})
+         .then(res => console.log(res))
+         .catch(e => console.log(e));
+         navigate('/')
    }
 
    return (

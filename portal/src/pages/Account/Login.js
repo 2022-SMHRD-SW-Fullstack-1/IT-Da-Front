@@ -33,10 +33,35 @@ const Login = () => {
    const onMLoginClick = () => {
       console.log(id)
       console.log(pw)
+
+      axios
+         .post("/member/login", { id: id, pw: pw })
+         .then(res => {
+            console.log(res.data)
+
+            if (res.data.mb_job == 's') {
+               window.sessionStorage.setItem("loginId", res.data.mb_id)
+               window.sessionStorage.setItem("role", 's')
+               window.location.replace("/")
+            } else if (res.data.mb_job == 't') {
+               window.sessionStorage.setItem("loginId", res.data.mb_id)
+               window.sessionStorage.setItem("role", 't')
+               window.location.replace("/")
+            } else if (res.data.mb_job == 'a') {
+               window.sessionStorage.setItem("loginId", res.data.mb_id)
+               window.sessionStorage.setItem("role", 'a')
+               window.location.replace("/")
+            } else
+               alert("일치하는 회원정보가 없습니다")
+         })
+         .catch(e => console.log(e));
+
    }
 
    const onELoginClick = () => {
       console.log(key)
+
+      navigate('/e_main')
    }
 
    return (
@@ -49,7 +74,7 @@ const Login = () => {
             {tab ? (
                <div className='memberLogin'>
                   <input ref={inputId} onChange={onIdChange} value={id} type='text' placeholder='아이디를 입력해주세요'></input>
-                  <input ref={inputPw} onChange={onPwChange} value={pw} type='text' placeholder='비밀번호를 입력해주세요'></input>
+                  <input ref={inputPw} onChange={onPwChange} value={pw} type='password' placeholder='비밀번호를 입력해주세요'></input>
                   <div>
                      <input type='checkbox'></input>
                      <span>로그인 유지</span>
