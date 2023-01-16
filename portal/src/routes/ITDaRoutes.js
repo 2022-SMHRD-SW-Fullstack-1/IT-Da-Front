@@ -16,21 +16,11 @@ const ITDaRoutes = () => {
          <div className='T_mainInnerL'>
             <Navbar menuList={menuList} />
          </div>
-         {(window.sessionStorage.getItem("role") === 's') && (
-            <div className='T_mainInnerR'>
-               <S_Routes />
-            </div>
-         )}
-         {(window.sessionStorage.getItem("role") === 't') && (
-            <div className='T_mainInnerR'>
-               <T_Routes />
-            </div>
-         )}
-         {(window.sessionStorage.getItem("role") === 'a') && (
-            <div className='T_mainInnerR'>
-               <M_Routes />
-            </div>
-         )}
+         <div className='T_mainInnerR'>
+         {(window.sessionStorage.getItem("role") === 's') && (<S_Routes />)}
+         {(window.sessionStorage.getItem("role") === 't') && (<T_Routes />)}
+         {(window.sessionStorage.getItem("role") === 'a') && (<M_Routes />)}
+         </div>
       </div>
 
 
