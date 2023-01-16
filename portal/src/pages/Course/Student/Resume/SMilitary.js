@@ -1,73 +1,70 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const SMilitary = (props) => {
-    const miliTitleList = ['필', '미필', '면제']
+  const miliTitleList = ['필', '미필', '면제']
 
-    const [miliTitle, setMiliTitle] = useState('');
-    const [miliArmy, setMiliArmy] = useState('');
-    const [miliSDt, setMiliSDt] = useState('');
-    const [miliEDt, setMiliEDt] = useState('');
-    const [veteranYn, setVeteranYn] = useState('');
+  // const handleMiliTitle = (e) => {
+  //   setMiliTitle(e.target.value);
+  // };
 
-    const handleMiliTitle = (e) => {
-        setMiliTitle(e.target.value);
-    };
-
-    const miliTitleRef = useRef()
-    const miliArmyRef = useRef()
-    const miliSDtRef = useRef()
-    const miliEDtRef = useRef()
-    const veteranYnRef = useRef()
+  const miliTitleRef = useRef()
+  const miliArmyRef = useRef()
+  const miliSDtRef = useRef()
+  const miliEDtRef = useRef()
+  const veteranYnRef = useRef()
 
 
-    useEffect(() => {
-        miliTitleRef.current.value = props.item.title;
-        miliArmyRef.current.value = props.item.army;
-        miliSDtRef.current.value = props.item.sDt;
-        miliEDtRef.current.value = props.item.eDt;
-        veteranYnRef.current.value = props.item.veteranYn;
-      }, [props]);
+  useEffect(() => {
+    miliTitleRef.current.value = props.item.title;
+    miliArmyRef.current.value = props.item.army;
+    miliSDtRef.current.value = props.item.sDt;
+    miliEDtRef.current.value = props.item.eDt;
+    veteranYnRef.current.value = props.item.veteranYn;
+  }, [props.item])
+  // }, [miliTitleRef, miliArmyRef, miliSDtRef, miliEDtRef, veteranYnRef]);
 
+  const setValue = () => {
+    props.setValue({
+      title: miliTitleRef.current.value,
+      army: miliArmyRef.current.value,
+      sDt: miliSDtRef.current.value,
+      eDt: miliEDtRef.current.value,
+      veteranYn: veteranYnRef.current.value,
+    })
+  }
 
-    
-    return (
-        <div className='military'>
-            <table className='resumeTable'>
-                <tbody>
-                    <tr className='sRTitle'>
-                        <th>병역</th>
-                    </tr>
-                    <tr>
-                        <td>구분</td>
-                        <td>군별</td>
-                        <td>복무기간</td>
-                        <td></td>
-                        <td>복무기간</td>
-                        <td>보훈대상</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name='mili_title' onChange={handleMiliTitle} ref={miliTitleRef}>
-                                {miliTitleList.map((item) => (
-                                    <option value={item} key={item}>
-                                        {item}
-                                    </option>
-                                ))}
-                            </select>
-                        </td>
-                        <td><input type='text' name='mili_army' onChange={() => setMiliArmy(miliArmyRef.current.value)} ref={miliArmyRef} /></td>
-                        <td><input type='text' name='mili_s_dt' onChange={() => setMiliSDt(miliSDtRef.current.value)} ref={miliSDtRef} /></td>
-                        <td>~</td>
-                        <td><input type='text' name='mili_e_dt' onChange={() => setMiliEDt(miliEDtRef.current.value)} ref={miliEDtRef} /></td>
-                        <td><input type='text' name='veteran_yn' onChange={() => setVeteranYn(veteranYnRef.current.value)} ref={veteranYnRef} /></td>
-                    </tr>
-                    <tr>
-                        <td><button>추가하기</button></td>
-                    </tr>
-                </tbody>
-            </table>
+  return (
+    <div className='resumeDiv'>
+      <p className='sRTitle'>병역</p>
+      <div className='sRTitleDiv'>
+        <div>구분</div>
+        <div>군별</div>
+        <div>복무기간</div>
+        <div></div>
+        <div>복무기간</div>
+        <div>보훈대상</div>
+      </div>
+      <div className='sRContentDiv'>
+        <div>
+          <select name='mili_title' onChange={setValue} ref={miliTitleRef}>
+            {miliTitleList.map((item) => (
+              <option value={item} key={item}>
+                {item}
+              </option>
+            ))}
+          </select>
         </div>
-    )
+        <div><input type='text' name='mili_army' onChange={setValue} ref={miliArmyRef} /></div>
+        <div><input type='text' name='mili_s_dt' onChange={setValue} ref={miliSDtRef} /></div>
+        <div>~</div>
+        <div><input type='text' name='mili_e_dt' onChange={setValue} ref={miliEDtRef} /></div>
+        <div><input type='text' name='veteran_yn' onChange={setValue} ref={veteranYnRef} /></div>
+      </div>
+      <div className='sRBtnDiv'>
+        <button className='sRAddBtn'>추가하기</button>
+      </div>
+    </div>
+  )
 }
 
 export default SMilitary

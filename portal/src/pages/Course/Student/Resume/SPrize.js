@@ -1,45 +1,43 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 const SPrize = (props) => {
 
-    const [prizeName, setPrizeName] = useState('');
-    const [prizeOrg, setPrizeOrg] = useState('');
-    const [prizeDt, setPrizeDt] = useState('');
+  const prizeNameRef = useRef()
+  const prizeOrgRef = useRef()
+  const prizeDtRef = useRef()
 
-    const prizeNameRef = useRef()
-    const prizeOrgRef = useRef()
-    const prizeDtRef = useRef()
+  useEffect(() => {
+    prizeNameRef.current.value = props.item.name;
+    prizeOrgRef.current.value = props.item.org;
+    prizeDtRef.current.value = props.item.dt;
+  }, [props.item])
 
-    useEffect(() => {
-        prizeNameRef.current.value = props.item.org;
-        prizeOrgRef .current.value = props.item.name;
-        prizeDtRef.current.value = props.item.dt;
-      }, [props]);
+  const setValue = () => {
+    props.setValue({
+      name: prizeNameRef.current.value,
+      org: prizeOrgRef.current.value,
+      dt: prizeDtRef.current.value
+    })
+  }
 
-    return (
-        <div className='prize'>
-            <table className='resumeTable'>
-                <tbody>
-                    <tr className='sRTitle'>
-                        <th>수상내역</th>
-                    </tr>
-                    <tr>
-                        <td>기관명</td>
-                        <td>수상명</td>
-                        <td>수상일자</td>
-                    </tr>
-                    <tr>
-                        <td><input type='text' name='prize_org' onChange={() => setPrizeOrg(prizeOrgRef.current.value)} ref={prizeOrgRef} /></td>
-                        <td><input type='text' name='prize_name' onChange={() => setPrizeName(prizeNameRef.current.value)} ref={prizeNameRef} /></td>
-                        <td><input type='text' name='prize_dt' onChange={() => setPrizeDt(prizeDtRef.current.value)} ref={prizeDtRef} /></td>
-                    </tr>
-                    <tr>
-                        <td><button>추가하기</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    )
+  return (
+    <div className='resumeDiv'>
+      <p className='sRTitle'>수상내역</p>
+      <div className='sRTitleDiv'>
+        <div>기관명</div>
+        <div>수상명</div>
+        <div>수상일자</div>
+      </div>
+      <div className='sRContentDiv'>
+        <div><input type='text' name='prize_org' onChange={setValue} ref={prizeOrgRef} /></div>
+        <div><input type='text' name='prize_name' onChange={setValue} ref={prizeNameRef} /></div>
+        <div><input type='text' name='prize_dt' onChange={setValue} ref={prizeDtRef} /></div>
+      </div>
+      <div className='sRBtnDiv'>
+        <button className='sRAddBtn'>추가하기</button>
+      </div>
+    </div>
+  )
 }
 
 export default SPrize
