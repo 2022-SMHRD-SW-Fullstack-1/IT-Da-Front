@@ -41,8 +41,15 @@
 .headerRight {
     display: flex;
     align-items: center;
-} .headerRight>p {
+} 
+.headerRight>p {
     margin: 0;
+}
+.headerRight>a {
+    margin-left: 1.5rem;
+    font-size: 1.1rem;
+    color: black;
+    text-decoration: none;
 }
 
 .headerImgProfile {
