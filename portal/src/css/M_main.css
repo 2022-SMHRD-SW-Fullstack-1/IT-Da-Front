@@ -1,18 +1,73 @@
 .head_title {
     font-size: 27px;
-    margin-left: 0px;
+    margin-left: 50px;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 
 .basic_container {
     width: 80%;
-    height: 530px;
+    height: inherit;
     background-color: #f4f4f4;
-    margin-left: 250px;
-    margin-right: 250px;
+    margin-left: 50px;
+    margin-right: 100px;
     margin-bottom: 30px;
     font-size: 18px
+}
+
+.course_make_container_inner {
+    padding-top: 30px;
+    margin-left: 50px;
+    padding-right: 50px;
+    display: flex;
+}
+
+.container_inner_left {
+    width: 300px;
+    margin-right: 100px;
+}
+
+.container_inner_left>p {
+    width: 300px;
+    padding: 20px;
+    font-weight: 800;
+}
+
+.container_inner_right {}
+
+
+.container_inner_right>input {
+    width: 400px;
+    height: 0;
+    padding: 20px;
+    margin: 20px;
+}
+
+.make_course_button {
+    display: flex;
+    justify-self: center;
+}
+
+/* list css */
+.course_edit_container_inner {
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_course_table {
+    padding-bottom: 5px;
+    justify-content: center;
+}
+
+.edit_course_table>thead {
+    font-size: 18px;
+}
+
+.edit_course_table>tbody {
+    font-size: 14px;
 }
 
 .edit_course_edit_title{
