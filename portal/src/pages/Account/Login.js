@@ -42,14 +42,17 @@ const Login = () => {
             if (res.data.mb_job == 's') {
                window.sessionStorage.setItem("loginId", res.data.mb_id)
                window.sessionStorage.setItem("role", 's')
+               window.sessionStorage.setItem("userName", res.data.mb_name)
                window.location.replace("/")
             } else if (res.data.mb_job == 't') {
                window.sessionStorage.setItem("loginId", res.data.mb_id)
                window.sessionStorage.setItem("role", 't')
+               window.sessionStorage.setItem("userName", res.data.mb_name)
                window.location.replace("/")
             } else if (res.data.mb_job == 'a') {
                window.sessionStorage.setItem("loginId", res.data.mb_id)
                window.sessionStorage.setItem("role", 'a')
+               window.sessionStorage.setItem("userName", res.data.mb_name)
                window.location.replace("/")
             } else
                alert("일치하는 회원정보가 없습니다")
@@ -60,8 +63,9 @@ const Login = () => {
 
    const onELoginClick = () => {
       console.log(key)
-
-      navigate('/e_main')
+      window.sessionStorage.setItem("role", 'e')
+      window.sessionStorage.setItem("userName", '유티소프트')
+      window.location.replace("/e_main")
    }
 
    return (
