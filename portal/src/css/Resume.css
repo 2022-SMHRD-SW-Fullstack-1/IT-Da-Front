@@ -1,0 +1,54 @@
+.topDiv_resume {
+   min-width: 50rem;
+   margin: 2rem;
+   padding: 1.5rem 0.7rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.topDiv_resume>div {
+   width: 46rem;
+}
+.topDiv_resume>div>table {
+   margin-bottom: 1rem;
+   width: 100%;
+   text-align: center;
+}
+.topDiv_resume>div td {
+   padding-top: 0.5rem;
+}
+/*각 div 별 간격 조절용*/
+.topDiv_resume>div>p {
+   margin-top: 3rem;
+}
+.r_basic {
+   display: flex;
+}
+/*증명사진 div*/
+.r_basic>div:first-child {
+margin: 0 1rem;
+}
+/*이름 성별 태어난연도 div, 각 div 제목 p 태그*/
+.r_basic>div:last-child>div:first-child, .topDiv_resume>div>p {
+   display: flex;
+   align-items: center;
+   border-bottom: 3px solid rgb(209, 209, 209);
+   margin-bottom: 0.5rem;
+}
+.r_basic>div:last-child>div:first-child>p {
+   margin: 0;
+}
+/*이름 p태그, 각 div 제목 p 태그*/
+.r_basic>div:last-child>div:first-child>p:first-child, .topDiv_resume>div>p {
+   font-size: 1.4rem;
+   font-weight: bold;
+   margin-right: 1rem;
+}
+/*연락처 이메일 주소 희망지역 div들*/
+.r_basic>div:last-child>div>div {
+   display: flex;
+}
+.r_basic>div:last-child>div>div>p:first-child {
+   min-width: 5rem;
+   text-align: center;
+}
