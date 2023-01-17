@@ -8,11 +8,8 @@
    margin-left: 2rem;
 }
 .content {
-   background-color: var(--mainGray);
    width: 100%;
-   border-radius: 10px;
    max-width: 50rem;
-   padding: 1rem;
 }
 .content>table {
    width: 100%;
@@ -28,35 +25,42 @@
    border-top: 1px solid rgb(214, 214, 214);
 }
 
+
 /*announcement write*/
-.annWriteTitle, .annWriteContent {
-   display: flex;
-   margin: 1rem;
+.annContent>input {
+   border: 1px solid #ccc;
+   width: 100%;
 }
-.annWriteTitle>p, .annWriteContent>p {
-   width: 8rem;
-   margin: 0;
+.annContent>p {
+   margin: 0.5rem 0;
 }
-.annWriteTitle>input, .annWriteContent>input {
-   flex-grow: 1;
-   border: 1px solid rgb(209, 209, 209);
-   border-radius: 5px;
+.annContent>p:first-child, .content>table {
+   border-top: 1px solid;
+   padding-top: 1rem;
 }
-.annWriteContent {
-   vertical-align: top;
-}
-.annWriteContent input {
-   height: 16rem;
-   vertical-align: top;
-}
-.annWriteButton {
+
+/*저장하기 버튼 CSS*/
+.annWriteButton, .annViewButton {
    display: flex;
    justify-content: flex-end;
+   padding: 1rem 0;
 }
-.annWriteButton>img {
-   height: 1.8rem;
-   margin: 1rem;
+.annWriteButton>button, .annViewButton>button {
+   border: none;
+   padding: 0.4rem 1rem;
+   margin-left: 1rem;
+   border-radius: 5px;
+   background-color: rgb(75, 75, 75);;
+   color: white;
 }
+
+.quill {
+   height: 20rem;
+}
+.quill * {
+   max-height: 16rem;
+}
+
 
 /*announcement view*/
 .annViewTitle {
@@ -85,18 +89,4 @@
 .annViewContent>p {
    margin: 1rem 0;
    line-height: 3rem;
-}
-.annViewButton {
-   display: flex;
-   align-items: center;
-   justify-content: flex-end;
-   padding: 1rem 0;
-}
-.annViewButton>button {
-   margin-left: 1rem;
-   border: none;
-   padding: 0.3rem 0.5rem;
-
-   color: white;
-   background-color: rgb(99, 99, 99);
 }

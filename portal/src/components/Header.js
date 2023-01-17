@@ -13,12 +13,16 @@ const Header = () => {
         window.location.replace("/")
     }
 
+    const onClickLogo = () => {
+        window.location.replace("/")
+    }
+
 
 
     return (
         <div className='headerTopDiv'>
             <div className='headerInnerDiv'>
-                <img className='headerLogo' src={logo} />
+                <img onClick={onClickLogo} className='headerLogo hoberHand' src={logo} />
                 {(window.sessionStorage.getItem("role") === 's') && (
                     <div className='headerRight'>
                     <p>{window.sessionStorage.getItem("userName")}</p>
