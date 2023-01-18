@@ -14,6 +14,7 @@ const Register = () => {
   const [bdMessage, setBdMessage] = useState('');
   const [telMessage, setTelMessage] = useState('');
   const [addrMessage, setAddrMessage] = useState('');
+  const [keyMessage, setKeyMessage] = useState('');
 
   //const [genderMessage, setGenderMessage] = useState('');
   // const [expireMessage, setExpireMessage] = useState('');
@@ -26,6 +27,7 @@ const Register = () => {
   const [isBd, setIsBd] = useState(false);
   const [isTel, setIsTel] = useState(false);
   const [isAddr, setIsAddr] = useState(false);
+  const [isKey, setIsKey] = useState(false);
 
   //const [isGender, setIsGender] = useState(false);
   //const [isExpire, setIsExpire] = useState(false);
@@ -128,6 +130,18 @@ const Register = () => {
     }
   };
 
+  const [course_key, setCourse_key] = useState('');
+  const onCourse_keyChange = (e) => {
+      setCourse_key(e.target.value)
+      if (e.target.value.length != 8) {
+         setKeyMessage('올바른 키를 입력해주세요.')
+         setIsKey(false)
+      } else {
+         setKeyMessage('')
+         setIsKey(true)
+      }
+  }
+
   const [expire, setExpire] = useState('leave');
   const onExpireChange = (e) => {
     setExpire(e.target.value);
@@ -137,12 +151,12 @@ const Register = () => {
   const [notAllow, setNotAllow] = useState(true);
 
   useEffect(() => {
-    if (isId && isPw && isPwCheck && isName && isBd && isTel && isAddr) {
+    if (isId && isPw && isPwCheck && isName && isBd && isTel && isAddr && isKey) {
       setNotAllow(false);
       return;
     }
     setNotAllow(true);
-  }, [isId, isPw, isPwCheck, isName, isBd, isTel, isAddr]);
+  }, [isId, isPw, isPwCheck, isName, isBd, isTel, isAddr, isKey]);
 
   const onClickRegister = () => {
     // console.log(id)
@@ -166,6 +180,7 @@ const Register = () => {
         tel: tel,
         address: address,
         expire: expire,
+        key: course_key
       })
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
@@ -243,6 +258,11 @@ const Register = () => {
         </div>
         <span>{addrMessage}</span>
 
+        <div>
+          <span>과정 키 (8자)</span>
+          <input onChange={onCourse_keyChange} value={course_key} type="text"></input>
+        </div>
+        <span>{keyMessage}</span>
         <br />
         <br />
         <h6>개인정보 유효기간 선택</h6>
