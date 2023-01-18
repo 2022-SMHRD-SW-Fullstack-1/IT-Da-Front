@@ -6,10 +6,10 @@
 }
 
 .basic_container {
-    width: 80%;
-    height: inherit;
+    width: fit-content;
+    height: fit-content;
     background-color: #f4f4f4;
-    margin-left: 50px;
+    padding-left: 50px;
     margin-right: 100px;
     margin-bottom: 30px;
     font-size: 18px

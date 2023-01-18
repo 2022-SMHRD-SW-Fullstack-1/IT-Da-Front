@@ -1,49 +1,42 @@
-import "../../css/M_main.css"
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import M_course_list from "./M_course_list"
+import M_e_list from './M_e_list'
 
-const M_edit_course = (props) => {
 
-    const [course, setCourse] = useState([])
+const M_edit_e = (props) => {
+
+    const [enter, setEnter] = useState([])
 
     useEffect(() => {
-        axios
-            .get("/select_on_course")
+        axios.get("/select_e")
             .then(function (res) {
-                setCourse(res.data)
                 console.log(res.data)
+                setEnter(res.data)
             })
             .catch(function (error) {
                 console.log("error")
             })
     }, [])
 
-    const courseList =
-        course.map((item) => <M_course_list item={item} />)
+    const enterList =
+        enter.map((item) => <M_e_list item={item} key={enter} />)
 
     return (
         <div className='basic_container'>
             <div className='head_title'>
-                <strong>전체 과정</strong>
+                <strong>기업 정보</strong>
             </div>
             <div className='course_edit_container_inner'>
                 <div className='edit_course_table'>
                     <table>
                         <thead>
                             <tr className='edit_course_edit_title'>
-                                <th>과정주제</th>
-                                <th>과정명</th>
-                                <th>캠퍼스</th>
-                                <th>시작날짜</th>
-                                <th>종료날짜</th>
-                                <th>담임명</th>
-                                <th>총원</th>
-                                <th>key</th>
+                                <th>기업명</th>
+                                <th>기업키</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {courseList}
+                            {enterList}
                         </tbody>
                     </table>
                 </div>
@@ -52,4 +45,4 @@ const M_edit_course = (props) => {
     )
 }
 
-export default M_edit_course
+export default M_edit_e

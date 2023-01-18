@@ -9,7 +9,7 @@ const M_main = (props) => {
     { title: "정보공개", subtitle: [{ title: "공개 키 생성(기업용)", url: "/make_e_key" }] }]
 
     const [course, setCourse] = useState([])
-   
+
     useEffect(() => {
         axios
             .get("/select_all_course")
@@ -23,7 +23,7 @@ const M_main = (props) => {
     }, [])
 
     const courseList =
-        course.map((item) => <M_course_list course_subject={item.course_subject} item={item}/>)
+        course.map((item) => <M_course_list item={item} key={course} />)
 
 
     return (
@@ -47,7 +47,7 @@ const M_main = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                            {courseList}                            
+                            {courseList}
                         </tbody>
 
                     </table>
