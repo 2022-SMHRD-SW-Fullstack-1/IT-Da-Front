@@ -7,14 +7,14 @@ const SMilitary = (props) => {
   }, [props.item])
 
   const handleAdd = (newItem) => {
-    console.log('handleCareer', newItem)
+    // console.log('handleCareer', newItem)
     // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
     props.setValue(props.item.concat([{
-      title: props.item.title || '',
-      army: props.item.army || '',
-      sDt: props.item.sDt || '',
-      eDt: props.item.eDt || '',
-      veteranYn: props.item.veteranYn || '',
+      mili_title: props.item.mili_title || '',
+      mili_army: props.item.mili_army || '',
+      mili_sDt: props.item.mili_s_dt || '',
+      mili_eDt: props.item.mili_e_dt || '',
+      veteran_yn: props.item.veteran_yn || '',
     }]))
   }
 

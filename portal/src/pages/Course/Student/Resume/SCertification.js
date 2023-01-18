@@ -7,12 +7,12 @@ const SCertification = (props) => {
   }, [props.item])
 
   const handleAdd = (newItem) => {
-    console.log('handleCertification', newItem)
+    // console.log('handleCertification', newItem)
     // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
     props.setValue(props.item.concat([{
-      org: props.item.org||'',
-      name: props.item.name||'',
-      dt: props.item.dt||'',
+      cert_org: props.item.cert_org||'',
+      cert_name: props.item.cert_name||'',
+      cert_dt: props.item.cert_dt||'',
     }]))
   }
 

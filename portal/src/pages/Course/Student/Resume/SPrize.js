@@ -7,12 +7,12 @@ const SPrize = (props) => {
   }, [props.item])
 
   const handleAdd = (newItem) => {
-    console.log('handleCareer', newItem)
+    // console.log('handleCareer', newItem)
     // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
     props.setValue(props.item.concat([{
-      org: props.item.org || '',
-      name: props.item.name || '',
-      dt: props.item.dt || '',
+      prize_org: props.item.prize_org || '',
+      prize_name: props.item.prize_name || '',
+      prize_dt: props.item.prize_dt || '',
     }]))
   }
 

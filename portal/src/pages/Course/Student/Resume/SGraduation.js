@@ -9,14 +9,14 @@ const SGraduation = (props) => {
   }, [props.item])
 
   const handleAdd = (newItem) => {
-    console.log('handleGraduation', newItem)
+    // console.log('handleGraduation', newItem)
     // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
     props.setValue(props.item.concat([{
-      gradSchool: props.item.gradSchool||'',
-      schoolType: props.item.schoolType||'',
-      gradDt: props.item.gradDt||'',
-      gradType: props.item.gradType||'',
-      gradScore: props.item.gradScore||'',
+      grad_school: props.item.grad_school||'',
+      school_type: props.item.school_type||'',
+      grad_dt: props.item.grad_dt||'',
+      grad_type: props.item.grad_type||'',
+      grad_score: props.item.grad_score||'',
     }]))
   }
 
