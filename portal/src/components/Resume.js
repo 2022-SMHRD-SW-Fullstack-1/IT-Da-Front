@@ -3,6 +3,9 @@ import React from 'react'
 import '../css/Resume.css'
 
 const Resume = () => {
+
+   
+
    return (
       <div className='topDiv_resume'>
          <div className='r_basic'>

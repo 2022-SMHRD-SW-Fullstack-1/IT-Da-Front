@@ -13,7 +13,7 @@ const Navbar = ({menuList}) => {
   let navContent = menuList.map((item)=>(
   <div className='navContentBox' key={item.title}>
     <p className='navTitle'>{item.title}</p>
-    {item.subtitle.map((item)=>(<p className='navSubtitle hoberHand' onClick={onClickNav} url={item.url} key={item.title}>{item.title}</p>))}
+    {item.subtitle.map((item)=>(<p className='navSubtitle hoverHand' onClick={onClickNav} url={item.url} key={item.title}>{item.title}</p>))}
   </div>))
 
   return (

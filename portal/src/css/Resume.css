@@ -1,5 +1,5 @@
 .topDiv_resume {
-   min-width: 50rem;
+   min-width: 60rem;
    margin: 2rem;
    padding: 1.5rem 0.7rem;
    display: flex;
@@ -7,7 +7,7 @@
    align-items: center;
 }
 .topDiv_resume>div {
-   width: 46rem;
+   width: 56rem;
 }
 .topDiv_resume>div>table {
    margin-bottom: 1rem;
@@ -26,7 +26,10 @@
 }
 /*증명사진 div*/
 .r_basic>div:first-child {
-margin: 0 1rem;
+   width: 10rem;;
+}
+.r_basic>div:last-child {
+   width: 45rem;
 }
 /*이름 성별 태어난연도 div, 각 div 제목 p 태그*/
 .r_basic>div:last-child>div:first-child, .topDiv_resume>div>p {
