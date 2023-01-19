@@ -23,7 +23,7 @@ const C_announcement_detail = () => {
    return (
       <div className='container'>
          <p>공지사항</p>
-         <div className=''>
+         <div className='content'>
             <div className='annViewTitle'>
                <p>제목</p>
                <p>작성일 2023-01-01</p>
@@ -32,7 +32,7 @@ const C_announcement_detail = () => {
                <p>내용 블라블라~</p>
             </div>
          </div>
-         <div className='annViewButton'>
+         <div className='content annViewButton'>
             <button onClick={goToWrite}>글수정</button>
             <button onClick={axiosTest}>글삭제</button>
          </div>

@@ -7,13 +7,14 @@ const SCareer = (props) => {
   }, [props.item])
 
   const handleAdd = (newItem) => {
-    console.log('handleCareer', newItem)
+    // console.log('handleCareer', newItem)
     // concat : 배열 + 배열 (push는 렌더링이 되지 않는다)
     props.setValue(props.item.concat([{
-      organization: props.item.organization||'',
-      position: props.item.position||'',
-      dt: props.item.dt||'',
-      activity: props.item.activity||'',
+      cr_organization: props.item.cr_organization||'',
+      cr_position: props.item.cr_position||'',
+      cr_s_dt: props.item.cr_s_dt||'',
+      cr_e_dt: props.item.cr_e_dt||'',
+      cr_activity: props.item.cr_activity||'',
     }]))
   }
 
@@ -23,6 +24,7 @@ const SCareer = (props) => {
       <div className='sRTitleDiv'>
         <div>기관명</div>
         <div>직책</div>
+        <div>기간</div>
         <div>기간</div>
         <div>직무/활동사항</div>
       </div>

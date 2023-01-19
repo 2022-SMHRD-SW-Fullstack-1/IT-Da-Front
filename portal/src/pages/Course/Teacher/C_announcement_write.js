@@ -1,17 +1,17 @@
 import React, { useState, useRef } from 'react'
+import ReactQuill from 'react-quill';
 
 import '../../../css/Course.css'
+import 'react-quill/dist/quill.snow.css';
 import writeBtn from '../../../asset/img/logo_sbl.png'
 
 const C_announcement_write = () => {
 
    // input value 가져오기
-   const inputTitle = useRef('')
    const [title, setTitle] = useState('');
    const onTitleChange = e => {
       setTitle(e.target.value)
    };
-   const inputContent = useRef('')
    const [content, setContet] = useState('');
    const onContentChange = e => {
       setContet(e.target.value)
@@ -24,21 +24,19 @@ const C_announcement_write = () => {
    }
 
    return (
-      <div className='container'>
-         <p>공지사항</p>
-         <div className='content'>
-            <div className='annWriteTitle'>
-               <p>제목</p>
-               <input ref={inputTitle} onChange={onTitleChange} value={title} type='text'></input>
-            </div>
-            <div className='annWriteContent'>
-               <p>내용</p>
-               <input ref={inputContent} onChange={onContentChange} value={content} type='text'></input>
+      <div className='container annContainer'>
+         <p>공지사항 글 수정</p>
+         <div className='content annContent'>
+            <p>제목</p>
+            <input onChange={onTitleChange} value={title} type='text'></input>
+
+            <p>내용</p>
+            <ReactQuill theme="snow" value={content} onChange={setContet} />
+            <div className='annWriteButton'>
+               <button onClick={clickWirteBtn}>저장하기</button>
             </div>
          </div>
-         <div className='annWriteButton'>
-            <img onClick={clickWirteBtn} src={writeBtn} />
-         </div>
+
       </div>
    )
 }
