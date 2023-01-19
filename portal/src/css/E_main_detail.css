@@ -1,0 +1,47 @@
+.E_main_detail_page {
+  display: flex;
+  justify-content: center;
+  width: 60em;
+}
+.E_main_detail_basic_div {
+  width: 60em;
+  background-color: aqua;
+  margin: 50px;
+}
+.detail_st_info {
+  border: 2px solid gray;
+  font-size: 25px;
+  margin: 1em;
+}
+.E_main_detail_entire {
+  margin: 3em;
+
+  width: 30em;
+}
+.E_main_detail_title {
+  border-bottom: 2px solid gray;
+  width: 35em;
+  margin: 3em;
+}
+.detail_table {
+  display: flex;
+  width: 25em;
+  margin: 3em;
+}
+.E_main_detail_inner_info {
+  /* background-color: blueviolet; */
+  flex-direction: row;
+  justify-content: center;
+  width: 20em;
+  height: 8em;
+}
+.E_main_detail_name_phone_mail {
+  background-color: brown;
+
+  width: 20em;
+}
+.E_main_detail_address_tec {
+  background-color: blue;
+
+  width: 15em;
+}
