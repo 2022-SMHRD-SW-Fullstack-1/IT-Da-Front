@@ -1,25 +1,39 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
 import '../../css/Course.css'
 
 const C_announcement = () => {
 
   const navigate = useNavigate()
-  const goToDetail = () => {
-    navigate('./detail')
+
+  const goToDetail = (e) => {
+    navigate('./detail', {state: { num: e.currentTarget.getAttribute('num')}})
+  }
+  const goToWrite = () => {
+    navigate('/announcement/write', { state: { title: '글 작성' } })
   }
 
+  const [boardList, setBoardList] = useState([])
 
-  //임시 데이터
-  const tempData = [{title: "신입생 여러분들 환영합니다", date: "2023-01-01"}, {title: "깃허브 회원가입 관련 공지", date: "2023-01-02"}, {title: "취업박람회 공지", date: "2023-01-07"}, {title: "내일은 늦지 않게 와주세요", date: "2023-01-15"}]
 
-  const bodyContent = tempData.reverse().map((item, idx)=>(
-            <tr key={idx}>
-              <td>{tempData.length - idx}</td>
-              <td className='hoberHand' onClick={goToDetail}>{item.title}</td>
-              <td>{item.date}</td>
-            </tr>))
+  // 데이터 가져오기
+  useEffect(() => {
+    axios
+      .get('/announcement/getPost', { params: { key: window.sessionStorage.getItem("course_key") } })
+      .then((res) => setBoardList(res.data))
+      .catch((e) => console.log(e));
+  }, [])
+
+  //받아온 데이터를 map을 활용해 화면에 뿌리는 코드
+  const bodyContent = boardList.map((item, idx) => (
+    <tr key={idx}>
+      <td>{boardList.length - idx}</td>
+      <td className='hoverHand' onClick={goToDetail} num={item.b_num}>{item.b_title}</td>
+      <td>{item.b_dt}</td>
+    </tr>))
+
 
   return (
     <div className='container'>
@@ -37,6 +51,10 @@ const C_announcement = () => {
             {bodyContent}
           </tbody>
         </table>
+        {window.sessionStorage.getItem("role") === 't' &&
+          <div className='annWriteButton'>
+            <button onClick={goToWrite}>글 쓰기</button>
+          </div>}
       </div>
     </div>
   )
