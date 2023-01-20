@@ -73,8 +73,8 @@ const M_make_course = () => {
         { value: 'vanilla', label: 'Vanilla' }
     ]
 
-    const SubjectList = () => (
-        <Select options={options} />)
+    // const SubjectList = () => (
+    //     <Select options={options} />)
 
 
     return (
