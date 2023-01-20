@@ -73,16 +73,49 @@ const E_main = () => {
     "전북",
     "제주",
   ];
+  const skill_stack = [
+    "java",
+    "html",
+    "css",
+    "react",
+    "Linux",
+    "android",
+    "IOS",
+  ];
 
   const navigate = useNavigate();
 
-  //수강생 디테일 페이지로 이동
-  const go_to_userdetail = () => {
-    navigate("/detail_user");
-  };
-
   const [update_month, setUpdate_month] = useState("전체");
   const [hope_location, setHope_location] = useState("서울");
+  const [skill, setSkill] = useState("java");
+  const [info, setInfo] = useState();
+
+  const who_name = useRef();
+
+  //수강생 디테일 페이지로 이동
+  const go_to_userdetail = (e) => {
+    navigate("/detail_user", {
+      state: {
+        mb_id: e.currentTarget.getAttribute("mb_id"),
+        photo: e.currentTarget.getAttribute("photo"),
+        name: e.currentTarget.getAttribute("name"),
+        phone: e.currentTarget.getAttribute("phone"),
+        gender: e.currentTarget.getAttribute("gender"),
+        birthday: e.currentTarget.getAttribute("birthday"),
+        email: e.currentTarget.getAttribute("email"),
+        addr: e.currentTarget.getAttribute("addr"),
+        wish_area1: e.currentTarget.getAttribute("wish_area1"),
+        wish_area2: e.currentTarget.getAttribute("wish_area2"),
+        wish_area3: e.currentTarget.getAttribute("wish_area3"),
+      },
+    });
+    console.log(
+      "뭘까",
+      e.currentTarget.getAttribute("mb_id"),
+      e.currentTarget.getAttribute("name"),
+      e.currentTarget.getAttribute("phone")
+    );
+  };
 
   //업데이트 날짜 필터
   const month_change = (e) => {
@@ -96,19 +129,37 @@ const E_main = () => {
     setHope_location(value);
   };
 
+  //기술 스택 필터
+  const skill_filter = (e) => {
+    const { value } = e.target;
+    setSkill(value);
+  };
+
   //상세보기 필터 적용 버튼
   const button_filterclick = () => {
     setFilterData(
       simple_info.filter(
         (item) =>
-          item.wish_area1.includes(hope_location) &&
-          dateCompare(update_month, item.updateDT)
+          item.wish_area1 == hope_location ||
+          item.wish_area2 == hope_location ||
+          item.wish_area3 == hope_location
+
+        // dateCompare(update_month, item.updateDT)
       )
     );
+    console.log(skill);
 
-    console.log(typeof (new Date() - new Date("2022-01-13")));
+    console.log(typeof (new Date() - new Date("2022-01-20")));
   };
 
+  //필터링 한 후 데이터 list
+  const [filterDate, setFilterData] = useState([]);
+
+  useEffect(() => {
+    setFilterData(simple_info);
+  }, []);
+
+  //데이터 초기화
   const [simple_info, setSimple_info] = useState([
     {
       mb_id: "",
@@ -132,12 +183,6 @@ const E_main = () => {
     },
   ]);
 
-  const [info, setInfo] = useState();
-
-  useEffect(() => {
-    setFilterData(simple_info);
-  }, [simple_info]);
-
   // 백에서 가져온 데이터
   useEffect(() => {
     axios
@@ -152,13 +197,34 @@ const E_main = () => {
       });
   }, []);
 
-  console.log("심플", simple_info);
-  //필터링 한 후 데이터 list
-  const [filterDate, setFilterData] = useState([]);
-
-  // useEffect(() => {
-  //   setFilterData(simple_info);
-  // }, []);
+  function detail_student() {
+    axios
+      .get("/resume/one", {
+        params: { id: who_name.current.value },
+      })
+      .then((res) => {
+        console.log(res.data);
+        // setResume(res.data[0]);
+        // setGraduation(res.data[1]);
+        console.log(res.data[1]);
+        // setCareer(res.data[2]);
+        console.log(res.data[2]);
+        // setCertification(res.data[3]);
+        console.log(res.data[3]);
+        // setPrize(res.data[4]);
+        console.log(res.data[4]);
+        // setMilitary(res.data[5]);
+        console.log(res.data[5]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  console.log("11", who_name);
+  //초기화면
+  useEffect(() => {
+    setFilterData(simple_info);
+  }, [simple_info]);
 
   // let listMap = filterDate.map((item) => (
   //   <div className="two_div" onClick={go_to_userdetail}>
@@ -197,10 +263,23 @@ const E_main = () => {
   //     </div>
   //   </div>
   // ));
-  console.log("이미지", simple_info.photo);
 
-  let listMap = simple_info.map((item) => (
-    <div className="two_div" onClick={go_to_userdetail}>
+  let listMap = filterDate.map((item) => (
+    <div
+      className="two_div"
+      mb_id={item.mb_id}
+      name={item.name}
+      photo={item.photo}
+      email={item.email}
+      phone={item.phone}
+      addr={item.addr}
+      gender={item.gender}
+      birthday={item.birthday}
+      wish_area1={item.wish_area1}
+      wish_area2={item.wish_area2}
+      wish_area3={item.wish_area3}
+      onClick={go_to_userdetail}
+    >
       <div className="e_main_photo">
         {/* {photoList.map((item) => (
           <img src={item.pl} />
@@ -272,9 +351,13 @@ const E_main = () => {
                       </div>
                     </div>
                     <div className="E_main_input_detail_three_div">
-                      <div>희망연봉</div>
+                      <div>기술스택</div>
                       <div>
-                        <input></input>~<input></input>
+                        <select onChange={skill_filter}>
+                          {skill_stack.map((item) => (
+                            <option>{item}</option>
+                          ))}
+                        </select>
                       </div>
                     </div>
                   </div>

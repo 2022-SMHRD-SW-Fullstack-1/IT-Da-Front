@@ -1,51 +1,134 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../../css/Resume.css";
+import { useLocation } from "react-router-dom";
+import "../../css/E_main_detail.css";
 
 const E_main_detail = () => {
-  const [resume, setResume] = useState();
-
-  useEffect(() => {
-    axios
-      .get("/resume/all")
-      .then((res) => {
-        setResume(res.data);
-      })
-      .catch(() => {});
+  const { state } = useLocation();
+  console.log(state.mb_id, state.name);
+  console.log(state.phone);
+  const [resume, setResume] = useState({
+    name: "",
+    gender: "",
+    birthday: "",
+    phone: "",
+    email: "",
+    addr: "",
+    skills: "",
+    //
+    wish_area1: "전체",
+    wish_area2: "전체",
+    wish_area3: "전체",
+    //
+    wish_salary: "내규에 따름",
+    //
+    wish_field: "",
+    major: "",
   });
+  //추가버튼있음
+  const [graduation, setGraduation] = useState([
+    {
+      gradSchool: "",
+      schoolType: "",
+      gradDt: "",
+      gradType: "",
+      gradScore: "",
+    },
+  ]);
+  //추가버튼있음
+  const [career, setCareer] = useState([
+    {
+      organization: "",
+      position: "",
+      s_dt: "",
+      e_dt: "",
+      activity: "",
+    },
+  ]);
+  //추가버튼있음
+  const [certification, setCertification] = useState([
+    {
+      name: "",
+      dt: "",
+      org: "",
+    },
+  ]);
+  //추가버튼있음
+  const [prize, setPrize] = useState([
+    {
+      name: "",
+      org: "",
+      dt: "",
+    },
+  ]);
+  //추가버튼있음
+  const [military, setMilitary] = useState([
+    {
+      title: "",
+      army: "",
+      sDt: "",
+      eDt: "",
+      veteranYn: "",
+    },
+  ]);
+
+  // useEffect(() => {
+  //   axios
+  //     .get("/resume/one", {
+  //       params: { id: sessionStorage.getItem("loginId") },
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setResume(res.data[0]);
+  //       setGraduation(res.data[1]);
+  //       // console.log(res.data[1])
+  //       setCareer(res.data[2]);
+  //       // console.log(res.data[2])
+  //       setCertification(res.data[3]);
+  //       // console.log(res.data[3])
+  //       setPrize(res.data[4]);
+  //       // console.log(res.data[4])
+  //       setMilitary(res.data[5]);
+  //       // console.log(res.data[5])
+  //     })
+  //     .catch((e) => console.error(e));
+  // });
 
   return (
     <div className="topDiv_resume">
       <div className="r_basic">
         <div>
-          <img
-            style={{ width: "6rem", height: "8rem", backgroundColor: "black" }}
-          />
+          {/* <img
+            // style={{ width: "6rem", height: "8rem", backgroundColor: "black" }}
+          
+          /> */}
+          <img className="id_photo" src={state.photo}></img>
         </div>
         <div>
-          <div>
-            <p>유성용</p>
-            <p>남자 / 1995년생</p>
+          <div className="test12">
+            <p>{state.name}</p>
+            <p>
+              {state.gender} / {state.birthday}
+            </p>
           </div>
           <div>
             <div>
               <p>연락처</p>
-              <p>010-5497-1234</p>
+              <p>{state.phone}</p>
             </div>
             <div>
               <p>이메일</p>
-              <p>suseong77@naver.com</p>
+              <p>{state.email}</p>
             </div>
             <div>
               <p>주소</p>
-              <p>
-                광주광역시 광산구 풍영로170번길 39-25 (광주 수완대주피오레
-                아파트)
-              </p>
+              <p>{state.addr}</p>
             </div>
             <div>
               <p>희망지역</p>
-              <p>서울, 광주, 경기</p>
+              <p>
+                {state.wish_area1},{state.wish_area2},{state.wish_area3}
+              </p>
             </div>
           </div>
         </div>
