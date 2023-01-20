@@ -1,13 +1,13 @@
 import "../../css/M_main.css"
 import React, { useEffect, useState, useRef } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import Select from 'react-select'
 
 
 const M_make_course = () => {
 
-    const menuList = [{ title: "과정관리", subtitle: [{ title: "과정생성", url: "/make_course" }, { title: "과정수정 및 삭제", url: "/edit_course" }] },
-    { title: "정보공개", subtitle: [{ title: "공개 키 생성(기업용)", url: "/make_e_key" }] }]
+    const navigate = useNavigate();
 
     const course_subjectRef = useRef("");
     const course_nameRef = useRef("");
@@ -24,8 +24,6 @@ const M_make_course = () => {
     const [course_e_dt, setCourse_e_dt] = useState("")
     const [course_teacher, setCourse_teacher] = useState("")
     const [course_limit, setCourse_limit] = useState("")
-
-    const [course_subject_list, setCourse_subject_list] = useState("")
 
     const onCourse_subject = e => {
         setCourse_subject(e.target.value)
@@ -53,7 +51,7 @@ const M_make_course = () => {
     const make_course_submit = (e) => {
         e.preventDefault();
         axios
-            .post("/make_course", {
+            .post("/course/make_course", {
                 course_subject: course_subject,
                 course_name: course_name,
                 course_campus: course_campus,
@@ -64,24 +62,12 @@ const M_make_course = () => {
             })
             .then(function (res) {
                 alert("과정생성 완료")
-                window.location.reload();
+                navigate('/make_teacher', { state: { course_teacher: course_teacher, course_s_dt: course_s_dt} })
             })
             .catch(function (err) {
                 console.log("error")
             })
     }
-
-    // 과정주제 가져오기
-    useEffect(() => {
-        axios
-            .get("/select_course_subject", {
-            }).then(function (res) {
-                setCourse_subject_list(res.data)
-            }).catch(function (err) {
-                console.log("error")
-            })
-    }, [])
-
 
     const options = [
         { value: 'chocolate', label: 'Chocolate' },
@@ -94,11 +80,9 @@ const M_make_course = () => {
 
 
     return (
-        <div className='basic_container'>
-            <div className='head_title'>
-                <strong>과정생성</strong>
-            </div>
-            <div className='course_make_container_inner'>
+        <div className='basic_container container'>
+            <p>과정생성</p>
+            <div className='course_make_container_inner content'>
                 <div className='container_inner_left'>
                     <p>과정주제</p>
                     <p>과정명</p>
@@ -117,10 +101,10 @@ const M_make_course = () => {
                     <input type="text" value={course_e_dt} onChange={onCourse_e_dt} ref={course_e_dtRef} />
                     <input type="text" value={course_teacher} onChange={onCourse_teacher} ref={course_teacherRef} />
                     <input type="text" value={course_limit} onChange={onCourse_limit} ref={course_limitRef} />
-                    <div className="make_course_button">
-                        <button onClick={make_course_submit}>과정 생성하기</button>
-                    </div>
                 </div>
+            </div>
+            <div className='manager_button'>
+                <button onClick={make_course_submit}>과정 생성하기</button>
             </div>
         </div>
     )

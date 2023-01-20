@@ -15,7 +15,7 @@ const M_make_e_key = () => {
     const makeEnterprise = (e) => {
         e.preventDefault();
         axios
-            .post("/make_enterprise", {
+            .post("/enterprise/make_enterprise", {
                 enter_name: enter_name,
             })
             .then(function (res) {
@@ -29,20 +29,18 @@ const M_make_e_key = () => {
 
 
     return (
-        <div className='basic_container'>
-            <div className='head_title'>
-                <strong>기업 key생성</strong>
-            </div>
-            <div className='course_make_container_inner'>
+        <div className='basic_container container'>
+            <p>과정생성</p>
+            <div className='course_make_container_inner content'>
                 <div className='container_inner_left'>
                     <p>기업명</p>
                 </div>
                 <div className='container_inner_right'>
-                    <input type="text" value={enter_name} onChange={onEnter_name} ref={enter_nameRef}/>
-                    <div className='make_course_button'>
-                        <button onClick={makeEnterprise}>기업key 생성하기</button>
-                    </div>
+                    <input type="text" value={enter_name} onChange={onEnter_name} ref={enter_nameRef} />
                 </div>
+            </div>
+            <div className='manager_button'>
+                <button onClick={makeEnterprise}>기업key 생성하기</button>
             </div>
         </div>
     )

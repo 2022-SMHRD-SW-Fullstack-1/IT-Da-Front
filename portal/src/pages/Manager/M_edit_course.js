@@ -9,7 +9,7 @@ const M_edit_course = (props) => {
 
     useEffect(() => {
         axios
-            .get("/select_on_course")
+            .get("/course/select_all_course")
             .then(function (res) {
                 setCourse(res.data)
                 console.log(res.data)
@@ -20,26 +20,23 @@ const M_edit_course = (props) => {
     }, [])
 
     const courseList =
-        course.map((item) => <M_course_list item={item} />)
+        course.map((item) => <M_course_list item={item} key={item.course_name} />)
 
     return (
-        <div className='basic_container'>
-            <div className='head_title'>
-                <strong>전체 과정</strong>
-            </div>
-            <div className='course_edit_container_inner'>
-                <div className='edit_course_table'>
+        <div className='container'>
+        <p>전체 과정</p>
+             <div className='content'>
                     <table>
                         <thead>
-                            <tr className='edit_course_edit_title'>
+                            <tr>
                                 <th>과정주제</th>
                                 <th>과정명</th>
                                 <th>캠퍼스</th>
-                                <th>시작날짜</th>
-                                <th>종료날짜</th>
+                                <th>기간</th>
                                 <th>담임명</th>
                                 <th>총원</th>
                                 <th>key</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,7 +45,6 @@ const M_edit_course = (props) => {
                     </table>
                 </div>
             </div>
-        </div>
     )
 }
 
