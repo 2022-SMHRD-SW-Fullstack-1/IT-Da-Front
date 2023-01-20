@@ -140,10 +140,10 @@ const E_main = () => {
     setFilterData(
       simple_info.filter(
         (item) =>
-          item.wish_area1 == hope_location ||
-          item.wish_area2 == hope_location ||
-          item.wish_area3 == hope_location
-
+          (item.wish_area1 == hope_location ||
+            item.wish_area2 == hope_location ||
+            item.wish_area3 == hope_location) &&
+          item.skills.includes(skill)
         // dateCompare(update_month, item.updateDT)
       )
     );
