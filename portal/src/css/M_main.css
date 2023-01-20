@@ -1,35 +1,189 @@
-.head_title {
-    font-size: 27px;
-    margin-left: 0px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
 .basic_container {
-    width: 80%;
-    height: 530px;
-    background-color: #f4f4f4;
-    margin-left: 250px;
-    margin-right: 250px;
-    margin-bottom: 30px;
-    font-size: 18px
+    padding: 1rem;
+    width: 100%;
 }
 
-.edit_course_edit_title{
+.basic_container>p {
+    font-weight: bold;
+    font-size: larger;
+    margin-left: 2rem;
+}
+
+.course_make_container_inner {
+    width: 100%;
+    max-width: 33rem;
+    display: flex;
+    border : solid 0.1rem rgb(211, 211, 211)
+}
+
+.container_inner_left {
+    width: 10rem;
+}
+
+.container_inner_left>p {
+    width: 10rem;
+    height: 4rem;
+    font-weight: bold;
+    padding: 1rem;
+    padding-left: 1.5rem;
+    margin: 0;
+}
+
+.container_inner_right {
+    display: flex;
+    flex-direction: column;
+}
+
+.container_inner_right>input {
+    width: 20rem;
+    height: 2rem;
+    border: 0.1rem solid rgb(211, 211, 211);
+    padding-left: 0.5rem;
+    flex-direction: row;
+    margin: 1rem
+    
+}
+
+.make_course_button {
+    display: flex;
+    justify-self: center;
+}
+
+/* list css */
+.course_edit_container_inner {
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.edit_course_table {
+    padding-bottom: 5px;
+    justify-content: center;
+}
+
+.edit_course_edit_title {
     font-size: 18px;
     margin: 20px;
 }
 
-.edit_course_edit_title > th{
+.edit_course_edit_title>th {
     padding-bottom: 10px;
 }
 
-.edit_course_edit_content{
+.edit_course_edit_content {
     font-weight: 100;
     font-size: 15px;
     font-weight: 500;
 }
 
-.edit_course_edit_content > th{
-    
+
+/*  */
+/*  */
+
+
+.content>table {
+    width: 80rem;
+    margin-right: 0.5rem;
+}
+
+.course_subject {
+    width: 21rem;
+    margin-right: 0.5rem;
+
+}
+
+.course_name {
+    width: 23rem;
+    margin-right: 0.5rem;
+
+}
+
+.course_campus {
+    width: 6rem;
+    margin-right: 0.5rem;
+
+}
+
+.course_period {
+    width: 12rem;
+    margin-right: 0.5rem;
+
+}
+
+.course_period_edit {
+    width: 8rem;
+    margin-right: 0.5rem;
+}
+
+.course_teacher {
+    width: 4rem;
+    margin-right: 0.5rem;
+
+}
+
+.course_limit {
+    width: 2.3rem;
+    margin-right: 0.5rem;
+}
+
+.course_key {
+    width: 5rem;
+}
+
+.course_button {
+    width: 10rem;
+}
+
+
+
+.course_subject>input {
+    width: 95%;
+}
+
+.course_name>input {
+    width: 95%;
+}
+
+.course_campus>input {
+    width: 95%;
+}
+
+.course_period_edit>input {
+    width: 50%;
+}
+
+.course_teacher>input {
+    width: 95%;
+}
+
+.course_limit>input {
+    width: 95%;
+}
+
+.e_name {
+    width: 10rem
+}
+
+.e_name>input {
+    width: 95%
+}
+
+.annViewButton>button {
+    margin: 0.1rem
+}
+
+.manager_button{
+  padding: 1rem;
+  padding-left: 12rem;
+}
+
+.manager_button>button {
+    border: none;
+    padding: 0.4rem 1rem;
+    margin-left: 1rem;
+    border-radius: 5px;
+    background-color: rgb(75, 75, 75);
+    color: white;
 }

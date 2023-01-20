@@ -1,44 +1,50 @@
-import "../../css/M_edit_course.css"
-import React from 'react'
+import "../../css/M_main.css"
+import React, { useEffect, useState } from 'react'
+import axios from "axios"
+import M_course_list from "./M_course_list"
 
-const M_edit_course = () => {
+const M_edit_course = (props) => {
 
-    const menuList = [{ title: "과정관리", subtitle: [{ title: "과정생성", url: "/make_course" }, { title: "과정수정 및 삭제", url: "/edit_course" }] },
-    { title: "정보공개", subtitle: [{ title: "공개 키 생성(기업용)", url: "/make_e_key" }] }]
+    const [course, setCourse] = useState([])
+
+    useEffect(() => {
+        axios
+            .get("/course/select_all_course")
+            .then(function (res) {
+                setCourse(res.data)
+                console.log(res.data)
+            })
+            .catch(function (error) {
+                console.log("error")
+            })
+    }, [])
+
+    const courseList =
+        course.map((item) => <M_course_list item={item} key={item.course_name} />)
 
     return (
-        <div className='basic_container'>
-            <div className='head_title'>
-                <strong>과정수정</strong>
-            </div>
-            <div className='course_edit_container_inner'>
-                <div className='edit_course_table'>
+        <div className='container'>
+        <p>전체 과정</p>
+             <div className='content'>
                     <table>
                         <thead>
                             <tr>
-                                <th>고유key</th>
+                                <th>과정주제</th>
                                 <th>과정명</th>
-                                <th>과정시작날짜</th>
-                                <th>과정종료날짜</th>
+                                <th>캠퍼스</th>
+                                <th>기간</th>
                                 <th>담임명</th>
                                 <th>총원</th>
+                                <th>key</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>asdf1234</th>
-                                <th>Full Stack SW융합 실무 부트캠프</th>
-                                <th>2022.08.01</th>
-                                <th>2023.03.13</th>
-                                <th>강예진 연구원</th>
-                                <th>23</th>
-                            </tr>
+                            {courseList}
                         </tbody>
-
                     </table>
                 </div>
             </div>
-        </div>
     )
 }
 
