@@ -1,8 +1,10 @@
 .loginContainer,
 .registerCntainer {
   display: flex;
-  align-items: center;
   justify-content: center;
+}
+.loginContainer {
+  min-height: 32rem;
 }
 .loginTab {
   display: flex;
