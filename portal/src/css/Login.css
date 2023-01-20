@@ -1,58 +1,66 @@
-.loginContainer, .registerCntainer {
-   display: flex;
-   align-items: center;
-   justify-content: center;
+.loginContainer,
+.registerCntainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .loginTab {
-   display: flex;
-   width: 100%;
-   justify-content: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
-.loginTab>button {
-   border: none;
-   background-color: var(--mainGrey);
-   padding: 1rem;
-   width: 40%;
+.loginTab > button {
+  border: none;
+  background-color: var(--mainGrey);
+  padding: 1rem;
+  width: 40%;
 }
-.loginContainer>div>div>input {
-   width: 80%;
-   padding: 0.3rem 0.5rem;
-   margin-top: 1rem;
-   border: 1px solid rgb(211, 211, 211);
-   border-radius: 5px;
-}
-
-.memberLogin, .enterpriseLogin {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   width: 100%;
-}
-.memberLogin>button, .enterpriseLogin>button {
-   width: 80%;
-   border: none;
-   border-radius: 5px;
-   padding: 0.3rem 0.5rem;
-   margin-top: 0.5rem;
-   background-color: var(--mainBlue);
-   color: white;
-}
-.memberLogin>div, .enterpriseLogin>div {
-   display: flex;
-   align-items: center;
-   justify-content: flex-start;
-   margin-top: 0.5rem;
-   width: 80%;
-}
-.memberLogin span, .enterpriseLogin span {
-   margin: 0 0.3rem;
-}
-.memberLogin>div:last-child {
-   display: flex;
-   justify-content: center;
-   font-size: 0.9rem;
+.loginContainer > div > div > input {
+  width: 80%;
+  padding: 0.3rem 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 5px;
 }
 
-.enterpriseLogin>span{
-   margin-top: 0.5rem;
+.memberLogin,
+.enterpriseLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.memberLogin > button,
+.enterpriseLogin > button {
+  width: 80%;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
+  margin-top: 0.5rem;
+  background-color: var(--mainBlue);
+  color: white;
+}
+.memberLogin > div,
+.enterpriseLogin > div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 0.5rem;
+  width: 80%;
+}
+.memberLogin span,
+.enterpriseLogin span {
+  margin: 0 0.3rem;
+}
+.memberLogin > div:last-child {
+  display: flex;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+.enterpriseLogin > span {
+  margin-top: 0.5rem;
+}
+.loginRegisterNav {
+  cursor: pointer;
 }
