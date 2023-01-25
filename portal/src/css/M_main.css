@@ -212,3 +212,11 @@
 .company_deadline>input{
     width: 95%;
 }
+
+.td_in_tr {
+    display: flex;
+}
+.td_in_tr>div:first-child {
+    width: 5rem;
+    font-weight: bold;
+}

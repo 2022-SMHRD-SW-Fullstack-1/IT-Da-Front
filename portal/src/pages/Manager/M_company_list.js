@@ -127,13 +127,9 @@ const M_company_list = (props) => {
             <td style={edit_style_op} className='company_deadline'><input type='text' value={company_deadline} onChange={onCompany_deadline} ref={company_deadlineRef} placeholder={props.item.company_deadline}></input></td>
 
 
-            <td style={edit_style_po} className='company_area'>{props.item.company_area} </td>
-            <td style={edit_style_op} className='company_area'><input type='text' value={company_area} onChange={onCompany_area} ref={company_areaRef} placeholder={props.item.company_area}></input></td>
 
 
 
-            {/* <td style={edit_style_po} className=''>{props.item.company_employ} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_employ} onChange={onCompany_employ} ref={company_employRef} placeholder={props.item.company_employ}></input></td> */}
 
             {/* <td style={edit_style_po} className=''>{props.item.company_grade} </td>
             <td style={edit_style_op} className=''><input type='text' value={company_grade} onChange={onCompany_grade} ref={company_gradeRef} placeholder={props.item.company_grade}></input></td> */}
@@ -158,6 +154,21 @@ const M_company_list = (props) => {
 
             {/* <td style={edit_style_po} className=''>{props.item.company_apply} </td>
             <td style={edit_style_op} className=''><input type='text' value={company_apply} onChange={onCompany_apply} ref={company_applyRef} placeholder={props.item.company_apply}></input></td> */}
+
+            <td>
+                <div className="td_in_tr">
+                    <div>지역</div>
+                    <div style={edit_style_po} className='company_area'>{props.item.company_area} </div>
+                    <div style={edit_style_op} className='company_area'><input type='text' value={company_area} onChange={onCompany_area} ref={company_areaRef} placeholder={props.item.company_area}></input></div>
+                </div>
+                <div className="td_in_tr">
+                    <div>고용형태</div>
+                    <div style={edit_style_po} className=''>{props.item.company_employ} </div>
+                    <div style={edit_style_op} className=''><input type='text' value={company_employ} onChange={onCompany_employ} ref={company_employRef} placeholder={props.item.company_employ}></input></div>
+                </div>
+            </td>
+
+
 
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_company_button}>수정하기</button></div></td>
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={delete_company_submit}>삭제하기</button></div></td>
