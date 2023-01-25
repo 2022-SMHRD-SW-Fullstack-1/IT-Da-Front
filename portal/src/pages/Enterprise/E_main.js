@@ -74,6 +74,7 @@ const E_main = () => {
     "제주",
   ];
   const skill_stack = [
+    "전체",
     "java",
     "html",
     "css",
@@ -86,15 +87,14 @@ const E_main = () => {
   const navigate = useNavigate();
 
   const [update_month, setUpdate_month] = useState("전체");
-  const [hope_location, setHope_location] = useState("서울");
-  const [skill, setSkill] = useState("java");
+  const [hope_location, setHope_location] = useState("전체");
+  const [skill, setSkill] = useState("전체");
   const [info, setInfo] = useState();
-
-  const who_name = useRef();
 
   //수강생 디테일 페이지로 이동
   const go_to_userdetail = (e) => {
     navigate("/detail_user", {
+      //버튼 클릭시 정보를 수강생 정보를 넘겨준다
       state: {
         mb_id: e.currentTarget.getAttribute("mb_id"),
         photo: e.currentTarget.getAttribute("photo"),
@@ -109,12 +109,7 @@ const E_main = () => {
         wish_area3: e.currentTarget.getAttribute("wish_area3"),
       },
     });
-    console.log(
-      "뭘까",
-      e.currentTarget.getAttribute("mb_id"),
-      e.currentTarget.getAttribute("name"),
-      e.currentTarget.getAttribute("phone")
-    );
+    console.log();
   };
 
   //업데이트 날짜 필터
@@ -140,10 +135,11 @@ const E_main = () => {
     setFilterData(
       simple_info.filter(
         (item) =>
-          (item.wish_area1 == hope_location ||
+          (hope_location == "전체" ||
+            item.wish_area1 == hope_location ||
             item.wish_area2 == hope_location ||
             item.wish_area3 == hope_location) &&
-          item.skills.includes(skill)
+          (skill == "전체" || item.skills.includes(skill))
         // dateCompare(update_month, item.updateDT)
       )
     );
@@ -186,7 +182,7 @@ const E_main = () => {
   // 백에서 가져온 데이터
   useEffect(() => {
     axios
-      .get("/resume/all")
+      .get("/student/resume/all")
       .then((res) => {
         setSimple_info(res.data);
         // console.log("전체", res.data);
@@ -199,8 +195,8 @@ const E_main = () => {
 
   function detail_student() {
     axios
-      .get("/resume/one", {
-        params: { id: who_name.current.value },
+      .get("/student/resume/one", {
+        params: { id: sessionStorage.current.value },
       })
       .then((res) => {
         console.log(res.data);
@@ -220,7 +216,7 @@ const E_main = () => {
         console.log(error);
       });
   }
-  console.log("11", who_name);
+
   //초기화면
   useEffect(() => {
     setFilterData(simple_info);
