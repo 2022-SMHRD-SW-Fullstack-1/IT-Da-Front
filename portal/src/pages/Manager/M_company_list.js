@@ -5,7 +5,6 @@ import axios from 'axios';
 
 const M_company_list = (props) => {
 
-    const company_nameRef = useRef("");
     const company_deadlineRef = useRef("");
     const company_areaRef = useRef("");
     const company_employRef = useRef("");
@@ -18,7 +17,6 @@ const M_company_list = (props) => {
     const company_salaryRef = useRef("");
     const company_applyRef = useRef("");
 
-    const [company_name, setCompany_name] = useState("")
     const [company_deadline, setCompany_deadline] = useState("")
     const [company_area, setCompany_area] = useState("")
     const [company_employ, setCompany_employ] = useState("")
@@ -31,10 +29,6 @@ const M_company_list = (props) => {
     const [company_salary, setCompany_salary] = useState("")
     const [company_apply, setCompany_apply] = useState("")
 
-
-    const onCompany_name = e => {
-        setCompany_name(e.target.value)
-    }
     const onCompany_deadline = e => {
         setCompany_deadline(e.target.value)
     }
@@ -125,44 +119,45 @@ const M_company_list = (props) => {
     return (
         <tr>
 
-            <td className=''>{props.item.company_register_date} </td>
+            <td className='company_register'>{props.item.company_register} </td>
 
-            <td className=''>{props.item.company_name} </td>
+            <td className='company_name'>{props.item.company_name} </td>
 
-            <td style={edit_style_po} className=''>{props.item.company_deadline} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_deadline} onChange={onCompany_deadline} ref={company_deadlineRef} placeholder={props.item.company_deadline}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_area} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_area} onChange={onCompany_area} ref={company_areaRef} placeholder={props.item.company_area}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_employ} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_employ} onChange={onCompany_employ} ref={company_employRef} placeholder={props.item.company_employ}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_grade} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_grade} onChange={onCompany_grade} ref={company_gradeRef} placeholder={props.item.company_grade}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_position} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_position} onChange={onCompany_position} ref={company_positionRef} placeholder={props.item.company_position}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_qual} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_qual} onChange={onCompany_qual} ref={company_qualRef} placeholder={props.item.company_qual}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_essential} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_essential} onChange={onCompany_essential} ref={company_essentialRef} placeholder={props.item.company_essential}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_advantage} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_advantage} onChange={onCompany_advantage} ref={company_advantageRef} placeholder={props.item.company_advantage}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_etc} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_etc} onChange={onCompany_etc} ref={company_etcRef} placeholder={props.item.company_etc}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_salary} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_salary} onChange={onCompany_salary} ref={company_salaryRef} placeholder={props.item.company_salary}></input></td>
-
-            <td style={edit_style_po} className=''>{props.item.company_apply} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_apply} onChange={onCompany_apply} ref={company_applyRef} placeholder={props.item.company_apply}></input></td>
+            <td style={edit_style_po} className='company_deadline'>{props.item.company_deadline} </td>
+            <td style={edit_style_op} className='company_deadline'><input type='text' value={company_deadline} onChange={onCompany_deadline} ref={company_deadlineRef} placeholder={props.item.company_deadline}></input></td>
 
 
+            <td style={edit_style_po} className='company_area'>{props.item.company_area} </td>
+            <td style={edit_style_op} className='company_area'><input type='text' value={company_area} onChange={onCompany_area} ref={company_areaRef} placeholder={props.item.company_area}></input></td>
+
+
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_employ} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_employ} onChange={onCompany_employ} ref={company_employRef} placeholder={props.item.company_employ}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_grade} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_grade} onChange={onCompany_grade} ref={company_gradeRef} placeholder={props.item.company_grade}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_position} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_position} onChange={onCompany_position} ref={company_positionRef} placeholder={props.item.company_position}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_qual} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_qual} onChange={onCompany_qual} ref={company_qualRef} placeholder={props.item.company_qual}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_essential} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_essential} onChange={onCompany_essential} ref={company_essentialRef} placeholder={props.item.company_essential}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_advantage} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_advantage} onChange={onCompany_advantage} ref={company_advantageRef} placeholder={props.item.company_advantage}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_etc} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_etc} onChange={onCompany_etc} ref={company_etcRef} placeholder={props.item.company_etc}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_salary} </td> */}
+            {/* <td style={edit_style_op} className=''><input type='text' value={company_salary} onChange={onCompany_salary} ref={company_salaryRef} placeholder={props.item.company_salary}></input></td> */}
+
+            {/* <td style={edit_style_po} className=''>{props.item.company_apply} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_apply} onChange={onCompany_apply} ref={company_applyRef} placeholder={props.item.company_apply}></input></td> */}
 
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_company_button}>수정하기</button></div></td>
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={delete_company_submit}>삭제하기</button></div></td>

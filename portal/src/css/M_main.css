@@ -13,7 +13,7 @@
     width: 100%;
     max-width: 33rem;
     display: flex;
-    border : solid 0.1rem rgb(211, 211, 211)
+    border: solid 0.1rem rgb(211, 211, 211)
 }
 
 .container_inner_left {
@@ -41,7 +41,6 @@
     padding-left: 0.5rem;
     flex-direction: row;
     margin: 1rem
-    
 }
 
 .make_course_button {
@@ -174,9 +173,9 @@
     margin: 0.1rem
 }
 
-.manager_button{
-  padding: 1rem;
-  padding-left: 12rem;
+.manager_button {
+    padding: 1rem;
+    padding-left: 12rem;
 }
 
 .manager_button>button {
@@ -186,4 +185,30 @@
     border-radius: 5px;
     background-color: rgb(75, 75, 75);
     color: white;
+}
+
+/* 회사 수정 */
+
+.company_register {
+    width: 5.5rem;
+}
+
+.company_register>input {
+    width: 95%;
+}
+
+.company_name{
+    width: 9.5rem
+}
+
+.company_namer>input {
+    width: 95%;
+}
+
+.company_deadline{
+    width: 5.5rem
+}
+
+.company_deadline>input{
+    width: 95%;
 }
