@@ -1,11 +1,25 @@
+.topDiv_resumePage{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+   background-color: var(--mainGray);
+}
+
+
 .topDiv_resume {
    min-width: 60rem;
+   max-width: 80rem;
    margin: 2rem;
    padding: 1.5rem 0.7rem;
    display: flex;
    flex-direction: column;
    align-items: center;
+   background-color: white;
+   border-radius: 10px;
 }
+
 .topDiv_resume>div {
    width: 56rem;
 }
@@ -31,8 +45,28 @@
 .r_basic>div:last-child {
    width: 45rem;
 }
+.sRPhotoDiv{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.sRPhotoDiv>div{
+   padding: .5rem;
+}
+.r_basic>div>div>div>button{
+   margin: 0.2rem;
+}
+
+.resumeTable>thead>tr>th>div, .resumeTable>tbody>tr>td>div{
+   width: 2rem;
+}
+/* .resumeTable tr td input{
+   width: 90%;
+} */
+
+
 /*이름 성별 태어난연도 div, 각 div 제목 p 태그*/
-.r_basic>div:last-child>div:first-child, .topDiv_resume>div>p {
+.r_basic>div:last-child>div:first-child, .topDiv_resume>div>p, .r_basic>div:last-child>div:last-child>p:first-child {
    display: flex;
    align-items: center;
    border-bottom: 3px solid rgb(209, 209, 209);
@@ -42,11 +76,18 @@
    margin: 0;
 }
 /*이름 p태그, 각 div 제목 p 태그*/
-.r_basic>div:last-child>div:first-child>p:first-child, .topDiv_resume>div>p {
+.r_basic>div:last-child>div:first-child>p:first-child, .topDiv_resume>div>p, .r_basic>div:last-child>div:last-child>p:first-child{
    font-size: 1.4rem;
    font-weight: bold;
    margin-right: 1rem;
 }
+
+/*기술스택*/
+.r_basic>div:last-child>div:last-child>p>input{
+   width: 40rem;
+   height: 10rem;
+}
+
 /*연락처 이메일 주소 희망지역 div들*/
 .r_basic>div:last-child>div>div {
    display: flex;
@@ -54,4 +95,62 @@
 .r_basic>div:last-child>div>div>p:first-child {
    min-width: 5rem;
    text-align: center;
+}
+.saveBtn{
+   border: none;
+   border-radius: 5px;
+   padding: 0.4rem 0.6rem;
+   margin: 0 0.5rem;
+   background-color: rgb(0, 138, 204);
+   font-weight: bold;
+   color: white;
+}
+
+.sRBtnDiv{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+}
+
+.sRAddBtn{
+   width: 1.7rem;
+   height: 1.7rem;
+}
+.sRDeleteBtn{
+   width: 1.7rem;
+   height: 1.7rem;
+}
+
+.rDt>input{
+   width: 6rem;
+}
+/* 저장하기 버튼 */
+.saveDiv{
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   margin-top: 0.5rem;
+}
+
+.rOrg>input{
+   width: 10rem;
+}
+
+/*자소서*/
+.cLInput{
+   width: 98.25%;
+   height: 10rem;
+
+}
+
+/*input 크기*/
+.gradScore{
+   width: 3rem;
+}
+.miliArmy{
+   width: 5rem;
+}
+.crPosition{
+   width:5rem;
 }
