@@ -1,0 +1,28 @@
+[
+   {
+      "title": "과정관리",
+      "subtitle": [
+         {
+            "title": "과정생성",
+            "url": "/make_course"
+         },
+         {
+            "title": "전체과정",
+            "url": "/edit_course"
+         }
+      ]
+   },
+   {
+      "title": "정보공개",
+      "subtitle": [
+         {
+            "title": "기업용 키 생성",
+            "url": "/make_e"
+         },
+         {
+            "title": "기업용 키 관리",
+            "url": "/edit_e"
+         }
+      ]
+   }
+]
