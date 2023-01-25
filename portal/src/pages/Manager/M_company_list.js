@@ -5,33 +5,33 @@ import axios from 'axios';
 
 const M_company_list = (props) => {
 
-    const company_register_dateRef = useRef("");
     const company_nameRef = useRef("");
     const company_deadlineRef = useRef("");
     const company_areaRef = useRef("");
     const company_employRef = useRef("");
     const company_gradeRef = useRef("");
     const company_positionRef = useRef("");
+    const company_qualRef = useRef("");
+    const company_essentialRef = useRef("");
     const company_advantageRef = useRef("");
-    const company_salaryRef = useRef("");
-    const company_requireRef = useRef("");
     const company_etcRef = useRef("");
+    const company_salaryRef = useRef("");
+    const company_applyRef = useRef("");
 
-    const [company_register_date, setCompany_register_date] = useState("")
     const [company_name, setCompany_name] = useState("")
     const [company_deadline, setCompany_deadline] = useState("")
     const [company_area, setCompany_area] = useState("")
     const [company_employ, setCompany_employ] = useState("")
     const [company_grade, setCompany_grade] = useState("")
     const [company_position, setCompany_position] = useState("")
+    const [company_qual, setCompany_qual] = useState("")
+    const [company_essential, setCompany_essential] = useState("")
     const [company_advantage, setCompany_advantage] = useState("")
-    const [company_salary, setCompany_salary] = useState("")
-    const [company_require, setCompany_require] = useState("")
     const [company_etc, setCompany_etc] = useState("")
+    const [company_salary, setCompany_salary] = useState("")
+    const [company_apply, setCompany_apply] = useState("")
 
-    const onCompany_register_date = e => {
-        setCompany_register_date(e.target.value)
-    }
+
     const onCompany_name = e => {
         setCompany_name(e.target.value)
     }
@@ -50,17 +50,23 @@ const M_company_list = (props) => {
     const onCompany_position = e => {
         setCompany_position(e.target.value)
     }
+    const onCompany_qual = e => {
+        setCompany_qual(e.target.value)
+    }
+    const onCompany_essential = e => {
+        setCompany_essential(e.target.value)
+    }
     const onCompany_advantage = e => {
         setCompany_advantage(e.target.value)
+    }
+    const onCompany_etc = e => {
+        setCompany_etc(e.target.value)
     }
     const onCompany_salary = e => {
         setCompany_salary(e.target.value)
     }
-    const onCompany_require = e => {
-        setCompany_require(e.target.value)
-    }
-    const onCompany_etc = e => {
-        setCompany_etc(e.target.value)
+    const onCompany_apply = e => {
+        setCompany_apply(e.target.value)
     }
 
     const [edit_style_po, setEdit_style_po] = useState({ display: "" })
@@ -77,10 +83,12 @@ const M_company_list = (props) => {
                 company_employ: company_employ,
                 company_grade: company_grade,
                 company_position: company_position,
+                company_qual: company_qual,
+                company_essential: company_essential,
                 company_advantage: company_advantage,
-                company_salary: company_salary,
-                company_require: company_require,
                 company_etc: company_etc,
+                company_salary: company_salary,
+                company_apply: company_apply,
             }).then(function (res) {
                 alert("수정완료")
                 window.location.reload();
@@ -136,17 +144,25 @@ const M_company_list = (props) => {
             <td style={edit_style_po} className=''>{props.item.company_position} </td>
             <td style={edit_style_op} className=''><input type='text' value={company_position} onChange={onCompany_position} ref={company_positionRef} placeholder={props.item.company_position}></input></td>
 
+            <td style={edit_style_po} className=''>{props.item.company_qual} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_qual} onChange={onCompany_qual} ref={company_qualRef} placeholder={props.item.company_qual}></input></td>
+
+            <td style={edit_style_po} className=''>{props.item.company_essential} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_essential} onChange={onCompany_essential} ref={company_essentialRef} placeholder={props.item.company_essential}></input></td>
+
             <td style={edit_style_po} className=''>{props.item.company_advantage} </td>
             <td style={edit_style_op} className=''><input type='text' value={company_advantage} onChange={onCompany_advantage} ref={company_advantageRef} placeholder={props.item.company_advantage}></input></td>
+
+            <td style={edit_style_po} className=''>{props.item.company_etc} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_etc} onChange={onCompany_etc} ref={company_etcRef} placeholder={props.item.company_etc}></input></td>
 
             <td style={edit_style_po} className=''>{props.item.company_salary} </td>
             <td style={edit_style_op} className=''><input type='text' value={company_salary} onChange={onCompany_salary} ref={company_salaryRef} placeholder={props.item.company_salary}></input></td>
 
-            <td style={edit_style_po} className=''>{props.item.company_require} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_require} onChange={onCompany_require} ref={company_requireRef} placeholder={props.item.company_require}></input></td>
+            <td style={edit_style_po} className=''>{props.item.company_apply} </td>
+            <td style={edit_style_op} className=''><input type='text' value={company_apply} onChange={onCompany_apply} ref={company_applyRef} placeholder={props.item.company_apply}></input></td>
 
-            <td style={edit_style_po} className=''>{props.item.company_etc} </td>
-            <td style={edit_style_op} className=''><input type='text' value={company_etc} onChange={onCompany_etc} ref={company_etcRef} placeholder={props.item.company_etc}></input></td>
+
 
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_company_button}>수정하기</button></div></td>
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={delete_company_submit}>삭제하기</button></div></td>

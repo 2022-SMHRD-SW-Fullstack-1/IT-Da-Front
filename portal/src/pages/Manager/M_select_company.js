@@ -35,10 +35,12 @@ const M_select_company = (props) => {
                             <th>고용형태</th>
                             <th>학력</th>
                             <th>직무</th>
+                            <th>자격</th>
+                            <th>필수요건</th>
                             <th>우대</th>
+                            <th>특이사항</th>
                             <th>급여</th>
-                            <th>필수</th>
-                            <th>기타</th>
+                            <th>지원방법</th>
                             <th></th>
                         </tr>
                     </thead>
