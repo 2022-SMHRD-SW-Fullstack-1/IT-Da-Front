@@ -12,8 +12,8 @@ const BoardButton = () => {
   }
   return (
     <div className='stuBoardExtendBtnDiv'>
-      <span className='stuBoardDiv' onClick={goToBoard}>공유 자료실<br />바로가기</span>
-      <span className='stuExtendDiv' onClick={goToExtend}>강의실 연장 사용<br />신청하기</span>
+      <span className='stuBoardDiv hoverHand' onClick={goToBoard}>공유 자료실<br />바로가기</span>
+      <span className='stuExtendDiv hoverHand' onClick={goToExtend}>강의실 연장 사용<br />신청하기</span>
     </div>
   )
 }

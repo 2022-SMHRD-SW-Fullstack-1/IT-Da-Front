@@ -1,25 +1,46 @@
-.T_rMain{
-   margin: 0.5rem;
+.resume {
+   display: flex;
+}
+.resume1>div {
+   display: flex;
+   flex-direction:raw;
+}
+.sRPhotoDiv {
+   margin-right: 4rem;
+}
+.resume_b {
    display: flex;
    flex-direction: column;
-   align-items: center;
-   width: 100%;
-   background-color: rgb(244,244,244);
-   
+   min-width: 6rem;
 }
-.resumeMain, .coverLetterMain {
-   margin: 1.5rem;
-   background-color: white;
-   width: 100%;
-   border-radius: 10px;
-   max-width: 50rem;
-   padding: 1rem;
+.resume_ngb{
+   display: flex;
+   flex-direction: row;
 }
-.sRTitle, .sCLTitle{
-   height: 3rem;
-   border-bottom: 2px solid rgb(136, 136, 136); 
-   font-size: 20px;
+.sRTitleDiv2>div, .sRTitleDiv>div{
+   min-width: 5rem;
 }
-.sRContentDiv, .sRTitleDiv{
+.sRTitleDiv2, .sRTitleDiv{
+   display: flex;
+}
+.resumeInput {
+   display: inline-flex;
+}
+.sRTitleDiv{
+   justify-content: space-between;
+}
+.resumeText {
+   display: inline;
+}
 
+.sRTitle{
+   border-bottom: 3px solid rgb(209, 209, 209);
+   margin-bottom: 0.5rem;
+   font-size: 1.4rem;
+   font-weight: bold;
+   /* margin-right: 1rem; */
+}
+.sRContentDiv{
+   display: flex;
+   justify-content: space-between;
 }

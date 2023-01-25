@@ -46,4 +46,14 @@
          }
       ]
    }
+   ,
+   {
+      "title": "구직 공고",
+      "subtitle": [
+         {
+            "title": "공고 확인",
+            "url": "/company/search"
+         }
+      ]
+   }
 ]
