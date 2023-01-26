@@ -1,0 +1,38 @@
+{
+   "name": "total",
+   "color": "hsl(199, 100%, 40%)",
+   "children": [
+      {
+         "name": "성공",
+         "color": "hsl(199, 100%, 40%)",
+         "children": [
+            {
+               "name": "취업",
+               "color": "hsl(199, 100%, 40%)",
+               "loc": 14
+            },
+            {
+               "name": "자력",
+               "color": "hsl(199, 100%, 40%)",
+               "loc": 7
+            }
+         ]
+      },
+      {
+         "name": "실패",
+         "color": "hsl(199, 0%, 71%)",
+         "children": [
+            {
+               "name": "희망",
+               "color": "hsl(199, 0%, 71%)",
+               "loc": 1
+            },
+            {
+               "name": "재직",
+               "color": "hsl(199, 0%, 71%)",
+               "loc": 2
+            }
+         ]
+      }
+   ]
+}

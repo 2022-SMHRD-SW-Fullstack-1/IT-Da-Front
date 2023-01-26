@@ -34,11 +34,11 @@
       "subtitle": [
          {
             "title": "출결 관리",
-            "url": "/"
+            "url": "/resume"
          },
          {
             "title": "학생 정보",
-            "url": "/resume"
+            "url": "/std_info"
          }
       ]
    }
