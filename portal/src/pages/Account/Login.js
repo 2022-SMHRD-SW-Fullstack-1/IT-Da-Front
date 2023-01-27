@@ -60,9 +60,25 @@ const Login = () => {
   };
 
   const onELoginClick = () => {
-    window.sessionStorage.setItem('role', 'e');
-    window.sessionStorage.setItem('userName', '유티소프트');
-    window.location.replace('/e_main');
+    //window.sessionStorage.setItem('role', 'e');
+    //window.sessionStorage.setItem('userName', '유티소프트');
+    //window.location.replace('/e_main');
+
+    axios
+      .post('/enterprise/login', { id: id, pw: pw })
+      .then((res) => {
+        console.log(res.data);
+
+        if (res.data.enter_approve == 'N') {
+          alert('승인되지 않은 아이디입니다.')
+        } else {
+          window.sessionStorage.setItem('loginId', res.data.enter_id);
+          window.sessionStorage.setItem('role', 'e');
+          window.sessionStorage.setItem('userName', res.data.enter_name);
+          window.location.replace('/');
+        }
+      })
+      .catch((e) => console.log(e));
   };
 
   const handleOnKeyPress = (e) => {
