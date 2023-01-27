@@ -220,3 +220,26 @@
     width: 5rem;
     font-weight: bold;
 }
+
+.company_outer {
+    width: 37rem;
+}
+
+.company_inner {
+    display: flex;
+    text-align: left;
+}
+
+.company_inner>div:first-child {
+    width: 7rem;
+    font-weight: bold;
+    margin-left: 3rem;
+}
+
+.company_inner>div:nth-child(2){
+    max-width: 30rem;
+}
+
+.company_inner>div>input{
+    width: 27.5rem;
+}

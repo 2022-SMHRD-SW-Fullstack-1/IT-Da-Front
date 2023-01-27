@@ -1,4 +1,3 @@
-import "../../css/M_main.css"
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
 import M_company_list from "./M_company_list"

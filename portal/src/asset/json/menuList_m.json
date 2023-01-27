@@ -32,5 +32,14 @@
             "url": "/edit_e"
          }
       ]
+   },
+   {
+      "title": "전체공지",
+      "subtitle": [
+         {
+            "title": "공지사항",
+            "url": "/manager_announcement"
+         }
+      ]
    }
 ]

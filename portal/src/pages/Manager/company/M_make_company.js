@@ -1,22 +1,9 @@
-import '../../css/M_main.css';
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const M_make_company = () => {
-  const company_nameRef = useRef('');
-  const company_deadlineRef = useRef('');
-  const company_areaRef = useRef('');
-  const company_employRef = useRef('');
-  const company_gradeRef = useRef('');
-  const company_positionRef = useRef('');
-  const company_qualRef = useRef('');
-  const company_essentialRef = useRef('');
-  const company_advantageRef = useRef('');
-  const company_etcRef = useRef('');
-  const company_salaryRef = useRef('');
-  const company_applyRef = useRef('');
-
+ 
   const [company_name, setCompany_name] = useState('');
   const [company_deadline, setCompany_deadline] = useState('');
   const [company_area, setCompany_area] = useState('');
@@ -97,7 +84,7 @@ const M_make_company = () => {
   };
 
   return (
-    <div className="registerCntainer basic_container_container">
+    <div className="registerContainer basic_container_container">
       <div>
         <p>기업 공고 생성하기</p>
         <div>
@@ -107,7 +94,6 @@ const M_make_company = () => {
             type="text"
             value={company_name}
             onChange={onCompany_name}
-            ref={company_nameRef}
           />
         </div>
         <div>
@@ -117,7 +103,6 @@ const M_make_company = () => {
             type="text"
             value={company_deadline}
             onChange={onCompany_deadline}
-            ref={company_deadlineRef}
           />
         </div>
         <div>
@@ -127,7 +112,6 @@ const M_make_company = () => {
             type="text"
             value={company_area}
             onChange={onCompany_area}
-            ref={company_areaRef}
           />
         </div>
         <div>
@@ -137,7 +121,6 @@ const M_make_company = () => {
             type="text"
             value={company_employ}
             onChange={onCompany_employ}
-            ref={company_employRef}
           />
         </div>
         <div>
@@ -147,7 +130,6 @@ const M_make_company = () => {
             type="text"
             value={company_grade}
             onChange={onCompany_grade}
-            ref={company_gradeRef}
           />
         </div>
         <div>
@@ -157,7 +139,6 @@ const M_make_company = () => {
             type="text"
             value={company_position}
             onChange={onCompany_position}
-            ref={company_positionRef}
           />
         </div>
         <div>
@@ -167,7 +148,6 @@ const M_make_company = () => {
             type="text"
             value={company_qual}
             onChange={onCompany_qual}
-            ref={company_qualRef}
           />
         </div>
         <div>
@@ -177,7 +157,6 @@ const M_make_company = () => {
             type="text"
             value={company_essential}
             onChange={onCompany_essential}
-            ref={company_essentialRef}
           />
         </div>
         <div>
@@ -187,7 +166,6 @@ const M_make_company = () => {
             type="text"
             value={company_advantage}
             onChange={onCompany_advantage}
-            ref={company_advantageRef}
           />
         </div>
         <div>
@@ -197,7 +175,6 @@ const M_make_company = () => {
             type="text"
             value={company_etc}
             onChange={onCompany_etc}
-            ref={company_etcRef}
           />
         </div>
         <div>
@@ -207,7 +184,6 @@ const M_make_company = () => {
             type="text"
             value={company_salary}
             onChange={onCompany_salary}
-            ref={company_salaryRef}
           />
         </div>
         <div>
@@ -217,7 +193,6 @@ const M_make_company = () => {
             type="text"
             value={company_apply}
             onChange={onCompany_apply}
-            ref={company_applyRef}
           />
         </div>
         <button className="manager_button" onClick={make_company_submit}>

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useRef } from 'react';
-import '../../css/M_main.css';
 
 const M_make_e_key = () => {
   const enter_nameRef = useRef('');
@@ -27,7 +26,7 @@ const M_make_e_key = () => {
   };
 
   return (
-    <div className=" registerCntainer basic_container_container">
+    <div className=" registerContainer basic_container_container">
       <div className="">
         <p>기업 키 생성</p>
         <div className="">
