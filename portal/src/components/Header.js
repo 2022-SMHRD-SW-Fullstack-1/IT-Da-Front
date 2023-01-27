@@ -20,7 +20,7 @@ const Header = () => {
 
 
     return (
-        <div className='headerTopDiv'>
+        <div className='headerTopDiv' style={{zIndex: '99'}}>
             <div className='headerInnerDiv'>
                 <img onClick={onClickLogo} className='headerLogo hoverHand' src={logo} />
                 {(window.sessionStorage.getItem("role") === 's') && (

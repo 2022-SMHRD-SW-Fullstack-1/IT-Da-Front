@@ -11,7 +11,7 @@ const MyResponsiveSunburst = ({ data }) => {
        cornerRadius={2}
        borderWidth={2}
        borderColor="#ffffff"
-       colors={{ scheme: 'category10' }}
+       colors={['rgb(0, 138, 204)', 'rgb(186, 186, 186)']}
        childColor={{
            from: 'color',
            modifiers: [

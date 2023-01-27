@@ -30,7 +30,7 @@ const StdInfoList = () => {
    return (
       <div className='container stdInfoContainer'>
          <div>
-            <div style={{width: '25rem', height: '20rem'}}><MyResponsiveSunburst data={data}/></div>
+            <div style={{width: '25rem', height: '20rem', zIndex: '0'}}><MyResponsiveSunburst data={data}/></div>
             <table>
                <thead>
                   <tr>
