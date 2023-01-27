@@ -52,7 +52,7 @@ const Login = () => {
           window.sessionStorage.setItem('loginId', res.data.mb_id);
           window.sessionStorage.setItem('role', 'a');
           window.sessionStorage.setItem('userName', res.data.mb_name);
-          window.sessionStorage.setItem('course_key', "52D8EECC");
+          window.sessionStorage.setItem('course_key', '52D8EECC');
           window.location.replace('/');
         } else alert('일치하는 회원정보가 없습니다');
       })

@@ -32,15 +32,21 @@ const M_e_list = (props) => {
   // 기업제거
   const delete_e_submit = e => {
     e.preventDefault();
-    axios
-      .post("/enterprise/delete_enterprise", {
-        enter_num: props.item.enter_num
-      }).then(function (res) {
-        alert("기업키 제거완료")
-        window.location.reload()
-      }).catch(function (err) {
-        console.log("실패")
-      })
+    if (window.confirm("삭제하시겠습니까?")) {
+
+
+      axios
+        .post("/enterprise/delete_enterprise", {
+          enter_num: props.item.enter_num
+        }).then(function (res) {
+          alert("기업키 제거완료")
+          window.location.reload()
+        }).catch(function (err) {
+          console.log("실패")
+        })
+    } else {
+      alert("삭제취소");
+    }
   }
 
   // 수정 클릭 시

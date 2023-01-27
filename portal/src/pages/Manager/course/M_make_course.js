@@ -1,16 +1,10 @@
-import '../../css/M_main.css';
 import React, { useEffect, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const M_make_course = () => {
+
   const navigate = useNavigate();
-  const course_subjectRef = useRef('');
-  const course_nameRef = useRef('');
-  const course_campusRef = useRef('');
-  const course_s_dtRef = useRef('');
-  const course_e_dtRef = useRef('');
-  const course_teacherRef = useRef('');
-  const course_limitRef = useRef('');
+
   const [course_subject, setCourse_subject] = useState('');
   const [course_name, setCourse_name] = useState('');
   const [course_campus, setCourse_campus] = useState('');
@@ -18,6 +12,7 @@ const M_make_course = () => {
   const [course_e_dt, setCourse_e_dt] = useState('');
   const [course_teacher, setCourse_teacher] = useState('');
   const [course_limit, setCourse_limit] = useState('');
+
   const onCourse_subject = (e) => {
     setCourse_subject(e.target.value);
   };
@@ -62,26 +57,18 @@ const M_make_course = () => {
         console.log('error');
       });
   };
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ];
-  // const SubjectList = () => (
-  //     <Select options={options} />)
+
   return (
-    <div className="registerCntainer M_make_course_container ">
+    <div className="registerContainer M_make_course_container ">
       <div>
         <p className="classMake">과정 생성</p>
         <div>
-          {/* <SubjectList value={course_subject} onChange={onCourse_subject} forwardRef={course_subjectRef} /> */}
           <span>과정 주제</span>
           <input
             placeholder="입력해주세요."
             type="text"
             value={course_subject}
             onChange={onCourse_subject}
-            ref={course_subjectRef}
           />
         </div>
         <div>
@@ -91,7 +78,6 @@ const M_make_course = () => {
             type="text"
             value={course_name}
             onChange={onCourse_name}
-            ref={course_nameRef}
           />
         </div>
         <div>
@@ -101,7 +87,6 @@ const M_make_course = () => {
             type="text"
             value={course_campus}
             onChange={onCourse_campus}
-            ref={course_campusRef}
           />
         </div>
         <div>
@@ -111,7 +96,6 @@ const M_make_course = () => {
             type="text"
             value={course_s_dt}
             onChange={onCourse_s_dt}
-            ref={course_s_dtRef}
           />
         </div>
         <div>
@@ -121,7 +105,6 @@ const M_make_course = () => {
             type="text"
             value={course_e_dt}
             onChange={onCourse_e_dt}
-            ref={course_e_dtRef}
           />
         </div>
         <div>
@@ -131,7 +114,6 @@ const M_make_course = () => {
             type="text"
             value={course_teacher}
             onChange={onCourse_teacher}
-            ref={course_teacherRef}
           />
         </div>
         <div>
@@ -141,7 +123,6 @@ const M_make_course = () => {
             type="text"
             value={course_limit}
             onChange={onCourse_limit}
-            ref={course_limitRef}
           />
         </div>
         <button className="M_make_course_button" onClick={make_course_submit}>
