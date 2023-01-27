@@ -14,6 +14,9 @@ const C_archive_write = () => {
    const { state } = useLocation();
 
    const [title, setTitle] = useState('');
+   const onTitleChange = e => {
+      setTitle(e.target.value)
+   };
    const [content, setContet] = useState('');
    const [files, setFiles] = useState('');
    const onLoadFile = (e) => {
@@ -98,7 +101,7 @@ const C_archive_write = () => {
          <p>공유 자료실 {state.title}</p>
          <div className='content annContent'>
             <p>제목</p>
-            <input onChange={setTitle} value={title} type='text'></input>
+            <input onChange={onTitleChange} value={title} type='text'></input>
 
             <p>내용</p>
             <ReactQuill theme="snow" value={content} onChange={setContet} />
