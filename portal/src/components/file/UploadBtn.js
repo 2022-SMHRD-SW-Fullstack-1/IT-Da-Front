@@ -1,6 +1,7 @@
 import AWS from 'aws-sdk';
 import axios from 'axios';
 import { useState } from 'react';
+
 const UploadBtn = ({btn_text,file_name}) => {
 // props로 버튼에 넣을 텍스트와 사용자 아이디(mb_id)를 받아야함
     const [selectedFile, setSelectedFile] = useState(null)

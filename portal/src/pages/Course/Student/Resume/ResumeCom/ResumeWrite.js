@@ -11,7 +11,7 @@ const ResumeWrite = ({ resume, setResume }) => {
     // project1:'1',
     // project2:'2',
 
-      /**저장하기 버튼 */
+    /**저장하기 버튼 */
   const btnSave = () => {
     console.log('click')
     axios

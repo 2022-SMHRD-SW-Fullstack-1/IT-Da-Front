@@ -12,6 +12,7 @@ import ResumeWrite from "./Resume/ResumeCom/ResumeWrite"
 import ReactToPrint from 'react-to-print'
 
 function S_R_write() {
+    
     const printRef=useRef()
 
   const [resume, setResume] = useState({
