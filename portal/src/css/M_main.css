@@ -197,7 +197,7 @@
     width: 95%;
 }
 
-.company_name{
+.company_name {
     width: 9.5rem
 }
 
@@ -205,17 +205,18 @@
     width: 95%;
 }
 
-.company_deadline{
+.company_deadline {
     width: 5.5rem
 }
 
-.company_deadline>input{
+.company_deadline>input {
     width: 95%;
 }
 
 .td_in_tr {
     display: flex;
 }
+
 .td_in_tr>div:first-child {
     width: 5rem;
     font-weight: bold;
@@ -236,10 +237,49 @@
     margin-left: 3rem;
 }
 
-.company_inner>div:nth-child(2){
+.company_inner>div:nth-child(2) {
     max-width: 30rem;
 }
 
-.company_inner>div>input{
+.company_inner>div>input {
     width: 27.5rem;
 }
+
+
+/* 위젯 */
+
+.attTable_manager {
+    width: 100%;
+    text-align: left;
+}
+
+.attTable_manager thead {
+    font-size: 1.4rem;
+    font-weight: bold;
+    font-size: large;
+}
+
+.attTable_manager td {
+    font-size: 0.8rem;
+    text-align: center;
+ }
+
+ .annItem_manager {
+    border-top: 1px solid rgb(231, 231, 231);
+    margin: 0.5rem 0.6rem;
+    padding-top: 0.6rem;
+    /*텍스트 줄바꿈 없애고 overflow되면 ...표시로 바꿔줌*/
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+ }
+
+ .attTable_manager .attNum_manager{
+    font-size: 2rem;
+ }
+
+ .annBody_manager {
+    width: 100%;
+    padding: 0 0.2rem;
+    height: inherit;
+ }

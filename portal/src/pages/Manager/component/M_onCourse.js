@@ -1,29 +1,70 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios';
 
-const M_oncourse = () => {
+import "../../../css/M_main.css"
+
+const M_onCourse = () => {
+
+  const navigate = useNavigate()
+
+  const [course, setCourse] = useState([])
+
+  const goToMake = () => {
+    navigate('/make_course')
+  }
+  const goToCourseList = () => {
+    navigate('/edit_course')
+  }
+
+  useEffect(() => {
+    axios
+      .get("/course/select_all_course")
+      .then(function (res) {
+        setCourse(res.data)
+      })
+      .catch(function (error) {
+        console.log("error")
+      })
+  }, [])
+
+
   return (
     <div className='topDiv'>
-    <table className='attTable'>
-       <thead>
-          <tr>
-             <td colSpan={3}>기업 승인</td>
-          </tr>
-       </thead>
-       <tbody>
-          <tr>
-             <td>출석</td>
-             <td>지각</td>
-             <td>결석</td>
-          </tr>
-          <tr className='attNum'>
-             <td>23</td>
-             <td>1</td>
-             <td>0</td>
-          </tr>
-       </tbody>
-    </table>
- </div>
+      <div className='annHead'>
+        <p>진행중인 과정</p>
+        <div>
+          <p className='hoverHand' onClick={goToMake}>과정추가</p>
+          <p className='hoverHand' onClick={goToCourseList}>전체과정</p>
+        </div>
+      </div>
+      <div className='annBody_manager'>
+        <table className='attTable_manager'>
+          <thead>
+            <tr>
+              <td className='annItem_manager'>과정명</td>
+              <td className='annItem_manager'>담임명</td>
+              <td className='annItem_manager'>과정키</td>
+            </tr>
+          </thead>
+          <tbody className=''>
+            <tr>
+              <td>
+              {course.map((item) => (<p className='annItem_manager' course_name={item.course_name} key={item.course_name}>{item.course_name}</p>))}
+              </td>
+              <td>
+              {course.map((item) => (<p className='annItem_manager' course_teacher={item.course_teacher} key={item.course_teacher}>{item.course_teacher}</p>))}
+              </td>
+              <td>
+              {course.map((item) => (<p className='annItem_manager'course_key={item.course_key} key={item.course_key}>{item.course_key}</p>))}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
   )
 }
 
-export default M_oncourse
+export default M_onCourse

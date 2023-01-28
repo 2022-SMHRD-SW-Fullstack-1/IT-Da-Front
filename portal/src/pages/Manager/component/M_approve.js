@@ -1,32 +1,62 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import axios from "axios"
 
-const M_approve = () => {
+const M_approve = (props) => {
 
-  const navigate = useNavigate()
+   const [enter, setEnter] = useState([])
 
-  const goToMake = () => {
-    navigate('/make_course')
- }
- const goToCourseList = () => {
-    navigate('/edit_course')
- }
+   useEffect(() => {
+      axios.get("/enterprise/approve_list")
+         .then(function (res) {
+            console.log(res.data)
+            setEnter(res.data)
+         })
+         .catch(function (error) {
+            console.log("error")
+         })
+   }, [])
 
+   const enter_approve_submit = (e) => {
+      e.preventDefault()
+      axios.post("/enterprise/approve", {
+      })
+         .then(function (res) {
+            // window.location.reload();
+         })
+         .catch(function (error) {
+            console.log("error")
+         })
+   }
 
-    return (
-        <div className='topDiv'>
-          <div className='annHead' style={{ marginTop: '1rem' }}>
-            <p>진행중인 과정</p>
-            <div>
-              <p className='hoverHand' onClick={goToMake}>과정추가</p>
-              <p className='hoverHand' onClick={goToCourseList}>전체과정</p>
-            </div>
-          </div>
-          <div className='annBody' style={{ minHeight: '12.6rem' }}>
-          </div>
-        </div>
-      )
+   const approveList = enter.map((item) => (
+      <tr key={item.enter_id}>
+         <td className='annItem_manager'>{item.enter_name}</td>
+         <td className='annItem_manager'>{item.enter_id}</td>
+         <td className='annItem_manager'><button onClick={enter_approve_submit}>승인</button></td>
+      </tr>))
+
+   return (
+      <div className='topDiv'>
+         <div className='annHead'>
+            <p>기업 승인</p>
+         </div>
+         <div className='annBody_manager'>
+            <table className='attTable_manager'>
+               <thead>
+                  <tr>
+                     <td className='annItem_manager'>기업명</td>
+                     <td className='annItem_manager'>아이디</td>
+                     <td className='annItem_manager'></td>
+                  </tr>
+               </thead>
+               <tbody>
+                  {approveList}
+               </tbody>
+            </table>
+         </div>
+
+      </div>
+   )
 }
 
 export default M_approve

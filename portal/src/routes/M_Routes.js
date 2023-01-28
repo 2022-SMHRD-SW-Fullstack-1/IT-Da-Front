@@ -11,6 +11,7 @@ import M_make_company from '../pages/Manager/company/M_make_company'
 import M_select_company from '../pages/Manager/company/M_select_company'
 import M_announcement_list from '../pages/Manager/announcement/M_announcement_list'
 import M_announcement_write from '../pages/Manager/announcement/M_announcement_write'
+import M_announcement_detail from '../pages/Manager/announcement/M_announcement_detail'
 
 
 
@@ -27,6 +28,7 @@ const M_Routes = () => {
       <Route path='/select_company' element={<M_select_company />}></Route>
       <Route path='/manager_announcement' element={<M_announcement_list />}></Route>
       <Route path='/manager_announcement_write' element={<M_announcement_write />}></Route>
+      <Route path='/manager_announcement_detail' element={<M_announcement_detail />}></Route>
     </Routes>
   )
 }

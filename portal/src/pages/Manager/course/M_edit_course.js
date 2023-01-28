@@ -19,7 +19,7 @@ const M_edit_course = (props) => {
     }, [])
 
     const courseList =
-        course.map((item) => <M_course_list item={item} key={item.course_name} />)
+        course.map((item) => <M_course_list item={item} key={item.course_teacher} />)
 
     return (
         <div className='container'>

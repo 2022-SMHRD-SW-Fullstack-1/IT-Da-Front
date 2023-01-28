@@ -13,11 +13,11 @@ const M_main = () => {
         <Container>
             <Row>
                 <Col lg={12} xl={5}>
-                    <M_onCourse />
+                    <M_approve />
                     <M_announcement />
                 </Col>
                 <Col lg={12} xl={7}>
-                    <M_approve />
+                    <M_onCourse />
                 </Col>
             </Row>
         </Container>

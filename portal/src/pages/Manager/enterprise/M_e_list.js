@@ -3,12 +3,19 @@ import axios from "axios"
 
 const M_e_list = (props) => {
 
-  const enter_nameRef = useRef("");
 
-  const [enter_name, setEnter_name] = useState("")
+  const [enter_pw, setEnter_pw] = useState("")
+  const [enter_manager, setEnter_manager] = useState("")
+  const [enter_tel, setEnter_tel] = useState("")
 
-  const onEnter_name = e => {
-    setEnter_name(e.target.value)
+  const onEnter_pw = e => {
+    setEnter_pw(e.target.value)
+  }
+  const onEnter_manager = e => {
+    setEnter_manager(e.target.value)
+  }
+  const onEnter_tel = e => {
+    setEnter_tel(e.target.value)
   }
 
   const [edit_style_po, setEdit_style_po] = useState({ display: "" })
@@ -19,10 +26,12 @@ const M_e_list = (props) => {
     e.preventDefault();
     axios
       .post("/enterprise/edit_enterprise", {
-        enter_name: enter_name,
-        enter_num: props.item.enter_num
+        enter_id: props.item.enter_id,
+        enter_pw: enter_pw,
+        enter_manager: enter_manager,
+        enter_tel: enter_tel,
       }).then(function (res) {
-        alert("기업키 수정완료")
+        alert("기업 수정완료")
         window.location.reload()
       }).catch(function (err) {
         console.log("실패")
@@ -62,9 +71,14 @@ const M_e_list = (props) => {
 
   return (
     <tr>
-      <td style={edit_style_po} className='e_name'>{props.item.enter_name}</td>
-      <td style={edit_style_op} className='e_name'><input type='text' value={enter_name} onChange={onEnter_name} ref={enter_nameRef} placeholder={props.item.enter_name}></input></td>
-      <td>{props.item.enter_num}</td>
+      <td>{props.item.enter_name}</td>
+      <td>{props.item.enter_id}</td>
+      <td style={edit_style_po} className='e_name'>{props.item.enter_pw}</td>
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter_pw} onChange={onEnter_pw} placeholder={props.item.enter_pw}></input></td>
+      <td style={edit_style_po} className='e_name'>{props.item.enter_manager}</td>
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter_manager} onChange={onEnter_manager} placeholder={props.item.enter_manager}></input></td>
+      <td style={edit_style_po} className='e_name'>{props.item.enter_tel}</td>
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter_tel} onChange={onEnter_tel} placeholder={props.item.enter_tel}></input></td>
       <td style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정하기</button><button onClick={delete_e_submit}>삭제하기</button></div></td>
       <td style={edit_style_op}><div className='content annViewButton'><button onClick={edit_e_submit}>수정완료</button><button onClick={edit_e_button_quit}>취소하기</button></div></td>
     </tr>

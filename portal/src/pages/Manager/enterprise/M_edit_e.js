@@ -19,17 +19,20 @@ const M_edit_e = (props) => {
     }, [])
 
     const enterList =
-        enter.map((item) => <M_e_list item={item} key={item.enter_name}/>)
+        enter.map((item) => <M_e_list item={item} key={item.enter_name} />)
 
     return (
         <div className='container'>
-            <p>진행중인 과정</p>
+            <p>기업 목록</p>
             <div className='content'>
                 <table>
                     <thead>
                         <tr>
                             <th>기업명</th>
-                            <th>기업키</th>
+                            <th>아이디</th>
+                            <th>비밀번호</th>
+                            <th>담당자</th>
+                            <th>연락처</th>
                             <th></th>
                         </tr>
                     </thead>
