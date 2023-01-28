@@ -2,15 +2,18 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 
 import S_main from '../pages/Course/Student/S_main.js'
+import Resume from '../components/Resume'
 import S_R_write from '../pages/Course/Student/S_R_write'
 import S_C_main from '../pages/Course/Student/S_C_main'
 import S_CL_main from '../pages/Course/Student/S_CL_main'
+import ResumeFrame from '../pages/Course/Student/Resume/ResumeFrame.js'
 
 const S_Routes = () => {
    return (
       <Routes>
          <Route path='/' element={<S_main />}></Route>
-         {/* <Route path='/resume_css' element={<Resume />}></Route> */}
+         <Route path='/resume_css' element={<Resume />}></Route>
+         <Route path='/resume_print' element={<ResumeFrame />}></Route>
          {/* <Route path='/resume/update' element={<S_R_main />}></Route> */}
          <Route path='/company/search' element={<S_C_main />}></Route>
          <Route path='/resume' element={<S_R_write />}></Route>

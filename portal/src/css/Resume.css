@@ -98,6 +98,7 @@
 }
 .saveBtn{
    border: none;
+   width: 5rem;
    border-radius: 5px;
    padding: 0.4rem 0.6rem;
    margin: 0 0.5rem;
@@ -153,4 +154,44 @@
 }
 .crPosition{
    width:5rem;
+}
+.big_input_text{
+   width: 20rem;
+   height: 5rem;
+}
+
+.sRBtnSaveDiv{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.photoDiv{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.photoDiv>div{
+   margin-top: 0.5rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+}
+.photoDiv>div>div{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   width: 65%;
+   margin-top: 0.5rem;
+}
+
+.photoDiv>img{
+   width: 3cm;
+   height: 4cm;
+}
+
+.photoDiv>div>input{
+   width: 50%;
 }

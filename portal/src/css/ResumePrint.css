@@ -1,0 +1,74 @@
+.resumePrintDiv{
+    display: flex;
+    flex-direction: column;
+    width: 18cm;
+    height: 25cm;
+    font-size: 11pt;
+    text-align: center;
+  }
+  /*이력서 타이틀*/
+  .resumePrintDiv>div:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 1mm;
+    border-color: rgb(71,176,187);
+    letter-spacing: 5mm;
+  }
+  .resumePrintDiv>div>span{
+    font-weight: bolder;
+    font-size: 22pt;
+    border-bottom: 1mm;
+  }
+  .resumePrintDiv>div>span:first-child{
+    width: 2.7cm;
+  }
+  .resumePrintDiv>div>span:last-child{
+    width: 6.4cm;
+  }
+  /*이력서 테이블*/
+  .resumePrintDiv>table{
+    margin-top: 4mm;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid;
+  }
+  .resumePrintDiv>table>tbody>tr>th, .resumePrintDiv>table>tbody>tr>td{
+    border-collapse: collapse;
+    border: 1px solid;
+  }
+  #resumePrintPhoto{
+    width: 3cm;
+    height: 4cm
+  }
+  .resumePrintDiv>table>tbody>tr>th:first-child{
+    width: 8mm;
+  }
+  .resumePrintDiv>table>tbody>tr>th, .resumePrintDiv>table>tbody>tr>td {
+    height: 6.9mm;
+  }
+  .resumePrintDiv>div>div:first-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .resumePrintDiv>div>div:last-child{
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+  }
+  .resumePrintDiv>div>div>span{
+    margin-left: 1.5cm;
+  }
+  
+  .resumePrintTitle{
+    background-color: rgb(223, 234, 245);
+    font-weight: bolder;
+  }
+  .resumePrintTitle2{
+    width: 1mm;
+  }
+
+  .resumePrintTopDiv{
+    margin: 20mm;
+  }

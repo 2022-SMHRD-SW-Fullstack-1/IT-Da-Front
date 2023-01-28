@@ -9,11 +9,8 @@ import MilitaryWrite from "./Resume/ResumeCom/MilitaryWrite"
 import PrizeWrite from "./Resume/ResumeCom/PrizeWrite"
 import ResumeWrite from "./Resume/ResumeCom/ResumeWrite"
 
-import ReactToPrint from 'react-to-print'
 
 function S_R_write() {
-    
-    const printRef=useRef()
 
   const [resume, setResume] = useState({
     name: '',
@@ -106,15 +103,8 @@ function S_R_write() {
   return (
     <div className='topDiv_resumePage'>
         <p></p>
-        <button onClick={() => window.open('./resume_css',"")}>[url 링크]</button>
-        <ReactToPrint
-            trigger={()=><button>프린트하기</button>}
-            content={()=>printRef.current}
-            pageStyle="print"
-            
-        />
-        <div className='topDiv_resume print'
-         ref={printRef}>
+        <button onClick={() => window.open('./resume_print')}>[url 링크]</button>
+        <div className='topDiv_resume'>
         <ResumeWrite resume={resume} setResume={setResume} />
         <GraduationWrite graduation={graduation} setGraduation = {setGraduation}/>
         <CareerWrite career={career} setCareer={setCareer}/>
