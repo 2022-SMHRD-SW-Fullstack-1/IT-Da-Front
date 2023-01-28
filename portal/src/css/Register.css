@@ -59,7 +59,7 @@
 .registerContainer > div > button {
   width: 100%;
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   padding: 0.6rem 0.5rem;
   margin-top: 2rem;
   background-color: var(--mainBlue);
