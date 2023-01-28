@@ -188,8 +188,8 @@ const Register = () => {
   };
 
   return (
-    <div className="registerCntainer">
-      <div>
+    <div className="registerContainer">
+      <div> 
         <p>개인회원가입</p>
         <Agreement />
 
