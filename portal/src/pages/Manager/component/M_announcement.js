@@ -24,7 +24,6 @@ const M_announcement = () => {
          .get('/announcement/get_manager_post', { params: { key: window.sessionStorage.getItem("course_key") } })
          .then(function(res){
             setBoardList(res.data);
-            console.log(res.data)
          })
          .catch((e) => console.log(e));
    }, [])
