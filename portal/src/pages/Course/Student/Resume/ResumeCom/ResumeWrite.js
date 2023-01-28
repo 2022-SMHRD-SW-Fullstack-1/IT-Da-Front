@@ -1,5 +1,6 @@
 import axios from 'axios'
-import React from 'react'
+import React, { useState } from 'react'
+import UploadBtn from '../../../../../components/file/UploadBtn'
 
 const ResumeWrite = ({ resume, setResume }) => {
     /**지역 전체 리스트 */
@@ -38,89 +39,130 @@ const ResumeWrite = ({ resume, setResume }) => {
       .catch(e => console.error(e))
     console.log(resume)
   }
+
+  const [edit_style_po, setEdit_style_po] = useState({ display: "" })
+  const [edit_style_op, setEdit_style_op] = useState({ display: "none" })
+
+      // 수정 클릭 시
+      const edit_e_button = () => {
+        setEdit_style_po({ display: "none" })
+        setEdit_style_op({ display: "" })
+    }
+
+    const edit_e_button_quit = () => {
+        setEdit_style_po({ display: "" })
+        setEdit_style_op({ display: "none" })
+        btnSave()
+    }
+
     return (
 
         <div className='r_basic'>
-            <div>
-                <img style={{ width: '6rem', height: '8rem', backgroundColor: 'black' }} />
+            <div className='photoDiv'>
+                <img className='r_photo' src={resume.photo}/>
+                <UploadBtn btn_text={"수정"} file_name={resume.photo}/>
             </div>
 
             <div>
                 <div>
-                    <p><input type='text' name='name' onChange={(e) => { setResume({ ...resume, name: e.target.value }) }}
-                        value={resume.name} /></p>
-                    <p><input type='text' name='gender' className='crPosition' onChange={(e) => { setResume({ ...resume, gender: e.target.value }) }}
+                    <p ><input style={edit_style_op} type='text' name='name' onChange={(e) => { setResume({ ...resume, name: e.target.value }) }}
+                        value={resume.name} />
+                            <span style={edit_style_po}>{resume.name}</span>
+                        </p>
+                    <p><input style={edit_style_op} type='text' name='gender' className='crPosition' onChange={(e) => { setResume({ ...resume, gender: e.target.value }) }}
                         value={resume.gender} />
+                            <span style={edit_style_po}>{resume.gender}</span>
                         /
-                        <input type='text' name='birthday' className='crPosition' onChange={(e) => { setResume({ ...resume, birthday: e.target.value }) }}
-                            value={resume.birthday} /></p>
+                        <input style={edit_style_op} type='text' name='birthday' className='crPosition' onChange={(e) => { setResume({ ...resume, birthday: e.target.value }) }}
+                        value={resume.birthday} />
+                            <span style={edit_style_po}>{resume.birthday}</span>
+                        </p>
                 </div>
                 <div>
                     <div>
                         <p>연락처</p>
-                        <p><input type='text' name='phone' onChange={(e) => { setResume({ ...resume, phone: e.target.value.replace(/[^0-9]/g, "") }); }}
-                            value={resume.phone} /></p>
+                        <p><input style={edit_style_op} type='text' name='phone' onChange={(e) => { setResume({ ...resume, phone: e.target.value.replace(/[^0-9]/g, "") }); }}
+                            value={resume.phone} />
+                            <span style={edit_style_po}>{resume.phone}</span>
+                            <span style={edit_style_po}>{resume.phone}</span>
+                            </p>
                     </div>
                     <div>
                         <p>이메일</p>
-                        <p><input type='text' name='email' onChange={(e) => { setResume({ ...resume, email: e.target.value }); }}
-                            value={resume.email} /></p>
+                        <p><input style={edit_style_op} type='text' name='email' onChange={(e) => { setResume({ ...resume, email: e.target.value }); }}
+                            value={resume.email} />
+                            <span style={edit_style_po}>{resume.email}</span>
+                            </p>
                     </div>
                     <div>
                         <p>주소</p>
-                        <p><input type='text' name='addr' onChange={(e) => { setResume({ ...resume, addr: e.target.value }); }}
-                            value={resume.addr} /></p>
+                        <p><input style={edit_style_op} type='text' name='addr' onChange={(e) => { setResume({ ...resume, addr: e.target.value }); }}
+                            value={resume.addr} />
+                            <span style={edit_style_po}>{resume.addr}</span>
+                            </p>
                     </div>
                     <div>
                         <p>전공</p>
-                        <p><input type='text' name='major' onChange={(e) => { setResume({ ...resume, major: e.target.value }); }}
-                            value={resume.major} /></p>
+                        <p><input style={edit_style_op} type='text' name='major' onChange={(e) => { setResume({ ...resume, major: e.target.value }); }}
+                            value={resume.major} />
+                            <span style={edit_style_po}>{resume.major}</span>
+                            </p>
                     </div>
                     <div>
                         <p>희망지역</p>
-                        <p><select name='wish_area1' onChange={(e) => { setResume({ ...resume, wish_area1: e.target.value }) }} >
+                        <p><select style={edit_style_op} name='wish_area1' onChange={(e) => { setResume({ ...resume, wish_area1: e.target.value }) }} >
                             {areaList.map((area) => (
                                 <option value={area} key={1 + area}>
                                     {area}
                                 </option>
                             ))}
                         </select>
-                            <select name='wish_area2' onChange={(e) => { setResume({ ...resume, wish_area2: e.target.value }) }} >
+                            <span style={edit_style_po}>{resume.wish_area1}</span>
+                            <select style={edit_style_op} name='wish_area2' onChange={(e) => { setResume({ ...resume, wish_area2: e.target.value }) }} >
                                 {areaList.map((area) => (
                                     <option value={area} key={2 + area}>
                                         {area}
                                     </option>
                                 ))}
                             </select>
-                            <select name='wish_area3' onChange={(e) => { setResume({ ...resume, wish_area3: e.target.value }) }} >
+                                <span style={edit_style_po}>{resume.wish_area2}</span>
+                            <select style={edit_style_op} name='wish_area3' onChange={(e) => { setResume({ ...resume, wish_area3: e.target.value }) }} >
                                 {areaList.map((area) => (
                                     <option value={area} key={3 + area}>
                                         {area}
                                     </option>
                                 ))}
-                            </select></p>
+                            </select>
+                                <span style={edit_style_po}>{resume.wish_area3}</span>
+                                </p>
                     </div>
                     <div>
                         <p>희망연봉</p>
-                        <p><input type='text' name='wish_salary' onChange={(e) => { setResume({ ...resume, wish_salary: e.target.value }); }}
-                            value={resume.wish_salary} /></p>
+                        <p><input style={edit_style_op} type='text' name='wish_salary' onChange={(e) => { setResume({ ...resume, wish_salary: e.target.value }); }}
+                            value={resume.wish_salary} />
+                                <span style={edit_style_po}>{resume.wish_salary}</span>
+                            </p>
                     </div>
                     <div>
                         <p>희망분야</p>
-                        <p><input type='text' name='wish_field' onChange={(e) => { setResume({ ...resume, wish_field: e.target.value }); }}
-                            value={resume.wish_field} /></p>
+                        <p><input style={edit_style_op} type='text' name='wish_field' onChange={(e) => { setResume({ ...resume, wish_field: e.target.value }); }}
+                            value={resume.wish_field} />
+                                <span style={edit_style_po}>{resume.wish_field}</span>
+                            </p>
                     </div>
                 </div>
                 <div>
                     <div>
                         <p>기술스택</p>
-                        <p><input type='text' name='skills' onChange={(e) => { setResume({ ...resume, skills: e.target.value }); }}
-                            value={resume.skills}
-                        /></p>
+                        <p><input style={edit_style_op} type='text' name='skills' className='big_input_text' onChange={(e) => { setResume({ ...resume, skills: e.target.value }); }}
+                            value={resume.skills}/>
+                                <span style={edit_style_po}>{resume.skills}</span>
+                        </p>
                     </div>
                 </div>
                 <div className='sRBtnDiv'>
-                    <button onClick={btnSave} >저장하기</button>
+                    <button style={edit_style_po} onClick={edit_e_button} >수정하기</button>
+                    <button style={edit_style_op} onClick={edit_e_button_quit} >저장하기</button>
                 </div>
             </div>
         </div>
