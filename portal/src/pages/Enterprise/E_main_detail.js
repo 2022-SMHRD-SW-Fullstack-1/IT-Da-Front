@@ -5,95 +5,101 @@ import "../../css/E_main_detail.css";
 
 const E_main_detail = () => {
   const { state } = useLocation();
-  console.log(state.mb_id, state.name);
-  console.log(state.phone);
+
   const [resume, setResume] = useState({
     name: "",
     gender: "",
     birthday: "",
+    major: "",
     phone: "",
     email: "",
     addr: "",
     skills: "",
-    //
-    wish_area1: "전체",
-    wish_area2: "전체",
-    wish_area3: "전체",
-    //
-    wish_salary: "내규에 따름",
-    //
     wish_field: "",
-    major: "",
+    wish_salary: "",
+    wish_area1: "",
+    wish_area2: "",
+    wish_area3: "",
+    simple_comment: "",
+    photo: "",
+    project1: "1",
+    project2: "2",
   });
   //추가버튼있음
   const [graduation, setGraduation] = useState([
     {
-      gradSchool: "",
-      schoolType: "",
-      gradDt: "",
-      gradType: "",
-      gradScore: "",
+      grad_num: "",
+      grad_school: "",
+      school_type: "",
+      grad_dt: "",
+      grad_type: "",
+      grad_score: "",
     },
   ]);
   //추가버튼있음
   const [career, setCareer] = useState([
     {
-      organization: "",
-      position: "",
-      s_dt: "",
-      e_dt: "",
+      cr_num: "",
+      cr_organization: "",
+      cr_position: "",
+      cr_s_dt: "",
+      cr_e_dt: "",
       activity: "",
     },
   ]);
   //추가버튼있음
   const [certification, setCertification] = useState([
     {
-      name: "",
-      dt: "",
-      org: "",
+      cert_num: "",
+      cert_org: "",
+      cert_name: "",
+      cert_dt: "",
     },
   ]);
   //추가버튼있음
   const [prize, setPrize] = useState([
     {
-      name: "",
-      org: "",
-      dt: "",
+      prize_num: "",
+      prize_org: "",
+      prize_name: "",
+      prize_dt: "",
     },
   ]);
   //추가버튼있음
   const [military, setMilitary] = useState([
     {
-      title: "",
-      army: "",
-      sDt: "",
-      eDt: "",
-      veteranYn: "",
+      mili_num: "",
+      mili_title: "",
+      mili_army: "",
+      mili_s_dt: "",
+      mili_e_dt: "",
+      veteran_yn: "",
     },
   ]);
 
-  // useEffect(() => {
-  //   axios
-  //     .get("/resume/one", {
-  //       params: { id: sessionStorage.getItem("loginId") },
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setResume(res.data[0]);
-  //       setGraduation(res.data[1]);
-  //       // console.log(res.data[1])
-  //       setCareer(res.data[2]);
-  //       // console.log(res.data[2])
-  //       setCertification(res.data[3]);
-  //       // console.log(res.data[3])
-  //       setPrize(res.data[4]);
-  //       // console.log(res.data[4])
-  //       setMilitary(res.data[5]);
-  //       // console.log(res.data[5])
-  //     })
-  //     .catch((e) => console.error(e));
-  // });
+  useEffect(() => {
+    axios
+      .get("/student/resume/one", {
+        params: { id: state.mb_id },
+      })
+      .then((res) => {
+        // console.log(res);
+        setResume(res.data[0]);
+        setGraduation(res.data[1]);
+        // console.log("뭐에요".res.data[1]);
+        setCareer(res.data[2]);
+        // console.log(res.data[2]);
+        setCertification(res.data[3]);
+        // console.log(res.data[3]);
+        setPrize(res.data[4]);
+        // console.log(res.data[4]);
+        setMilitary(res.data[5]);
+        // console.log(res.data[5]);
+      })
+      .catch((e) => console.error(e));
+  }, []);
 
+  console.log("들어", certification);
   return (
     <div className="topDiv_resume">
       <div className="r_basic">
@@ -102,32 +108,32 @@ const E_main_detail = () => {
             // style={{ width: "6rem", height: "8rem", backgroundColor: "black" }}
           
           /> */}
-          <img className="id_photo" src={state.photo}></img>
+          <img className="id_photo" src={resume.photo}></img>
         </div>
         <div>
           <div className="test12">
-            <p>{state.name}</p>
+            <p>{resume.name}</p>
             <p>
-              {state.gender} / {state.birthday}
+              {resume.gender} / {resume.birthday}
             </p>
           </div>
           <div>
             <div>
               <p>연락처</p>
-              <p>{state.phone}</p>
+              <p>{resume.phone}</p>
             </div>
             <div>
               <p>이메일</p>
-              <p>{state.email}</p>
+              <p>{resume.email}</p>
             </div>
             <div>
               <p>주소</p>
-              <p>{state.addr}</p>
+              <p>{resume.addr}</p>
             </div>
             <div>
               <p>희망지역</p>
               <p>
-                {state.wish_area1},{state.wish_area2},{state.wish_area3}
+                {resume.wish_area1},{resume.wish_area2},{resume.wish_area3}
               </p>
             </div>
           </div>
@@ -146,13 +152,25 @@ const E_main_detail = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>전남대학교</td>
-              <td>소프트웨어전공</td>
-              <td>2022-02-02 ~ 2026-02-02</td>
-              <td>졸업</td>
-              <td>4.4/4.5</td>
-            </tr>
+            {graduation.map((graduation, idx) => (
+              <tr key={idx}>
+                <td>
+                  <p>{graduation.grad_school}</p>
+                </td>
+                <td>
+                  <p>{graduation.school_type}</p>
+                </td>
+                <td>
+                  <p>{graduation.grad_dt}</p>
+                </td>
+                <td>
+                  <p>{graduation.grad_type}</p>
+                </td>
+                <td>
+                  <p>{graduation.grad_score}</p>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -169,7 +187,7 @@ const E_main_detail = () => {
           </thead>
           <tbody>
             <tr>
-              <td>스마트인재개발원</td>
+              <td></td>
               <td>훈련생</td>
               <td>2022-02-02 ~ 2026-02-02</td>
               <td>Full Stack SW융합 실무 부트캠프</td>
@@ -189,9 +207,9 @@ const E_main_detail = () => {
           </thead>
           <tbody>
             <tr>
-              <td>SQLD</td>
-              <td>한국데이터산업진흥원</td>
-              <td>2022-02-02</td>
+              <td>{certification.cert_name}</td>
+              <td>{certification.cert_name}</td>
+              <td>{certification.cert_dt}</td>
             </tr>
           </tbody>
         </table>

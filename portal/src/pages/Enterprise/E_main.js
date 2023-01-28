@@ -6,24 +6,12 @@ import dateCompare from "../../utils/filter";
 import "bootstrap/dist/css/bootstrap.css";
 import "../../css/E_main.css";
 import axios from "axios";
+import uuid from "react-uuid";
+import { RiStarLine } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
+import E_main_detail from "./E_main_detail";
 
 const E_main = () => {
-  //증명사진 맵
-  const photoList = [
-    {
-      pl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGVefgpaMA8Z2xnaQWPA4eoUKB9Swx4EzlTg&usqp=CAU",
-    },
-    {
-      pl: "https://blog.kakaocdn.net/dn/IOYEi/btq1JzPmm2w/Jn7TB4RqutJNkyeAS8K0U1/img.jpg",
-    },
-    {
-      pl: "https://img.hankyung.com/photo/202109/BF.27474984.1.jpg",
-    },
-    {
-      pl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1cGeRfYemAJ__8LPwfOUCDbAha5EUQ_Ff2Q&usqp=CAU",
-    },
-  ];
-
   //맵으로 뿌려줄 임의 데이터
   const tempList = [
     {
@@ -91,6 +79,40 @@ const E_main = () => {
   const [skill, setSkill] = useState("전체");
   const [info, setInfo] = useState();
 
+  // 멤버 아이디 저장-> 북마크할 예정인 아이디
+  const [id, setId] = useState("");
+
+  //필터링 한 후 데이터 list
+  const [filterDate, setFilterData] = useState([]);
+
+  //수강생 데이터(MAP으로 뿌릴) 초기화용
+  const [simple_info, setSimple_info] = useState([
+    {
+      mb_id: "",
+      name: "",
+      gender: "",
+      birthday: "",
+      major: "",
+      phone: "",
+      email: "",
+      addr: "",
+      skills: "",
+      wish_field: "",
+      wish_salary: "",
+      wish_area1: "",
+      wish_area2: "",
+      wish_area3: "",
+      simple_comment: "",
+      photo: "",
+      project: "",
+      project2: "",
+      bookmarkTF: "",
+    },
+  ]);
+
+  //기업이 누구를 북마크했는지 정보
+  const [bookmark_info, setBookmark_info] = useState([]);
+
   //수강생 디테일 페이지로 이동
   const go_to_userdetail = (e) => {
     navigate("/detail_user", {
@@ -111,6 +133,85 @@ const E_main = () => {
     });
     console.log();
   };
+
+  const [mark, setMark] = useState("");
+  //찜하기 버튼
+  const onHandleBookmark = (e) => {
+    //북마크 여부 확인용
+    console.log(e.currentTarget.getAttribute("mb_id"));
+
+    if (bookmark_info.includes(e.currentTarget.getAttribute("mb_id"))) {
+      // bookmark가 체크 되어있을때 => bookmark 삭제
+      var mb_id = e.currentTarget.getAttribute("mb_id");
+      setBookmark_info(bookmark_info.filter((e) => e !== mb_id));
+      axios
+        .post("/bookmark/delete_bookmark", {
+          enter_id: window.sessionStorage.getItem("loginId"),
+          mb_id: e.currentTarget.getAttribute("mb_id"),
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      // bookmark가 체크 안되어있을때 => bookmark 추가
+      setBookmark_info([
+        ...bookmark_info,
+        e.currentTarget.getAttribute("mb_id"),
+      ]);
+      axios
+        .post("/bookmark/add_bookmark", {
+          enter_id: window.sessionStorage.getItem("loginId"),
+          mb_id: e.currentTarget.getAttribute("mb_id"),
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+
+    //리스트에 포함되면 오케이 리스트.mb_id.includes(bookmark_mb_id)
+    // if (bookmark_info.includes(bookmark_mb_id)) {
+    //   if (
+    //     mark
+    //     // 리스트.mb_id.includes(bookmark_mb_id)
+    //   ) {
+    //     setMark(true);
+
+    // } else {
+    //   setMark(false);
+    //   // setMark(true);
+    //   console.log("클릭시", bookmark_mb_id);
+    //   setId(bookmark_mb_id);
+    //   // console.log("찍히나", id);
+    //   return "추가";
+    // }
+    if (mark) {
+      setMark(true);
+    } else {
+      setMark(false);
+    }
+  };
+
+  // 찜하기
+  // useEffect(() => {
+  //   axios
+  //     .post("/bookmark/add_bookmark", {
+  //       enter_id: "utsoft123@naver.com",
+  //       mb_id: id,
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setMark(res.data);
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }, []);
 
   //업데이트 날짜 필터
   const month_change = (e) => {
@@ -148,171 +249,62 @@ const E_main = () => {
     console.log(typeof (new Date() - new Date("2022-01-20")));
   };
 
-  //필터링 한 후 데이터 list
-  const [filterDate, setFilterData] = useState([]);
-
-  useEffect(() => {
-    setFilterData(simple_info);
-  }, []);
-
-  //데이터 초기화
-  const [simple_info, setSimple_info] = useState([
-    {
-      mb_id: "",
-      name: "",
-      gender: "",
-      birthday: "",
-      major: "",
-      phone: "",
-      email: "",
-      addr: "",
-      skills: "",
-      wish_field: "",
-      wish_salary: "",
-      wish_area1: "",
-      wish_area2: "",
-      wish_area3: "",
-      simple_comment: "",
-      photo: "",
-      project: "",
-      project2: "",
-    },
-  ]);
-
-  // 백에서 가져온 데이터
+  // 기업이 저장한 인재 북마크 데이터
   useEffect(() => {
     axios
-      .get("/student/resume/all")
-      .then((res) => {
-        setSimple_info(res.data);
-        // console.log("전체", res.data);
-        // console.log(res.data[0].name);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
-  function detail_student() {
-    axios
-      .get("/student/resume/one", {
-        params: { id: sessionStorage.current.value },
+      .get("/bookmark/select_bookmark", {
+        params: { enter_id: window.sessionStorage.getItem("loginId") },
       })
       .then((res) => {
         console.log(res.data);
-        // setResume(res.data[0]);
-        // setGraduation(res.data[1]);
-        console.log(res.data[1]);
-        // setCareer(res.data[2]);
-        console.log(res.data[2]);
-        // setCertification(res.data[3]);
-        console.log(res.data[3]);
-        // setPrize(res.data[4]);
-        console.log(res.data[4]);
-        // setMilitary(res.data[5]);
-        console.log(res.data[5]);
+        console.log(res.data.resume);
+        setSimple_info(res.data.resume);
+        setFilterData(res.data.resume);
+        setBookmark_info(res.data.bookmark);
       })
+
       .catch(function (error) {
         console.log(error);
       });
-  }
+  }, []);
 
-  //초기화면
+  //1. 처음에 리스트를 보여줄때, 특정인재(북마크 된)에게 별 표시 해주기
+  // 문제: 기업이 북마크를 했는데, 띄워주는 자료는 학생자료임(북마크 관련 변수 없음)
+  //       학생리스트.map에 북마크 표시해주는 변수를 추가하기 어려움
+  //
+
   useEffect(() => {
-    setFilterData(simple_info);
+    console.log(simple_info);
   }, [simple_info]);
 
-  // let listMap = filterDate.map((item) => (
-  //   <div className="two_div" onClick={go_to_userdetail}>
-  //     <div className="e_main_photo" key={item.photo}>
-  //       <img src={item.photo} />
-  //     </div>
-  //     <div className="e_main_resume">
-  //       <div className="e_main_resume_info">
-  //         이름 : {item.name}{" "}
-  //         <div>
-  //           {item.gender}/{item.age}
-  //         </div>
-  //       </div>
-  //       <div className="e_main_resume_info" key={item.hopeLoc.toString()}>
-  //         희망지역 : {item.hopeLoc.toString()}
-  //       </div>
-  //       <div className="e_main_resume_info" key={item.skillStack.toString()}>
-  //         보유 기술스택 : {item.skillStack.toString()}
-  //       </div>
-  //     </div>
-  //     <div className="e_main_comment">
-  //       <div className="e_main_comment_info">
-  //         한줄소개
-  //         <div key={item.cmt}>{item.cmt}</div>
-  //       </div>
-
-  //       <div className="e_main_comment_project">
-  //         <div>
-  //           대표 프로젝트
-  //           {item.project.map((item) => (
-  //             <div key={item}>{item}</div>
-  //           ))}
-  //         </div>
-  //       </div>
-  //       <div className="e_main_update">업데이트 날짜 2023-01-17</div>
-  //     </div>
-  //   </div>
-  // ));
-
+  /**MAP으로 보여줄 필터 데이터 */
   let listMap = filterDate.map((item) => (
-    <div
-      className="two_div"
-      mb_id={item.mb_id}
-      name={item.name}
-      photo={item.photo}
-      email={item.email}
-      phone={item.phone}
-      addr={item.addr}
-      gender={item.gender}
-      birthday={item.birthday}
-      wish_area1={item.wish_area1}
-      wish_area2={item.wish_area2}
-      wish_area3={item.wish_area3}
-      onClick={go_to_userdetail}
-    >
-      <div className="e_main_photo">
-        {/* {photoList.map((item) => (
-          <img src={item.pl} />
-        ))} */}
-        <img className="id_photo" src={item.photo}></img>
-      </div>
-      <div className="e_main_resume">
-        <div className="e_main_resume_info">
-          이름 : {item.name}{" "}
-          <div>
-            {item.gender}/{item.birthday}
-          </div>
-        </div>
-        <div className="e_main_resume_info">
-          희망지역 : {item.wish_area1}, {item.wish_area2}, {item.wish_area3}
-        </div>
-        <div className="e_main_resume_info">기술스택 : {item.skills}</div>
-      </div>
-      <div className="e_main_comment">
-        <div className="e_main_comment_info">
-          한줄소개
-          <div>{item.simple_comment}</div>
-        </div>
-
-        <div className="e_main_comment_project">
-          <div>
-            대표 프로젝트
-            {/* {item.project.map((item) => (
-              <div key={item}>{item}</div>
-            ))} */}
-            <div>{item.project}</div>
-            <div>{item.project2}</div>
-          </div>
-        </div>
-        <div className="e_main_update">업데이트 날짜 2022-12-01</div>
-      </div>
-    </div>
+    <tr key={uuid()} className="E_main_info">
+      <td mb_id={item.mb_id} onClick={onHandleBookmark}>
+        {bookmark_info.includes(item.mb_id) ? <RiStarFill /> : <RiStarLine />}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.name}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.phone}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.addr}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.gender}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.birthday}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.skills}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.wish_area1},{item.wish_area2},{item.wish_area3}
+      </td>
+    </tr>
   ));
 
   return (
@@ -331,7 +323,7 @@ const E_main = () => {
                       <div>
                         <select onChange={month_change}>
                           {month.map((item) => (
-                            <option>{item}</option>
+                            <option key={item}>{item}</option>
                           ))}
                         </select>
                       </div>
@@ -351,7 +343,7 @@ const E_main = () => {
                       <div>
                         <select onChange={skill_filter}>
                           {skill_stack.map((item) => (
-                            <option>{item}</option>
+                            <option key={item}>{item}</option>
                           ))}
                         </select>
                       </div>
@@ -371,7 +363,22 @@ const E_main = () => {
             </Accordion.Item>
           </Accordion>
         </div>
-        {listMap}
+
+        <table className="t">
+          <thead>
+            <tr className="E_main_title">
+              <th></th>
+              <th>이름</th>
+              <th>전화번호</th>
+              <th>주소</th>
+              <th>성별</th>
+              <th>나이</th>
+              <th>기술스택</th>
+              <th>희망지역</th>
+            </tr>
+          </thead>
+          <tbody>{listMap}</tbody>
+        </table>
       </div>
     </div>
   );

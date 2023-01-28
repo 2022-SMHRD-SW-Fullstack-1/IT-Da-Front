@@ -18,6 +18,10 @@
 
   width: 30em;
 }
+.id_photo {
+  width: 10rem;
+}
+
 .E_main_detail_title {
   border-bottom: 2px solid gray;
   width: 35em;

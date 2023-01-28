@@ -85,73 +85,29 @@
 }
 .two_div {
   align-self: center;
-
   width: 70rem;
   display: flex;
   flex: content;
   padding: 3px;
   margin: 3px;
   border-bottom: 2px solid;
-  border-color: gray;
+  border-color: #e3e3e3;
+  background-color: aqua;
 }
-.e_main_photo {
-  width: 10rem;
-  height: 12rem;
-  display: flex;
+.E_main_title {
+  text-align: center;
+  border-bottom: 1px solid #e3e3e3;
+  background-color: #e3e3e3;
+  height: 2rem;
+  width: 50rem;
 }
-.id_photo {
-  width: 10rem;
-}
-.e_main_resume {
-  width: 30em;
 
-  height: 12em;
-}
-.e_main_resume_info {
-  margin: 5%;
-  font-size: 1.2em;
-  font-weight: 1000;
-}
-.e_main_resume_info div {
-  font-size: 0.9em;
-  font-weight: 400;
-  margin-left: 3.3em;
-}
-.e_main_comment {
-  width: 40em;
-}
-.e_main_comment_info {
-  margin: 5px;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  font-size: 1.3rem;
-  background-color: rgb(234, 234, 234);
-  border-radius: 0.5rem;
-}
-.e_main_comment_project {
-  margin: 5px;
-  padding: 5px;
-  font-size: 1.3rem;
-}
-.e_main_update {
-  margin: 5px;
-  padding: 5px;
-  text-align: right;
-  color: rgb(136, 136, 167);
-}
-.photo {
-  margin: 10%;
-  width: 300px;
-  height: 160px;
-  background-image: url(https://news.nateimg.co.kr/orgImg/my/2022/03/30/202203301657532027_1.jpg);
-  background-size: contain;
-}
-.photo1 {
-  margin: 10%;
-  width: 300px;
-  height: 155px;
-  background-image: url(https://blog.kakaocdn.net/dn/IOYEi/btq1JzPmm2w/Jn7TB4RqutJNkyeAS8K0U1/img.jpg);
-  background-size: contain;
+/* .E_main_info:hover {
+  background-color: #e3e3e3;
+} */
+
+.E_main_info {
+  text-align: center;
+  border-bottom: 1px solid rgb(232, 232, 232);
+  height: 2rem;
 }
