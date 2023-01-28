@@ -50,10 +50,10 @@ const M_onCourse = () => {
           <tbody className=''>
             <tr>
               <td>
-              {course.map((item) => (<p className='annItem_manager' course_name={item.course_name} key={item.course_name}>{item.course_name}</p>))}
+              {course.map((item) => (<p className='annItem_manager' course_name={item.course_name} key={item.course_key}>{item.course_name}</p>))}
               </td>
               <td>
-              {course.map((item) => (<p className='annItem_manager' course_teacher={item.course_teacher} key={item.course_teacher}>{item.course_teacher}</p>))}
+              {course.map((item) => (<p className='annItem_manager' course_teacher={item.course_teacher} key={item.course_key}>{item.course_teacher}</p>))}
               </td>
               <td>
               {course.map((item) => (<p className='annItem_manager'course_key={item.course_key} key={item.course_key}>{item.course_key}</p>))}

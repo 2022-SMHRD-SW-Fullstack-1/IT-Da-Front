@@ -31,8 +31,10 @@ const M_edit_e = (props) => {
                             <th>기업명</th>
                             <th>아이디</th>
                             <th>비밀번호</th>
-                            <th>담당자</th>
+                            <th>대표</th>
                             <th>연락처</th>
+                            <th>주소</th>
+                            <th>사업자번호</th>
                             <th></th>
                         </tr>
                     </thead>

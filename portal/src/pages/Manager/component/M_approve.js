@@ -8,7 +8,6 @@ const M_approve = (props) => {
    useEffect(() => {
       axios.get("/enterprise/approve_list")
          .then(function (res) {
-            console.log(res.data)
             setEnter(res.data)
          })
          .catch(function (error) {
@@ -18,10 +17,12 @@ const M_approve = (props) => {
 
    const enter_approve_submit = (e) => {
       e.preventDefault()
-      axios.post("/enterprise/approve", {
-      })
+      console.log(e.currentTarget.getAttribute('enter_id'))
+      axios.get("/enterprise/approve", { params: {
+         enter_id: e.currentTarget.getAttribute('enter_id')
+      } })
          .then(function (res) {
-            // window.location.reload();
+            window.location.reload();
          })
          .catch(function (error) {
             console.log("error")
@@ -32,7 +33,7 @@ const M_approve = (props) => {
       <tr key={item.enter_id}>
          <td className='annItem_manager'>{item.enter_name}</td>
          <td className='annItem_manager'>{item.enter_id}</td>
-         <td className='annItem_manager'><button onClick={enter_approve_submit}>승인</button></td>
+         <td className='annItem_manager'><button enter_id={item.enter_id} onClick={enter_approve_submit}>승인</button></td>
       </tr>))
 
    return (
