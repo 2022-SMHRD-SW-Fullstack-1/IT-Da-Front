@@ -1,45 +1,15 @@
 [
-   {
-      "title": "과정관리",
-      "subtitle": [
-         {
-            "title": "과정생성",
-            "url": "/make_course"
-         },
-         {
-            "title": "전체과정",
-            "url": "/edit_course"
-         }
-      ]
-   },
-   {
-      "title": "정보공개",
-      "subtitle": [
-         {
-            "title": "기업공고 생성",
-            "url": "/make_company"
-         },
-         {
-            "title": "기업공고 관리",
-            "url": "/select_company"
-         },
-         {
-            "title": "기업용 키 생성",
-            "url": "/make_e"
-         },
-         {
-            "title": "기업용 키 관리",
-            "url": "/edit_e"
-         }
-      ]
-   },
-   {
-      "title": "전체공지",
-      "subtitle": [
-         {
-            "title": "공지사항",
-            "url": "/manager_announcement"
-         }
-      ]
-   }
+  {
+    "title": "수료생 정보",
+    "subtitle": [
+      {
+        "title": "전체 수료생 조회",
+        "url": "/make_course"
+      },
+      {
+        "title": "스크랩 인재",
+        "url": "/edit_course"
+      }
+    ]
+  }
 ]
