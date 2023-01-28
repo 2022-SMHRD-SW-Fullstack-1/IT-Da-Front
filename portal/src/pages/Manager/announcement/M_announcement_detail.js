@@ -12,18 +12,19 @@ const M_announcement_detail = () => {
 
   useEffect(() => {
     axios
-      .get("/announcement/get_one_manager_post", { params: { key: state.num } })
+      .get("/announcement/getOnePost", { params: { key: state.num } })
       .then(res => setPost(res.data))
       .catch(e => console.log(e));
   }, [])
 
   const navigate = useNavigate()
   const goToWrite = () => {
-    navigate('/announcement/manager_write', { state: { title: '글 수정', b_title: post.b_title, b_content: post.b_content, b_num: post.b_num } })
+    navigate('/manager_announcement_write', { state: { title: '글 수정', b_title: post.b_title, b_content: post.b_content, b_num: post.b_num } })
   }
+  
   const deletePost = () => {
     axios
-      .get("/announcement/manager_delete", { params: { key: state.num } })
+      .get("/announcement/deletePost", { params: { key: state.num } })
       .then(res => navigate('/manager_announcement'))
       .catch(e => console.log(e));
   }

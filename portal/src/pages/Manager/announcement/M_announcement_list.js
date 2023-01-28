@@ -7,7 +7,7 @@ const M_announcement_list = () => {
     const navigate = useNavigate()
 
   const goToDetail = (e) => {
-    navigate('./detail', {state: { num: e.currentTarget.getAttribute('num')}})
+    navigate('/manager_announcement_detail', {state: { num: e.currentTarget.getAttribute('num')}})
   }
   const goToWrite = () => {
     navigate('/manager_announcement_write', { state: { title: '글 작성' } })

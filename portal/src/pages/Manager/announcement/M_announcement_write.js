@@ -33,7 +33,7 @@ const M_announcement_write = () => {
       console.log(content)
       if (state.title == '글 수정') {
          axios
-         .post('/manager_announcement_edit', {
+         .post('/announcement/editPost', {
             title: title,
             content: content,
             b_num: state.b_num,
