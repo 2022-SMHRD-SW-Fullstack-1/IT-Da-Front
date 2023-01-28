@@ -92,6 +92,16 @@ const E_Register = () => {
       }
    };
 
+   const [bNum, setBNum] = useState('');
+   const onBNumChange = (e) => {
+      setBNum(e.target.value);
+   };
+
+   const [add, setAdd] = useState('');
+   const onAddChange = (e) => {
+      setAdd(e.target.value);
+   };
+
    const [tel, setTel] = useState('');
    const onTelChange = (e) => {
       const telRegex = /^01([0|1|6|7|8|9])?([0-9]{3,4})?([0-9]{4})$/;
@@ -109,22 +119,25 @@ const E_Register = () => {
    const [notAllow, setNotAllow] = useState(true);
 
    useEffect(() => {
-      if (isId && isPw && isPwCheck && isName && isTel) {
+      if (isId && isPw && isPwCheck && isName && isTel && isEnterprise) {
          setNotAllow(false);
          return;
       }
       setNotAllow(true);
-   }, [isId, isPw, isPwCheck, isName, isTel]);
+   }, [isId, isPw, isPwCheck, isName, isTel, isEnterprise]);
 
    const onClickRegister = () => {
       //back으로 회원가입 데이터 전송
       axios
          .post('/enterprise/register', {
+            enter_id: id,
+            enter_pw: pw,
             enter_name: enterprise,
-            id: id,
-            pw: pw,
-            manager: name,
-            tel: tel
+            enter_manager: name,
+            enter_tel: tel,
+            enter_approve: 'N',
+            enter_address: add,
+            enter_num: bNum
          })
          .then((res) => console.log(res))
          .catch((e) => console.log(e));
@@ -135,12 +148,6 @@ const E_Register = () => {
       <div className="registerContainer">
          <div>
             <p>기업회원가입</p>
-
-            <div>
-               <span>기업명</span>
-               <input onChange={onEnterpriseChange} value={enterprise} type="text"></input>
-            </div>
-            <span> {enterpriseMessage}</span>
 
             <div>
                <span>아이디 (4~15자 영문,숫자)</span>
@@ -165,13 +172,29 @@ const E_Register = () => {
             <span>{pwCheckMessage}</span>
 
             <div>
-               <span>담당자 이름</span>
+               <span>기업명</span>
+               <input onChange={onEnterpriseChange} value={enterprise} type="text"></input>
+            </div>
+            <span> {enterpriseMessage}</span>
+
+            <div>
+               <span>대표명</span>
                <input onChange={onNameChange} value={name} type="text"></input>
             </div>
             <span> {nameMessage}</span>
 
             <div>
-               <span>휴대폰 ('-'없이 입력하세요.)</span>
+               <span>주소</span>
+               <input onChange={onAddChange} value={add} type="text"></input>
+            </div>
+
+            <div>
+               <span>사업자 번호</span>
+               <input onChange={onBNumChange} value={bNum} type="tel"></input>
+            </div>
+
+            <div>
+               <span>담당자 연락처 ('-'없이 입력하세요.)</span>
                <input onChange={onTelChange} value={tel} type="tel"></input>
             </div>
             <span>{telMessage}</span>
