@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import ReactToPrint from 'react-to-print'
 import '../../../../css/ResumePrint.css'
 const ResumeFrame = ({}) => {
+    
     const printRef=useRef()
   return (
     <div className='resumePrintTopDiv'>

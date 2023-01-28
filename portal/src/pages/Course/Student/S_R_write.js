@@ -9,7 +9,6 @@ import MilitaryWrite from "./Resume/ResumeCom/MilitaryWrite"
 import PrizeWrite from "./Resume/ResumeCom/PrizeWrite"
 import ResumeWrite from "./Resume/ResumeCom/ResumeWrite"
 
-
 function S_R_write() {
 
   const [resume, setResume] = useState({
