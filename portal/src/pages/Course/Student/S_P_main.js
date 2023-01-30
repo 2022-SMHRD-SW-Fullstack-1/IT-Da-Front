@@ -5,7 +5,6 @@ const S_P_main = () => {
 
   const [portfolio, setPortfolio] = useState([])
 
-
   const navigate = useNavigate()
 
   const goToDetail = (e) => {
