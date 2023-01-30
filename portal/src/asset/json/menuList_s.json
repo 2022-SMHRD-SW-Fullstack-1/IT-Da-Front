@@ -4,7 +4,7 @@
       "subtitle": [
          {
             "title": "공지사항",
-            "url": "/C_announcement"
+            "url": "/announcement"
          },
          {
             "title": "강의 일정",
@@ -12,7 +12,7 @@
          },
          {
             "title": "공유 자료실",
-            "url": "/"
+            "url": "/archive"
          },
          {
             "title": "연장사용 신청서",
@@ -42,7 +42,7 @@
          },
          {
             "title": "포트폴리오",
-            "url": "/"
+            "url": "/portfolio"
          }
       ]
    }
