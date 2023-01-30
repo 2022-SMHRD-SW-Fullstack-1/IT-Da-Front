@@ -87,7 +87,7 @@ const CertificationWrite = ({ certification, setCertification }) => {
                                     </div></td>
                             <td><p>{certification.cert_name}</p></td>
                             <td><p>{certification.cert_org}</p></td>
-                            <td><p>{certification.cert_dt} </p></td>
+                            <td><p>{certification.cert_dt.replace(/-/g,'.')} </p></td>
                         </tr>
                     ))}
                     <tr>
@@ -97,7 +97,7 @@ const CertificationWrite = ({ certification, setCertification }) => {
                             </div></td>
                         <td><input type='text' name='cert_name' onChange={onChange} value={inputs.cert_name} /></td>
                         <td><input type='text' name='cert_org' onChange={onChange} value={inputs.cert_org} /></td>
-                        <td><input type='date' name='cert_dt' onChange={onChange} value={inputs.cert_dt} /></td>
+                        <td><input type='date' className='dateInput' name='cert_dt' onChange={onChange} value={inputs.cert_dt} /></td>
                     </tr>
                 </tbody>
             </table>

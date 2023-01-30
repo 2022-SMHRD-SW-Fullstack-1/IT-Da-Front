@@ -3,6 +3,7 @@ import React from "react";
 import "../../../css/Resume.css";
 
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const S_CL_main = () => {
   const [coverLetter, SetCoverLetter] = useState({
@@ -50,6 +51,12 @@ const S_CL_main = () => {
       .catch((e) => console.error(e));
   }, []);
 
+
+  const navigate = useNavigate()
+  const goToCoverLetterFrame = () => {
+    navigate('/cover_letter/frame', 
+    {state:{ coverLetter: coverLetter}})
+  }
   return (
     <div className="topDiv_resume">
       <div>
@@ -61,7 +68,7 @@ const S_CL_main = () => {
               type="text"
               name="growth"
               onChange={onChange}
-              value={coverLetter.growth}
+              value={coverLetter.growth||''}
             />
           </p>
         </div>
@@ -75,7 +82,7 @@ const S_CL_main = () => {
               type="text"
               name="pros_cons"
               onChange={onChange}
-              value={coverLetter.pros_cons}
+              value={coverLetter.pros_cons||''}
             />
           </p>
         </div>
@@ -89,7 +96,7 @@ const S_CL_main = () => {
               type="text"
               name="goal_and_crisis"
               onChange={onChange}
-              value={coverLetter.goal_and_crisis}
+              value={coverLetter.goal_and_crisis||''}
             />
           </p>
         </div>
@@ -103,17 +110,18 @@ const S_CL_main = () => {
               type="text"
               name="motivation"
               onChange={onChange}
-              value={coverLetter.motivation}
+              value={coverLetter.motivation||''}
             />
           </p>
         </div>
       </div>
       <div className="saveDiv">
         <span>
-          <button className="saveBtn" onClick={btnResume}>
+          <button className="blueBtn" onClick={btnResume}>
             저장하기
           </button>
         </span>
+        <span><button className="blueBtn" onClick={goToCoverLetterFrame}>출력페이지</button></span>
       </div>
     </div>
   );

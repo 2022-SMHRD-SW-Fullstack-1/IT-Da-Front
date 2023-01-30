@@ -8,6 +8,7 @@ import GraduationWrite from "./Resume/ResumeCom/GraduationWrite"
 import MilitaryWrite from "./Resume/ResumeCom/MilitaryWrite"
 import PrizeWrite from "./Resume/ResumeCom/PrizeWrite"
 import ResumeWrite from "./Resume/ResumeCom/ResumeWrite"
+import { useNavigate } from "react-router-dom"
 
 function S_R_write() {
 
@@ -25,10 +26,10 @@ function S_R_write() {
     wish_area1: '',
     wish_area2: '',
     wish_area3: '',
-    simple_comment:'',
-    photo:'',
-    project1:'1',
-    project2:'2',
+    simple_comment: '',
+    photo: '',
+    project1: '1',
+    project2: '2',
   })
   //추가버튼있음
   const [graduation, setGraduation] = useState([{
@@ -39,7 +40,7 @@ function S_R_write() {
     grad_type: '',
     grad_score: '',
   }
-])
+  ])
   //추가버튼있음
   const [career, setCareer] = useState([{
     cr_num: '',
@@ -65,7 +66,7 @@ function S_R_write() {
   }])
   //추가버튼있음
   const [military, setMilitary] = useState([{
-    mili_num:'',
+    mili_num: '',
     mili_title: '',
     mili_army: '',
     mili_s_dt: '',
@@ -97,20 +98,25 @@ function S_R_write() {
       )
       .catch(e =>
         console.error(e))
-  }, []);
+  }, [resume.photo]);
 
+  const navigate = useNavigate()
+  const goToResumeFrame = () => {
+    navigate('/resume/frame', 
+    {state:{ resume: resume, graduation: graduation, career: career, certification:certification, prize:prize, military:military }})
+  }
   return (
     <div className='topDiv_resumePage'>
-        <p></p>
-        <button onClick={() => window.open('./resume_print')}>[url 링크]</button>
-        <div className='topDiv_resume'>
+      <div className='topDiv_resume'>
         <ResumeWrite resume={resume} setResume={setResume} />
-        <GraduationWrite graduation={graduation} setGraduation = {setGraduation}/>
-        <CareerWrite career={career} setCareer={setCareer}/>
-        <CertificationWrite certification={certification} setCertification={setCertification}/>
-        <PrizeWrite prize={prize} setPrize={setPrize}/>
-        <MilitaryWrite military={military} setMilitary={setMilitary}/>
-        </div>
+        <GraduationWrite graduation={graduation} setGraduation={setGraduation} />
+        <CareerWrite career={career} setCareer={setCareer} />
+        <CertificationWrite certification={certification} setCertification={setCertification} />
+        <PrizeWrite prize={prize} setPrize={setPrize} />
+        <MilitaryWrite military={military} setMilitary={setMilitary} />
+      </div>
+      <button className="blueBtn" onClick={goToResumeFrame}>출력페이지</button>
+      <p></p>
     </div>
   );
 }

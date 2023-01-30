@@ -1,17 +1,15 @@
 import AWS from 'aws-sdk';
 import axios from 'axios';
 import { useState } from 'react';
-
-const UploadBtn = ({btn_text,file_name}) => {
-// props로 버튼에 넣을 텍스트와 사용자 아이디(mb_id)를 받아야함
-    const [selectedFile, setSelectedFile] = useState(null)
+import aws from '../../asset/json/aws.json'
+const UploadBtn = ({ btn_text, selectedFile, resume, setResume }) => {
     //S3 정보 설정
     //aws iam 엑세스 키,패스워드
-    const ACCESS_KEY = 'AKIAYALYMKESYAPVMMBG';
-    const SECRET_ACCESS_KEY = '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';
+    const ACCESS_KEY = aws.ACCESS_KEY;
+    const SECRET_ACCESS_KEY = aws.SECRET_ACCESS_KEY;
     //aws S3 지역, 버킷명
-    const REGION = "ap-northeast-2";
-    const S3_BUCKET = 'smhrdportal';
+    const REGION = aws.REGION;
+    const S3_BUCKET = aws.S3_BUCKET;
     
     AWS.config.update({
       accessKeyId: ACCESS_KEY,
@@ -22,30 +20,17 @@ const UploadBtn = ({btn_text,file_name}) => {
       params: { Bucket: S3_BUCKET},
       region: REGION,
     });
-
-    const handleFileInput = (e) => {
-        const file = e.target.files[0];
-        console.log(file)
-        //확장자 확인을 위한 변수
-        const fileExt = file.name.split('.').pop();
-        //jpg만 받겠다
-        if(file.type !== 'image/jpeg' || fileExt !=='jpg'){
-          alert('jpg 파일만 Upload 가능합니다.');
-          return;
-        }
-        setSelectedFile(e.target.files[0]);
-      }
       
     //파일 업로드
-    const uploadFile = (file) => {
-        console.log(file)
+    const uploadFile = () => {
+        console.log(selectedFile)
         //업로드를 위한 파라미터 설정
         const params = {
           ACL: 'public-read',
-          Body: file,
+          Body: selectedFile,
           Bucket: S3_BUCKET,
           //upload/사용자아이디 폴더 안에 file.name을 넣겠다
-          Key: "upload/" + file.name
+          Key: `upload/photo/${sessionStorage.getItem("loginId")}/` + selectedFile.name
         };
         myBucket.putObject(params)
         .send((err)=>{
@@ -55,24 +40,30 @@ const UploadBtn = ({btn_text,file_name}) => {
             else {
                 axios
                 .post("/student/photo/update",{
-                    photo:file_name,
+                    photo:selectedFile.name,
                     id: sessionStorage.getItem("loginId")
                 })
-                .then(res => console.log(res))
+                .then(res => {
+                  console.log(res)
+                  setResume({
+                    ...resume,
+                    photo: selectedFile.name,
+                  });
+                })
                 .catch(e => console.error(e))
-                console.log(file_name)
+                console.log(selectedFile.name)
             }
         })
     }
 
     // 렌더와 동시에 실행이 되는 문제 발생 -> 조건문 써서 임시로 차단
     // 파일 삭제
-    const deleteFile = (file_name) => {
+    const deleteFile = () => {
         //삭제를 위한 파라미터 설정
         const params = {
             Bucket: S3_BUCKET,
-            //업로드라는 폴더 안에 file.name을 넣겠다
-            Key: "upload/"+file_name
+            //업로드라는 폴더 안에 file.name을 삭제하겠다
+            Key: `upload/photo/${sessionStorage.getItem("loginId")}/`+resume.photo
         };
         myBucket.deleteObject(params)
         .send((err) => {
@@ -82,23 +73,26 @@ const UploadBtn = ({btn_text,file_name}) => {
             else {
                 axios
                 .post("/student/photo/delete",{
-                    photo:file_name,
+                    photo:resume.photo,
                     id: sessionStorage.getItem("loginId")
                 })
-                .then(res => console.log(res))
+                .then(res => {
+                  console.log(res)
+                  setResume({
+                    ...resume,
+                    photo: '',
+                  });
+                })
                 .catch(e => console.error(e))
-                console.log(file_name)
+                console.log(resume.photo)
             }
         })
     }
 
   return (
     <div className='fileDiv'>
-        <input type='file' onChange={handleFileInput}></input>
-        <div>
-        <button onClick={selectedFile?(uploadFile(selectedFile)):null}>수정</button>
-        <button onClick={selectedFile?(deleteFile({file_name})):null}>삭제</button>
-        </div>
+        <button onClick={selectedFile?(uploadFile):null}>{btn_text}</button>
+        <button onClick={resume.photo?(deleteFile):null}>삭제</button>
     </div>
   )
 }

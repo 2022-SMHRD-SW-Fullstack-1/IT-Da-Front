@@ -106,7 +106,7 @@ const CareerWrite = ({career, setCareer}) => {
                             <td><p>{career.cr_organization}</p></td>
                             <td><p>{career.cr_position}</p></td>
                             <td><p>
-                                {career.cr_s_dt}~{career.cr_e_dt}
+                                {career.cr_s_dt.replace(/-/g,'.')} ~ {career.cr_e_dt.replace(/-/g,'.')}
                             </p></td>
                             <td><p>{career.activity}</p></td>
                         </tr>
@@ -119,9 +119,9 @@ const CareerWrite = ({career, setCareer}) => {
                         <td><input type='text' name='cr_organization' onChange={onChange} value={inputs.cr_organization} /></td>
                         <td><input type='text' name='cr_position' className='crPosition' onChange={onChange} value={inputs.cr_position} /></td>
                         <td>
-                            <input type='date' name='cr_s_dt' onChange={onChange} value={inputs.cr_s_dt} />
-                            ~
-                            <input type='date' name='cr_e_dt' onChange={onChange} value={inputs.cr_e_dt} />
+                            <input type='date' className='dateInput' name='cr_s_dt' onChange={onChange} value={inputs.cr_s_dt} />
+                            &nbsp;~&nbsp;
+                            <input type='date' className='dateInput' name='cr_e_dt' onChange={onChange} value={inputs.cr_e_dt} />
                         </td>
                         <td><input type='text' name='activity' onChange={onChange} value={inputs.activity} /></td>
                     </tr>

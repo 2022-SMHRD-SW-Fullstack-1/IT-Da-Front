@@ -104,7 +104,7 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                     </div></td>
                             <td><p>{military.mili_title}</p></td>
                             <td><p>{military.mili_army}</p></td>
-                            <td><p>{military.mili_s_dt}~{military.mili_e_dt}</p></td>
+                            <td><p>{military.mili_s_dt.replace(/-/g,'.')} ~ {military.mili_e_dt.replace(/-/g,'.')}</p></td>
                             <td><p>{military.veteran_yn}</p></td>
                         </tr>
                         ))}
@@ -121,9 +121,9 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                 ))}
                                 </select></td>
                             <td><input type='text' name='mili_army' className='miliArmy' onChange={onChange} value={inputs.mili_army} /></td>
-                            <td><input type='date' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} />
-                            ~
-                            <input type='date' name='mili_e_dt' onChange={onChange} value={inputs.mili_e_dt} /></td>
+                            <td><input type='date' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} />
+                            &nbsp;~&nbsp;
+                            <input type='date' className='dateInput' name='mili_e_dt' onChange={onChange} value={inputs.mili_e_dt} /></td>
                             <td><input type='text' name='veteran_yn' onChange={onChange} value={inputs.veteran_yn} /></td>
                         </tr>
                 </tbody>

@@ -99,7 +99,7 @@ const PrizeWrite = ({ prize, setPrize }) => {
                                     <img className='sRDeleteBtn' src={btnDelete}/>
                                 </div></td>
                             <td><p>{prize.prize_name}</p></td>
-                            <td><p>{prize.prize_dt} </p></td>
+                            <td><p>{prize.prize_dt.replace(/-/g,'.')} </p></td>
                             <td><p>{prize.prize_org}</p></td>
                         </tr>
                     ))}
@@ -109,7 +109,7 @@ const PrizeWrite = ({ prize, setPrize }) => {
                                 <img className='sRAddBtn' src={btnAdd}/>
                             </div></td>
                         <td><input type='text' name='prize_name' onChange={onChange} value={inputs.prize_name} /></td>
-                        <td><input type='date' name='prize_dt' onChange={onChange} value={inputs.prize_dt} /></td>
+                        <td><input type='date' className='dateInput' name='prize_dt' onChange={onChange} value={inputs.prize_dt} /></td>
                         <td><input type='text' name='prize_org' onChange={onChange} value={inputs.prize_org} /></td>
                     </tr>
                 </tbody>

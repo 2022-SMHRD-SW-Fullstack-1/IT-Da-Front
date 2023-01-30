@@ -110,7 +110,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                                     </div></td>
                             <td><p>{graduation.grad_school}</p></td>
                             <td><p>{graduation.school_type}</p></td>
-                            <td><p>{graduation.grad_dt}</p></td>
+                            <td><p>{graduation.grad_dt.replace(/-/g,'.')}</p></td>
                             <td><p>{graduation.grad_type}</p></td>
                             <td><p>{graduation.grad_score}</p></td>
                         </tr>
@@ -122,7 +122,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                             </div></td>
                         <td><input type='text' name='grad_school' onChange={onChange} value={inputs.grad_school} /></td>
                         <td><input type='text' name='school_type' onChange={onChange} value={inputs.school_type} /></td>
-                        <td><input type='date' name='grad_dt' onChange={onChange} value={inputs.grad_dt} /></td>
+                        <td><input type='date' className='dateInput' name='grad_dt' onChange={onChange} value={inputs.grad_dt} /></td>
                         <td><select name='grad_type' onChange={onChange} >
                             {gradTypeList.map((grad_type) => (
                                 <option value={grad_type} key={1 + grad_type}>
