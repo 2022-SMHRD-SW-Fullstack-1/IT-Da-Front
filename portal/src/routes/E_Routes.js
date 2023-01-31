@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import E_main from "../pages/Enterprise/E_main";
 import E_main_detail from "../pages/Enterprise/E_main_detail";
-import E_t from "../pages/Enterprise/E_test";
 import E_main_bookmark from "../pages/Enterprise/E_main_bookmark";
 const E_Routes = () => {
   return (
