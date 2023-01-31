@@ -283,3 +283,13 @@
     padding: 0 0.2rem;
     height: inherit;
  }
+
+ .extend_register > input{
+    margin-top : 1rem;
+    margin-right: 3rem;
+ }
+
+ .extend_register > button {
+    border-radius: 10%;
+    background-color: aqua;
+ }

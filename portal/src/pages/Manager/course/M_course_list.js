@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, } from 'react'
 import axios from "axios"
 
 const M_course_list = (props) => {
@@ -66,23 +66,23 @@ const M_course_list = (props) => {
     return (
         <tr>
             <td style={edit_style_po} className='course_subject'>{props.item.course_subject} </td>
-            <td style={edit_style_op} className='course_subject'><input type='text' value={course_subject} onChange={onCourse_subject} placeholder={props.item.course_subject}></input></td>
+            <td style={edit_style_op} className='course_subject'><input type='text' value={course_subject} onChange={onCourse_subject}  placeholder={props.item.course_subject}></input></td>
 
             <td style={edit_style_po} className='course_name'>{props.item.course_name}</td>
-            <td style={edit_style_op} className='course_name'><input type='text' value={course_name} onChange={onCourse_name} placeholder={props.item.course_name} ></input></td>
+            <td style={edit_style_op} className='course_name'><input type='text' value={course_name} onChange={onCourse_name}  placeholder={props.item.course_name} ></input></td>
 
             <td style={edit_style_po} className='course_campus'>{props.item.course_campus}</td>
             <td style={edit_style_op} className='course_campus'><input type='text' value={course_campus} onChange={onCourse_campus} placeholder={props.item.course_campus} ></input></td>
 
-            <td style={edit_style_po} className='course_period'>{props.item.course_s_dt.substring(0, 4)}-{props.item.course_s_dt.substring(4, 6)}-{props.item.course_s_dt.substring(6, 8)}~<br />
-                {props.item.course_e_dt.substring(0, 4)}-{props.item.course_e_dt.substring(4, 6)}-{props.item.course_e_dt.substring(6, 8)}</td>
-            <td style={edit_style_op} className='course_period_edit'><input type='text' value={course_s_dt} onChange={onCourse_s_dt} placeholder={props.item.course_s_dt}></input>~<br />
-                <input type='text' value={course_e_dt} onChange={onCourse_e_dt} placeholder={props.item.course_e_dt} ></input></td>
+            <td style={edit_style_po} className='course_period'>{props.item.course_s_dt.substring(0,4)}-{props.item.course_s_dt.substring(4,6)}-{props.item.course_s_dt.substring(6,8)}~<br/>
+            {props.item.course_e_dt.substring(0,4)}-{props.item.course_e_dt.substring(4,6)}-{props.item.course_e_dt.substring(6,8)}</td>
+            <td style={edit_style_op} className='course_period_edit'><input type='text' value={course_s_dt} onChange={onCourse_s_dt} placeholder={props.item.course_s_dt}></input>~<br/>
+            <input type='text' value={course_e_dt} onChange={onCourse_e_dt} placeholder={props.item.course_e_dt} ></input></td>
 
             <td className='course_teacher'>{props.item.course_teacher}</td>
 
             <td style={edit_style_po} className='course_limit'>{props.item.course_limit}</td>
-            <td style={edit_style_op} className='course_limit'><input type='text' value={course_limit} onChange={onCourse_limit} s placeholder={props.item.course_limit} ></input></td>
+            <td style={edit_style_op} className='course_limit'><input type='text' value={course_limit} onChange={onCourse_limit} placeholder={props.item.course_limit} ></input></td>
 
             <td className='course_key'>{props.item.course_key}</td>
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정하기</button></div></td>

@@ -16,16 +16,12 @@
       "title": "정보공개",
       "subtitle": [
          {
-            "title": "기업공고 생성",
-            "url": "/make_company"
-         },
-         {
             "title": "기업공고 관리",
             "url": "/select_company"
-         },         
+         },
          {
             "title": "기업 관리",
-            "url": "/edit_e"
+            "url": "/select_enterprise"
          }
       ]
    },

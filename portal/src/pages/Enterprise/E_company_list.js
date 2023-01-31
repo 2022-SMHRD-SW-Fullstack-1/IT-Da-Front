@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
-const M_company_list = (props) => {
+const E_company_list = (props) => {
 
     const [company_deadline, setCompany_deadline] = useState("")
     const [company_area, setCompany_area] = useState("")
@@ -119,13 +118,13 @@ const M_company_list = (props) => {
             <td className='company_name'>{props.item.company_name} </td>
 
             <td style={edit_style_po} className='company_deadline'>{props.item.company_deadline} </td>
-            <td style={edit_style_op} className='company_deadline'><input type='text' value={company_deadline} onChange={onCompany_deadline} placeholder={props.item.company_deadline}></input></td>
+            <td style={edit_style_op} className='company_deadline'><input type='text' value={company_deadline} onChange={onCompany_deadline}  placeholder={props.item.company_deadline}></input></td>
 
             <td className="company_outer">
                 <div className="company_inner">
                     <div>지역</div>
                     <div style={edit_style_po} className=''>{props.item.company_area} </div>
-                    <div style={edit_style_op} className=''><input type='text' value={company_area} onChange={onCompany_area} placeholder={props.item.company_area}></input></div>
+                    <div style={edit_style_op} className=''><input type='text' value={company_area} onChange={onCompany_area}  placeholder={props.item.company_area}></input></div>
                 </div>
                 <div className="company_inner">
                     <div>고용형태</div>
@@ -135,12 +134,12 @@ const M_company_list = (props) => {
                 <div className="company_inner">
                     <div>학력</div>
                     <div style={edit_style_po} className=''>{props.item.company_grade} </div>
-                    <div style={edit_style_op} className=''><input type='text' value={company_grade} onChange={onCompany_grade} placeholder={props.item.company_grade}></input></div>
+                    <div style={edit_style_op} className=''><input type='text' value={company_grade} onChange={onCompany_grade}placeholder={props.item.company_grade}></input></div>
                 </div>
                 <div className="company_inner">
                     <div>직무</div>
                     <div style={edit_style_po} className=''>{props.item.company_position} </div>
-                    <div style={edit_style_op} className=''><input type='text' value={company_position} onChange={onCompany_position} placeholder={props.item.company_position}></input></div>
+                    <div style={edit_style_op} className=''><input type='text' value={company_position} onChange={onCompany_position}  placeholder={props.item.company_position}></input></div>
                 </div>
                 <div className="company_inner">
                     <div>자격</div>
@@ -150,7 +149,7 @@ const M_company_list = (props) => {
                 <div className="company_inner">
                     <div>필수요건</div>
                     <div style={edit_style_po} className=''>{props.item.company_essential} </div>
-                    <div style={edit_style_op} className=''><input type='text' value={company_essential} onChange={onCompany_essential} placeholder={props.item.company_essential}></input></div>
+                    <div style={edit_style_op} className=''><input type='text' value={company_essential} onChange={onCompany_essential}  placeholder={props.item.company_essential}></input></div>
                 </div>
                 <div className="company_inner">
                     <div>우대</div>
@@ -170,7 +169,7 @@ const M_company_list = (props) => {
                 <div className="company_inner">
                     <div>지원방법</div>
                     <div style={edit_style_po} className=''>{props.item.company_apply} </div>
-                    <div style={edit_style_op} className=''><input type='text' value={company_apply} onChange={onCompany_apply} placeholder={props.item.company_apply}></input></div>
+                    <div style={edit_style_op} className=''><input type='text' value={company_apply} onChange={onCompany_apply}  placeholder={props.item.company_apply}></input></div>
                 </div>
             </td>
             <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_company_button}>수정하기</button><button onClick={delete_company_submit}>삭제하기</button>
@@ -181,4 +180,4 @@ const M_company_list = (props) => {
     )
 }
 
-export default M_company_list
+export default E_company_list

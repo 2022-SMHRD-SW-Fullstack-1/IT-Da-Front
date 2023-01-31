@@ -10,6 +10,9 @@ import C_archive from '../pages/Course/C_archive';
 import C_archive_write from '../pages/Course/Teacher/C_archive_write';
 import C_archive_detail from '../pages/Course/C_archive_detail';
 import StdInfoList from '../components/StdInfoList';
+import C_extend from '../pages/Course/Teacher/extend/C_extend';
+import C_extend_write from '../pages/Course/Teacher/extend/C_extend_write';
+import C_extend_detail from '../pages/Course/Teacher/extend/C_extend_detail';
 
 const T_Routes = () => {
    return (
@@ -23,6 +26,10 @@ const T_Routes = () => {
          <Route path='/archive/detail' element={<C_archive_detail/>}/>
          <Route path='/archive/write' element={<C_archive_write/>}/>
          <Route path='/std_info' element={<StdInfoList/>}/>
+         <Route path='/extend' element={<C_extend/>}/>
+         <Route path='/extend/write' element={<C_extend_write/>}/>
+         <Route path='/extend/detail' element={<C_extend_detail/>}/>
+         
       </Routes>
    )
 }

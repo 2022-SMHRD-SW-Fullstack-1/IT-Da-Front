@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const M_make_company = () => {
+const E_make_company = () => {
  
-  const [company_name, setCompany_name] = useState('');
   const [company_deadline, setCompany_deadline] = useState('');
   const [company_area, setCompany_area] = useState('');
   const [company_employ, setCompany_employ] = useState('');
@@ -17,9 +15,6 @@ const M_make_company = () => {
   const [company_salary, setCompany_salary] = useState('');
   const [company_apply, setCompany_apply] = useState('');
 
-  const onCompany_name = (e) => {
-    setCompany_name(e.target.value);
-  };
   const onCompany_deadline = (e) => {
     setCompany_deadline(e.target.value);
   };
@@ -54,12 +49,12 @@ const M_make_company = () => {
     setCompany_apply(e.target.value);
   };
 
-  // 과정 생성하기
+  // 공고 생성하기
   const make_company_submit = (e) => {
     e.preventDefault();
     axios
       .post('/enterprise/make_company', {
-        company_name: company_name,
+        company_name: window.sessionStorage.getItem("userName"),
         company_deadline: company_deadline,
         company_area: company_area,
         company_employ: company_employ,
@@ -71,12 +66,11 @@ const M_make_company = () => {
         company_etc: company_etc,
         company_salary: company_salary,
         company_apply: company_apply,
+        enter_id : window.sessionStorage.getItem("loginId")
       })
       .then(function (res) {
         alert('기업생성 완료');
-        // window.location.reload();
-        console.log(company_qual);
-        console.log(company_essential);
+        window.location.reload();
       })
       .catch(function (err) {
         console.log('error');
@@ -87,15 +81,7 @@ const M_make_company = () => {
     <div className="registerContainer basic_container_container">
       <div>
         <p>기업 공고 생성하기</p>
-        <div>
-          <span>기업 명</span>
-          <input
-            placeholder="입력해주세요."
-            type="text"
-            value={company_name}
-            onChange={onCompany_name}
-          />
-        </div>
+       
         <div>
           <span>마감일</span>
           <input
@@ -203,4 +189,4 @@ const M_make_company = () => {
   );
 };
 
-export default M_make_company;
+export default E_make_company;

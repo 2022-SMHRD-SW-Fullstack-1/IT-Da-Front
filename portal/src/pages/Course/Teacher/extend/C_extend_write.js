@@ -3,10 +3,9 @@ import axios from 'axios';
 import ReactQuill from 'react-quill';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import '../../../css/Course.css'
 import 'react-quill/dist/quill.snow.css';
 
-const C_announcement_write = (props) => {
+const C_extend_write = (props) => {
 
    const navigate = useNavigate();
 
@@ -18,12 +17,12 @@ const C_announcement_write = (props) => {
    const onTitleChange = e => {
       setTitle(e.target.value)
    };
-   const [content, setContet] = useState('');
+   const [content, setContent] = useState('');
    
    useEffect(()=>{
       if (state.title == '글 수정') {
          setTitle(state.b_title)
-         setContet(state.b_content)
+         setContent(state.b_content)
       }
    },[])
 
@@ -41,20 +40,20 @@ const C_announcement_write = (props) => {
          })
          .then((res) => {
             console.log(res)
-            navigate('/announcement', { state: { state: title } })
+            navigate('/extend', { state: { state: title } })
          })
          .catch((e) => console.log(e));
       } else {
          axios
-         .post('/announcement/addPost', {
-            title: title,
-            content: content,
-            id: window.sessionStorage.getItem("loginId"),
-            key: window.sessionStorage.getItem("course_key"),
+         .post('/announcement/write_extend', {
+            b_title: title,
+            b_content: content,
+            mb_id: window.sessionStorage.getItem("loginId"),
+            course_key: window.sessionStorage.getItem("course_key"),
          })
          .then((res) => {
-            console.log(res)
-            navigate('/announcement', { state: { state: title } })
+            alert("작성완료")
+            navigate('/extend', { state: { state: title } })
          })
          .catch((e) => console.log(e));
       }
@@ -69,7 +68,7 @@ const C_announcement_write = (props) => {
             <input onChange={onTitleChange} value={title} type='text'></input>
 
             <p>내용</p>
-            <ReactQuill theme="snow" value={content} onChange={setContet} />
+            <ReactQuill theme="snow" value={content} onChange={setContent} />
             <div className='annWriteButton'>
                <button onClick={clickWriteBtn}>저장하기</button>
             </div>
@@ -79,4 +78,4 @@ const C_announcement_write = (props) => {
    )
 }
 
-export default C_announcement_write
+export default C_extend_write

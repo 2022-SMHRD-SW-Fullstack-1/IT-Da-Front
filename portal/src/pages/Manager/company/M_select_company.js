@@ -16,6 +16,7 @@ const M_select_company = (props) => {
                 console.log("error")
             })
     }, [])
+    
 
     const companyList =
         company.map((item) => <M_company_list item={item} key={item.company_name} />)
@@ -31,16 +32,6 @@ const M_select_company = (props) => {
                             <th>기업명</th>
                             <th>마감일</th>
                             <th>구인정보</th>
-                            {/* <th>지역</th>
-                            <th>고용형태</th>
-                            <th>학력</th>
-                            <th>직무</th>
-                            <th>자격</th>
-                            <th>필수요건</th>
-                            <th>우대</th>
-                            <th>특이사항</th>
-                            <th>급여</th>
-                            <th>지원방법</th> */}
                             <th></th>
                         </tr>
                     </thead>
