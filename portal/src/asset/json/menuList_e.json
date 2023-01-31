@@ -4,11 +4,11 @@
     "subtitle": [
       {
         "title": "전체 수료생 조회",
-        "url": "/make_course"
+        "url": "/"
       },
       {
         "title": "스크랩 인재",
-        "url": "/edit_course"
+        "url": "/detail_bookmark"
       }
     ]
   }
