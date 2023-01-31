@@ -67,13 +67,22 @@ const E_main = () => {
     "Linux",
     "android",
     "IOS",
+    "swift",
+  ];
+
+  const wanted_job = [
+    "전체",
+    "백엔드 개발자",
+    "프론트엔드 개발자",
+
+    "안드로이드 개발자",
+    "ios 개발자",
   ];
   const navigate = useNavigate();
   const [update_month, setUpdate_month] = useState("전체");
   const [hope_location, setHope_location] = useState("전체");
   const [skill, setSkill] = useState("전체");
-  const [info, setInfo] = useState([]);
-
+  const [hope_job, setHope_job] = useState("전체");
   //필터링 한 후 데이터 list
   const [filterDate, setFilterData] = useState([]);
   //수강생 데이터(MAP으로 뿌릴) 초기화용
@@ -117,7 +126,6 @@ const E_main = () => {
       },
     });
   };
-  const [mark, setMark] = useState("");
 
   //찜하기 버튼
   const onHandleBookmark = (e) => {
@@ -176,6 +184,12 @@ const E_main = () => {
     setSkill(value);
   };
 
+  //희망 직무 필터
+  const hope_job_filter = (e) => {
+    const { value } = e.target;
+    setHope_job(value);
+  };
+
   //상세보기 필터 적용 버튼
   const button_filterclick = () => {
     setFilterData(
@@ -186,6 +200,7 @@ const E_main = () => {
             item.wish_area2 == hope_location ||
             item.wish_area3 == hope_location) &&
           (skill == "전체" || item.skills.includes(skill)) &&
+          (hope_job == "전체" || item.wish_field.includes(hope_job)) &&
           dateCompare(update_month, item.update_dt)
       )
     );
@@ -227,20 +242,18 @@ const E_main = () => {
       <td mb_id={item.mb_id} onClick={go_to_userdetail}>
         {item.name}
       </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.phone}
-      </td>
+
       <td mb_id={item.mb_id} onClick={go_to_userdetail}>
         {item.addr}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.gender}
       </td>
       <td mb_id={item.mb_id} onClick={go_to_userdetail}>
         {item.birthday}
       </td>
       <td mb_id={item.mb_id} onClick={go_to_userdetail}>
         {item.skills}
+      </td>
+      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+        {item.wish_field}
       </td>
       <td mb_id={item.mb_id} onClick={go_to_userdetail}>
         {item.wish_area1},{item.wish_area2},{item.wish_area3}
@@ -290,6 +303,16 @@ const E_main = () => {
                         </select>
                       </div>
                     </div>
+                    <div className="E_main_input_detail_three_div">
+                      <div>희망 직무</div>
+                      <div>
+                        <select onChange={hope_job_filter}>
+                          {wanted_job.map((item) => (
+                            <option key={item}>{item}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="filter">
@@ -310,11 +333,10 @@ const E_main = () => {
             <tr className="E_main_title">
               <th></th>
               <th>이름</th>
-              <th>전화번호</th>
               <th>주소</th>
-              <th>성별</th>
               <th>나이</th>
               <th>기술스택</th>
+              <th>지원 분야</th>
               <th>희망지역</th>
               <th>업데이트 날짜</th>
             </tr>

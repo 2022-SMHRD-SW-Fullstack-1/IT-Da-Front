@@ -149,7 +149,7 @@ const E_main_detail = () => {
             src={`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/photo/${state.mb_id}/${resume.photo}`}
           ></img>
         </div>
-        <div>
+        <div className="e_detail_info">
           <div className="e_detail_name">
             <p>{resume.name}</p>
             <p>
@@ -173,10 +173,22 @@ const E_main_detail = () => {
               <p>{resume.addr}</p>
             </div>
             <div>
+              <p>전공</p>
+              <p>{resume.major}</p>
+            </div>
+            <div>
               <p>희망지역</p>
               <p>
                 {resume.wish_area1},{resume.wish_area2},{resume.wish_area3}
               </p>
+            </div>
+            <div>
+              <p>희망분야</p>
+              <p>{resume.wish_field}</p>
+            </div>
+            <div>
+              <p>희망연봉</p>
+              <p>{resume.wish_salary}</p>
             </div>
           </div>
         </div>

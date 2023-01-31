@@ -21,6 +21,9 @@
 .id_photo {
   width: 10rem;
 }
+.e_detail_info {
+  margin-left: 2rem;
+}
 
 .E_main_detail_title {
   border-bottom: 2px solid gray;

@@ -14,10 +14,6 @@ const E_main_bookmark = () => {
   const { state } = useLocation();
 
   const navigate = useNavigate();
-  const [update_month, setUpdate_month] = useState("전체");
-  const [hope_location, setHope_location] = useState("전체");
-  const [skill, setSkill] = useState("전체");
-  const [info, setInfo] = useState([]);
 
   //필터링 한 후 데이터 list
   const [filterDate, setFilterData] = useState([]);
@@ -62,7 +58,6 @@ const E_main_bookmark = () => {
       },
     });
   };
-  const [mark, setMark] = useState("");
 
   //찜하기 버튼
   const onHandleBookmark = (e) => {
@@ -101,24 +96,6 @@ const E_main_bookmark = () => {
           console.log(error);
         });
     }
-  };
-
-  //업데이트 날짜 필터
-  const month_change = (e) => {
-    const { value } = e.target;
-    setUpdate_month(value);
-  };
-
-  //희망 지역 날짜 필터
-  const hope_change = (e) => {
-    const { value } = e.target;
-    setHope_location(value);
-  };
-
-  //기술 스택 필터
-  const skill_filter = (e) => {
-    const { value } = e.target;
-    setSkill(value);
   };
 
   // 이력서 입력한 정보 /기업이 저장한 인재 북마크 데이터
@@ -166,20 +143,18 @@ const E_main_bookmark = () => {
           <td mb_id={item.mb_id} onClick={go_to_userdetail}>
             {item.name}
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-            {item.phone}
-          </td>
+
           <td mb_id={item.mb_id} onClick={go_to_userdetail}>
             {item.addr}
-          </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-            {item.gender}
           </td>
           <td mb_id={item.mb_id} onClick={go_to_userdetail}>
             {item.birthday}
           </td>
           <td mb_id={item.mb_id} onClick={go_to_userdetail}>
             {item.skills}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.wish_field}
           </td>
           <td mb_id={item.mb_id} onClick={go_to_userdetail}>
             {item.wish_area1},{item.wish_area2},{item.wish_area3}
@@ -202,11 +177,10 @@ const E_main_bookmark = () => {
             <tr className="E_main_title">
               <th></th>
               <th>이름</th>
-              <th>전화번호</th>
               <th>주소</th>
-              <th>성별</th>
               <th>나이</th>
               <th>기술스택</th>
+              <th>지원 분야</th>
               <th>희망지역</th>
               <th>업데이트 날짜</th>
             </tr>
