@@ -85,7 +85,7 @@ const E_make_company = () => {
         <div>
           <span>마감일</span>
           <input
-            placeholder="입력해주세요."
+            placeholder="예) 20110526"
             type="text"
             value={company_deadline}
             onChange={onCompany_deadline}
@@ -182,7 +182,7 @@ const E_make_company = () => {
           />
         </div>
         <button className="manager_button" onClick={make_company_submit}>
-          기업 생성하기
+          공고 생성하기
         </button>
       </div>
     </div>
