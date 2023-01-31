@@ -72,10 +72,12 @@
 .navTitle {
    font-weight: bold;
    font-size: 1.3rem;
+   padding-left: 1rem;
+   margin-bottom: 0.2rem;
 }
 .navSubtitle {
    font-size: 1.1rem;
-   padding: 0.5rem 1rem;
+   padding: 0.5rem 0.1rem;
    margin: 0;
    border-radius: 5px;
 }
