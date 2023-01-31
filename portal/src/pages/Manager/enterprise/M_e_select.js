@@ -30,9 +30,9 @@ const M_e_select = () => {
                     <table>
                         <thead>
                             <tr>
+                                <th>기업명</th>
                                 <th>아이디</th>
                                 <th>패스워드</th>
-                                <th>아이디</th>
                                 <th>대표</th>
                                 <th>연락처</th>
                                 <th>전화번호</th>

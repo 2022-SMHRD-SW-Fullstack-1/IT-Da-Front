@@ -3,23 +3,20 @@ import axios from "axios"
 
 const M_e_list = (props) => {
 
+  const [enter, setEnter] = useState({
+    enter_pw: props.item.enter_pw,
+    enter_manager: props.item.enter_manager,
+    enter_tel: props.item.enter_tel,
+    enter_address: props.item.enter_address,
+  })
 
-  const [enter_pw, setEnter_pw] = useState("")
-  const [enter_manager, setEnter_manager] = useState("")
-  const [enter_tel, setEnter_tel] = useState("")
-  const [enter_address, setEnter_address] = useState("")
 
-  const onEnter_pw = e => {
-    setEnter_pw(e.target.value)
-  }
-  const onEnter_manager = e => {
-    setEnter_manager(e.target.value)
-  }
-  const onEnter_tel = e => {
-    setEnter_tel(e.target.value)
-  }
-  const onEnter_address = e => {
-    setEnter_address(e.target.value)
+  const onChange = (e) => {
+    const { name, value } = e.target
+    setEnter({
+      ...enter,
+      [name]: value
+    })
   }
 
   const [edit_style_po, setEdit_style_po] = useState({ display: "" })
@@ -31,10 +28,10 @@ const M_e_list = (props) => {
     axios
       .post("/enterprise/edit_enterprise", {
         enter_id: props.item.enter_id,
-        enter_pw: enter_pw,
-        enter_manager: enter_manager,
-        enter_tel: enter_tel,
-        enter_address: enter_address
+        enter_pw: enter.enter_pw,
+        enter_manager: enter.enter_manager,
+        enter_tel: enter.enter_tel,
+        enter_address: enter.enter_address
       }).then(function (res) {
         alert("기업 수정완료")
         window.location.reload()
@@ -81,19 +78,19 @@ const M_e_list = (props) => {
       <td>{props.item.enter_id}</td>
 
       <td style={edit_style_po} className='e_name'>{props.item.enter_pw}</td>
-      <td style={edit_style_op} className='e_name'><input type='text' value={enter_pw} onChange={onEnter_pw} placeholder={props.item.enter_pw}></input></td>
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter.enter_pw} onChange={onChange} name="enter_pw"></input></td>
 
       <td style={edit_style_po} className='e_name'>{props.item.enter_manager}</td>
-      <td style={edit_style_op} className='e_name'><input type='text' value={enter_manager} onChange={onEnter_manager} placeholder={props.item.enter_manager}></input></td>
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter.enter_manager} onChange={onChange} name="enter_manager"></input></td>
 
-      <td style={edit_style_po} className='e_name'>{props.item.enter_tel.substring(0,3)}-{props.item.enter_tel.substring(3,7)}-{props.item.enter_tel.substring(7,11)}</td>
-      <td style={edit_style_op} className='e_name'><input type='text' value={enter_tel} onChange={onEnter_tel} placeholder={props.item.enter_tel}></input></td>
+      <td style={edit_style_po} className='e_name'>{props.item.enter_tel.substring(0, 3)}-{props.item.enter_tel.substring(3, 7)}-{props.item.enter_tel.substring(7, 11)}</td>
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter.enter_tel} onChange={onChange} name="enter_tel"></input></td>
 
       <td style={edit_style_po} className='e_name'>{props.item.enter_address}</td>
-      <td style={edit_style_op} className='e_name'><input type='text' value={enter_address} onChange={onEnter_address} placeholder={props.item.enter_address}></input></td>      
+      <td style={edit_style_op} className='e_name'><input type='text' value={enter.enter_address} onChange={onChange} name="enter_address"></input></td>
 
-      <td>{props.item.enter_num.substring(0,2)}-{props.item.enter_num.substring(2,5)}-{props.item.enter_num.substring(5,10)}</td>
-      
+      <td>{props.item.enter_num.substring(0, 2)}-{props.item.enter_num.substring(2, 5)}-{props.item.enter_num.substring(5, 10)}</td>
+
       <td style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정하기</button><button onClick={delete_e_submit}>삭제하기</button></div></td>
       <td style={edit_style_op}><div className='content annViewButton'><button onClick={edit_e_submit}>수정완료</button><button onClick={edit_e_button_quit}>취소하기</button></div></td>
     </tr>

@@ -11,5 +11,18 @@
         "url": "/detail_bookmark"
       }
     ]
+  },
+  {
+    "title": "공고 관리",
+    "subtitle": [
+      {
+        "title": "공고 생성",
+        "url": "/make_company"
+      },
+      {
+        "title": "공고 관리",
+        "url": "/select_one_company"
+      }
+    ]
   }
 ]
