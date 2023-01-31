@@ -66,7 +66,7 @@ const M_company_list = (props) => {
         if (window.confirm("삭제하시겠습니까?")) {
             axios
                 .post("/enterprise/delete_company", {
-                    company_name: props.item.company_name,
+                    company_num: props.item.company_num,
                 }).then(function (res) {
                     alert("삭제완료")
                     window.location.reload();
