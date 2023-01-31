@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import dateCompare from "../../utils/filter";
 import "bootstrap/dist/css/bootstrap.css";
@@ -9,7 +9,10 @@ import uuid from "react-uuid";
 import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import E_main_detail from "./E_main_detail";
+
 const E_main_bookmark = () => {
+  const { state } = useLocation();
+
   const navigate = useNavigate();
   const [update_month, setUpdate_month] = useState("전체");
   const [hope_location, setHope_location] = useState("전체");
@@ -45,18 +48,21 @@ const E_main_bookmark = () => {
   const [member_info, setMember_info] = useState([{}]);
   //기업이 누구를 북마크했는지 정보
   const [bookmark_info, setBookmark_info] = useState([]);
+
   //수강생 디테일 페이지로 이동
   const go_to_userdetail = (e) => {
     navigate("/detail_user", {
       //버튼 클릭시 정보를 수강생 정보를 넘겨준다
       state: {
         mb_id: e.currentTarget.getAttribute("mb_id"),
-
+        isBookmark: bookmark_info.includes(
+          e.currentTarget.getAttribute("mb_id")
+        ),
         onHandleBookmark: e.currentTarget.getAttribute(onHandleBookmark),
       },
     });
-    console.log();
   };
+  const [mark, setMark] = useState("");
 
   //찜하기 버튼
   const onHandleBookmark = (e) => {
@@ -97,6 +103,24 @@ const E_main_bookmark = () => {
     }
   };
 
+  //업데이트 날짜 필터
+  const month_change = (e) => {
+    const { value } = e.target;
+    setUpdate_month(value);
+  };
+
+  //희망 지역 날짜 필터
+  const hope_change = (e) => {
+    const { value } = e.target;
+    setHope_location(value);
+  };
+
+  //기술 스택 필터
+  const skill_filter = (e) => {
+    const { value } = e.target;
+    setSkill(value);
+  };
+
   // 이력서 입력한 정보 /기업이 저장한 인재 북마크 데이터
   useEffect(() => {
     axios
@@ -107,7 +131,11 @@ const E_main_bookmark = () => {
         console.log(res.data);
         console.log(res.data.resume);
         setSimple_info(res.data.resume);
-        setFilterData(res.data.resume);
+        setFilterData(
+          res.data.resume.filter((item) =>
+            res.data.bookmark.includes(item.mb_id)
+          )
+        );
 
         setBookmark_info(res.data.bookmark);
         setMember_info(res.data.member);
@@ -117,6 +145,7 @@ const E_main_bookmark = () => {
       });
   }, []);
 
+  //초기화면
   useEffect(() => {
     console.log(simple_info);
   }, [simple_info]);
@@ -125,31 +154,41 @@ const E_main_bookmark = () => {
 
   let listMap = filterDate.map((item) => (
     <tr key={uuid()} className="E_main_info">
-      <td mb_id={item.mb_id} onClick={onHandleBookmark}>
-        {bookmark_info.includes(item.mb_id) ? <RiStarFill /> : <RiStarLine />}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.name}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.phone}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.addr}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.gender}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.birthday}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.skills}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.wish_area1},{item.wish_area2},{item.wish_area3}
-      </td>
-      <td>{item.update_dt}</td>
+      {bookmark_info.includes(item.mb_id) ? (
+        <>
+          <td mb_id={item.mb_id}>
+            {bookmark_info.includes(item.mb_id) ? (
+              <RiStarFill />
+            ) : (
+              <RiStarLine />
+            )}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.name}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.phone}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.addr}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.gender}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.birthday}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.skills}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.wish_area1},{item.wish_area2},{item.wish_area3}
+          </td>
+          <td>{item.update_dt}</td>
+        </>
+      ) : (
+        <td>"스크랩인재가 없습니다 "</td>
+      )}
     </tr>
   ));
 

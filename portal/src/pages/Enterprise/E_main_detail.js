@@ -7,6 +7,9 @@ import "../../css/E_main_detail.css";
 
 const E_main_detail = () => {
   const { state } = useLocation();
+
+  const [isBookmark, setIsBookmark] = useState(state.isBookmark);
+
   const [resume, setResume] = useState({
     mb_id: "",
     name: "",
@@ -80,8 +83,6 @@ const E_main_detail = () => {
     },
   ]);
 
-  const [bookmark_info, setBookmark_info] = useState([]);
-
   // 인적사항, 학력, 경력/교육, 자격증, 수상내역, 병역, 기술스택 정보 백에서 가져옴
   useEffect(() => {
     axios
@@ -105,35 +106,16 @@ const E_main_detail = () => {
       .catch((e) => console.error(e));
   }, []);
 
-  useEffect(() => {
-    axios
-      .get("/bookmark/select_bookmark", {
-        params: { enter_id: window.sessionStorage.getItem("loginId") },
-      })
-      .then((res) => {
-        console.log(res.data);
-        console.log(res.data.resume);
-
-        setBookmark_info(res.data.bookmark);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
-
-  console.log("안녕하세요", bookmark_info);
-
   const onHandleBookmark = (e) => {
     //북마크 여부 확인용
     console.log("a아이디", state.mb_id);
-    if (bookmark_info.includes(e.currentTarget.getAttribute("mb_id"))) {
+    if (isBookmark) {
       // bookmark가 체크 되어있을때 => bookmark 삭제
-      var mb_id = state.mb_id;
-      setBookmark_info(bookmark_info.filter((e) => e !== mb_id));
+      setIsBookmark(false);
       axios
         .post("/bookmark/delete_bookmark", {
           enter_id: window.sessionStorage.getItem("loginId"),
-          mb_id: e.currentTarget.getAttribute("mb_id"),
+          mb_id: state.mb_id,
         })
         .then((res) => {
           console.log(res.data);
@@ -143,14 +125,11 @@ const E_main_detail = () => {
         });
     } else {
       // bookmark가 체크 안되어있을때 => bookmark 추가
-      setBookmark_info([
-        ...bookmark_info,
-        e.currentTarget.getAttribute("mb_id"),
-      ]);
+      setIsBookmark(true);
       axios
         .post("/bookmark/add_bookmark", {
           enter_id: window.sessionStorage.getItem("loginId"),
-          mb_id: e.currentTarget.getAttribute("mb_id"),
+          mb_id: state.mb_id,
         })
         .then((res) => {
           console.log(res.data);
@@ -177,11 +156,7 @@ const E_main_detail = () => {
               {resume.gender} / {resume.birthday}
             </p>
             <div className="" onClick={onHandleBookmark}>
-              {bookmark_info.includes(state.mb_id) ? (
-                <RiStarFill />
-              ) : (
-                <RiStarLine />
-              )}
+              {isBookmark ? <RiStarFill /> : <RiStarLine />}
             </div>
           </div>
           <div>

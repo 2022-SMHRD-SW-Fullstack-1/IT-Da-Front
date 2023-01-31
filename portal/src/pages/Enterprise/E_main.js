@@ -103,17 +103,19 @@ const E_main = () => {
   const [member_info, setMember_info] = useState([{}]);
   //기업이 누구를 북마크했는지 정보
   const [bookmark_info, setBookmark_info] = useState([]);
+
   //수강생 디테일 페이지로 이동
   const go_to_userdetail = (e) => {
     navigate("/detail_user", {
       //버튼 클릭시 정보를 수강생 정보를 넘겨준다
       state: {
         mb_id: e.currentTarget.getAttribute("mb_id"),
-
+        isBookmark: bookmark_info.includes(
+          e.currentTarget.getAttribute("mb_id")
+        ),
         onHandleBookmark: e.currentTarget.getAttribute(onHandleBookmark),
       },
     });
-    console.log();
   };
   const [mark, setMark] = useState("");
 
@@ -155,36 +157,25 @@ const E_main = () => {
         });
     }
   };
-  // 찜하기
-  // useEffect(() => {
-  //   axios
-  //     .post("/bookmark/add_bookmark", {
-  //       enter_id: "utsoft123@naver.com",
-  //       mb_id: id,
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setMark(res.data);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }, []);
+
   //업데이트 날짜 필터
   const month_change = (e) => {
     const { value } = e.target;
     setUpdate_month(value);
   };
+
   //희망 지역 날짜 필터
   const hope_change = (e) => {
     const { value } = e.target;
     setHope_location(value);
   };
+
   //기술 스택 필터
   const skill_filter = (e) => {
     const { value } = e.target;
     setSkill(value);
   };
+
   //상세보기 필터 적용 버튼
   const button_filterclick = () => {
     setFilterData(
@@ -201,6 +192,7 @@ const E_main = () => {
     console.log(skill);
     console.log(typeof (new Date() - new Date("2022-01-20")));
   };
+
   // 이력서 입력한 정보 /기업이 저장한 인재 북마크 데이터
   useEffect(() => {
     axios
@@ -220,14 +212,12 @@ const E_main = () => {
         console.log(error);
       });
   }, []);
-  console.log("뭐가", simple_info);
-  //1. 처음에 리스트를 보여줄때, 특정인재(북마크 된)에게 별 표시 해주기
-  // 문제: 기업이 북마크를 했는데, 띄워주는 자료는 학생자료임(북마크 관련 변수 없음)
-  //       학생리스트.map에 북마크 표시해주는 변수를 추가하기 어려움
-  //
+
+  //초기화면
   useEffect(() => {
     console.log(simple_info);
   }, [simple_info]);
+
   /**MAP으로 보여줄 필터 데이터 */
   let listMap = filterDate.map((item) => (
     <tr key={uuid()} className="E_main_info">
@@ -258,6 +248,7 @@ const E_main = () => {
       <td>{item.update_dt}</td>
     </tr>
   ));
+
   return (
     <div className="E_main_page">
       <div className="big_div">
