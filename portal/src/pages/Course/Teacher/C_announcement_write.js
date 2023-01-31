@@ -18,12 +18,12 @@ const C_announcement_write = (props) => {
    const onTitleChange = e => {
       setTitle(e.target.value)
    };
-   const [content, setContet] = useState('');
+   const [content, setContent] = useState('');
    
    useEffect(()=>{
       if (state.title == '글 수정') {
          setTitle(state.b_title)
-         setContet(state.b_content)
+         setContent(state.b_content)
       }
    },[])
 
@@ -69,7 +69,7 @@ const C_announcement_write = (props) => {
             <input onChange={onTitleChange} value={title} type='text'></input>
 
             <p>내용</p>
-            <ReactQuill theme="snow" value={content} onChange={setContet} />
+            <ReactQuill theme="snow" value={content} onChange={setContent} />
             <div className='annWriteButton'>
                <button onClick={clickWriteBtn}>저장하기</button>
             </div>
