@@ -1,81 +1,46 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import '../../../css/Course.css'
+import M_company_list from "../../Manager/company/M_company_list";
 
 const S_C_main = () => {
   
-  const [company, setCompany] = useState([{
-    company_register_date:'',
-    company_name:'',
-    company_deadline:'',
-    company_area:'',
-    company_employ:'',
-    company_grade:'',
-    company_position:'',
-    company_advantage:'',
-    company_salary:'',
-    company_require:'',
-    company_etc:'',
-  }])
-  
-    const onClick = () => {
-    console.log("click");
-  };
+  const [company, setCompany] = useState([])
 
   useEffect(() => {
-    axios
-    .get("/company/search/all")
-    .then((res)=>{
-        //명령
-    })
-    .catch((e)=>console.error(e));
+      axios
+          .get("/enterprise/select_company")
+          .then(function (res) {
+              setCompany(res.data)
+          })
+          .catch(function (error) {
+              console.log("error")
+          })
+  }, [])  
 
-  },[])
+  const companyList =
+      company.map((item) => <M_company_list item={item} key={item.company_name} />)
 
   return (
-    <div className="container">
-    <div className="topDiv_resumePage">
-      <div className="topDiv_resume">
-        <table className="content">
-          <thead>
-            <tr>
-                <th>목차</th>
-                <th>등록일</th>
-                <th>기업명</th>
-                <th>마감일</th>
-                <th>지역</th>
-                <th>고용형태</th>
-                <th>학력</th>
-                <th>직무</th>
-                <th>우대</th>
-                <th>급여</th>
-                <th>필수</th>
-                <th>지원방법</th>
-            </tr>
-          </thead>
-          <tbody>
-            {company.map((company, idx) => (
-              <tr key={idx}>
-                <td><p>{idx+1}</p></td>
-                <td><p>{company.company_register_date}</p></td>
-                <td><p>{company.company_name}</p></td>
-                <td><p>{company.company_deadline}</p></td>
-                <td><p>{company.company_area}</p></td>
-                <td><p>{company.company_employ}</p></td>
-                <td><p>{company.company_grade}</p></td>
-                <td><p>{company.company_position}</p></td>
-                <td><p>{company.company_advantage}</p></td>
-                <td><p>{company.company_salary}</p></td>
-                <td><p>{company.company_require}</p></td>
-                <td><p>{company.company_etc}</p></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className='container'>
+          <p>기업 공고</p>
+          <div className='content'>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>등록일</th>
+                          <th>기업명</th>
+                          <th>마감일</th>
+                          <th>구인정보</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {companyList}
+                  </tbody>
+              </table>
+          </div>
       </div>
-      </div>
-    </div>
-  );
-};
+  )
+}
 
 export default S_C_main;

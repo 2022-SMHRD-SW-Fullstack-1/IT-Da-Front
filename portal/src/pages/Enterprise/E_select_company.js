@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
-import E_company_list from "./E_company_list"
+import M_company_list from '../Manager/company/M_company_list'
 
 const E_select_company = (props) => {
 
@@ -22,7 +22,7 @@ const E_select_company = (props) => {
   }, [])
 
   const companyList =
-    company.map((item) => <E_company_list item={item} key={item.company_name} />)
+    company.map((item) => <M_company_list item={item} key={item.company_name} />)
 
   return (
     <div className='container'>

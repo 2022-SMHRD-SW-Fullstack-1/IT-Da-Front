@@ -226,22 +226,24 @@
     width: 37rem;
 }
 
-.company_inner {
+.company_outer>div {
     display: flex;
     text-align: left;
+    border-bottom: 1px solid lightgray;
+    margin: 0.1rem 0.5rem;
+}
+.company_outer>div:last-child {
+    border-bottom: none;
 }
 
-.company_inner>div:first-child {
-    width: 7rem;
+.company_outer>div>div:first-child {
+    width: 6rem;
     font-weight: bold;
-    margin-left: 3rem;
+    padding: 0.2rem;
+    text-align: center;
 }
 
-.company_inner>div:nth-child(2) {
-    max-width: 30rem;
-}
-
-.company_inner>div>input {
+.company_outer>div>div>input {
     width: 27.5rem;
 }
 
