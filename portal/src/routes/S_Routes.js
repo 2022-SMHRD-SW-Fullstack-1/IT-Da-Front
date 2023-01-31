@@ -10,10 +10,11 @@ import S_CL_main from '../pages/Course/Student/S_CL_main'
 import ResumeFrame from '../pages/Course/Student/Resume/ResumeFrame.js'
 import CoverLetterFrame from '../pages/Course/Student/Resume/CoverLetterFrame.js'
 import C_extend from '../pages/Course/Teacher/extend/C_extend.js'
-import C_extend_detail from '../pages/Course/Teacher/extend/C_extend_detail.js'
+import C_extend_detail from '../pages/Course/Teacher/extend/C_extend_detail';
 import C_announcement from '../pages/Course/C_announcement.js'
 import C_announcement_detail from '../pages/Course/C_announcement_detail';
 import C_archive from '../pages/Course/C_archive'
+import C_archive_detail from '../pages/Course/C_archive_detail';
 
 const S_Routes = () => {
    return (
@@ -32,6 +33,7 @@ const S_Routes = () => {
          <Route path='/announcement' element={<C_announcement />}></Route>
          <Route path='/announcement/detail' element={<C_announcement_detail />}/>
          <Route path='/archive' element={<C_archive />}></Route>
+         <Route path='/archive/detail' element={<C_archive_detail/>}/>
       </Routes>
    )
 }
