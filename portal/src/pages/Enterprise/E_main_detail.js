@@ -1,12 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { RiStarLine } from "react-icons/ri";
+import { RiStarFill } from "react-icons/ri";
 import "../../css/E_main_detail.css";
 
 const E_main_detail = () => {
   const { state } = useLocation();
-
   const [resume, setResume] = useState({
+    mb_id: "",
     name: "",
     gender: "",
     birthday: "",
@@ -36,6 +38,7 @@ const E_main_detail = () => {
       grad_score: "",
     },
   ]);
+
   //추가버튼있음
   const [career, setCareer] = useState([
     {
@@ -77,6 +80,9 @@ const E_main_detail = () => {
     },
   ]);
 
+  const [bookmark_info, setBookmark_info] = useState([]);
+
+  // 인적사항, 학력, 경력/교육, 자격증, 수상내역, 병역, 기술스택 정보 백에서 가져옴
   useEffect(() => {
     axios
       .get("/student/resume/one", {
@@ -99,23 +105,84 @@ const E_main_detail = () => {
       .catch((e) => console.error(e));
   }, []);
 
-  console.log("들어", certification);
+  useEffect(() => {
+    axios
+      .get("/bookmark/select_bookmark", {
+        params: { enter_id: window.sessionStorage.getItem("loginId") },
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log(res.data.resume);
+
+        setBookmark_info(res.data.bookmark);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  console.log("안녕하세요", bookmark_info);
+
+  const onHandleBookmark = (e) => {
+    //북마크 여부 확인용
+    console.log("a아이디", state.mb_id);
+    if (bookmark_info.includes(e.currentTarget.getAttribute("mb_id"))) {
+      // bookmark가 체크 되어있을때 => bookmark 삭제
+      var mb_id = state.mb_id;
+      setBookmark_info(bookmark_info.filter((e) => e !== mb_id));
+      axios
+        .post("/bookmark/delete_bookmark", {
+          enter_id: window.sessionStorage.getItem("loginId"),
+          mb_id: e.currentTarget.getAttribute("mb_id"),
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
+      // bookmark가 체크 안되어있을때 => bookmark 추가
+      setBookmark_info([
+        ...bookmark_info,
+        e.currentTarget.getAttribute("mb_id"),
+      ]);
+      axios
+        .post("/bookmark/add_bookmark", {
+          enter_id: window.sessionStorage.getItem("loginId"),
+          mb_id: e.currentTarget.getAttribute("mb_id"),
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  };
+
   return (
     <div className="topDiv_resume">
       <div className="r_basic">
         <div>
-          {/* <img
-            // style={{ width: "6rem", height: "8rem", backgroundColor: "black" }}
-          
-          /> */}
-          <img className="id_photo" src={resume.photo}></img>
+          <img
+            className="id_photo"
+            src={`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/photo/${state.mb_id}/${resume.photo}`}
+          ></img>
         </div>
         <div>
-          <div className="test12">
+          <div className="e_detail_name">
             <p>{resume.name}</p>
             <p>
               {resume.gender} / {resume.birthday}
             </p>
+            <div className="" onClick={onHandleBookmark}>
+              {bookmark_info.includes(state.mb_id) ? (
+                <RiStarFill />
+              ) : (
+                <RiStarLine />
+              )}
+            </div>
           </div>
           <div>
             <div>
@@ -186,12 +253,24 @@ const E_main_detail = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td>훈련생</td>
-              <td>2022-02-02 ~ 2026-02-02</td>
-              <td>Full Stack SW융합 실무 부트캠프</td>
-            </tr>
+            {career.map((career, idx) => (
+              <tr key={idx}>
+                <td>
+                  <p>{career.cr_organization}</p>
+                </td>
+                <td>
+                  <p>{career.cr_position}</p>
+                </td>
+                <td>
+                  <p>
+                    {career.cr_s_dt}~{career.cr_e_dt}
+                  </p>
+                </td>
+                <td>
+                  <p>{career.activity}</p>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -206,11 +285,19 @@ const E_main_detail = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>{certification.cert_name}</td>
-              <td>{certification.cert_name}</td>
-              <td>{certification.cert_dt}</td>
-            </tr>
+            {certification.map((certification, idx) => (
+              <tr key={idx}>
+                <td>
+                  <p>{certification.cert_name}</p>
+                </td>
+                <td>
+                  <p>{certification.cert_org}</p>
+                </td>
+                <td>
+                  <p>{certification.cert_dt} </p>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -226,12 +313,19 @@ const E_main_detail = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>최우수상</td>
-              <td>캡스톤대회</td>
-              <td>2022-02-02</td>
-              <td>스마트인재개발원</td>
-            </tr>
+            {prize.map((prize, idx) => (
+              <tr key={idx}>
+                <td>
+                  <p>{prize.prize_name}</p>
+                </td>
+                <td>
+                  <p>{prize.prize_dt} </p>
+                </td>
+                <td>
+                  <p>{prize.prize_org}</p>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -247,21 +341,32 @@ const E_main_detail = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>필</td>
-              <td>육군</td>
-              <td>2015-07-25 ~ 2017-10-26</td>
-              <td>없음</td>
-            </tr>
+            {military.map((military, idx) => (
+              <tr key={idx}>
+                <td>
+                  <p>{military.mili_title}</p>
+                </td>
+                <td>
+                  <p>{military.mili_army}</p>
+                </td>
+                <td>
+                  <p>
+                    {military.mili_s_dt}~{military.mili_e_dt}
+                  </p>
+                </td>
+                <td>
+                  <p>{military.veteran_yn}</p>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
       <div>
         <p>기술스택</p>
-        <div>블라블라~</div>
+        <div>{resume.skills}</div>
       </div>
     </div>
   );
 };
-
 export default E_main_detail;

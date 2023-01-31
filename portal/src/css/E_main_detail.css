@@ -53,5 +53,10 @@
 .test12 {
   margin: 0.7rem;
 }
-.r_basic {
+.detail_name {
+  font-weight: 400;
+}
+.aaa {
+  margin-left: 50px;
+  background-color: aqua;
 }

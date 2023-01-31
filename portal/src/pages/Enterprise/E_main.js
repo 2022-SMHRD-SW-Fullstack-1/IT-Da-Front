@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Accordion from "react-bootstrap/Accordion";
 import dateCompare from "../../utils/filter";
-
 import "bootstrap/dist/css/bootstrap.css";
 import "../../css/E_main.css";
 import axios from "axios";
@@ -10,7 +9,6 @@ import uuid from "react-uuid";
 import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import E_main_detail from "./E_main_detail";
-
 const E_main = () => {
   //맵으로 뿌려줄 임의 데이터
   const tempList = [
@@ -45,7 +43,6 @@ const E_main = () => {
       age: "25세",
     },
   ];
-
   //필터 데이터
   const month = ["전체", , "1주일전", "1개월전", "3개월전", "6개월전"];
   const location = [
@@ -71,20 +68,14 @@ const E_main = () => {
     "android",
     "IOS",
   ];
-
   const navigate = useNavigate();
-
   const [update_month, setUpdate_month] = useState("전체");
   const [hope_location, setHope_location] = useState("전체");
   const [skill, setSkill] = useState("전체");
-  const [info, setInfo] = useState();
-
-  // 멤버 아이디 저장-> 북마크할 예정인 아이디
-  const [id, setId] = useState("");
+  const [info, setInfo] = useState([]);
 
   //필터링 한 후 데이터 list
   const [filterDate, setFilterData] = useState([]);
-
   //수강생 데이터(MAP으로 뿌릴) 초기화용
   const [simple_info, setSimple_info] = useState([
     {
@@ -106,40 +97,30 @@ const E_main = () => {
       photo: "",
       project: "",
       project2: "",
-      bookmarkTF: "",
+      update_dt: "",
     },
   ]);
-
+  const [member_info, setMember_info] = useState([{}]);
   //기업이 누구를 북마크했는지 정보
   const [bookmark_info, setBookmark_info] = useState([]);
-
   //수강생 디테일 페이지로 이동
   const go_to_userdetail = (e) => {
     navigate("/detail_user", {
       //버튼 클릭시 정보를 수강생 정보를 넘겨준다
       state: {
         mb_id: e.currentTarget.getAttribute("mb_id"),
-        photo: e.currentTarget.getAttribute("photo"),
-        name: e.currentTarget.getAttribute("name"),
-        phone: e.currentTarget.getAttribute("phone"),
-        gender: e.currentTarget.getAttribute("gender"),
-        birthday: e.currentTarget.getAttribute("birthday"),
-        email: e.currentTarget.getAttribute("email"),
-        addr: e.currentTarget.getAttribute("addr"),
-        wish_area1: e.currentTarget.getAttribute("wish_area1"),
-        wish_area2: e.currentTarget.getAttribute("wish_area2"),
-        wish_area3: e.currentTarget.getAttribute("wish_area3"),
+
+        onHandleBookmark: e.currentTarget.getAttribute(onHandleBookmark),
       },
     });
     console.log();
   };
-
   const [mark, setMark] = useState("");
+
   //찜하기 버튼
   const onHandleBookmark = (e) => {
     //북마크 여부 확인용
     console.log(e.currentTarget.getAttribute("mb_id"));
-
     if (bookmark_info.includes(e.currentTarget.getAttribute("mb_id"))) {
       // bookmark가 체크 되어있을때 => bookmark 삭제
       var mb_id = e.currentTarget.getAttribute("mb_id");
@@ -173,30 +154,7 @@ const E_main = () => {
           console.log(error);
         });
     }
-
-    //리스트에 포함되면 오케이 리스트.mb_id.includes(bookmark_mb_id)
-    // if (bookmark_info.includes(bookmark_mb_id)) {
-    //   if (
-    //     mark
-    //     // 리스트.mb_id.includes(bookmark_mb_id)
-    //   ) {
-    //     setMark(true);
-
-    // } else {
-    //   setMark(false);
-    //   // setMark(true);
-    //   console.log("클릭시", bookmark_mb_id);
-    //   setId(bookmark_mb_id);
-    //   // console.log("찍히나", id);
-    //   return "추가";
-    // }
-    if (mark) {
-      setMark(true);
-    } else {
-      setMark(false);
-    }
   };
-
   // 찜하기
   // useEffect(() => {
   //   axios
@@ -212,25 +170,21 @@ const E_main = () => {
   //       console.log(error);
   //     });
   // }, []);
-
   //업데이트 날짜 필터
   const month_change = (e) => {
     const { value } = e.target;
     setUpdate_month(value);
   };
-
   //희망 지역 날짜 필터
   const hope_change = (e) => {
     const { value } = e.target;
     setHope_location(value);
   };
-
   //기술 스택 필터
   const skill_filter = (e) => {
     const { value } = e.target;
     setSkill(value);
   };
-
   //상세보기 필터 적용 버튼
   const button_filterclick = () => {
     setFilterData(
@@ -240,16 +194,14 @@ const E_main = () => {
             item.wish_area1 == hope_location ||
             item.wish_area2 == hope_location ||
             item.wish_area3 == hope_location) &&
-          (skill == "전체" || item.skills.includes(skill))
-        // dateCompare(update_month, item.updateDT)
+          (skill == "전체" || item.skills.includes(skill)) &&
+          dateCompare(update_month, item.update_dt)
       )
     );
     console.log(skill);
-
     console.log(typeof (new Date() - new Date("2022-01-20")));
   };
-
-  // 기업이 저장한 인재 북마크 데이터
+  // 이력서 입력한 정보 /기업이 저장한 인재 북마크 데이터
   useEffect(() => {
     axios
       .get("/bookmark/select_bookmark", {
@@ -260,23 +212,22 @@ const E_main = () => {
         console.log(res.data.resume);
         setSimple_info(res.data.resume);
         setFilterData(res.data.resume);
-        setBookmark_info(res.data.bookmark);
-      })
 
+        setBookmark_info(res.data.bookmark);
+        setMember_info(res.data.member);
+      })
       .catch(function (error) {
         console.log(error);
       });
   }, []);
-
+  console.log("뭐가", simple_info);
   //1. 처음에 리스트를 보여줄때, 특정인재(북마크 된)에게 별 표시 해주기
   // 문제: 기업이 북마크를 했는데, 띄워주는 자료는 학생자료임(북마크 관련 변수 없음)
   //       학생리스트.map에 북마크 표시해주는 변수를 추가하기 어려움
   //
-
   useEffect(() => {
     console.log(simple_info);
   }, [simple_info]);
-
   /**MAP으로 보여줄 필터 데이터 */
   let listMap = filterDate.map((item) => (
     <tr key={uuid()} className="E_main_info">
@@ -304,9 +255,9 @@ const E_main = () => {
       <td mb_id={item.mb_id} onClick={go_to_userdetail}>
         {item.wish_area1},{item.wish_area2},{item.wish_area3}
       </td>
+      <td>{item.update_dt}</td>
     </tr>
   ));
-
   return (
     <div className="E_main_page">
       <div className="big_div">
@@ -363,7 +314,6 @@ const E_main = () => {
             </Accordion.Item>
           </Accordion>
         </div>
-
         <table className="t">
           <thead>
             <tr className="E_main_title">
@@ -375,6 +325,7 @@ const E_main = () => {
               <th>나이</th>
               <th>기술스택</th>
               <th>희망지역</th>
+              <th>업데이트 날짜</th>
             </tr>
           </thead>
           <tbody>{listMap}</tbody>
