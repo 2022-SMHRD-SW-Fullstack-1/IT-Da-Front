@@ -17,7 +17,7 @@ const C_archive_write = () => {
    const onTitleChange = e => {
       setTitle(e.target.value)
    };
-   const [content, setContet] = useState('');
+   const [content, setContent] = useState('');
    const [files, setFiles] = useState('');
    const onLoadFile = (e) => {
       const file = e.target.files;
@@ -31,13 +31,13 @@ const C_archive_write = () => {
    useEffect(()=>{
       if (state.title == '글 수정') {
          setTitle(state.b_title)
-         setContet(state.b_content)
+         setContent(state.b_content)
       }
    },[])
 
 
    // 글 작성 버튼 누르면 작성된 내용 가져오기
-   const clickWirteBtn = () => {
+   const clickWriteBtn = () => {
       console.log(title)
       console.log(content)
 
@@ -104,11 +104,11 @@ const C_archive_write = () => {
             <input onChange={onTitleChange} value={title} type='text'></input>
 
             <p>내용</p>
-            <ReactQuill theme="snow" value={content} onChange={setContet} />
+            <ReactQuill theme="snow" value={content} onChange={setContent} />
             <input type='file' accept='img/*' onChange={onLoadFile} />
             <img src={files && files}/>
             <div className='annWriteButton'>
-               <button onClick={clickWirteBtn}>저장하기</button>
+               <button onClick={clickWriteBtn}>저장하기</button>
             </div>
          </div>
       </div>
