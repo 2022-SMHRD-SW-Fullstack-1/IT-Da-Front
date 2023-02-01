@@ -29,14 +29,18 @@ const C_schedule = () => {
 
    const [mark, setMark] = useState([]);
 
+   const getData = () => {
+      axios
+      .post('/announcement/getSchedule', {
+         course_key: window.sessionStorage.getItem('course_key')
+      })
+      .then((res) => setData(res.data))
+      .catch((e) => console.log(e));
+   }
+
    useEffect(() => {
       //setMark(["2023-02-15", "2023-02-16", "2023-02-17"])
-      axios
-         .post('/announcement/getSchedule', {
-            course_key: window.sessionStorage.getItem('course_key')
-         })
-         .then((res) => setData(res.data))
-         .catch((e) => console.log(e));
+      getData()
    }, [])
 
    useEffect(() => {
@@ -65,10 +69,12 @@ const C_schedule = () => {
             sche_content: content,
          })
          .then((res) => {
+            getData()
             console.log(res)
          })
          .catch((e) => console.log(e));
    }
+   console.log(data)
 
    const onDelete = (e) => {
       let sche_num = e.currentTarget.getAttribute('sche_num')
