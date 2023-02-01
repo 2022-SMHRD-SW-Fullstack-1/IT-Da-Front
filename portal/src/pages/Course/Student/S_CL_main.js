@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useRef } from "react";
 import "../../../css/Resume.css";
 
 import { useState, useEffect } from "react";
@@ -57,6 +57,16 @@ const S_CL_main = () => {
     navigate('/cover_letter/frame', 
     {state:{ coverLetter: coverLetter}})
   }
+
+  const goToFrame = useRef()
+  const moveConfirm = () => {
+    if (window.confirm("페이지를 이동하시겠습니까? 변경사항이 저장되지 않을 수 있습니다")) {
+      goToFrame.current.click()
+    } else {
+    }
+
+  }
+
   return (
     <div className="topDiv_resume">
       <div>
@@ -121,7 +131,8 @@ const S_CL_main = () => {
             저장하기
           </button>
         </span>
-        <span><button className="blueBtn" onClick={goToCoverLetterFrame}>출력페이지</button></span>
+        <span><button className="blueBtn" onClick={moveConfirm}>출력페이지</button></span>
+        <span><button style={{display:"none"}} onClick={goToCoverLetterFrame} ref={goToFrame}></button></span>
       </div>
     </div>
   );
