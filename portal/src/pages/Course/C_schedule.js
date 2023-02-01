@@ -23,7 +23,7 @@ const C_schedule = () => {
    // 일정 추가 입력 보여줄지 말지 저장할 변수
    const [add, setAdd] = useState(false)
    // 오늘 날짜
-   const today = new Date().toString().substring(0, 9)
+   const today = new Date().toString().substring(0, 10)
    // 클릭한 날짜를 저장할 변수
    const [value, setValue] = useState(new Date());
 
@@ -110,7 +110,7 @@ const C_schedule = () => {
                );
             }} />
          <div>
-            <span value={value}>{value.toString().substring(0, 9) == today ? '오늘의' : intoKorean(value.toString().substring(4, 10))} 일정</span>
+            <span value={value}>{value.toString().substring(0, 10) == today ? '오늘의' : intoKorean(value.toString().substring(4, 10))} 일정</span>
             <span className={window.sessionStorage.getItem('role') === 't' ? 'hoverHand' : 'invisible'} onClick={() => { setAdd(!add) }}>일정 추가</span>
          </div>
          <div>

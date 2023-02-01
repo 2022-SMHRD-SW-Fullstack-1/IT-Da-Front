@@ -17,7 +17,7 @@ const Schedule = () => {
   }
 
   // 오늘 날짜
-  const today = new Date().toString().substring(0, 9)
+  const today = new Date().toString().substring(0, 10)
   // 클릭한 날짜를 저장할 변수
   const [value, setValue] = useState(new Date());
 
@@ -54,7 +54,7 @@ const Schedule = () => {
     <div className='topDiv'>
       <Calendar onChange={setValue} value={value} calendarType="US" formatDay={(locale, date) => moment(date).format("DD")} showNeighboringMonth={false} />
       <div className='annHead' style={{ marginTop: '1rem' }}>
-        <p value={value}>{value.toString().substring(0, 9) == today ? '오늘의' : intoKorean(value.toString().substring(4, 10))} 일정</p>
+        <p value={value}>{value.toString().substring(0, 10) == today ? '오늘의' : intoKorean(value.toString().substring(4, 10))} 일정</p>
         <div>
           <p className='hoverHand' onClick={goToSchedule}>더보기</p>
         </div>
