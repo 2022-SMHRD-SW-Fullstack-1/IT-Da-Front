@@ -8,7 +8,7 @@
          },
          {
             "title": "강의 일정",
-            "url": "/"
+            "url": "/schedule"
          },
          {
             "title": "공유 자료실",
@@ -23,10 +23,6 @@
    {
       "title": "학생관리",
       "subtitle": [
-         {
-            "title": "출결 관리",
-            "url": "/resume"
-         },
          {
             "title": "학생 정보",
             "url": "/std_info"

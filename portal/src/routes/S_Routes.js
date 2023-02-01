@@ -15,6 +15,7 @@ import C_announcement from '../pages/Course/C_announcement.js'
 import C_announcement_detail from '../pages/Course/C_announcement_detail';
 import C_archive from '../pages/Course/C_archive'
 import C_archive_detail from '../pages/Course/C_archive_detail';
+import C_schedule from '../pages/Course/C_schedule.js'
 
 const S_Routes = () => {
    return (
@@ -34,6 +35,7 @@ const S_Routes = () => {
          <Route path='/announcement/detail' element={<C_announcement_detail />}/>
          <Route path='/archive' element={<C_archive />}></Route>
          <Route path='/archive/detail' element={<C_archive_detail/>}/>
+         <Route path='/schedule' element={<C_schedule/>}/>
       </Routes>
    )
 }

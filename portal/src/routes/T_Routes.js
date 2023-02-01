@@ -13,6 +13,7 @@ import StdInfoList from '../components/StdInfoList';
 import C_extend from '../pages/Course/Teacher/extend/C_extend';
 import C_extend_write from '../pages/Course/Teacher/extend/C_extend_write';
 import C_extend_detail from '../pages/Course/Teacher/extend/C_extend_detail';
+import C_schedule from '../pages/Course/C_schedule';
 
 const T_Routes = () => {
    return (
@@ -29,7 +30,7 @@ const T_Routes = () => {
          <Route path='/extend' element={<C_extend/>}/>
          <Route path='/extend/write' element={<C_extend_write/>}/>
          <Route path='/extend/detail' element={<C_extend_detail/>}/>
-         
+         <Route path='/schedule' element={<C_schedule/>}/>
       </Routes>
    )
 }
