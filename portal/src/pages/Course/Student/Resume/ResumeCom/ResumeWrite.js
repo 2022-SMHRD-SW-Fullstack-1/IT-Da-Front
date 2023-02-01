@@ -85,7 +85,6 @@ const ResumeWrite = ({ resume, setResume }) => {
                         <p><input style={edit_style_op} type='text' name='phone' onChange={(e) => { setResume({ ...resume, phone: e.target.value.replace(/[^0-9]/g, "") }); }}
                             value={resume.phone} />
                             <span style={edit_style_po}>{resume.phone}</span>
-                            <span style={edit_style_po}>{resume.phone}</span>
                             </p>
                     </div>
                     <div>
