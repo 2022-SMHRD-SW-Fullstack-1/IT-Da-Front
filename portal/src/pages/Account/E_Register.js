@@ -139,8 +139,14 @@ const E_Register = () => {
             enter_address: add,
             enter_num: bNum
          })
-         .then((res) => console.log(res))
-         .catch((e) => console.log(e));
+         .then((res) => {
+            console.log(res)
+            alert('회원가입에 성공했습니다.')
+         })
+         .catch((e) => {
+            console.log(e)
+            alert('회원가입에 실패했습니다.')
+         });
       navigate('/');
    };
 

@@ -132,14 +132,14 @@ const Register = () => {
 
   const [course_key, setCourse_key] = useState('');
   const onCourse_keyChange = (e) => {
-      setCourse_key(e.target.value)
-      if (e.target.value.length != 8) {
-         setKeyMessage('올바른 키를 입력해주세요.')
-         setIsKey(false)
-      } else {
-         setKeyMessage('')
-         setIsKey(true)
-      }
+    setCourse_key(e.target.value)
+    if (e.target.value.length != 8) {
+      setKeyMessage('올바른 키를 입력해주세요.')
+      setIsKey(false)
+    } else {
+      setKeyMessage('')
+      setIsKey(true)
+    }
   }
 
   const [expire, setExpire] = useState('leave');
@@ -182,14 +182,20 @@ const Register = () => {
         expire: expire,
         key: course_key
       })
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+      .then((res) => {
+        console.log(res)
+        alert('회원가입에 성공했습니다.')
+      })
+      .catch((e) => {
+        console.log(e)
+        alert('회원가입에 실패했습니다.')
+      });
     navigate('/');
   };
 
   return (
     <div className="registerContainer">
-      <div> 
+      <div>
         <p>개인회원가입</p>
         <Agreement />
 
