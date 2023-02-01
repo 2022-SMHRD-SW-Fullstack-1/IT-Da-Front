@@ -18,7 +18,7 @@ const SelectFileBtn = ({ btnText, setSelectedFile, fileTypes, fileExts }) => {
     //확장자 확인을 위한 변수
     const fileExt = file.name.split('.').pop();
     //jpg만 받겠다
-    if (fileTypes.includes(file.type) || fileExts.includes(fileExt)) {
+    if ((fileTypes.includes(file.type) || fileExts.includes(fileExt)) &&file.size<=5000000) {
       setSelectedFile(e.target.files[0]);
     }
     else {

@@ -16,6 +16,8 @@ import C_announcement_detail from '../pages/Course/C_announcement_detail';
 import C_archive from '../pages/Course/C_archive'
 import C_archive_detail from '../pages/Course/C_archive_detail';
 import C_schedule from '../pages/Course/C_schedule.js'
+import S_portfolio_detail from '../pages/Course/Student/S_portfolio_detail.js'
+import S_portfolio_write from '../pages/Course/Student/Portfolio/S_portfolio_write.js'
 
 const S_Routes = () => {
    return (
@@ -29,6 +31,8 @@ const S_Routes = () => {
          <Route path='/resume' element={<S_R_write />}></Route>
          <Route path='/cover_letter' element={<S_CL_main />}></Route>
          <Route path='/portfolio' element={<S_P_main />}></Route>
+         <Route path='/portfolio/detail' element={<S_portfolio_detail/>}></Route>
+         <Route path='/portfolio/write' element={<S_portfolio_write/>}></Route>
          <Route path='/extend' element={<C_extend />}></Route>
          <Route path='/extend/detail' element={<C_extend_detail />}></Route>
          <Route path='/announcement' element={<C_announcement />}></Route>
