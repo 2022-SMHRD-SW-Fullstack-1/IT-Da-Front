@@ -37,7 +37,7 @@ const M_approve = (props) => {
       </tr>))
 
    return (
-      <div className='topDiv'>
+      <div className='topDiv' style={{minHeight: '12rem'}}>
          <div className='annHead'>
             <p>기업 승인</p>
          </div>

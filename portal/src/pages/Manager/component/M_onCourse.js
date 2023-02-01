@@ -30,7 +30,7 @@ const M_onCourse = () => {
 
 
   return (
-    <div className='topDiv'>
+    <div className='topDiv' style={{width: '40rem', maxWidth: 'none', minHeight: '26rem'}}>
       <div className='annHead'>
         <p>진행중인 과정</p>
         <div>
@@ -49,14 +49,14 @@ const M_onCourse = () => {
           </thead>
           <tbody className=''>
             <tr>
-              <td>
-              {course.map((item) => (<p className='annItem_manager' course_name={item.course_name} key={item.course_key}>{item.course_name}</p>))}
+              <td className='annItem_manager'>
+              {course.map((item) => (<p course_name={item.course_name} key={item.course_key}>{item.course_name}</p>))}
               </td>
-              <td>
-              {course.map((item) => (<p className='annItem_manager' course_teacher={item.course_teacher} key={item.course_key}>{item.course_teacher}</p>))}
+              <td className='annItem_manager'>
+              {course.map((item) => (<p course_teacher={item.course_teacher} key={item.course_key}>{item.course_teacher}</p>))}
               </td>
-              <td>
-              {course.map((item) => (<p className='annItem_manager'course_key={item.course_key} key={item.course_key}>{item.course_key}</p>))}
+              <td className='annItem_manager'>
+              {course.map((item) => (<p course_key={item.course_key} key={item.course_key}>{item.course_key}</p>))}
               </td>
             </tr>
           </tbody>

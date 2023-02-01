@@ -85,3 +85,7 @@
    background-color: rgb(230, 230, 230);
 }
 
+/*연장사용신청*/
+.extendTable table{
+   width: 15rem !important;
+}

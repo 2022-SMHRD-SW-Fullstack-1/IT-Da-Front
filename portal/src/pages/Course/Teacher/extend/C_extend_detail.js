@@ -106,7 +106,7 @@ const C_extend_detail = () => {
                <button onClick={goToWrite}>글수정</button>
                <button onClick={deletePost}>글삭제</button>
             </div>}
-         <div>
+         <div className='content extendTable'>
             <table>
                <thead>
                   <tr>

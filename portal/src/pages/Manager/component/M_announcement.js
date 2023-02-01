@@ -29,7 +29,7 @@ const M_announcement = () => {
    }, [])
 
    return (
-      <div className='topDiv'>
+      <div className='topDiv' style={{minHeight: '12rem'}}>
          <div className='annHead'>
             <p>전체 공지사항</p>
             <div>

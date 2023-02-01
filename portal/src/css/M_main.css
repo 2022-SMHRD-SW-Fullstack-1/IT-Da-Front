@@ -242,6 +242,9 @@
     padding: 0.2rem;
     text-align: center;
 }
+.company_outer>div>div:nth-child(2) {
+    padding: 0.2rem;
+}
 
 .company_outer>div>div>input {
     width: 27.5rem;
@@ -262,14 +265,13 @@
 }
 
 .attTable_manager td {
-    font-size: 0.8rem;
     text-align: center;
  }
 
  .annItem_manager {
     border-top: 1px solid rgb(231, 231, 231);
     margin: 0.5rem 0.6rem;
-    padding-top: 0.6rem;
+    padding: 0.4rem 0;
     /*텍스트 줄바꿈 없애고 overflow되면 ...표시로 바꿔줌*/
     text-overflow: ellipsis;
     overflow: hidden;

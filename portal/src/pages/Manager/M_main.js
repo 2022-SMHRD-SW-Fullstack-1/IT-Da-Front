@@ -12,12 +12,12 @@ const M_main = () => {
     return (
         <Container>
             <Row>
-                <Col lg={12} xl={5}>
+                <Col xl={12} xxl={7}>
+                    <M_onCourse />
+                </Col>
+                <Col xl={12} xxl={5}>
                     <M_approve />
                     <M_announcement />
-                </Col>
-                <Col lg={12} xl={7}>
-                    <M_onCourse />
                 </Col>
             </Row>
         </Container>
