@@ -11,11 +11,10 @@ const MilitaryWrite = ({ military, setMilitary }) => {
         mili_title: '',
         mili_army: '',
         mili_s_dt: '',
-        mili_e_dt: '',
         veteran_yn: '',
     })
     //newCareer에 담을 수 있게 input값을 선언
-    const { mili_num, mili_title, mili_army, mili_s_dt, mili_e_dt, veteran_yn } = inputs
+    const { mili_num, mili_title, mili_army, mili_s_dt, veteran_yn } = inputs
 
     const onChange = e => {
         const { name, value } = e.target;
@@ -30,14 +29,12 @@ const MilitaryWrite = ({ military, setMilitary }) => {
             mili_title,
             mili_army,
             mili_s_dt,
-            mili_e_dt,
             veteran_yn,
         }
         if ((mili_title == '') ||
             (mili_title == '선택') ||
             (mili_army == '') ||
             (mili_s_dt == '') ||
-            (mili_e_dt == '') ||
             (veteran_yn == '')) {
             alert('입력란을 채워 주세요')
         }
@@ -47,7 +44,6 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                     mili_title: inputs.mili_title,
                     mili_army: inputs.mili_army,
                     mili_s_dt: inputs.mili_s_dt,
-                    mili_e_dt: inputs.mili_e_dt,
                     veteran_yn: inputs.veteran_yn,
                     id: sessionStorage.getItem("loginId")
                 })
@@ -61,7 +57,6 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                 mili_title: '',
                 mili_army: '',
                 mili_s_dt: '',
-                mili_e_dt: '',
                 veteran_yn: '',
             })
         }
@@ -91,7 +86,7 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                         <th></th>
                         <th>구분</th>
                         <th>군별</th>
-                        <th>복무기간</th>
+                        <th>복무기간(면제사유)</th>
                         <th>보훈대상</th>
                     </tr>
                 </thead>
@@ -104,7 +99,7 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                     </div></td>
                             <td><p>{military.mili_title}</p></td>
                             <td><p>{military.mili_army}</p></td>
-                            <td><p>{military.mili_s_dt.replace(/-/g,'.')} ~ {military.mili_e_dt.replace(/-/g,'.')}</p></td>
+                            <td><p>{military.mili_s_dt}</p></td>
                             <td><p>{military.veteran_yn}</p></td>
                         </tr>
                         ))}
@@ -121,9 +116,7 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                 ))}
                                 </select></td>
                             <td><input type='text' name='mili_army' className='miliArmy' onChange={onChange} value={inputs.mili_army} /></td>
-                            <td><input type='date' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} />
-                            &nbsp;~&nbsp;
-                            <input type='date' className='dateInput' name='mili_e_dt' onChange={onChange} value={inputs.mili_e_dt} /></td>
+                            <td><input type='text' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} /></td>
                             <td><input type='text' name='veteran_yn' onChange={onChange} value={inputs.veteran_yn} /></td>
                         </tr>
                 </tbody>
