@@ -95,7 +95,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                     <tr>
                         <th></th>
                         <th>학교명</th>
-                        <th>전공</th>
+                        <th>전공(계열)</th>
                         <th>기간</th>
                         <th>구분</th>
                         <th>학점</th>

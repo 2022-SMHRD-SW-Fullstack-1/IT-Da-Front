@@ -33,9 +33,7 @@ const MilitaryWrite = ({ military, setMilitary }) => {
         }
         if ((mili_title == '') ||
             (mili_title == '선택') ||
-            (mili_army == '') ||
-            (mili_s_dt == '') ||
-            (veteran_yn == '')) {
+            (mili_s_dt == '')) {
             alert('입력란을 채워 주세요')
         }
         else {
