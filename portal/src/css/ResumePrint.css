@@ -71,7 +71,7 @@
   }
 
   /*이력서 세부 항목 제목 칸(학력~전산관련)*/
-  .resumePrintDiv>table>tbody>tr>th:first-child{
+  .resumePrintDiv>table>tbody>tr:first-child>th:first-child{
     width: 8mm;
   }
   /*이력서 세부 항목 내용 칸 전체*/
@@ -109,7 +109,7 @@
 
   /*일자, 기관명 너비*/
   .resumePrintDt, .resumePrintName{
-    width: 47mm;
+    width: 180px;
   }
 
   .printCareer{
@@ -143,4 +143,12 @@
   padding: 1mm;
   text-align: left;
   vertical-align: baseline;
+}
+
+#skill{
+  width: 30px;
+}
+
+.resumeSkill{
+  width: 47.777%;
 }
