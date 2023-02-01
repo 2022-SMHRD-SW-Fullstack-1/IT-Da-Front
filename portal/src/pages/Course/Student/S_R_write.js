@@ -70,7 +70,6 @@ function S_R_write() {
     mili_title: '',
     mili_army: '',
     mili_s_dt: '',
-    mili_e_dt: '',
     veteran_yn: '',
   }])
 

@@ -5,7 +5,7 @@ import btnAdd from '../../../../../asset/img/btn_add.png'
 import btnDelete from '../../../../../asset/img/btn_delete.png'
 
 const GraduationWrite = ({ graduation, setGraduation }) => {
-    const gradTypeList = ['재학', '휴학', '졸업예정', '졸업']
+    const gradTypeList = ['선택','재학', '휴학', '졸업예정', '졸업']
     const [inputs, setInputs] = useState({
         grad_num: uuid(),
         grad_school: '',
@@ -38,7 +38,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
             (school_type == '') ||
             (grad_dt == '') ||
             (grad_type == '') ||
-            (grad_score == '')) {
+            (grad_type == '선택')) {
             alert('입력란을 채워 주세요')
         }
         else {

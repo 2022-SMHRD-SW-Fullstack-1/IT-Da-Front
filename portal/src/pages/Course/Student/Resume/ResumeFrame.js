@@ -80,7 +80,7 @@ const ResumeFrame = () => {
             <tr key={military.mili_num}>
                 <td>{military.mili_title}</td>
                 <td>{military.mili_army}</td>
-                <td>{military.mili_s_dt.replace(/-/g, '.')} ~ {military.mili_e_dt.replace(/-/g,'.')}</td>
+                <td>{military.mili_s_dt}</td>
                 <td>{military.veteran_yn}</td>
             </tr>
         ))
