@@ -35,8 +35,8 @@ const M_e_select = () => {
                                 <th>패스워드</th>
                                 <th>대표</th>
                                 <th>연락처</th>
-                                <th>전화번호</th>
                                 <th>주소</th>
+                                <th>전화번호</th>
                                 <th>사업자번호</th>
                                 <th></th>
                             </tr>

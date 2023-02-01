@@ -91,8 +91,8 @@ const M_e_list = (props) => {
 
       <td>{props.item.enter_num.substring(0, 2)}-{props.item.enter_num.substring(2, 5)}-{props.item.enter_num.substring(5, 10)}</td>
 
-      <td style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정하기</button><button onClick={delete_e_submit}>삭제하기</button></div></td>
-      <td style={edit_style_op}><div className='content annViewButton'><button onClick={edit_e_submit}>수정완료</button><button onClick={edit_e_button_quit}>취소하기</button></div></td>
+      <td style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정</button><button onClick={delete_e_submit}>삭제</button></div></td>
+      <td style={edit_style_op}><div className='content annViewButton'><button onClick={edit_e_submit}>완료</button><button onClick={edit_e_button_quit}>취소</button></div></td>
     </tr>
   )
 }

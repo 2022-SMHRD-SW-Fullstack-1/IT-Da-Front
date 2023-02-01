@@ -164,14 +164,14 @@ const M_company_list = (props) => {
             {window.sessionStorage.getItem('role')==='a'&&
             <td className='course_button' style={edit_style_po}>
                 <div className='content annViewButton'>
-                    <button onClick={edit_company_button}>수정하기</button>
-                    <button onClick={delete_company_submit}>삭제하기</button>
+                    <button onClick={edit_company_button}>수정</button>
+                    <button onClick={delete_company_submit}>삭제</button>
             </div></td>}
             {window.sessionStorage.getItem('role')==='a'&&
             <td className='course_button' style={edit_style_op}>
                 <div className='content annViewButton'>
-                    <button onClick={edit_company_submit}>수정완료</button>
-                    <button onClick={edit_e_company_quit}>수정취소</button>
+                    <button onClick={edit_company_submit}>완료</button>
+                    <button onClick={edit_e_company_quit}>취소</button>
             </div></td>}
 
         </tr>

@@ -76,7 +76,7 @@ const M_course_list = (props) => {
             <td style={edit_style_op} className='course_limit'><input type='text' value={course.course_limit} onChange={onChange} name="course_limit" ></input></td>
 
             <td className='course_key'>{props.item.course_key}</td>
-            <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정하기</button></div></td>
+            <td className='course_button' style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정</button></div></td>
             <td className='course_button' style={edit_style_op}><div className='content annViewButton'><button onClick={edit_course_submit}>완료</button><button onClick={edit_e_button_quit}>X</button></div></td>
 
         </tr>
