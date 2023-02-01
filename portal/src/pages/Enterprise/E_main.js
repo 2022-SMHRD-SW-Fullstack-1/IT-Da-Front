@@ -82,6 +82,7 @@ const E_main = () => {
   const [update_month, setUpdate_month] = useState("전체");
   const [hope_location, setHope_location] = useState("전체");
   const [skill, setSkill] = useState("전체");
+
   const [hope_job, setHope_job] = useState("전체");
   //필터링 한 후 데이터 list
   const [filterDate, setFilterData] = useState([]);

@@ -10,6 +10,7 @@ const E_main_detail = () => {
 
   const [isBookmark, setIsBookmark] = useState(state.isBookmark);
 
+  //이력서 정보
   const [resume, setResume] = useState({
     mb_id: "",
     name: "",
@@ -30,7 +31,7 @@ const E_main_detail = () => {
     project1: "1",
     project2: "2",
   });
-  //추가버튼있음
+  //학력
   const [graduation, setGraduation] = useState([
     {
       grad_num: "",
@@ -42,7 +43,7 @@ const E_main_detail = () => {
     },
   ]);
 
-  //추가버튼있음
+  //경력,교육
   const [career, setCareer] = useState([
     {
       cr_num: "",
@@ -53,7 +54,7 @@ const E_main_detail = () => {
       activity: "",
     },
   ]);
-  //추가버튼있음
+  //자격증
   const [certification, setCertification] = useState([
     {
       cert_num: "",
@@ -62,7 +63,7 @@ const E_main_detail = () => {
       cert_dt: "",
     },
   ]);
-  //추가버튼있음
+  //수상내역
   const [prize, setPrize] = useState([
     {
       prize_num: "",
@@ -71,7 +72,7 @@ const E_main_detail = () => {
       prize_dt: "",
     },
   ]);
-  //추가버튼있음
+  //병역
   const [military, setMilitary] = useState([
     {
       mili_num: "",
@@ -80,6 +81,14 @@ const E_main_detail = () => {
       mili_s_dt: "",
       mili_e_dt: "",
       veteran_yn: "",
+    },
+  ]);
+  const [cover_letter, setCover_letter] = useState([
+    {
+      goal_and_crisis: "",
+      growth: "",
+      motivation: "",
+      pros_cons: "",
     },
   ]);
 
@@ -91,6 +100,7 @@ const E_main_detail = () => {
       })
       .then((res) => {
         // console.log(res);
+
         setResume(res.data[0]);
         setGraduation(res.data[1]);
         // console.log("뭐에요".res.data[1]);
@@ -102,13 +112,15 @@ const E_main_detail = () => {
         // console.log(res.data[4]);
         setMilitary(res.data[5]);
         // console.log(res.data[5]);
+        setCover_letter(res.data[6]);
       })
       .catch((e) => console.error(e));
   }, []);
 
+  console.log("자기소개", cover_letter);
   const onHandleBookmark = (e) => {
     //북마크 여부 확인용
-    console.log("a아이디", state.mb_id);
+
     if (isBookmark) {
       // bookmark가 체크 되어있을때 => bookmark 삭제
       setIsBookmark(false);
@@ -352,6 +364,26 @@ const E_main_detail = () => {
       <div>
         <p>기술스택</p>
         <div>{resume.skills}</div>
+      </div>
+      <div>
+        <p>자기소개</p>
+        <br></br>
+        <div>
+          <p>성장배경</p>
+          <p className="cover_letter_info">{cover_letter.growth}</p>
+        </div>
+        <div>
+          <p>위기 극복</p>
+          <p className="cover_letter_info">{cover_letter.goal_and_crisis}</p>
+        </div>
+        <div>
+          <p>장단점</p>
+          <p className="cover_letter_info">{cover_letter.pros_cons}</p>
+        </div>
+        <div>
+          <p>지원동기</p>
+          <p className="cover_letter_info">{cover_letter.motivation}</p>
+        </div>
       </div>
     </div>
   );

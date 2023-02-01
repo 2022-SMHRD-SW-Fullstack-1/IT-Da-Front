@@ -59,7 +59,6 @@
 .detail_name {
   font-weight: 400;
 }
-.aaa {
-  margin-left: 50px;
-  background-color: aqua;
+.cover_letter_info {
+  border: 2px solid gray;
 }
