@@ -5,7 +5,6 @@ import M_company_list from "./M_company_list"
 const M_select_company = (props) => {
 
     const [company, setCompany] = useState([])
-
     useEffect(() => {
         axios
             .get("/enterprise/select_company")
@@ -20,7 +19,7 @@ const M_select_company = (props) => {
     //필터기능
     const onFilter = (f_company_name, f_company_area, f_company_position, f_company_salary) => {
         console.log("필터내용", filter)
-        //newCourse리스트를 course에서 필터링 내용이 포함된 리스트로 구성
+        //newCompany에서 필터링 내용이 포함된 리스트로 구성
         //지역, 직무, 급여, 이름
         setNewCompany(company.filter(company =>
             company.company_name.includes(f_company_name) &&

@@ -6,7 +6,6 @@ import M_company_list from "../../Manager/company/M_company_list";
 const S_C_main = () => {
   
   const [company, setCompany] = useState([])
-
   useEffect(() => {
       axios
           .get("/enterprise/select_company")
