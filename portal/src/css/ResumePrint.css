@@ -72,8 +72,19 @@
 
   /*이력서 세부 항목 제목 칸(학력~전산관련)*/
   .resumePrintDiv>table>tbody>tr:first-child>th:first-child{
-    width: 8mm;
+    width: 5%;
   }
+  .resumePrintDt1{
+    width: 25%;
+  }
+  .resumePrintDt2{
+    width:30%
+  }
+  .resumePrintName{
+    width: 25%;
+  }
+
+
   /*이력서 세부 항목 내용 칸 전체*/
   .resumePrintDiv>table>tbody>tr>th, .resumePrintDiv>table>tbody>tr>td {
     height: 7.5mm;
@@ -101,15 +112,6 @@
   .resumePrintTitle{
     background-color: rgb(223, 234, 245);
     font-weight: bolder;
-  }
-  /*자격 중간 부분 1미리 공백*/
-  .resumePrintTitle2{
-    width: 1mm;
-  }
-
-  /*일자, 기관명 너비*/
-  .resumePrintDt, .resumePrintName{
-    width: 180px;
   }
 
   .printCareer{
@@ -143,12 +145,4 @@
   padding: 1mm;
   text-align: left;
   vertical-align: baseline;
-}
-
-#skill{
-  width: 30px;
-}
-
-.resumeSkill{
-  width: 47.777%;
 }

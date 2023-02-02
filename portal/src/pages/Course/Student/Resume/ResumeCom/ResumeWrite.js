@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SelectFileBtn from '../../../../../components/file/SelectFileBtn'
 import UploadBtn from '../../../../../components/file/UploadBtn'
 
@@ -54,6 +54,7 @@ const ResumeWrite = ({ resume, setResume }) => {
     const [selectedFile, setSelectedFile] = useState(null)
     const fileTypes = ['image/jpeg', 'image/jpg']
     const fileExts = ['jpeg', 'jpg']
+
     return (
 
         <div className='r_basic'>
@@ -153,10 +154,12 @@ const ResumeWrite = ({ resume, setResume }) => {
                 </div>
                 <div>
                     <div>
-                        <p>기술스택</p>
+                        <p>기술스택<br/>,로 구분</p>
+                        <p>
+                        </p>
                         <p><input style={edit_style_op} type='text' name='skills' className='big_input_text' onChange={(e) => { setResume({ ...resume, skills: e.target.value }); }}
                             value={resume.skills}/>
-                                <span style={edit_style_po}>{resume.skills}</span>
+                            <span style={edit_style_po}>{resume.skills}</span>
                         </p>
                     </div>
                 </div>

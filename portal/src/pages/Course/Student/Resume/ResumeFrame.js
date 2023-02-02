@@ -42,26 +42,13 @@ const ResumeFrame = () => {
         ))
 
     /**자격map */
-    const certificationList1 =
+    const certificationList =
         state.certification.map((certification, idx) => (
-            (idx % 2 == 0)
-            && <>
+            <tr>
                 <td key={idx+certification.cert_name}>{certification.cert_name}</td>
                 <td key={idx+certification.cert_org}>{certification.cert_org}</td>
-            </>
-        ))
-    /**자격map */
-    const certificationList2 =
-        state.certification.map((certification, idx) => (
-            ((idx % 2 == 1) && (certification.cert_name != ''))
-                ? <>
-                    <td key={idx+certification.cert_name}>{certification.cert_name}</td>
-                    <td key={idx+certification.cert_org}>{certification.cert_org}</td>
-                </>
-                : <>
-                    <td key={idx+uuid()} />
-                    <td key={idx+uuid()} />
-                </>
+                <td key={idx+certification.cert_dt}>{certification.cert_dt.replace(/-/g, '.')}</td>
+            </tr>
         ))
 
     /**수상map */
@@ -84,6 +71,21 @@ const ResumeFrame = () => {
                 <td>{military.veteran_yn}</td>
             </tr>
         ))
+
+    const skillList = state.resume.skills.split(",");
+
+
+    useEffect(()=>{
+
+    },[state.skills])
+
+    const skillListTd = 
+
+    skillList.map((skills, idx) => (
+        <tr key={idx+skills}>
+            <td>{skills}</td>
+        </tr>
+    ))
 
     return (
         <div className='resumePrintTopDiv'>
@@ -113,7 +115,7 @@ const ResumeFrame = () => {
                             <td className='resumePrintTitle resumePrintTitle1'>성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;명</td>
                             <td>{state.resume.gender}</td>
                             <td className='resumePrintTitle resumePrintTitle1'>생년월일</td>
-                            <td>{state.resume.birthday}</td>
+                            <td>{state.resume.birthday.replace(/-/g,'.')}</td>
                         </tr>
                         <tr>
                             <td className='resumePrintTitle resumePrintTitle1'>연&nbsp;&nbsp;락&nbsp;&nbsp;처</td>
@@ -132,10 +134,10 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={3}>학 력</th>
-                            <th className='resumePrintTitle resumePrintDt'>기간</th>
+                            <th className='resumePrintTitle' rowSpan={3}>학<br/>력</th>
+                            <th className='resumePrintTitle resumePrintDt2'>기간</th>
                             <th className='resumePrintTitle resumePrintName'>학교명</th>
-                            <th className='resumePrintTitle resumePrintName'>전공</th>
+                            <th className='resumePrintTitle '>전공</th>
                             <th className='resumePrintTitle'>구분</th>
                             <th className='resumePrintTitle'>학점</th>
                         </tr>
@@ -147,8 +149,8 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle printCareer' rowSpan={4}> 경 력<br/>·<br/>교 육</th>
-                            <th className='resumePrintTitle resumePrintDt'>기간</th>
+                            <th className='resumePrintTitle printCareer' rowSpan={4}>경<br/>력<br/>·<br/>교<br/>육</th>
+                            <th className='resumePrintTitle resumePrintDt2'>기간</th>
                             <th className='resumePrintTitle resumePrintName'>기관명</th>
                             <th className='resumePrintTitle'>직책</th>
                             <th className='resumePrintTitle'>직무/활동사항</th>
@@ -162,18 +164,12 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={3}>&nbsp;&nbsp;자&nbsp;&nbsp;<br/>&nbsp;격&nbsp;</th>
-                            <th className='resumePrintTitle resumePrintName'>자격증명</th>
+                            <th className='resumePrintTitle' rowSpan={3}>자<br/>격</th>
+                            <th className='resumePrintTitle'>자격증명</th>
                             <th className='resumePrintTitle resumePrintName'>기관명</th>
-                            <th className='resumePrintTitle resumePrintTitle2'></th>
-                            <th className='resumePrintTitle resumePrintName'>자격증명</th>
-                            <th className='resumePrintTitle resumePrintName'>기관명</th>
+                            <th className='resumePrintTitle resumePrintDt1'>발행일자</th>
                         </tr>
-                        <tr>
-                            {certificationList1}
-                            <td />
-                            {certificationList2}
-                        </tr>
+                            {certificationList}
                     </tbody>
                 </table>
 
@@ -184,10 +180,10 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={3}>&nbsp;&nbsp;수&nbsp;&nbsp;<br/>&nbsp;상&nbsp;</th>
+                            <th className='resumePrintTitle' rowSpan={3}>수<br/>상</th>
                             <th className='resumePrintTitle resumePrintName'>수상명</th>
-                            <th className='resumePrintTitle resumePrintName'>내용</th>
-                            <th className='resumePrintTitle resumePrintDt'>수상일자</th>
+                            <th className='resumePrintTitle '>내용</th>
+                            <th className='resumePrintTitle resumePrintDt1'>수상일자</th>
                             <th className='resumePrintTitle resumePrintName'>기관명</th>
                         </tr>
                         {prizeList}
@@ -201,11 +197,11 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={2}>병 역</th>
+                            <th className='resumePrintTitle' rowSpan={2}>병<br/>역</th>
                             <th className='resumePrintTitle resumePrintName'>구분</th>
-                            <th className='resumePrintTitle resumePrintName'>군별</th>
-                            <th className='resumePrintTitle resumePrintDt'>복무기간(면제사유)</th>
-                            <th className='resumePrintTitle'>보훈대상</th>
+                            <th className='resumePrintTitle '>군별</th>
+                            <th className='resumePrintTitle resumePrintDt2'>복무기간(면제사유)</th>
+                            <th className='resumePrintTitle resumePrintName'>보훈대상</th>
                         </tr>
                         {militaryList}
                     </tbody>
@@ -218,42 +214,10 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' id='skill' rowSpan={5}> 전<br/>산 <br/>관<br/>련</th>
+                            <th className='resumePrintTitle' id='skill' rowSpan={5}>전<br/>산<br/>관<br/>련</th>
                             <th className='resumePrintTitle resumeSkill'>구분</th>
-                            {/* <th className='resumePrintTitle'></th> */}
-                            <th className='resumePrintTitle resumeSkill'>구분</th>
-                            {/* <th className='resumePrintTitle'></th> */}
                         </tr>
-                        <tr>
-                            <td>java</td>
-                            {/* <td></td> */}
-                            <td>Android</td>
-                            {/* <td></td> */}
-                        </tr>
-                        <tr>
-                            <td>Python</td>
-                            {/* <td></td> */}
-                            <td>machine learning</td>
-                            {/* <td></td> */}
-                        </tr>
-                        <tr>
-                            <td>SQL</td>
-                            {/* <td></td> */}
-                            <td>deep learning</td>
-                            {/* <td></td> */}
-                        </tr>
-                        <tr>
-                            <td>html / css</td>
-                            {/* <td></td> */}
-                            <td>기타(
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                )</td>
-                        </tr>
+                            {skillListTd}
                     </tbody>
                 </table>
                 <div>
