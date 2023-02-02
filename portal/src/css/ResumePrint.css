@@ -1,6 +1,5 @@
 @page {
   margin: 0mm;
-  
 }
 
 .resumePrintTopDiv{
@@ -23,6 +22,11 @@
     font-size: 11pt;
     text-align: center;
   }
+
+  .resumePrintDiv + .resumePrintDiv {
+    margin-top: 40px;
+  }
+
   /*이력서 타이틀*/
   .resumePrintDiv>div:first-child{
     display: flex;
@@ -145,4 +149,8 @@
   padding: 1mm;
   text-align: left;
   vertical-align: baseline;
+}
+
+#coverLetter{
+  height: auto;
 }

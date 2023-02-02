@@ -65,18 +65,21 @@ const PrizeWrite = ({ prize, setPrize }) => {
         // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
         // = new.num 가 num 인 것을 제거함
         console.log(prize_org, prize_name, prize_dt)
-        setPrize(prize.filter(newPrize => (newPrize.prize_num!=prize_num)))
-        axios
-        .post('/student/prize/delete', {
-            prize_org:prize_org,
-            prize_name:prize_name,
-            prize_dt:prize_dt,
-            id: sessionStorage.getItem("loginId")
-        })
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((e) => console.log(e));
+
+        if (window.confirm("데이터를 삭제하시겠습니까? 되돌릴 수 없습니다")) {
+            setPrize(prize.filter(newPrize => (newPrize.prize_num!=prize_num)))
+            axios
+            .post('/student/prize/delete', {
+                prize_org:prize_org,
+                prize_name:prize_name,
+                prize_dt:prize_dt,
+                id: sessionStorage.getItem("loginId")
+            })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((e) => console.log(e));
+          }
     }
     return (
         <div className='resumeDiv'>

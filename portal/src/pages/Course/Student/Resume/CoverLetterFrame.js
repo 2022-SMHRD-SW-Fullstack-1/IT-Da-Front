@@ -19,7 +19,7 @@ const CoverLetterFrame = () => {
 
     return (
         <div className='resumePrintTopDiv'>
-            <div className='resumePrintDiv coverLetterPrintDiv'
+            <div id='coverLetter' className='resumePrintDiv coverLetterPrintDiv'
                 ref={printRef}>
                 <div id='coverLetterTitle'>
                     <span>자기소개서</span>
@@ -28,7 +28,7 @@ const CoverLetterFrame = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th className='resumePrintTitle'>성<br/>장<br/>과<br/>정</th>
+                            <th className='resumePrintTitle page-break'>성<br/>장<br/>과<br/>정</th>
                             <td>{state.coverLetter.growth}</td>
                         </tr>
                     </thead>
@@ -38,7 +38,7 @@ const CoverLetterFrame = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th className='resumePrintTitle'>성격<br/>의<br/>장단점</th>
+                            <th className='resumePrintTitle page-break'>성격<br/>의<br/>장단점</th>
                             <td>{state.coverLetter.pros_cons}</td>
                         </tr>
                     </thead>
@@ -48,7 +48,7 @@ const CoverLetterFrame = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th className='resumePrintTitle'>위기<br/>극복<br/>·<br/>목표<br/>달성</th>
+                            <th className='resumePrintTitle page-break'>위기<br/>극복<br/>·<br/>목표<br/>달성</th>
                             <td>{state.coverLetter.goal_and_crisis}</td>
                         </tr>
                     </thead>
@@ -58,7 +58,7 @@ const CoverLetterFrame = () => {
                 <table>
                     <thead>
                         <tr>
-                            <th className='resumePrintTitle'>지원<br/>동기<br/>·<br/>포부</th>
+                            <th className='resumePrintTitle page-break'>지원<br/>동기<br/>·<br/>포부</th>
                             <td>{state.coverLetter.motivation}</td>
                         </tr>
                     </thead>

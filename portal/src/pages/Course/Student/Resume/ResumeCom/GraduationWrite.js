@@ -67,6 +67,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
         }
     }
     const onRemove = (grad_num, grad_dt, grad_school, school_type, grad_type) => {
+        if (window.confirm("데이터를 삭제하시겠습니까? 되돌릴 수 없습니다")) {
         // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
         // = new.num 가 num 인 것을 제거함
         console.log('제거')
@@ -85,6 +86,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                 console.log(res)
             })
             .catch((e) => console.log(e));
+        }
     }
 
     return (

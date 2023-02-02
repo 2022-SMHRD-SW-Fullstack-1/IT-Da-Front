@@ -228,6 +228,7 @@ const ResumeFrame = () => {
             <ReactToPrint
                 trigger={() => <button className='printBtn'>출력하기</button>}
                 content={() => printRef.current}
+                documentTitle="none"
                 pageStyle="print"
 
             />

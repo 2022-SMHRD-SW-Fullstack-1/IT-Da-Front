@@ -73,9 +73,8 @@ const S_CL_main = () => {
         <p>성장배경</p>
         <div>
           <p>
-            <input
+            <textarea
               className="cLInput"
-              type="text"
               name="growth"
               onChange={onChange}
               value={coverLetter.growth||''}
@@ -87,9 +86,8 @@ const S_CL_main = () => {
         <p>성격의 장단점</p>
         <div>
           <p>
-            <input
+            <textarea
               className="cLInput"
-              type="text"
               name="pros_cons"
               onChange={onChange}
               value={coverLetter.pros_cons||''}
@@ -101,9 +99,8 @@ const S_CL_main = () => {
         <p className="sCLTitle">위기극복 및 목표달성</p>
         <div>
           <p>
-            <input
+            <textarea
               className="cLInput"
-              type="text"
               name="goal_and_crisis"
               onChange={onChange}
               value={coverLetter.goal_and_crisis||''}
@@ -115,9 +112,8 @@ const S_CL_main = () => {
         <p>지원 동기 및 입사 후 포부</p>
         <div>
           <p>
-            <input
+            <textarea
               className="cLInput"
-              type="text"
               name="motivation"
               onChange={onChange}
               value={coverLetter.motivation||''}
