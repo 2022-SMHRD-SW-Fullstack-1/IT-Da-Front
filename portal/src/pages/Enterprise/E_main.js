@@ -9,42 +9,10 @@ import uuid from "react-uuid";
 import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import E_main_detail from "./E_main_detail";
+import ageCaculate from "../../utils/ageCaculate";
 const E_main = () => {
-  //맵으로 뿌려줄 임의 데이터
-  const tempList = [
-    {
-      photo:
-        "https://news.nateimg.co.kr/orgImg/my/2022/03/30/202203301657532027_1.jpg",
-      name: "차은우",
-      hopeLoc: ["서울", "경기"],
-      skillStack: ["자바", "코틀린", "안드로이드", "스프링"],
-      cmt: "분골쇄신의 정신으로 열심히 하겠습니다어쩌구저쩌구분골쇄신의 정신으로 열심히 하겠습니다어쩌구저쩌구",
-      project: [
-        "취업연계를 위한 이력 정보 관리 서비스",
-        "웹소켓을 활용한 초단기 알바 구인구직 플랫폼",
-      ],
-      updateDT: "2023-01-17",
-      gender: "남자",
-      age: "27세",
-    },
-    {
-      photo:
-        "https://blog.kakaocdn.net/dn/IOYEi/btq1JzPmm2w/Jn7TB4RqutJNkyeAS8K0U1/img.jpg",
-      name: "아무개",
-      hopeLoc: ["제주"],
-      skillStack: ["자바", "코틀린", "안드로이드", "스프링"],
-      cmt: "분골쇄신의 정신으로 열심히 하겠습니다어쩌구저쩌구분골쇄신의 정신으로 열심히 하겠습니다어쩌구저쩌구",
-      project: [
-        "취업연계를 위한 이력 정보 관리 서비스",
-        "웹소켓을 활용한 초단기 알바 구인구직 플랫폼",
-      ],
-      updateDT: "2022-11-22",
-      gender: "여자",
-      age: "25세",
-    },
-  ];
   //필터 데이터
-  const month = ["전체", , "1주일전", "1개월전", "3개월전", "6개월전"];
+  const month = ["전체", "1주일전", "1개월전", "3개월전", "6개월전"];
   const location = [
     "전체",
     "서울",
@@ -69,21 +37,24 @@ const E_main = () => {
     "IOS",
     "swift",
   ];
-
   const wanted_job = [
     "전체",
     "백엔드 개발자",
     "프론트엔드 개발자",
-
     "안드로이드 개발자",
     "ios 개발자",
   ];
+
   const navigate = useNavigate();
   const [update_month, setUpdate_month] = useState("전체");
   const [hope_location, setHope_location] = useState("전체");
   const [skill, setSkill] = useState("전체");
-
   const [hope_job, setHope_job] = useState("전체");
+  const [certificate_info, setCertificate_info] = useState("");
+  const onCertiChange = (e) => {
+    setCertificate_info(e.target.value);
+  };
+
   //필터링 한 후 데이터 list
   const [filterDate, setFilterData] = useState([]);
   //수강생 데이터(MAP으로 뿌릴) 초기화용
@@ -110,9 +81,11 @@ const E_main = () => {
       update_dt: "",
     },
   ]);
+
   const [member_info, setMember_info] = useState([{}]);
   //기업이 누구를 북마크했는지 정보
   const [bookmark_info, setBookmark_info] = useState([]);
+  const [certification_info, setCertification_info] = useState([]);
 
   //수강생 디테일 페이지로 이동
   const go_to_userdetail = (e) => {
@@ -191,6 +164,10 @@ const E_main = () => {
     setHope_job(value);
   };
 
+  const certificate_filter = (e) => {
+    const { value } = e.target;
+  };
+
   //상세보기 필터 적용 버튼
   const button_filterclick = () => {
     setFilterData(
@@ -200,13 +177,22 @@ const E_main = () => {
             item.wish_area1 == hope_location ||
             item.wish_area2 == hope_location ||
             item.wish_area3 == hope_location) &&
-          (skill == "전체" || item.skills.includes(skill)) &&
+          (skill == "전체" ||
+            (item.skills != null && item.skills.includes(skill))) &&
           (hope_job == "전체" || item.wish_field.includes(hope_job)) &&
-          dateCompare(update_month, item.update_dt)
+          dateCompare(update_month, item.update_dt) &&
+          certification_info
+            .filter((i) => i.cert_name.includes(certificate_info))
+            .findIndex((e) => e.mb_id === item.mb_id) !== -1
       )
     );
     console.log(skill);
     console.log(typeof (new Date() - new Date("2022-01-20")));
+    console.log(
+      certification_info
+        .filter((i) => i.cert_name.includes(certificate_info))
+        .findIndex((e) => e.mb_id === "jingu@naver.com") !== -1
+    );
   };
 
   // 이력서 입력한 정보 /기업이 저장한 인재 북마크 데이터
@@ -218,6 +204,7 @@ const E_main = () => {
       .then((res) => {
         console.log(res.data);
         console.log(res.data.resume);
+        setCertification_info(res.data.certification);
         setSimple_info(res.data.resume);
         setFilterData(res.data.resume);
 
@@ -229,39 +216,46 @@ const E_main = () => {
       });
   }, []);
 
-  //초기화면
-  useEffect(() => {
-    console.log(simple_info);
-  }, [simple_info]);
+  let id = "";
 
   /**MAP으로 보여줄 필터 데이터 */
-  let listMap = filterDate.map((item) => (
-    <tr key={uuid()} className="E_main_info">
-      <td mb_id={item.mb_id} onClick={onHandleBookmark}>
-        {bookmark_info.includes(item.mb_id) ? <RiStarFill /> : <RiStarLine />}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.name}
-      </td>
-
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.addr}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.birthday}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.skills}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.wish_field}
-      </td>
-      <td mb_id={item.mb_id} onClick={go_to_userdetail}>
-        {item.wish_area1},{item.wish_area2},{item.wish_area3}
-      </td>
-      <td>{item.update_dt}</td>
-    </tr>
-  ));
+  let listMap = filterDate.map(
+    (item) => (
+      (id = item.mb_id),
+      (
+        <tr key={uuid()} className="E_main_info">
+          <td mb_id={item.mb_id} onClick={onHandleBookmark}>
+            {bookmark_info.includes(item.mb_id) ? (
+              <RiStarFill />
+            ) : (
+              <RiStarLine />
+            )}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.name}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {ageCaculate(item.birthday.substring(0, 4))}세
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {certification_info
+              .filter((e) => e.mb_id == id)
+              .map((i) => i.cert_name + "  ")}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.skills}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.wish_field}
+          </td>
+          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+            {item.wish_area1},{item.wish_area2},{item.wish_area3}
+          </td>
+          <td>{item.update_dt.substring(0, 10)}</td>
+        </tr>
+      )
+    )
+  );
 
   return (
     <div className="E_main_page">
@@ -305,6 +299,15 @@ const E_main = () => {
                       </div>
                     </div>
                     <div className="E_main_input_detail_three_div">
+                      <div>자격증</div>
+                      <div>
+                        <input
+                          value={certificate_info}
+                          onChange={onCertiChange}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="E_main_input_detail_three_div">
                       <div>희망 직무</div>
                       <div>
                         <select onChange={hope_job_filter}>
@@ -320,7 +323,7 @@ const E_main = () => {
                   <div
                     onClick={button_filterclick}
                     id="btn_filter"
-                    className="test"
+                    className="test hoverHand"
                   >
                     적용
                   </div>
@@ -334,8 +337,8 @@ const E_main = () => {
             <tr className="E_main_title">
               <th></th>
               <th>이름</th>
-              <th>주소</th>
               <th>나이</th>
+              <th>자격증</th>
               <th>기술스택</th>
               <th>지원 분야</th>
               <th>희망지역</th>

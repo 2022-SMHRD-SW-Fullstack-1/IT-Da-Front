@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import "../../css/E_main_detail.css";
+import ageCaculate from "../../utils/ageCaculate";
 
 const E_main_detail = () => {
   const { state } = useLocation();
@@ -30,6 +31,7 @@ const E_main_detail = () => {
     photo: "",
     project1: "1",
     project2: "2",
+    update_dt: "",
   });
   //학력
   const [graduation, setGraduation] = useState([
@@ -152,6 +154,11 @@ const E_main_detail = () => {
     }
   };
 
+  var now = new Date(); // 현재 날짜 및 시간
+  var year = now.getFullYear(); // 연도
+  var bdYear = 0;
+  bdYear = resume.birthday.substring(0, 4);
+
   return (
     <div className="topDiv_resume">
       <div className="r_basic">
@@ -165,7 +172,8 @@ const E_main_detail = () => {
           <div className="e_detail_name">
             <p>{resume.name}</p>
             <p>
-              {resume.gender} / {resume.birthday}
+              {resume.gender} / {resume.birthday} /
+              {ageCaculate(resume.birthday.substring(0, 4))}세
             </p>
             <div className="" onClick={onHandleBookmark}>
               {isBookmark ? <RiStarFill /> : <RiStarLine />}
