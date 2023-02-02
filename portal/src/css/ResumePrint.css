@@ -3,7 +3,7 @@
 }
 
 .resumePrintTopDiv{
-  margin: 20mm;
+  margin: 0mm;
   display: flex;
   flex-direction: column;
   align-items: center;
