@@ -53,7 +53,7 @@ const Schedule = () => {
   return (
     <div className='topDiv'>
       <Calendar onChange={setValue} value={value} calendarType="US" formatDay={(locale, date) => moment(date).format("DD")} showNeighboringMonth={false} />
-      <div className='annHead' style={{ marginTop: '1rem' }}>
+      <div className='annHead' style={{ marginTop: '1.5rem' }}>
         <p value={value}>{value.toString().substring(0, 10) == today ? '오늘의' : intoKorean(value.toString().substring(4, 10))} 일정</p>
         <div>
           <p className='hoverHand' onClick={goToSchedule}>더보기</p>

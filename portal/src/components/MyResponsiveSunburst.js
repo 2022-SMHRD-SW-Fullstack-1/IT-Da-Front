@@ -21,6 +21,7 @@ const MyResponsiveSunburst = ({ data }) => {
                ]
            ]
        }}
+       arcLabel="id"
        enableArcLabels={true}
        arcLabelsSkipAngle={10}
        arcLabelsTextColor="#000000"

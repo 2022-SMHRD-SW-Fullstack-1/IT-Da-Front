@@ -1,20 +1,64 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
+import ageCaculate from '../utils/ageCaculate'
 import '../css/StdInfoList.css'
-import data from '../asset/json/data.json'
 import MyResponsiveSunburst from './MyResponsiveSunburst'
 
 const StdInfoList = () => {
 
+   // 코스 정보를 활용해 테이블 제목을 저장
    const [tableTitle, setTableTitle] = useState('')
+   // 학생들 정보를 저장
+   const [stdInfo, setStdInfo] = useState([])
+   // 차트 정보를 저장
+   const [chart, setChart] = useState({name: '전체', children: [{name: '성공', children: [{name: '취업', loc: 0},{name: '자력', loc: 0}]},{name: '실패', children:[{name: '희망', loc: 0},{name: '재직', loc: 0}]}]})
+   // 수정 가능 여부
+   const [modify, setModify] = useState(true)
+
+   const onSpecialChange = (e) => {
+      let id = e.currentTarget.getAttribute('mb_id')
+      const { value } = e.target;
+      setStdInfo(stdInfo.map((item)=> item.id == id ? {...item, special: value} : item))
+   }
+   const onExampleChange = (e) => {
+      let id = e.currentTarget.getAttribute('mb_id')
+     const { value } = e.target;
+     setStdInfo(stdInfo.map((item)=> item.id == id ? {...item, example: value} : item));
+   };
+   const onDivisionChange = (e) => {
+      let id = e.currentTarget.getAttribute('mb_id')
+     const { value } = e.target;
+     setStdInfo(stdInfo.map((item)=> item.id == id ? {...item, division: value} : item));
+   };
+
+   const onModifyBtnClick = () => {
+      !modify &&
+      axios
+         .post('/member/updateStdInfo', {stdInfo: stdInfo})
+         .then((res) => {
+            console.log(res)
+         })
+         .catch((e) => console.log(e));
+      setModify(!modify)
+   }
+
+
+   useEffect(() => {
+      axios
+         .get('/announcement/getCourseInfo', { params: { key: window.sessionStorage.getItem("course_key") } })
+         .then((res) => setTableTitle(res.data))
+         .catch((e) => console.log(e));
+
+      axios
+         .post('/member/getStudentInfo', { course_key: window.sessionStorage.getItem('course_key') })
+         .then((res) => setStdInfo(res.data))
+         .catch((e) => console.log(e));
+   }, [])
 
    useEffect(()=>{
-      axios
-      .get('/announcement/getCourseInfo', { params: { key: window.sessionStorage.getItem("course_key") } })
-      .then((res) => setTableTitle(res.data))
-      .catch((e) => console.log(e));
-   },[])
+      setChart({name: '전체', children: [{name: '성공', children: [{name: '취업', loc: stdInfo.filter((item => item.division === '취업')).length},{name: '자력', loc: stdInfo.filter((item => item.division === '자력')).length}]},{name: '실패', children:[{name: '희망', loc: stdInfo.filter((item => item.division === '희망')).length},{name: '재직', loc: stdInfo.filter((item => item.division === '재직')).length}]}]})
+   },[stdInfo])
 
    const divisionData = [{ item: "희망", explain: "취업 또는 창업을 희망하는자" },
    { item: "재직", explain: "입소시 재직자, 자영업영세업자 등 근로자" },
@@ -24,13 +68,10 @@ const StdInfoList = () => {
    { item: "기타", explain: "공채, 불가, 연락두절" },
    { item: "중탈", explain: "중도탈락자(월/일)" },]
 
-   const student = [{name: "김춘배", tel: "01035468945", gender: "남", age: "28", school: "조선대학교", major: "정보통신전공", certification: "SQLD", hope_jop: "웹 프론트 개발자", hope_city: "서울 경기", example: "모범", division: "희망", special: "수도권희망"},
-   {name: "이수지", tel: "01032656465", gender: "여", age: "27", school: "광주대학교", major: "유아교육과", certification: "SQLD", hope_jop: "안드로이드 앱 개발자", hope_city: "광주 서울", example: "", division: "희망", special: "앱 개발 희망"}]
-
    return (
       <div className='container stdInfoContainer'>
          <div>
-            <div style={{width: '25rem', height: '20rem', zIndex: '0'}}><MyResponsiveSunburst data={data}/></div>
+            <div style={{ width: '25rem', height: '20rem', zIndex: '0' }}><MyResponsiveSunburst data={chart} /></div>
             <table>
                <thead>
                   <tr>
@@ -44,7 +85,7 @@ const StdInfoList = () => {
             </table>
          </div>
          <div className='content'>
-            <p>{tableTitle}</p>
+            <p>{tableTitle}<button onClick={onModifyBtnClick} id='modifyBtn'>{modify?'수정':'저장'}</button></p>
             <table>
                <thead>
                   <tr>
@@ -64,8 +105,22 @@ const StdInfoList = () => {
                   </tr>
                </thead>
                <tbody>
-                  {student.map((item, idx)=><tr><td>{idx+1}</td><td>{item.name}</td><td>{item.tel}</td><td>{item.gender}</td><td>{item.age}</td><td>{item.school}</td><td>{item.major}</td><td>{item.certification}</td><td>{item.hope_jop}</td><td>{item.hope_city}</td><td>{item.example}</td><td>{item.division}</td><td>{item.special}</td></tr>)}
-
+                  {stdInfo.map((item, idx) => 
+                  <tr>
+                     <td>{idx + 1}</td>
+                     <td>{item.name}</td>
+                     <td>{item.phone}</td>
+                     <td>{item.gender==='m'?'남':'여'}</td>
+                     <td>{ageCaculate(item.birthdate.substring(0,4))}</td>
+                     <td>{item.school}</td>
+                     <td>{item.major}</td>
+                     <td>{item.certification}</td>
+                     <td>{item.hope_jop}</td>
+                     <td>{item.hope_city.includes('전체')?'무관':item.hope_city}</td>
+                     {modify?<td>{item.example}</td>:<td><select onChange={onExampleChange} mb_id={item.id} value={item.example}><option>모범</option><option>  </option></select></td>}
+                     {modify?<td>{item.division}</td>:<td><select onChange={onDivisionChange} mb_id={item.id} value={item.division}><option>희망</option><option>재직</option><option>취업</option><option>자력</option><option>제외</option><option>기타</option><option>중탈</option></select></td>}
+                     {modify?<td>{item.special}</td>:<td><input onChange={onSpecialChange} mb_id={item.id} value={item.special} type='text'></input></td>}
+                  </tr>)}
                </tbody>
             </table>
          </div>
