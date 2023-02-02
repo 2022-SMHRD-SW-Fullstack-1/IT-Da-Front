@@ -89,7 +89,7 @@ const M_e_list = (props) => {
       <td style={edit_style_po} className='e_name'>{props.item.enter_address}</td>
       <td style={edit_style_op} className='e_name'><input type='text' value={enter.enter_address} onChange={onChange} name="enter_address"></input></td>
 
-      <td>{props.item.enter_num.substring(0, 2)}-{props.item.enter_num.substring(2, 5)}-{props.item.enter_num.substring(5, 10)}</td>
+      <td>{props.item.enter_num.substring(0, 3)}-{props.item.enter_num.substring(3, 5)}-{props.item.enter_num.substring(5, 10)}</td>
 
       <td style={edit_style_po}><div className='content annViewButton'><button onClick={edit_e_button}>수정</button><button onClick={delete_e_submit}>삭제</button></div></td>
       <td style={edit_style_op}><div className='content annViewButton'><button onClick={edit_e_submit}>완료</button><button onClick={edit_e_button_quit}>취소</button></div></td>
