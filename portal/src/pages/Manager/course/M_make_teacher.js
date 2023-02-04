@@ -46,13 +46,13 @@ const M_make_teacher = () => {
 
     return (
         <div className='registerContainer M_make_course_container'>
-            <p>담임생성</p>
+            <div>
+                <p>담임 연구원 계정 생성</p>
                 <div className=''>
-                    <p>담임명 : {state.course_teacher}</p>
+                    <p style={{margin: '0.8rem 0'}}>담임명 : {state.course_teacher}</p>
                     <p>과정키 : {course_key}</p>
-                </div>                
-            <div className='M_make_course_button'>
-                <button onClick={makeTeacher}>담임 생성하기</button>
+                </div>
+                <button onClick={makeTeacher}>계정 생성하기</button>
             </div>
         </div>
     )

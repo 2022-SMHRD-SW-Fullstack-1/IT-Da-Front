@@ -108,7 +108,7 @@ const M_make_course = () => {
           />
         </div>
         <div>
-          <span>담임 명</span>
+          <span>담임명</span>
           <input
             placeholder="입력해주세요."
             type="text"
