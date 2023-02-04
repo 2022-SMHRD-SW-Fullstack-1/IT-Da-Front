@@ -27,7 +27,7 @@ const M_e_select = () => {
         <div className='container'>
         <p>기업 관리</p>
              <div className='content'>
-                    <table>
+                    <table style={{ minWidth: '80rem' }}>
                         <thead>
                             <tr>
                                 <th>기업명</th>
@@ -36,7 +36,6 @@ const M_e_select = () => {
                                 <th>대표</th>
                                 <th>연락처</th>
                                 <th>주소</th>
-                                <th>전화번호</th>
                                 <th>사업자번호</th>
                                 <th></th>
                             </tr>

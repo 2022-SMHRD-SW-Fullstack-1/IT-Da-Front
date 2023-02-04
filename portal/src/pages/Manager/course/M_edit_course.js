@@ -74,7 +74,7 @@ const M_edit_course = (props) => {
             </div>
             <div className='content'>
 
-                <table>
+                <table style={{ minWidth: '80rem' }}>
                     <thead>
                         <tr>
                             <th>과정주제</th>
