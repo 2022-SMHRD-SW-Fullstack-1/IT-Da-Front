@@ -95,12 +95,7 @@ const C_extend_detail = () => {
                <p dangerouslySetInnerHTML={{ __html: post.b_content }}></p>
             </div>
          </div>
-         {window.sessionStorage.getItem("role") === 's' && extend_over == true &&
-            <div className='extend_register'>
-               이름 : <span>{window.sessionStorage.getItem("userName")}</span>
-               시간 : <input type="text" value={extend_time} onChange={onExtend_timeChange} />
-               <button onClick={registerExtend}>신청하기</button>
-            </div>}
+         
          {window.sessionStorage.getItem("role") === 't' &&
             <div className='content annViewButton'>
                <button onClick={goToWrite}>글수정</button>
@@ -116,8 +111,15 @@ const C_extend_detail = () => {
                </thead>
                <tbody>
                   {extendList}
+                  {window.sessionStorage.getItem("role") === 's' && extend_over == true &&
+                  <tr>
+                     <td><span>{window.sessionStorage.getItem("userName")}</span></td>
+                     <td><input placeholder='예) 21:00' type="text" value={extend_time} onChange={onExtend_timeChange} /></td>
+                     <td><button onClick={registerExtend}>신청하기</button></td>
+                  </tr>}
                </tbody>
             </table>
+            
          </div>
       </div>
    )

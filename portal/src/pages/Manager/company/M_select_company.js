@@ -61,7 +61,7 @@ const M_select_company = (props) => {
                 <div><button onClick={() => onFilter(f_company_name, f_company_area, f_company_position, f_company_salary)}>검색</button></div>
             </div>
             <div className='content'>
-                <table>
+                <table style={{ minWidth: '80rem' }}>
                     <thead>
                         <tr>
                             <th>등록일</th>

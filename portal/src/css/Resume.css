@@ -21,6 +21,7 @@
 
 .topDiv_resume>div {
    width: 56rem;
+   margin-bottom: 1rem;
 }
 .topDiv_resume>div>table {
    margin-bottom: 1rem;
@@ -29,10 +30,6 @@
 }
 .topDiv_resume>div td {
    padding-top: 0.5rem;
-}
-/*각 div 별 간격 조절용*/
-.topDiv_resume>div>p {
-   margin-top: 3rem;
 }
 .r_basic {
    display: flex;

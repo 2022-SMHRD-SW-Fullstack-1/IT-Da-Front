@@ -87,5 +87,20 @@
 
 /*연장사용신청*/
 .extendTable table{
-   width: 15rem !important;
+   width: fit-content !important;
+   border: none !important;
+}
+.extendTable table td{
+   padding: 0.4rem 0.8rem !important;
+}
+.extendTable table input {
+   width: 5rem;
+}
+.extendTable table tr td button {
+   border: none;
+   border-radius: 5px;
+   padding: 0.3rem 0.6rem;
+   background-color: rgb(75, 75, 75);
+   color: white;
+   margin-right: 0.5rem;
 }

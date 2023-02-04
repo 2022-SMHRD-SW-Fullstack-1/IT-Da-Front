@@ -172,10 +172,9 @@ const E_main_detail = () => {
           <div className="e_detail_name">
             <p>{resume.name}</p>
             <p>
-              {resume.gender} / {resume.birthday} /
-              {ageCaculate(resume.birthday.substring(0, 4))}세
+              {resume.gender} / {resume.birthday} / {ageCaculate(resume.birthday.substring(0, 4))}세
             </p>
-            <div className="" onClick={onHandleBookmark}>
+            <div className="" onClick={onHandleBookmark} style={{marginLeft: '0.5rem'}}>
               {isBookmark ? <RiStarFill /> : <RiStarLine />}
             </div>
           </div>
@@ -378,19 +377,19 @@ const E_main_detail = () => {
         <br></br>
         <div>
           <p>성장배경</p>
-          <p className="cover_letter_info">{cover_letter.growth}</p>
+          <textarea className="cLInput cover_letter_info" value={cover_letter.growth}/>
         </div>
         <div>
           <p>위기 극복</p>
-          <p className="cover_letter_info">{cover_letter.goal_and_crisis}</p>
+          <textarea className="cLInput cover_letter_info" value={cover_letter.goal_and_crisis}/>
         </div>
         <div>
           <p>장단점</p>
-          <p className="cover_letter_info">{cover_letter.pros_cons}</p>
+          <textarea className="cLInput cover_letter_info" value={cover_letter.pros_cons}/>
         </div>
         <div>
           <p>지원동기</p>
-          <p className="cover_letter_info">{cover_letter.motivation}</p>
+          <textarea className="cLInput cover_letter_info" value={cover_letter.motivation}/>
         </div>
       </div>
     </div>

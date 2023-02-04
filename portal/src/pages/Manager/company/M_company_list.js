@@ -161,13 +161,13 @@ const M_company_list = (props) => {
                     <div style={edit_style_op} className=''><input type='text' value={company.company_apply} onChange={onChange} name="company_apply"></input></div>
                 </div>}
             </td>
-            {window.sessionStorage.getItem('role')==='a'&&
+            {(window.sessionStorage.getItem('role')==='a' || window.sessionStorage.getItem('role')==='e')&&
             <td className='course_button' style={edit_style_po}>
                 <div className='content annViewButton'>
                     <button onClick={edit_company_button}>수정</button>
                     <button onClick={delete_company_submit}>삭제</button>
             </div></td>}
-            {window.sessionStorage.getItem('role')==='a'&&
+            {(window.sessionStorage.getItem('role')==='a' || window.sessionStorage.getItem('role')==='e')&&
             <td className='course_button' style={edit_style_op}>
                 <div className='content annViewButton'>
                     <button onClick={edit_company_submit}>완료</button>

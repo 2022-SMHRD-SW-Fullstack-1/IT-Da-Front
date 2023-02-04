@@ -1,9 +1,9 @@
 [
   {
-    "title": "수료생 정보",
+    "title": "인재 정보",
     "subtitle": [
       {
-        "title": "전체 수료생 조회",
+        "title": "인재 검색",
         "url": "/"
       },
       {
@@ -13,12 +13,8 @@
     ]
   },
   {
-    "title": "공고 관리",
+    "title": "구인 공고",
     "subtitle": [
-      {
-        "title": "공고 생성",
-        "url": "/make_company"
-      },
       {
         "title": "공고 관리",
         "url": "/select_one_company"

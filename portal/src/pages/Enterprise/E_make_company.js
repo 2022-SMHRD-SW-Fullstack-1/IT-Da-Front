@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 
 const E_make_company = () => {
+  
+  const navigate = useNavigate()
  
   const [company_deadline, setCompany_deadline] = useState('');
   const [company_area, setCompany_area] = useState('');
@@ -70,7 +73,7 @@ const E_make_company = () => {
       })
       .then(function (res) {
         alert('기업생성 완료');
-        window.location.reload();
+        navigate('/select_one_company')
       })
       .catch(function (err) {
         console.log('error');
