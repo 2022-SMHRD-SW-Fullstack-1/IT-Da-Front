@@ -1,6 +1,6 @@
 {
-    "ACCESS_KEY" : "AKIAYALYMKESYAPVMMBG",
-    "SECRET_ACCESS_KEY" : "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",
+    "ACCESS_KEY" : "AKIAYALYsfKESYAPVMMBG",
+    "SECRET_ACCESS_KEY" : "QToVNsfxND3nUISyEZDV2GIm+LmrZcY7uI9z6shCZj",
     "REGION" : "ap-northeast-2",
     "S3_BUCKET" : "smhrdportal"
 }
