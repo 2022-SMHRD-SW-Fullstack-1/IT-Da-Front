@@ -39,10 +39,10 @@
    }
    ,
    {
-      "title": "구직 공고",
+      "title": "취업 지원",
       "subtitle": [
          {
-            "title": "공고 확인",
+            "title": "채용 공고",
             "url": "/company/search"
          }
       ]

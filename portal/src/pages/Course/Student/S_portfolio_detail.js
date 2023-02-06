@@ -103,9 +103,9 @@ const S_portfolio_detail = () => {
         console.log('click')
     }
     const img = [
-        (state.portfolio_img1!=='')?{id:1, image:`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${1}`}:null,
-        (state.portfolio_img2!=='')?{id:2, image:`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${2}`}:null,
-        (state.portfolio_img3!=='')?{id:3, image:`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${3}`}:null
+        (state.portfolio_img1!=='')?{id:1, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${1}`}:null,
+        (state.portfolio_img2!=='')?{id:2, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${2}`}:null,
+        (state.portfolio_img3!=='')?{id:3, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${3}`}:null
     ]
     const [datas, setDatas] = useState(img) //고양이 데이터
     const [currItem, setCurrItem] = useState(datas[0]) //선택한 사진 상태설정

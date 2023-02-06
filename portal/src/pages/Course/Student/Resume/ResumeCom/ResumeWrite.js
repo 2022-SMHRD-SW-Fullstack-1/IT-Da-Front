@@ -59,7 +59,7 @@ const ResumeWrite = ({ resume, setResume }) => {
 
         <div className='r_basic'>
             <div className='photoDiv'>
-                {resume.photo?(<img className='r_photo' src={`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/photo/${sessionStorage.getItem("loginId")}/${resume.photo}`}/>)
+                {resume.photo?(<img className='r_photo' src={`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/photo/${sessionStorage.getItem("loginId")}/${resume.photo}`}/>)
                 :<img className='r_photo'/>}
                 <SelectFileBtn btnText={"사진선택"} setSelectedFile={setSelectedFile} fileTypes={fileTypes} fileExts={fileExts} />
                 <UploadBtn btn_text={"수정"} selectedFile={selectedFile} resume={resume} setResume={setResume}/>

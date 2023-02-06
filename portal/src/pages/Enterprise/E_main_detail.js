@@ -165,7 +165,7 @@ const E_main_detail = () => {
         <div>
           <img
             className="id_photo"
-            src={`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/photo/${state.mb_id}/${resume.photo}`}
+            src={`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/photo/${state.mb_id}/${resume.photo}`}
           ></img>
         </div>
         <div className="e_detail_info">

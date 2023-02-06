@@ -103,7 +103,7 @@ const ResumeFrame = () => {
                     <tbody>
                         <tr>
                             <td id='resumePrintPhoto' rowSpan={4}>
-                                {state.resume.photo?(<img id='resumePrintPhoto' src={`https://smhrdportal.s3.ap-northeast-2.amazonaws.com/upload/photo/${sessionStorage.getItem("loginId")}/${state.resume.photo}`}/>)
+                                {state.resume.photo?(<img id='resumePrintPhoto' src={`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/photo/${sessionStorage.getItem("loginId")}/${state.resume.photo}`}/>)
                                 :<img id='resumePrintPhoto'/>}
                             </td>
                             <td className='resumePrintTitle resumePrintTitle1'>지원분야</td>
