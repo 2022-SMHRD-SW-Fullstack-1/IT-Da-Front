@@ -10,8 +10,8 @@ const S_portfolio_write = () => {
     const [selectedFile3, setSelectedFile3] = useState(null)
     const fileTypes = ['image/jpeg', 'image/jpg', 'image/png']
     const fileExts = ['jpeg', 'jpg', 'png']
-    const fileType = ['application/x-zip-compressed']
-    const fileExt = ['zip']
+    const fileTypes2 = ['application/x-zip-compressed']
+    const fileExts2 = ['zip']
     const [selectedFile, setSelectedFile] = useState(null)
     const navigate = useNavigate()
     // navigate를 이용하여 전달한 값 가져오기
@@ -244,7 +244,7 @@ const S_portfolio_write = () => {
         //확장자 확인을 위한 변수
         const fileExt = file.name.split('.').pop();
         //jpg만 받겠다
-        if ((fileTypes.includes(file.type) || fileExts.includes(fileExt)) &&file.size<=5000000) {
+        if ((fileTypes2.includes(file.type) || fileExts2.includes(fileExt)) &&file.size<=5000000) {
           setSelectedFile(e.target.files[0]);
           setInputs({
               ...inputs,
