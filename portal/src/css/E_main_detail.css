@@ -62,3 +62,7 @@
 .cover_letter_info {
   border: 2px solid gray;
 }
+.cLview {
+  border: 1px solid black;
+  padding: 0.5rem;
+}

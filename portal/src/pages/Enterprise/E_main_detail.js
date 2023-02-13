@@ -377,19 +377,19 @@ const E_main_detail = () => {
         <br></br>
         <div>
           <p>성장배경</p>
-          <textarea className="cLInput cover_letter_info" value={cover_letter.growth}/>
+          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.growth} }/>
         </div>
         <div>
           <p>위기 극복</p>
-          <textarea className="cLInput cover_letter_info" value={cover_letter.goal_and_crisis}/>
+          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.goal_and_crisis} }/>
         </div>
         <div>
           <p>장단점</p>
-          <textarea className="cLInput cover_letter_info" value={cover_letter.pros_cons}/>
+          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.pros_cons} }/>
         </div>
         <div>
           <p>지원동기</p>
-          <textarea className="cLInput cover_letter_info" value={cover_letter.motivation}/>
+          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.motivation} }/>
         </div>
       </div>
     </div>
