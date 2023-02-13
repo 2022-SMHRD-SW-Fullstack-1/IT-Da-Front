@@ -191,6 +191,19 @@ const Register = () => {
         alert('회원가입에 실패했습니다.')
       });
     navigate('/');
+
+    axios
+      .post('/member/alarm', {
+        course_key : '00F2A8AB',
+        alarm_content : `${name}님이 회원가입을 하셨습니다`
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((e) => {
+        console.log(e)
+      });
+    navigate('/');
   };
 
   return (
