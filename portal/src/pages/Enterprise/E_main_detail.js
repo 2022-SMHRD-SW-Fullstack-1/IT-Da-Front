@@ -101,7 +101,7 @@ const E_main_detail = () => {
         params: { id: state.mb_id },
       })
       .then((res) => {
-        // console.log(res);
+        console.log(res);
 
         setResume(res.data[0]);
         setGraduation(res.data[1]);
@@ -114,7 +114,7 @@ const E_main_detail = () => {
         // console.log(res.data[4]);
         setMilitary(res.data[5]);
         // console.log(res.data[5]);
-        setCover_letter(res.data[6]);
+        setCover_letter(res.data[7]);
       })
       .catch((e) => console.error(e));
   }, []);
