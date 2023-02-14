@@ -1,4 +1,6 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 import '../css/header.css'
 import logo from '../asset/img/logo_sbl.png'
@@ -17,6 +19,12 @@ const Header = () => {
         window.location.replace("/")
     }
 
+    const navigate = useNavigate()
+
+    const onClickEdit = () => {
+        navigate('/memberEditCheck')
+    }
+
 
 
     return (
@@ -26,28 +34,25 @@ const Header = () => {
                 {(window.sessionStorage.getItem("role") === 's') && (
                     <div className='headerRight'>
                     <p>{window.sessionStorage.getItem("userName")}</p>
-                    <img className='headerImgProfile' src={profileImg} />
+                    <button onClick={onClickEdit} className='headerBtn'>마이페이지</button>
                     <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
                 </div>
                 )}
                 {(window.sessionStorage.getItem("role") === 't') && (
                     <div className='headerRight'>
                     <p>{window.sessionStorage.getItem("userName")} 연구원</p>
-                    <img className='headerImgProfile' src={profileImg} />
                     <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
                 </div>
                 )}
                 {(window.sessionStorage.getItem("role") === 'a') && (
                     <div className='headerRight'>
                     <p>{window.sessionStorage.getItem("userName")}님</p>
-                    <img className='headerImgProfile' src={profileImg} />
                     <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
                 </div>
                 )}
                 {(window.sessionStorage.getItem("role") === 'e') && (
                     <div className='headerRight'>
                     <p>{window.sessionStorage.getItem("userName")}</p>
-                    <img className='headerImgProfile' src={profileImg} />
                     <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
                 </div>
                 )}
