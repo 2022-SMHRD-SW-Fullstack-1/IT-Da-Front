@@ -158,8 +158,6 @@ const btnMemberEdit = () => {
         })
     }
 
-
-   // {(e) => onRemove(pw)}
     return (
         <div className="registerContainer">
             <div>
@@ -230,6 +228,7 @@ const btnMemberEdit = () => {
         </div>
       
         <button 
+        className='memberBtn'
         disabled={notAllow}
         onClick={(e) => {
             btnMemberEdit(e)}}>수정</button>

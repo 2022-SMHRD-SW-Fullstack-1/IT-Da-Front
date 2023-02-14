@@ -23,3 +23,8 @@
     display: flex;
     margin: 5rem
 }
+.memberBtn:disabled{
+    background-color: gray;
+    
+}
+

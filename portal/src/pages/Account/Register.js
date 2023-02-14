@@ -322,6 +322,7 @@ const Register = () => {
         </div>
 
         <button
+        className='registerBtn'
           disabled={notAllow}
           onClick={(e) => {
             onClickRegister(e);
