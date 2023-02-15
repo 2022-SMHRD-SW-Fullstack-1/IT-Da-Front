@@ -10,7 +10,6 @@ import M_announcement_list from '../pages/Manager/announcement/M_announcement_li
 import M_announcement_write from '../pages/Manager/announcement/M_announcement_write'
 import M_announcement_detail from '../pages/Manager/announcement/M_announcement_detail'
 import M_e_select from '../pages/Manager/enterprise/M_e_select'
-import Test from '../pages/Manager/Test'
 
 
 
@@ -27,7 +26,7 @@ const M_Routes = () => {
       <Route path='/manager_announcement_write' element={<M_announcement_write />}></Route>
       <Route path='/manager_announcement_detail' element={<M_announcement_detail />}></Route>
       <Route path='/select_enterprise' element={<M_e_select />}></Route>
-      <Route path='/test' element={<Test />}></Route>
+
     </Routes>
   )
 }
