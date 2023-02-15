@@ -4,7 +4,7 @@ import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import axios from 'axios';
 
-const M_company_list = (props) => {
+const M_company_bookmark_list = (props) => {
 
     console.log(props)
  
@@ -137,6 +137,7 @@ const M_company_list = (props) => {
   
 
     return (
+        props.bookmarkList.includes(company.company_num.toString())?(
         <tr className="company_container">
 
                 
@@ -232,8 +233,8 @@ const M_company_list = (props) => {
                     <button onClick={edit_e_company_quit}>취소</button>
             </div></td>}
 
-        </tr>
+        </tr>):<td></td>
     )
 }
 
-export default M_company_list
+export default M_company_bookmark_list

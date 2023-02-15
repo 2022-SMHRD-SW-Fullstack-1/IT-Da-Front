@@ -90,3 +90,14 @@
    margin: 1rem 0;
    line-height: 3rem;
 }
+
+.comapny_bookmark_th{
+   width: 2rem;
+
+}
+
+.company_bookmark{
+   
+   text-align: right;
+   margin-bottom: 0.3rem
+}

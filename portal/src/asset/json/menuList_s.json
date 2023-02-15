@@ -44,6 +44,10 @@
          {
             "title": "채용 공고",
             "url": "/company/search"
+         },
+         {
+            "title": "관심 기업",
+            "url": "/company/bookmark"
          }
       ]
    }

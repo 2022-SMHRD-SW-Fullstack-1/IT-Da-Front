@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import '../../../css/Course.css'
-import M_company_list from "../../Manager/company/M_company_list";
+import '../../../../css/Course.css'
+import M_company_bookmark_list from "../../../Manager/company/M_company_bookmark_list";
 
-const S_C_main = () => {
+const S_bookmark = () => {
   
     const [isBookmark, setIsBookmark] = useState([])
     
@@ -75,7 +75,7 @@ const S_C_main = () => {
 
 
   const companyList =
-    newCompany.map((item) => <M_company_list setBookmarkList={setBookmarkList} bookmarkList={bookmarkList} item={item} key={item.company_num}/>)
+    newCompany.map((item) => <M_company_bookmark_list setBookmarkList={setBookmarkList} bookmarkList={bookmarkList} item={item} key={item.company_num}/>)
 
   return (
       <div className='container'>
@@ -96,6 +96,7 @@ const S_C_main = () => {
                           <th>기업명</th>
                           <th>마감일</th>
                           <th>구인정보</th>
+                          
                       </tr>
                   </thead>
                   <tbody>
@@ -107,4 +108,4 @@ const S_C_main = () => {
   )
 }
 
-export default S_C_main;
+export default S_bookmark;
