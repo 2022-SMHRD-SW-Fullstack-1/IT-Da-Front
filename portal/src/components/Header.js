@@ -12,12 +12,13 @@ import AllAlarm_list from '../pages/Alarm/AllAlarm_list';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
-const Header = () => {
+const Header = ({socket}) => {
 
     const onClickLogout = () => {
         window.sessionStorage.removeItem("loginId")
         window.sessionStorage.removeItem("userName")
         window.sessionStorage.removeItem("role")
+        socket.close()
         window.location.replace("/")
     }
 
@@ -30,6 +31,8 @@ const Header = () => {
     const onClickEdit = () => {
         navigate('/memberEditCheck')
     }
+
+    // 알람
 
     const [alarmCount, setAlarmCount] = useState()
     const [alarmIconPo, setAlarmIconPo] = useState({ display: '' })
@@ -134,7 +137,7 @@ const Header = () => {
                     <div className='headerRight'>
                         <p>{window.sessionStorage.getItem("userName")}님</p>
                         <img className='headerImgProfile' src={profileImg} />
-                        <button onClick={onClickLogout} ㅊ>로그아웃</button>
+                        <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
                         <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
                         <div className="AllAlarmListGroup">
