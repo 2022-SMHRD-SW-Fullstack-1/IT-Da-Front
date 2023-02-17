@@ -93,6 +93,7 @@ const E_main = () => {
       //버튼 클릭시 정보를 수강생 정보를 넘겨준다
       state: {
         mb_id: e.currentTarget.getAttribute("mb_id"),
+        name: e.currentTarget.getAttribute("name"),
         isBookmark: bookmark_info.includes(
           e.currentTarget.getAttribute("mb_id")
         ),
@@ -115,10 +116,8 @@ const E_main = () => {
           mb_id: e.currentTarget.getAttribute("mb_id"),
         })
         .then((res) => {
-          console.log(res.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     } else {
       // bookmark가 체크 안되어있을때 => bookmark 추가
@@ -132,10 +131,8 @@ const E_main = () => {
           mb_id: e.currentTarget.getAttribute("mb_id"),
         })
         .then((res) => {
-          console.log(res.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     }
   };
@@ -202,12 +199,9 @@ const E_main = () => {
         params: { enter_id: window.sessionStorage.getItem("loginId") },
       })
       .then((res) => {
-        console.log(res.data);
-        console.log(res.data.resume);
         setCertification_info(res.data.certification);
         setSimple_info(res.data.resume);
         setFilterData(res.data.resume);
-
         setBookmark_info(res.data.bookmark);
         setMember_info(res.data.member);
       })
@@ -231,24 +225,24 @@ const E_main = () => {
               <RiStarLine />
             )}
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+          <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {item.name}
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+          <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {ageCaculate(item.birthday.substring(0, 4))}세
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+          <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {certification_info
               .filter((e) => e.mb_id == id)
               .map((i) => i.cert_name + "  ")}
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+          <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {item.skills}
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+          <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {item.wish_field}
           </td>
-          <td mb_id={item.mb_id} onClick={go_to_userdetail}>
+          <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {item.wish_area1},{item.wish_area2},{item.wish_area3}
           </td>
           <td>{item.update_dt.substring(0, 10)}</td>

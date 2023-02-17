@@ -30,10 +30,8 @@
  .alarm_delete{
    background-color: transparent;
    border: 0;
-   padding-left: 1rem;
    color: black;
    display: flex;
-   padding-left: 10rem;
  }
 
  .AllAlarmListGroup{

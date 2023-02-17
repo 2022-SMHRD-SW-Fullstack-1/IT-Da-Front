@@ -5,11 +5,12 @@ import Alarm_list from './Alarm_list';
 
 import '../../css/alarm.css'
 
-function Alarm() {
+function Alarm({socket}) {
 
   const [newAlarm, setNewAlarm] = useState([])
 
   useEffect(() => {
+    window.sessionStorage.getItem("role") !== null &&
     axios
       .get("/alarm/selectNewAlarm",
         {
@@ -19,7 +20,6 @@ function Alarm() {
         })
       .then(function (res) {
         setNewAlarm(res.data)
-        console.log(res.data)
       })
       .catch(function (error) {
         console.log("error")
@@ -28,6 +28,25 @@ function Alarm() {
 
   const newAlarmList =
     newAlarm.map((item) => <Alarm_list newAlarm={newAlarm} setNewAlarm={setNewAlarm} item={item} key={item.alarm_num} />)
+
+  // //알림 실시간으로 띄우기
+  // socket.onAlarm = function (event) {
+  //   let alarm = JSON.parse(event.data);
+  //   if (alarm.talker !== undefined) {
+  //     let newRecentAlarm = {
+  //       alarm_num: alarm.alarm_num, 
+  //       mb_id_to: alarm.mb_id_to,
+  //       alarm_content: alarm.alarm_content,
+  //       alarm_check: alarm.alarm_check, 
+  //       alarm_dt: alarm.alarm_dt, 
+  //     }
+  //     setNewAlarm(newAlarm.concat(newRecentAlarm))
+  //     axios
+  //       .post('gigwork/alert/addChatAlert', newRecentAlarm)
+  //       .then(res => console.log(res))
+  //       .catch(e => console.log(e));
+  //   }
+  // }
 
   return (
     <div className='alarmPosition'>

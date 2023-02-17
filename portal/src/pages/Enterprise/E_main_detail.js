@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import "../../css/E_main_detail.css";
@@ -101,8 +101,6 @@ const E_main_detail = () => {
         params: { id: state.mb_id },
       })
       .then((res) => {
-        console.log(res);
-
         setResume(res.data[0]);
         setGraduation(res.data[1]);
         // console.log("뭐에요".res.data[1]);
@@ -119,7 +117,6 @@ const E_main_detail = () => {
       .catch((e) => console.error(e));
   }, []);
 
-  console.log("자기소개", cover_letter);
   const onHandleBookmark = (e) => {
     //북마크 여부 확인용
 
@@ -132,10 +129,8 @@ const E_main_detail = () => {
           mb_id: state.mb_id,
         })
         .then((res) => {
-          console.log(res.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     } else {
       // bookmark가 체크 안되어있을때 => bookmark 추가
@@ -146,10 +141,8 @@ const E_main_detail = () => {
           mb_id: state.mb_id,
         })
         .then((res) => {
-          console.log(res.data);
         })
         .catch(function (error) {
-          console.log(error);
         });
     }
   };
@@ -158,6 +151,65 @@ const E_main_detail = () => {
   var year = now.getFullYear(); // 연도
   var bdYear = 0;
   bdYear = resume.birthday.substring(0, 4);
+
+  const navigate = useNavigate()
+
+  // 이력서 컨택
+
+  const goToResumeFrame = () => {
+    axios
+    .post("/alarm/addSAlarm", {
+     mb_id_to : state.mb_id,
+     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 이력서를 출력하셨습니다.` 
+    })
+    .then((res) => {
+    })
+    .catch(function (error) {
+    });
+    axios
+    .post("/alarm/addTAlarm", {
+     mb_id_to : state.mb_id,
+     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 이력서를 출력하셨습니다.` 
+    })
+    .then((res) => {
+    })
+    .catch(function (error) {
+    });
+    navigate('/resume/frame', 
+    {state:{ resume: resume, graduation: graduation, career: career, certification:certification, prize:prize, military:military }})
+  }
+
+  // 자기소개서 컨택
+
+  const [coverLetter, SetCoverLetter] = useState({
+    growth: "",
+    pros_cons: "",
+    goal_and_crisis: "",
+    motivation: "",
+  })
+
+  const goToCoverLetterFrame = () => {
+    axios
+    .post("/alarm/addSAlarm", {
+     mb_id_to : state.mb_id,
+     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 자기소개서를 출력하셨습니다.` 
+    })
+    .then((res) => {
+    })
+    .catch(function (error) {
+    });
+    axios
+    .post("/alarm/addTAlarm", {
+     mb_id_to : state.mb_id,
+     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 자기소개서를 출력하셨습니다.` 
+    })
+    .then((res) => {
+    })
+    .catch(function (error) {
+    });
+    navigate('/cover_letter/frame',
+      { state: { coverLetter: coverLetter } })
+  }
 
   return (
     <div className="topDiv_resume">
@@ -174,7 +226,7 @@ const E_main_detail = () => {
             <p>
               {resume.gender} / {resume.birthday} / {ageCaculate(resume.birthday.substring(0, 4))}세
             </p>
-            <div className="" onClick={onHandleBookmark} style={{marginLeft: '0.5rem'}}>
+            <div className="" onClick={onHandleBookmark} style={{ marginLeft: '0.5rem' }}>
               {isBookmark ? <RiStarFill /> : <RiStarLine />}
             </div>
           </div>
@@ -372,26 +424,28 @@ const E_main_detail = () => {
         <p>기술스택</p>
         <div>{resume.skills}</div>
       </div>
+      <button className='headerBtn' onClick={goToResumeFrame}>이력서 출력하기</button>
       <div>
         <p>자기소개</p>
         <br></br>
         <div>
           <p>성장배경</p>
-          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.growth} }/>
+          <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.growth }} />
         </div>
         <div>
           <p>위기 극복</p>
-          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.goal_and_crisis} }/>
+          <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.goal_and_crisis }} />
         </div>
         <div>
           <p>장단점</p>
-          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.pros_cons} }/>
+          <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.pros_cons }} />
         </div>
         <div>
           <p>지원동기</p>
-          <p className="cLview" dangerouslySetInnerHTML={ {__html: cover_letter.motivation} }/>
+          <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.motivation }} />
         </div>
       </div>
+      <button className='headerBtn' onClick={goToCoverLetterFrame}>자기소개서 출력하기</button>
     </div>
   );
 };

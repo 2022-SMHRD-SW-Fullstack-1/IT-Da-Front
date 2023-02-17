@@ -37,41 +37,41 @@ const Header = () => {
     const [allAlarmShow, setAllAlarmShow] = useState({ display: 'none' })
 
     useEffect(() => {
-        axios
-            .get("/alarm/alarmCount",
-                {
-                    params: {
-                        mb_id_to: window.sessionStorage.getItem("loginId")
+        window.sessionStorage.getItem("role") !== null &&
+            axios
+                .get("/alarm/alarmCount",
+                    {
+                        params: {
+                            mb_id_to: window.sessionStorage.getItem("loginId")
+                        }
+                    })
+                .then(function (res) {
+                    if (res.data > 0) {
+                        setAlarmIconPo({ display: 'none' })
+                        setAlarmIconOp({ display: '' })
                     }
                 })
-            .then(function (res) {
-                if (res.data > 0) {
-                    setAlarmIconPo({ display: 'none' })
-                    setAlarmIconOp({ display: '' })
-                }
-            })
-            .catch(function (error) {
-                console.log("error")
-            })
+                .catch(function (error) {
+                    console.log("error")
+                })
+
+        window.sessionStorage.getItem("role") !== null &&
+            axios
+                .get("/alarm/selectAllAlarm",
+                    {
+                        params: {
+                            mb_id_to: window.sessionStorage.getItem("loginId")
+                        }
+                    })
+                .then(function (res) {
+                    setAllAlarm(res.data)
+                })
+                .catch(function (error) {
+                    console.log("error")
+                })
     }, [])
 
     const [allAlarm, setAllAlarm] = useState([])
-
-    useEffect(() => {
-        axios
-            .get("/alarm/selectAllAlarm",
-                {
-                    params: {
-                        mb_id_to: window.sessionStorage.getItem("loginId")
-                    }
-                })
-            .then(function (res) {
-                setAllAlarm(res.data)
-            })
-            .catch(function (error) {
-                console.log("error")
-            })
-    }, [])
 
     const allAlarmClick = () => {
         if (allAlarmShow.display === 'none') {
@@ -96,7 +96,7 @@ const Header = () => {
     }
 
     const allAlarmList =
-        allAlarm.map((item) => <AllAlarm_list allAlarm={allAlarm} setAllAlarm={setAllAlarm} item={item} key={item.alarm_content} />)
+        allAlarm.map((item) => <AllAlarm_list allAlarm={allAlarm} setAllAlarm={setAllAlarm} item={item} key={item.alarm_num} />)
 
     return (
         <div className='headerTopDiv' style={{ zIndex: '99' }}>
@@ -106,7 +106,6 @@ const Header = () => {
                     <div className='headerRight'>
                         <p>{window.sessionStorage.getItem("userName")}</p>
                         <img className='headerImgProfile' onClick={onClickEdit} src={profileImg} />
-                        <button onClick={onClickEdit} className='headerBtn'>마이페이지</button>
                         <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
                         <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
@@ -135,7 +134,7 @@ const Header = () => {
                     <div className='headerRight'>
                         <p>{window.sessionStorage.getItem("userName")}님</p>
                         <img className='headerImgProfile' src={profileImg} />
-                        <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
+                        <button onClick={onClickLogout} ㅊ>로그아웃</button>
                         <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
                         <div className="AllAlarmListGroup">
