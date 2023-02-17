@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom';
 
 import T_Routes from './T_Routes'
 import S_Routes from './S_Routes';
@@ -12,16 +13,20 @@ import menuList_m from '../asset/json/menuList_m.json'
 import menuList_e from '../asset/json/menuList_e.json'
 
 const ITDaRoutes = () => {
+   
+   const location = useLocation();
 
    return (
 
       <div className='T_mainInner'>
-         <div className='T_mainInnerL'>
-            {(window.sessionStorage.getItem("role") === 's') && (<Navbar menuList={menuList_s} />)}
-            {(window.sessionStorage.getItem("role") === 't') && (<Navbar menuList={menuList_t} />)}
-            {(window.sessionStorage.getItem("role") === 'a') && (<Navbar menuList={menuList_m} />)}
-            {(window.sessionStorage.getItem("role") === 'e') && (<Navbar menuList={menuList_e} />)}
-         </div>
+         {location.pathname !== "/consulting"
+        && <div className='T_mainInnerL'>
+        {(window.sessionStorage.getItem("role") === 's') && (<Navbar menuList={menuList_s} />)}
+        {(window.sessionStorage.getItem("role") === 't') && (<Navbar menuList={menuList_t} />)}
+        {(window.sessionStorage.getItem("role") === 'a') && (<Navbar menuList={menuList_m} />)}
+        {(window.sessionStorage.getItem("role") === 'e') && (<Navbar menuList={menuList_e} />)}
+     </div>}
+         
          <div className='T_mainInnerR'>
             {(window.sessionStorage.getItem("role") === 's') && (<S_Routes />)}
             {(window.sessionStorage.getItem("role") === 't') && (<T_Routes />)}

@@ -1,6 +1,6 @@
 [
    {
-      "title": "수업관리",
+      "title": "수업 관리",
       "subtitle": [
          {
             "title": "공지사항",
@@ -21,11 +21,15 @@
       ]
    },
    {
-      "title": "학생관리",
+      "title": "학생 관리",
       "subtitle": [
          {
             "title": "학생 정보",
             "url": "/std_info"
+         },
+         {
+            "title": "학생 상담",
+            "url": "/consulting"
          }
       ]
    }

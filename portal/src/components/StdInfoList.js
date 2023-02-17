@@ -1,11 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 import ageCaculate from '../utils/ageCaculate'
 import '../css/StdInfoList.css'
 import MyResponsiveSunburst from './MyResponsiveSunburst'
 
 const StdInfoList = () => {
+
+   const navigate = useNavigate();
 
    // 코스 정보를 활용해 테이블 제목을 저장
    const [tableTitle, setTableTitle] = useState('')
@@ -31,6 +34,15 @@ const StdInfoList = () => {
      const { value } = e.target;
      setStdInfo(stdInfo.map((item)=> item.id == id ? {...item, division: value} : item));
    };
+
+   const go_to_userdetail = (e) => {
+      navigate("/detail_user", {
+        //버튼 클릭시 정보를 수강생 정보를 넘겨준다
+        state: {
+          mb_id: e.currentTarget.getAttribute("mb_id")
+        },
+      });
+    };
 
    const onModifyBtnClick = () => {
       !modify &&
@@ -70,6 +82,7 @@ const StdInfoList = () => {
 
    return (
       <div className='container stdInfoContainer'>
+         <h1>취업 통계</h1>
          <div>
             <div style={{ width: '25rem', height: '20rem', zIndex: '0' }}><MyResponsiveSunburst data={chart} /></div>
             <table>
@@ -107,16 +120,16 @@ const StdInfoList = () => {
                <tbody>
                   {stdInfo.map((item, idx) => 
                   <tr>
-                     <td>{idx + 1}</td>
-                     <td>{item.name}</td>
-                     <td>{item.phone}</td>
-                     <td>{item.gender==='m'?'남':'여'}</td>
-                     <td>{ageCaculate(item.birthdate.substring(0,4))}</td>
-                     <td>{item.school}</td>
-                     <td>{item.major}</td>
-                     <td>{item.certification}</td>
-                     <td>{item.hope_jop}</td>
-                     <td>{item.hope_city.includes('전체')?'무관':item.hope_city}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{idx + 1}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.name}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.phone}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.gender==='m'?'남':'여'}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{ageCaculate(item.birthdate.substring(0,4))}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.school}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.major}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.certification}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.hope_jop}</td>
+                     <td mb_id={item.id} onClick={go_to_userdetail}>{item.hope_city.includes('전체')?'무관':item.hope_city}</td>
                      {modify?<td>{item.example}</td>:<td><select onChange={onExampleChange} mb_id={item.id} value={item.example}><option>모범</option><option>  </option></select></td>}
                      {modify?<td>{item.division}</td>:<td><select onChange={onDivisionChange} mb_id={item.id} value={item.division}><option>희망</option><option>재직</option><option>취업</option><option>자력</option><option>제외</option><option>기타</option><option>중탈</option></select></td>}
                      {modify?<td>{item.special}</td>:<td><input onChange={onSpecialChange} mb_id={item.id} value={item.special} type='text'></input></td>}

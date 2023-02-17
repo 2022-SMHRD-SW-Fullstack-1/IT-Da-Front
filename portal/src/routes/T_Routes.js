@@ -14,6 +14,8 @@ import C_extend from '../pages/Course/Teacher/extend/C_extend';
 import C_extend_write from '../pages/Course/Teacher/extend/C_extend_write';
 import C_extend_detail from '../pages/Course/Teacher/extend/C_extend_detail';
 import C_schedule from '../pages/Course/C_schedule';
+import E_main_detail from '../pages/Enterprise/E_main_detail';
+import C_consulting from '../pages/Course/Teacher/C_consulting';
 
 const T_Routes = () => {
    return (
@@ -31,6 +33,8 @@ const T_Routes = () => {
          <Route path='/extend/write' element={<C_extend_write/>}/>
          <Route path='/extend/detail' element={<C_extend_detail/>}/>
          <Route path='/schedule' element={<C_schedule/>}/>
+         <Route path='/detail_user' element={<E_main_detail/>}/>
+         <Route path='/consulting' element={<C_consulting/>}/>
       </Routes>
    )
 }
