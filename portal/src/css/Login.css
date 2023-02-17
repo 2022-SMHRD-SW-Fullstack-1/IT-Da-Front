@@ -2,27 +2,43 @@
 .registerCntainer {
   display: flex;
   justify-content: center;
+
 }
+.topDiv, .loginDiv{
+  box-shadow: 0 2px 8px 0 gray;
+  padding: 1rem 0.7rem;
+  background-color: #f8f9fa;
+  margin: 4rem;
+}
+
+
+
 .loginContainer {
   min-height: 32rem;
+  margin-bottom: 5rem;
+  
 }
 .loginTab {
   display: flex;
   width: 100%;
   justify-content: center;
+  
 }
 .loginTab > button {
   border: none;
   background-color: var(--mainGrey);
   padding: 1rem;
-  width: 40%;
+  width: 45%;
+
 }
 .loginContainer > div > div > input {
-  width: 80%;
+  width: 90%;
   padding: 0.3rem 0.5rem;
-  margin-top: 1rem;
+  margin: 1rem 0 -0.1rem 0;
   border: 1px solid rgb(211, 211, 211);
-  border-radius: 5px;
+  border-radius: 0 0 0 0;
+  height: 3rem;
+
 }
 
 .memberLogin,
@@ -34,13 +50,16 @@
 }
 .memberLogin > button,
 .enterpriseLogin > button {
-  width: 80%;
+  width: 90%;
   border: none;
   border-radius: 5px;
   padding: 0.3rem 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 1.2rem;
   background-color: var(--mainBlue);
   color: white;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: bold;
 }
 .memberLogin > div,
 .enterpriseLogin > div {
@@ -48,7 +67,7 @@
   align-items: center;
   justify-content: flex-start;
   margin-top: 0.5rem;
-  width: 80%;
+  width: 88%;
 }
 .memberLogin span,
 .enterpriseLogin span {
@@ -58,6 +77,15 @@
   display: flex;
   justify-content: center;
   font-size: 0.9rem;
+}
+
+
+#IdInput{
+  border-radius: 5px 5px 0 0;
+}
+#PwInput{
+  border-radius:  0 0 5px 5px;
+  margin-top: 0rem;
 }
 
 .enterpriseLogin > span {
@@ -71,4 +99,61 @@
   border-bottom: 2px solid #008ACC !important;
   color: #008ACC !important;
   font-weight: bold;
+}
+
+.loginLogo{
+  display: flex;
+  width: 20rem;
+  margin: auto;
+  margin-top: 8rem;
+ 
+  
+}
+.LoginFooterLogo{
+  width: 8rem;
+  height: 1.5rem; 
+  margin-bottom: 0.1rem;
+}
+.LoginFooterLogo:hover{
+cursor: pointer;
+}
+.LoginText{
+font-size: 0.7rem;
+color: #888;
+}
+.LoginCorp{
+font-size: 0.7rem;
+}
+
+.LoginFopterDiv{
+  height: 10px;
+  margin: auto;
+}
+
+.loginFooter{
+  display: flex;
+ margin-bottom: 8rem;
+}
+.personal_info_Div{
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  font-size: 0.7rem;
+  margin-bottom: 0.1rem;
+  color: gray;
+}
+.personal_info_Div:hover{
+  cursor: pointer;
+}
+
+.personal_2{
+ font-weight: bold;
+}
+
+#personal_line_1{
+  font-size: 0.1rem;
+}
+
+.loginLine_1{
+  font-size: 0.5rem;
 }
