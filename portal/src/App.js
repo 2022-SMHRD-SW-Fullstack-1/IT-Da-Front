@@ -1,5 +1,6 @@
 import './css/App.css';
 import './css/header.css'
+import { useLocation } from 'react-router-dom';
 
 import ITDaRoutes from './routes/ITDaRoutes';
 import LoginRoutes from "./routes/LoginRoutes";
@@ -8,16 +9,21 @@ import Header from './components/Header'
 import Alarm from './pages/Alarm/Alarm';
 
 function App() {
+
+  const location = useLocation();
+
   return (
     <div className='T_mainTopDiv'>
-      <Header />
-      <Alarm/>
+      {location.pathname !== "/consulting"
+        && <Header />}
+      <Alarm />
       {window.sessionStorage.getItem("loginId") == null ? (
-        <LoginRoutes/>
+        <LoginRoutes />
       ) : (
-            <ITDaRoutes />
+        <ITDaRoutes />
       )}
-      <Footer />
+      {location.pathname !== "/consulting"
+        && <Footer />}
     </div>
   );
 }
