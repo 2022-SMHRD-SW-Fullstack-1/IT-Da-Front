@@ -119,7 +119,7 @@ const StdInfoList = () => {
                </thead>
                <tbody>
                   {stdInfo.map((item, idx) => 
-                  <tr>
+                  <tr key={item.phone}>
                      <td mb_id={item.id} onClick={go_to_userdetail}>{idx + 1}</td>
                      <td mb_id={item.id} onClick={go_to_userdetail}>{item.name}</td>
                      <td mb_id={item.id} onClick={go_to_userdetail}>{item.phone}</td>
