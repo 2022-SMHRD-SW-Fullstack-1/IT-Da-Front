@@ -158,25 +158,27 @@ const E_main_detail = () => {
 
   const goToResumeFrame = () => {
     axios
-    .post("/alarm/addSAlarm", {
-     mb_id_to : state.mb_id,
-     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 이력서를 출력하셨습니다.` 
-    })
-    .then((res) => {
-    })
-    .catch(function (error) {
-    });
+      .post("/alarm/addSAlarm", {
+        mb_id_from: window.sessionStorage.getItem('loginId'),
+        mb_id_to: state.mb_id,
+        alarm_content: `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 이력서를 출력하셨습니다.`
+      })
+      .then((res) => {
+      })
+      .catch(function (error) {
+      });
     axios
-    .post("/alarm/addTAlarm", {
-     mb_id_to : state.mb_id,
-     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 이력서를 출력하셨습니다.` 
-    })
-    .then((res) => {
-    })
-    .catch(function (error) {
-    });
-    navigate('/resume/frame', 
-    {state:{ resume: resume, graduation: graduation, career: career, certification:certification, prize:prize, military:military }})
+      .post("/alarm/addTAlarm", {
+        mb_id_from: window.sessionStorage.getItem('loginId'),
+        mb_id_to: state.mb_id,
+        alarm_content: `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 이력서를 출력하셨습니다.`
+      })
+      .then((res) => {
+      })
+      .catch(function (error) {
+      });
+    navigate('/resume/frame',
+      { state: { resume: resume, graduation: graduation, career: career, certification: certification, prize: prize, military: military } })
   }
 
   // 자기소개서 컨택
@@ -190,23 +192,25 @@ const E_main_detail = () => {
 
   const goToCoverLetterFrame = () => {
     axios
-    .post("/alarm/addSAlarm", {
-     mb_id_to : state.mb_id,
-     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 자기소개서를 출력하셨습니다.` 
-    })
-    .then((res) => {
-    })
-    .catch(function (error) {
-    });
+      .post("/alarm/addSAlarm", {
+        mb_id_from: window.sessionStorage.getItem('loginId'),
+        mb_id_to: state.mb_id,
+        alarm_content: `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 자기소개서를 출력하셨습니다.`
+      })
+      .then((res) => {
+      })
+      .catch(function (error) {
+      });
     axios
-    .post("/alarm/addTAlarm", {
-     mb_id_to : state.mb_id,
-     alarm_content : `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 자기소개서를 출력하셨습니다.` 
-    })
-    .then((res) => {
-    })
-    .catch(function (error) {
-    });
+      .post("/alarm/addTAlarm", {
+        mb_id_from: window.sessionStorage.getItem('loginId'),
+        mb_id_to: state.mb_id,
+        alarm_content: `${window.sessionStorage.getItem('userName')} 님이 ${state.name}님의 자기소개서를 출력하셨습니다.`
+      })
+      .then((res) => {
+      })
+      .catch(function (error) {
+      });
     navigate('/cover_letter/frame',
       { state: { coverLetter: coverLetter } })
   }
@@ -227,7 +231,7 @@ const E_main_detail = () => {
               {resume.gender} / {resume.birthday} / {ageCaculate(resume.birthday.substring(0, 4))}세
             </p>
             <div className="" onClick={onHandleBookmark} style={{ marginLeft: '0.5rem' }}>
-              {isBookmark ? <RiStarFill /> : <RiStarLine />}
+              {window.sessionStorage.getItem('role') === 'e' && (isBookmark ? <RiStarFill /> : <RiStarLine />)}
             </div>
           </div>
           <div>

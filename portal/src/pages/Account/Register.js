@@ -192,8 +192,11 @@ const Register = () => {
       });
     navigate('/');
 
+
+    // 학생 회원가입 알림
     axios
-      .post('/member/alarm', {
+      .post('/alarm/stdRegisterAlarm', {
+        mb_id_from : id,
         course_key : '00F2A8AB',
         alarm_content : `${name}님이 회원가입을 하셨습니다`
       })

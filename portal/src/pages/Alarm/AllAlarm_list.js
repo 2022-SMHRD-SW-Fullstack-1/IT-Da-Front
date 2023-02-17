@@ -51,7 +51,8 @@ const AllAlarm_list = (props) => {
 
 
     return (
-        <ListGroup.Item>  <div className='alarm_content'>{props.item.alarm_content}</div>
+        <ListGroup.Item>
+            <div className='alarm_content'>{props.item.alarm_content}</div>
             <div className='alarm_dt'>{displayedAt(createdAt)}
                 <button className='alarm_delete' onClick={alarm_delete}>x</button>
             </div>

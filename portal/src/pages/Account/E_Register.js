@@ -149,17 +149,20 @@ const E_Register = () => {
          });
       navigate('/');
 
+      // 기업회원가입 알람
+
       axios
-      .post('/enterprise/alarm', {
-         mb_id_to : 'admin',
-         alarm_content : `${enterprise}님이 가입신청을 하셨습니다.`
-      })
-      .then((res) => {
-         console.log(res)
-      })
-      .catch((e) => {
-      });
-   navigate('/');
+         .post('/alarm/enterRegisterAlarm', {
+            mb_id_from : id,
+            mb_id_to: 'admin',
+            alarm_content: `${enterprise}님이 가입신청을 하셨습니다.`
+         })
+         .then((res) => {
+            console.log(res)
+         })
+         .catch((e) => {
+         });
+      navigate('/');
    };
 
    return (
