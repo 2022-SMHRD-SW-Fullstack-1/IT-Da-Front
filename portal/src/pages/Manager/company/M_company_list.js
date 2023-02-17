@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const M_company_list = (props) => {
 
-    console.log(props)
+    
  
     const [company, setCompany] = useState({
         company_num : props.item.company_num + "",
@@ -21,6 +21,7 @@ const M_company_list = (props) => {
         company_etc: props.item.company_etc,
         company_salary: props.item.company_salary,
         company_apply: props.item.company_apply,
+        company_count: props.item.company_count
     })
 
     const onChange = (e) => {
@@ -33,7 +34,7 @@ const M_company_list = (props) => {
 
     const [edit_style_po, setEdit_style_po] = useState({ display: "" })
     const [edit_style_op, setEdit_style_op] = useState({ display: "none" })
-
+    const [bookmark_count, setBookmark_count]=useState()
     // 과정수정
     const edit_company_submit = (e) => {
         e.preventDefault();
@@ -102,6 +103,11 @@ const M_company_list = (props) => {
       // bookmark가 체크 되어있을때 => bookmark 삭제
       var company_num = company.company_num.toString();
       props.setBookmarkList(props.bookmarkList.filter((e) => e !== company_num.toString()));
+      
+      setCompany((prevState)=>({
+        ...prevState,
+        company_count: prevState.company_count-1
+      }))
       axios
         .post("/bookmark/delete_bookmark_company", {
           mb_id: window.sessionStorage.getItem("loginId"),
@@ -120,6 +126,10 @@ const M_company_list = (props) => {
         company.company_num,
       ]);
       console.log(company.company_num)
+      setCompany((prevState)=>({
+        ...prevState,
+        company_count: prevState.company_count+1
+      }))
       axios
         .post("/bookmark/add_bookmark_company", {
           mb_id: window.sessionStorage.getItem("loginId"),
@@ -140,7 +150,9 @@ const M_company_list = (props) => {
         <tr className="company_container">
 
                 
-             {window.sessionStorage.getItem("role")==="s"&&(props.bookmarkList.includes(company.company_num.toString()) ? <td company_num={company.company_num} onClick={onHandleBookmark}><RiStarFill /></td> : <td company_num={company.company_num} onClick={onHandleBookmark}><RiStarLine /></td>)}
+             {window.sessionStorage.getItem("role")==="s"&&(props.bookmarkList.includes(company.company_num.toString()) ?
+              <td company_num={company.company_num} onClick={onHandleBookmark}><RiStarFill /><p>{company.company_count}</p></td> :
+               <td company_num={company.company_num} onClick={onHandleBookmark}><RiStarLine /><p>{company.company_count}</p></td>)}
             
             
             <td className='company_register'>

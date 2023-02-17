@@ -5,12 +5,9 @@ import M_company_list from "../../Manager/company/M_company_list";
 
 const S_C_main = () => {
   
-    const [isBookmark, setIsBookmark] = useState([])
-    
     const [bookmarkList, setBookmarkList] = useState([])
     //수료생 누구를 북마크했는지 정보
-  const [bookmark_info, setBookmark_info] = useState([]);
-    const [member_info,setMember_info]=useState([])
+  
   const [company, setCompany] = useState([])
   useEffect(() => {
       axios
