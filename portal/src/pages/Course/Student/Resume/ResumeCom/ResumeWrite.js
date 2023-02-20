@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import SelectFileBtn from '../../../../../components/file/SelectFileBtn'
 import UploadBtn from '../../../../../components/file/UploadBtn'
 import ageCaculate from '../../../../../utils/ageCaculate'
+import MajorList from "../../../../../asset/list/Major"
 
 const ResumeWrite = ({ resume, setResume }) => {
     /**지역 전체 리스트 */
@@ -45,7 +46,7 @@ const ResumeWrite = ({ resume, setResume }) => {
     const fileTypes = ['image/jpeg', 'image/jpg']
     const fileExts = ['jpeg', 'jpg']
     const [fileImage, setFileImage] = useState();
-
+    const mList=MajorList
     return (
 
         <div className='r_basic'>
@@ -89,7 +90,7 @@ const ResumeWrite = ({ resume, setResume }) => {
                     </div>
                     <div>
                         <p>전&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공</p>
-                        <p><span>{resume.major}</span>
+                        <p><span>{(mList.includes(resume.major))&&'전 공'||'비전공'}</span>
                         </p>
                     </div>
                     <div>
