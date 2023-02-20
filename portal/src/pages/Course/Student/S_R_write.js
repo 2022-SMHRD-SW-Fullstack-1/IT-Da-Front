@@ -8,6 +8,8 @@ import GraduationWrite from "./Resume/ResumeCom/GraduationWrite"
 import MilitaryWrite from "./Resume/ResumeCom/MilitaryWrite"
 import PrizeWrite from "./Resume/ResumeCom/PrizeWrite"
 import ResumeWrite from "./Resume/ResumeCom/ResumeWrite"
+import Wish_fieldWrite from "./Resume/ResumeCom/Wish_fieldWrite"
+import SkillsWrite from "./Resume/ResumeCom/SkillsWrite"
 import { useNavigate } from "react-router-dom"
 
 function S_R_write() {
@@ -39,6 +41,7 @@ function S_R_write() {
     grad_dt: '',
     grad_type: '',
     grad_score: '',
+    grad_idx:0,
   }
   ])
   //추가버튼있음
@@ -48,7 +51,8 @@ function S_R_write() {
     cr_position: '',
     cr_s_dt: '',
     cr_e_dt: '',
-    activity: '',
+    cr_activity: '',
+    cd_idx:0,
   }])
   //추가버튼있음
   const [certification, setCertification] = useState([{
@@ -56,6 +60,7 @@ function S_R_write() {
     cert_org: '',
     cert_name: '',
     cert_dt: '',
+    cert_idx:0,
   }])
   //추가버튼있음
   const [prize, setPrize] = useState([{
@@ -63,6 +68,7 @@ function S_R_write() {
     prize_org: '',
     prize_name: '',
     prize_dt: '',
+    prize_idx:'',
   }])
   //추가버튼있음
   const [military, setMilitary] = useState([{
@@ -71,7 +77,17 @@ function S_R_write() {
     mili_army: '',
     mili_s_dt: '',
     veteran_yn: '',
+    mili_idx:'',
   }])
+  const [skills, setSkill] = useState([{
+    skill_num: '',
+    skill_name:'',
+    skill_grade:''
+}])
+const [wish_field, setWishField] = useState([{
+  field_num: '',
+  wish_field_name:''
+}])
 
   // 하위 컴포넌트가 실행되고 메인 컨포넌트가 실행된다.
   // 가데이터가 있는 지금은 문제가 없으나 db값을 받아오면 문제가 생길 수 있음
@@ -93,6 +109,8 @@ function S_R_write() {
         // console.log(res.data[4])
         setMilitary(res.data[5])
         // console.log(res.data[5])
+        setSkill(res.data[6])
+        setWishField(res.data[8])
       }
       )
       .catch(e =>
@@ -102,12 +120,14 @@ function S_R_write() {
   const navigate = useNavigate()
   const goToResumeFrame = () => {
     navigate('/resume/frame', 
-    {state:{ resume: resume, graduation: graduation, career: career, certification:certification, prize:prize, military:military }})
+    {state:{ resume: resume, graduation: graduation, career: career, certification:certification, prize:prize, military:military, skills:skills, wish_field:wish_field }})
   }
   return (
     <div className='topDiv_resumePage'>
       <div className='topDiv_resume'>
-        <ResumeWrite resume={resume} setResume={setResume} />
+        <ResumeWrite resume={resume} skills={skills} wish_field={wish_field} setWishField={setWishField} setSkill={setSkill} setResume={setResume} />
+        <Wish_fieldWrite wish_field={wish_field} setWishField={setWishField}/>
+        <SkillsWrite skills={skills} setSkill={setSkill}/>
         <GraduationWrite graduation={graduation} setGraduation={setGraduation} />
         <CareerWrite career={career} setCareer={setCareer} />
         <CertificationWrite certification={certification} setCertification={setCertification} />
