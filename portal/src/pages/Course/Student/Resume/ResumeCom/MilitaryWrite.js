@@ -121,14 +121,14 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                 >
-                                    <td onClick={() => onRemove(military.mili_num, military.mili_title, military.mili_army)}>
-                                        <div className='.sRBtnDiv'>
-                                            <img className='sRDeleteBtn' src={btnDelete} />
-                                        </div></td>
                                     <td><p>{military.mili_title}</p></td>
                                     <td><p>{military.mili_army}</p></td>
                                     <td><p>{military.mili_s_dt}</p></td>
                                     <td><p>{military.veteran_yn}</p></td>
+                                    <td onClick={() => onRemove(military.mili_num, military.mili_title, military.mili_army)}>
+                                        <div className='sRBtnDiv'>
+                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        </div></td>
                                 </tr>
                             )}
                         </Draggable>
@@ -144,20 +144,16 @@ const MilitaryWrite = ({ military, setMilitary }) => {
             <table className='resumeTable'>
                 <thead>
                     <tr>
-                        <th></th>
                         <th>구분</th>
                         <th>군별</th>
                         <th>복무기간(면제사유)</th>
                         <th>보훈대상</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {dnd}
                 <tbody>
                     <tr>
-                        <td onClick={addMilitary}>
-                            <div className='.sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
                         <td><select name='mili_title' onChange={onChange} >
                             {miliTitleList.map((mili_title) => (
                                 <option value={mili_title} key={1 + mili_title}>
@@ -168,6 +164,10 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                         <td><input type='text' name='mili_army' className='miliArmy' onChange={onChange} value={inputs.mili_army} /></td>
                         <td><input type='text' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} /></td>
                         <td><input type='text' name='veteran_yn' onChange={onChange} value={inputs.veteran_yn} /></td>
+                        <td onClick={addMilitary}>
+                            <div className='sRBtnDiv'>
+                                <img className='sRAddBtn' src={btnAdd} />
+                            </div></td>
                     </tr>
                 </tbody>
             </table>

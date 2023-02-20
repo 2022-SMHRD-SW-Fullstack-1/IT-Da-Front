@@ -132,15 +132,15 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                 >
-                                    <td onClick={() => onRemove(graduation.grad_num, graduation.grad_dt, graduation.grad_school, graduation.school_type, graduation.grad_type)}>
-                                        <div className='.sRBtnDiv'>
-                                            <img className='sRDeleteBtn' src={btnDelete} />
-                                        </div></td>
                                     <td><p>{graduation.grad_school}</p></td>
                                     <td><p>{graduation.school_type}</p></td>
                                     <td><p>{graduation.grad_dt.replace(/-/g, '.')}</p></td>
                                     <td><p>{graduation.grad_type}</p></td>
                                     <td><p>{graduation.grad_score}</p></td>
+                                    <td onClick={() => onRemove(graduation.grad_num, graduation.grad_dt, graduation.grad_school, graduation.school_type, graduation.grad_type)}>
+                                        <div className='sRBtnDiv'>
+                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        </div></td>
                                 </tr>
                             )}
                         </Draggable>
@@ -157,21 +157,17 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
             <table className='resumeTable'>
                 <thead>
                     <tr>
-                        <th></th>
                         <th>학교명</th>
                         <th>전공(계열)</th>
                         <th>기간</th>
                         <th>구분</th>
                         <th>학점</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {dnd}
                 <tbody>
                     <tr>
-                        <td onClick={addGraduation}>
-                            <div className='.sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
                         <td><input type='text' name='grad_school' onChange={onChange} value={inputs.grad_school} /></td>
                         <td><input type='text' name='school_type' onChange={onChange} value={inputs.school_type} /></td>
                         <td><input type='date' className='dateInput' name='grad_dt' onChange={onChange} value={inputs.grad_dt} /></td>
@@ -184,6 +180,10 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                         </select>
                         </td>
                         <td><input type='text' name='grad_score' className='gradScore' onChange={onChange} value={inputs.grad_score} /></td>
+                        <td onClick={addGraduation}>
+                            <div className='sRBtnDiv'>
+                                <img className='sRAddBtn' src={btnAdd} />
+                            </div></td>
                     </tr>
                 </tbody>
             </table>

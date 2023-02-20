@@ -39,10 +39,10 @@ const PrizeWrite = ({ prize, setPrize }) => {
 
         if ((prize_name == '') || (prize_dt == '') || (prize_org == '')) {
             alert('입력란을 채워 주세요')
-        }else if (window.confirm("데이터를 추가하시겠습니까?")) {
+        } else if (window.confirm("데이터를 추가하시겠습니까?")) {
             axios
                 .post('/student/prize/add', {
-                    prize_num:inputs.prize_num,
+                    prize_num: inputs.prize_num,
                     prize_org: inputs.prize_org,
                     prize_name: inputs.prize_name,
                     prize_dt: inputs.prize_dt,
@@ -61,25 +61,25 @@ const PrizeWrite = ({ prize, setPrize }) => {
             })
         }
     }
-    const onRemove = (prize_num,prize_org, prize_name, prize_dt) => {
+    const onRemove = (prize_num, prize_org, prize_name, prize_dt) => {
         // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
         // = new.num 가 num 인 것을 제거함
         console.log(prize_org, prize_name, prize_dt)
 
         if (window.confirm("데이터를 삭제하시겠습니까? 되돌릴 수 없습니다")) {
-            setPrize(prize.filter(newPrize => (newPrize.prize_num!=prize_num)))
+            setPrize(prize.filter(newPrize => (newPrize.prize_num != prize_num)))
             axios
-            .post('/student/prize/delete', {
-                prize_org:prize_org,
-                prize_name:prize_name,
-                prize_dt:prize_dt,
-                id: sessionStorage.getItem("loginId")
-            })
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((e) => console.log(e));
-          }
+                .post('/student/prize/delete', {
+                    prize_org: prize_org,
+                    prize_name: prize_name,
+                    prize_dt: prize_dt,
+                    id: sessionStorage.getItem("loginId")
+                })
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((e) => console.log(e));
+        }
     }
     const onDragEnd = result => {
         if (!result.destination) {
@@ -87,14 +87,14 @@ const PrizeWrite = ({ prize, setPrize }) => {
         }
         setPrize(items => reorder(items, result.source.index, result.destination.index))
         axios
-        .post('/student/prize/idx', {
-            prize: reorder(prize,result.source.index, result.destination.index),
-            id: sessionStorage.getItem("loginId")
-        })
-        .then((res) => {
-            console.log(res)
-        })
-        .catch((e) => console.log(e));
+            .post('/student/prize/idx', {
+                prize: reorder(prize, result.source.index, result.destination.index),
+                id: sessionStorage.getItem("loginId")
+            })
+            .then((res) => {
+                console.log(res)
+            })
+            .catch((e) => console.log(e));
         console.log(prize)
     }
 
@@ -118,13 +118,13 @@ const PrizeWrite = ({ prize, setPrize }) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                 >
-                            <td onClick={() => onRemove(prize.prize_num, prize.prize_org, prize.prize_name,prize.prize_dt)}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRDeleteBtn' src={btnDelete}/>
-                                </div></td>
-                            <td><p>{prize.prize_name}</p></td>
-                            <td><p>{prize.prize_dt.replace(/-/g,'.')} </p></td>
-                            <td><p>{prize.prize_org}</p></td>
+                                    <td><p>{prize.prize_name}</p></td>
+                                    <td><p>{prize.prize_dt.replace(/-/g, '.')} </p></td>
+                                    <td><p>{prize.prize_org}</p></td>
+                                    <td onClick={() => onRemove(prize.prize_num, prize.prize_org, prize.prize_name, prize.prize_dt)}>
+                                        <div className='sRBtnDiv'>
+                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        </div></td>
                                 </tr>
                             )}
                         </Draggable>
@@ -140,22 +140,22 @@ const PrizeWrite = ({ prize, setPrize }) => {
             <table className='resumeTable'>
                 <thead>
                     <tr>
-                        <th></th>
                         <th>수상명</th>
                         <th>수상일자</th>
                         <th>기관명</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {dnd}
                 <tbody>
                     <tr>
-                        <td onClick={addPrize}>
-                            <div className='.sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd}/>
-                            </div></td>
                         <td><input type='text' name='prize_name' onChange={onChange} value={inputs.prize_name} /></td>
                         <td><input type='date' className='dateInput' name='prize_dt' onChange={onChange} value={inputs.prize_dt} /></td>
                         <td><input type='text' name='prize_org' onChange={onChange} value={inputs.prize_org} /></td>
+                        <td onClick={addPrize}>
+                            <div className='sRBtnDiv'>
+                                <img className='sRAddBtn' src={btnAdd} />
+                            </div></td>
                     </tr>
                 </tbody>
             </table>

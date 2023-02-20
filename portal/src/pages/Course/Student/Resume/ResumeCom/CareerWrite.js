@@ -136,16 +136,17 @@ const CareerWrite = ({ career, setCareer }) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                 >
-                                    <td onClick={() => onRemove(career.cr_num, career.cr_organization, career.cr_position, career.cr_s_dt, career.cr_e_dt)}>
-                                        <div className='.sRBtnDiv'>
-                                            <img className='sRDeleteBtn' src={btnDelete} />
-                                        </div></td>
                                     <td><p>{career.cr_organization}</p></td>
                                     <td><p>{career.cr_position}</p></td>
                                     <td><p>
                                         {career.cr_s_dt.replace(/-/g, '.')} ~ {career.cr_e_dt.replace(/-/g, '.')}
                                     </p></td>
                                     <td><p>{career.cr_activity}</p></td>
+                                    <td onClick={() => onRemove(career.cr_num, career.cr_organization, career.cr_position, career.cr_s_dt, career.cr_e_dt)}>
+                                        <div className='sRBtnDiv'>
+                                            {/* <img className='sRDeleteBtn' src={btnDelete} /> */}
+                                            X
+                                        </div></td>
                                 </tr>
                             )}
                         </Draggable>
@@ -162,20 +163,16 @@ const CareerWrite = ({ career, setCareer }) => {
             <table className='resumeTable'>
                 <thead>
                     <tr>
-                        <th></th>
                         <th>기관명</th>
                         <th>직책</th>
                         <th>기간</th>
                         <th>직무/활동사항</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {dnd}
                 <tbody>
                     <tr>
-                        <td onClick={addCareer}>
-                            <div className='.sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
                         <td><input type='text' name='cr_organization' onChange={onChange} value={inputs.cr_organization} /></td>
                         <td><input type='text' name='cr_position' className='crPosition' onChange={onChange} value={inputs.cr_position} /></td>
                         <td>
@@ -184,6 +181,10 @@ const CareerWrite = ({ career, setCareer }) => {
                             <input type='date' className='dateInput' name='cr_e_dt' onChange={onChange} value={inputs.cr_e_dt} />
                         </td>
                         <td><input type='text' name='cr_activity' onChange={onChange} value={inputs.cr_activity} /></td>
+                        <td onClick={addCareer}>
+                            <div className='sRBtnDiv'>
+                                <img className='sRAddBtn' src={btnAdd} />
+                            </div></td>
                     </tr>
                 </tbody>
             </table>

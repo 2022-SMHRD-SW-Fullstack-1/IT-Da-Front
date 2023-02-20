@@ -114,13 +114,14 @@ const CertificationWrite = ({ certification, setCertification }) => {
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
                                 >
-                            <td onClick={() => onRemove(certification.cert_num,certification.cert_org,certification.cert_name,certification.cert_dt)}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRDeleteBtn' src={btnDelete}/>
-                                    </div></td>
                             <td><p>{certification.cert_name}</p></td>
                             <td><p>{certification.cert_org}</p></td>
                             <td><p>{certification.cert_dt.replace(/-/g,'.')} </p></td>
+                            <td onClick={() => onRemove(certification.cert_num,certification.cert_org,certification.cert_name,certification.cert_dt)}>
+                                <div className='sRBtnDiv'>
+                                    {/* <img className='sRDeleteBtn' src={btnDelete}/> */}
+                                    X
+                                    </div></td>
                                 </tr>
                             )}
                         </Draggable>
@@ -137,22 +138,22 @@ const CertificationWrite = ({ certification, setCertification }) => {
             <table className='resumeTable'>
                 <thead>
                     <tr>
-                        <th></th>
                         <th>자격증명</th>
                         <th>발급기관</th>
                         <th>발급일자</th>
+                        <th></th>
                     </tr>
                 </thead>
                 {dnd}
                 <tbody>
                     <tr>
-                        <td onClick={addCertification}>
-                            <div className='.sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd}/>
-                            </div></td>
                         <td><input type='text' name='cert_name' onChange={onChange} value={inputs.cert_name} /></td>
                         <td><input type='text' name='cert_org' onChange={onChange} value={inputs.cert_org} /></td>
                         <td><input type='date' className='dateInput' name='cert_dt' onChange={onChange} value={inputs.cert_dt} /></td>
+                        <td onClick={addCertification}>
+                            <div className='sRBtnDiv'>
+                                <img className='sRAddBtn' src={btnAdd}/>
+                            </div></td>
                     </tr>
                 </tbody>
             </table>
