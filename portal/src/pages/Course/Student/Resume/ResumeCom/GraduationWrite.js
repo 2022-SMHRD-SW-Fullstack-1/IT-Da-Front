@@ -3,9 +3,17 @@ import React, { useState } from 'react'
 import uuid from 'react-uuid'
 import btnAdd from '../../../../../asset/img/btn_add.png'
 import btnDelete from '../../../../../asset/img/btn_delete.png'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+}
 
 const GraduationWrite = ({ graduation, setGraduation }) => {
-    const gradTypeList = ['선택','재학', '휴학', '졸업예정', '졸업']
+    const gradTypeList = ['선택', '재학', '휴학', '졸업예정', '졸업']
     const [inputs, setInputs] = useState({
         grad_num: uuid(),
         grad_school: '',
@@ -40,8 +48,7 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
             (grad_type == '') ||
             (grad_type == '선택')) {
             alert('입력란을 채워 주세요')
-        }
-        else {
+        } else if (window.confirm("데이터를 추가하시겠습니까?")) {
             axios
                 .post('/student/graduation/add', {
                     grad_school: inputs.grad_school,
@@ -68,26 +75,81 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
     }
     const onRemove = (grad_num, grad_dt, grad_school, school_type, grad_type) => {
         if (window.confirm("데이터를 삭제하시겠습니까? 되돌릴 수 없습니다")) {
-        // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-        // = new.num 가 num 인 것을 제거함
-        console.log('제거')
-        setGraduation(graduation.filter(newGraduation =>
-            (newGraduation.grad_num !== grad_num)
-        ))
-        axios
-            .post('/student/graduation/delete', {
-                grad_dt: grad_dt,
-                grad_school: grad_school,
-                school_type: school_type,
-                grad_type: grad_type,
-                id: sessionStorage.getItem("loginId")
-            })
-            .then((res) => {
-                console.log(res)
-            })
-            .catch((e) => console.log(e));
+            // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+            // = new.num 가 num 인 것을 제거함
+            console.log('제거')
+            setGraduation(graduation.filter(newGraduation =>
+                (newGraduation.grad_num !== grad_num)
+            ))
+            axios
+                .post('/student/graduation/delete', {
+                    grad_dt: grad_dt,
+                    grad_school: grad_school,
+                    school_type: school_type,
+                    grad_type: grad_type,
+                    id: sessionStorage.getItem("loginId")
+                })
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((e) => console.log(e));
         }
     }
+    const onDragEnd = result => {
+        if (!result.destination) {
+            return
+        }
+        setGraduation(items => reorder(items, result.source.index, result.destination.index))
+        axios
+        .post('/student/graduation/idx', {
+            graduation: reorder(graduation,result.source.index, result.destination.index),
+            id: sessionStorage.getItem("loginId")
+        })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((e) => console.log(e));
+        console.log(graduation)
+    }
+
+    const onDragUpdate = update => {
+        if (!update.destination) {
+            return
+        }
+    }
+    const dnd = <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+        <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+                <tbody
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                >
+                    {graduation.map((graduation, index) => (
+                        <Draggable key={graduation.grad_num} draggableId={"item-" + graduation.grad_num} index={index}>
+                            {(provided, snapshot) => (
+                                <tr onClick={(e) => console.log(index)}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                                    <td onClick={() => onRemove(graduation.grad_num, graduation.grad_dt, graduation.grad_school, graduation.school_type, graduation.grad_type)}>
+                                        <div className='.sRBtnDiv'>
+                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        </div></td>
+                                    <td><p>{graduation.grad_school}</p></td>
+                                    <td><p>{graduation.school_type}</p></td>
+                                    <td><p>{graduation.grad_dt.replace(/-/g, '.')}</p></td>
+                                    <td><p>{graduation.grad_type}</p></td>
+                                    <td><p>{graduation.grad_score}</p></td>
+                                </tr>
+                            )}
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                </tbody>
+            )}
+        </Droppable>
+    </DragDropContext>
 
     return (
         <div className='resumeDiv'>
@@ -103,24 +165,12 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                         <th>학점</th>
                     </tr>
                 </thead>
+                {dnd}
                 <tbody>
-                    {graduation.map((graduation, idx) => (
-                        <tr key={idx}>
-                            <td onClick={() => onRemove(graduation.grad_num, graduation.grad_dt, graduation.grad_school, graduation.school_type, graduation.grad_type)}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRDeleteBtn' src={btnDelete}/>
-                                    </div></td>
-                            <td><p>{graduation.grad_school}</p></td>
-                            <td><p>{graduation.school_type}</p></td>
-                            <td><p>{graduation.grad_dt.replace(/-/g,'.')}</p></td>
-                            <td><p>{graduation.grad_type}</p></td>
-                            <td><p>{graduation.grad_score}</p></td>
-                        </tr>
-                    ))}
                     <tr>
                         <td onClick={addGraduation}>
                             <div className='.sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd}/>
+                                <img className='sRAddBtn' src={btnAdd} />
                             </div></td>
                         <td><input type='text' name='grad_school' onChange={onChange} value={inputs.grad_school} /></td>
                         <td><input type='text' name='school_type' onChange={onChange} value={inputs.school_type} /></td>
@@ -131,12 +181,13 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                                     {grad_type}
                                 </option>
                             ))}
-                            </select>
+                        </select>
                         </td>
                         <td><input type='text' name='grad_score' className='gradScore' onChange={onChange} value={inputs.grad_score} /></td>
                     </tr>
                 </tbody>
             </table>
+            <div><button className="resumeBtn" onClick={addGraduation}>추가하기</button></div>
         </div>
     )
 }

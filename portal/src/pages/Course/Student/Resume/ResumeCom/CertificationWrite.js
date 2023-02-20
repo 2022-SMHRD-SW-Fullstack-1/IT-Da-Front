@@ -3,6 +3,14 @@ import React, { useState } from 'react'
 import uuid from 'react-uuid'
 import btnAdd from '../../../../../asset/img/btn_add.png'
 import btnDelete from '../../../../../asset/img/btn_delete.png'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+}
 const CertificationWrite = ({ certification, setCertification }) => {
     const [inputs, setInputs] = useState({
         cert_num: uuid(),
@@ -29,7 +37,7 @@ const CertificationWrite = ({ certification, setCertification }) => {
         }
         if ((cert_org == '') || (cert_name == '') || (cert_dt == '')) {
             alert('입력란을 채워 주세요')
-        } else {
+        }else if (window.confirm("데이터를 추가하시겠습니까?")) {
             axios
                 .post('/student/certification/add', {
                     cert_org: inputs.cert_org,
@@ -68,6 +76,61 @@ const CertificationWrite = ({ certification, setCertification }) => {
             .catch((e) => console.log(e));
         }
     }
+    const onDragEnd = result => {
+        if (!result.destination) {
+            return
+        }
+        setCertification(items => reorder(items, result.source.index, result.destination.index))
+        axios
+        .post('/student/certification/idx', {
+            certification: reorder(certification,result.source.index, result.destination.index),
+            id: sessionStorage.getItem("loginId")
+        })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((e) => console.log(e));
+        console.log(certification)
+    }
+
+    const onDragUpdate = update => {
+        if (!update.destination) {
+            return
+        }
+    }
+
+    const dnd = <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+        <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+                <tbody
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                >
+                    {certification.map((certification, index) => (
+                        <Draggable key={certification.cert_num} draggableId={"item-"+certification.cert_num} index={index}>
+                            {(provided, snapshot) => (
+                                <tr onClick={(e) => console.log(index)}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                            <td onClick={() => onRemove(certification.cert_num,certification.cert_org,certification.cert_name,certification.cert_dt)}>
+                                <div className='.sRBtnDiv'>
+                                    <img className='sRDeleteBtn' src={btnDelete}/>
+                                    </div></td>
+                            <td><p>{certification.cert_name}</p></td>
+                            <td><p>{certification.cert_org}</p></td>
+                            <td><p>{certification.cert_dt.replace(/-/g,'.')} </p></td>
+                                </tr>
+                            )}
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                </tbody>
+            )}
+        </Droppable>
+    </DragDropContext>
+
     return (
         <div className='resumeDiv'>
             <p className='sRTitle'>자격증</p>
@@ -80,18 +143,8 @@ const CertificationWrite = ({ certification, setCertification }) => {
                         <th>발급일자</th>
                     </tr>
                 </thead>
+                {dnd}
                 <tbody>
-                    {certification.map((certification, idx) => (
-                        <tr key={idx}>
-                            <td onClick={() => onRemove(certification.cert_num,certification.cert_org,certification.cert_name,certification.cert_dt)}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRDeleteBtn' src={btnDelete}/>
-                                    </div></td>
-                            <td><p>{certification.cert_name}</p></td>
-                            <td><p>{certification.cert_org}</p></td>
-                            <td><p>{certification.cert_dt.replace(/-/g,'.')} </p></td>
-                        </tr>
-                    ))}
                     <tr>
                         <td onClick={addCertification}>
                             <div className='.sRBtnDiv'>
@@ -103,6 +156,7 @@ const CertificationWrite = ({ certification, setCertification }) => {
                     </tr>
                 </tbody>
             </table>
+            <div><button className="resumeBtn" onClick={addCertification}>추가하기</button></div>
         </div>
     )
 }

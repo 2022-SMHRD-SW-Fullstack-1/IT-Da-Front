@@ -3,6 +3,14 @@ import uuid from 'react-uuid'
 import React, { useState } from 'react'
 import btnAdd from '../../../../../asset/img/btn_add.png'
 import btnDelete from '../../../../../asset/img/btn_delete.png'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+}
 
 const PrizeWrite = ({ prize, setPrize }) => {
     const [inputs, setInputs] = useState({
@@ -31,8 +39,7 @@ const PrizeWrite = ({ prize, setPrize }) => {
 
         if ((prize_name == '') || (prize_dt == '') || (prize_org == '')) {
             alert('입력란을 채워 주세요')
-        }
-        else {
+        }else if (window.confirm("데이터를 추가하시겠습니까?")) {
             axios
                 .post('/student/prize/add', {
                     prize_num:inputs.prize_num,
@@ -54,13 +61,6 @@ const PrizeWrite = ({ prize, setPrize }) => {
             })
         }
     }
-    // select 또는 insert를 할 때마다 전부 delete를 해주면 문제가 없음
-    // -> 업데이트하는 부분만 추가/삭제하고 싶음
-    // 문제가 되는 부분 -> 데이터를 추가할 때, filter를 어떤 것을 사용해야할지
-    // -> uuid를 사용하고 싶은데, 프론트에서 어떤식으로 가공해야할지 모르겠음
-    //      프론트에서 가공한다면 스프링에서 default가 아니라 프론트에서 설정해준 값을 넣을 수 있을까?
-    //unhex((uuid().replace(/  _utf8mb4\'-\'  /g,  _utf8mb4\'\'  )).toUpperCase)
-    //                                 ?                ?
     const onRemove = (prize_num,prize_org, prize_name, prize_dt) => {
         // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
         // = new.num 가 num 인 것을 제거함
@@ -81,6 +81,59 @@ const PrizeWrite = ({ prize, setPrize }) => {
             .catch((e) => console.log(e));
           }
     }
+    const onDragEnd = result => {
+        if (!result.destination) {
+            return
+        }
+        setPrize(items => reorder(items, result.source.index, result.destination.index))
+        axios
+        .post('/student/prize/idx', {
+            prize: reorder(prize,result.source.index, result.destination.index),
+            id: sessionStorage.getItem("loginId")
+        })
+        .then((res) => {
+            console.log(res)
+        })
+        .catch((e) => console.log(e));
+        console.log(prize)
+    }
+
+    const onDragUpdate = update => {
+        if (!update.destination) {
+            return
+        }
+    }
+    const dnd = <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+        <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+                <tbody
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                >
+                    {prize.map((prize, index) => (
+                        <Draggable key={prize.prize_num} draggableId={"item-" + prize.prize_num} index={index}>
+                            {(provided, snapshot) => (
+                                <tr onClick={(e) => console.log(index)}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                            <td onClick={() => onRemove(prize.prize_num, prize.prize_org, prize.prize_name,prize.prize_dt)}>
+                                <div className='.sRBtnDiv'>
+                                    <img className='sRDeleteBtn' src={btnDelete}/>
+                                </div></td>
+                            <td><p>{prize.prize_name}</p></td>
+                            <td><p>{prize.prize_dt.replace(/-/g,'.')} </p></td>
+                            <td><p>{prize.prize_org}</p></td>
+                                </tr>
+                            )}
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                </tbody>
+            )}
+        </Droppable>
+    </DragDropContext>
     return (
         <div className='resumeDiv'>
             <p className='sRTitle'>수상내역</p>
@@ -89,23 +142,12 @@ const PrizeWrite = ({ prize, setPrize }) => {
                     <tr>
                         <th></th>
                         <th>수상명</th>
-                        {/* <th>내용</th> */}
                         <th>수상일자</th>
                         <th>기관명</th>
                     </tr>
                 </thead>
+                {dnd}
                 <tbody>
-                    {prize.map((prize, idx) => (
-                        <tr key={idx}>
-                            <td onClick={() => onRemove(prize.prize_num, prize.prize_org, prize.prize_name,prize.prize_dt)}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRDeleteBtn' src={btnDelete}/>
-                                </div></td>
-                            <td><p>{prize.prize_name}</p></td>
-                            <td><p>{prize.prize_dt.replace(/-/g,'.')} </p></td>
-                            <td><p>{prize.prize_org}</p></td>
-                        </tr>
-                    ))}
                     <tr>
                         <td onClick={addPrize}>
                             <div className='.sRBtnDiv'>
@@ -117,6 +159,7 @@ const PrizeWrite = ({ prize, setPrize }) => {
                     </tr>
                 </tbody>
             </table>
+            <div><button className="resumeBtn" onClick={addPrize}>추가하기</button></div>
         </div>
     )
 }

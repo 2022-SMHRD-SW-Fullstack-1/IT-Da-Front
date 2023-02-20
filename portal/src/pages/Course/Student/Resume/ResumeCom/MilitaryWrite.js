@@ -3,6 +3,14 @@ import React, { useState } from 'react'
 import uuid from 'react-uuid'
 import btnAdd from '../../../../../asset/img/btn_add.png'
 import btnDelete from '../../../../../asset/img/btn_delete.png'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
+const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
+    return result
+}
 
 const MilitaryWrite = ({ military, setMilitary }) => {
     const miliTitleList = ['선택', '필', '미필', '면제']
@@ -35,8 +43,7 @@ const MilitaryWrite = ({ military, setMilitary }) => {
             (mili_title == '선택') ||
             (mili_s_dt == '')) {
             alert('입력란을 채워 주세요')
-        }
-        else {
+        } else if (window.confirm("데이터를 추가하시겠습니까?")) {
             axios
                 .post('/student/military/add', {
                     mili_title: inputs.mili_title,
@@ -61,22 +68,76 @@ const MilitaryWrite = ({ military, setMilitary }) => {
     }
     const onRemove = (mili_num, mili_title, mili_army) => {
         if (window.confirm("데이터를 삭제하시겠습니까? 되돌릴 수 없습니다")) {
-        // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
-        // = new.num 가 num 인 것을 제거함
-        setMilitary(military.filter(newMilitary =>
-            (newMilitary.mili_num !== mili_num)))
+            // new.num 가 파라미터로 일치하지 않는 원소만 추출해서 새로운 배열을 만듬
+            // = new.num 가 num 인 것을 제거함
+            setMilitary(military.filter(newMilitary =>
+                (newMilitary.mili_num !== mili_num)))
+            axios
+                .post('/student/military/delete', {
+                    mili_title: mili_title,
+                    mili_army: mili_army,
+                    id: sessionStorage.getItem("loginId")
+                })
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((e) => console.log(e));
+        }
+    }
+    const onDragEnd = result => {
+        if (!result.destination) {
+            return
+        }
+        setMilitary(items => reorder(items, result.source.index, result.destination.index))
         axios
-            .post('/student/military/delete', {
-                mili_title: mili_title,
-                mili_army: mili_army,
+            .post('/student/military/idx', {
+                military: reorder(military, result.source.index, result.destination.index),
                 id: sessionStorage.getItem("loginId")
             })
             .then((res) => {
                 console.log(res)
             })
             .catch((e) => console.log(e));
+        console.log(military)
+    }
+
+    const onDragUpdate = update => {
+        if (!update.destination) {
+            return
         }
     }
+    const dnd = <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
+        <Droppable droppableId="droppable">
+            {(provided, snapshot) => (
+                <tbody
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                >
+                    {military.map((military, index) => (
+                        <Draggable key={military.mili_num} draggableId={"item-" + military.mili_num} index={index}>
+                            {(provided, snapshot) => (
+                                <tr onClick={(e) => console.log(index)}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                >
+                                    <td onClick={() => onRemove(military.mili_num, military.mili_title, military.mili_army)}>
+                                        <div className='.sRBtnDiv'>
+                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        </div></td>
+                                    <td><p>{military.mili_title}</p></td>
+                                    <td><p>{military.mili_army}</p></td>
+                                    <td><p>{military.mili_s_dt}</p></td>
+                                    <td><p>{military.veteran_yn}</p></td>
+                                </tr>
+                            )}
+                        </Draggable>
+                    ))}
+                    {provided.placeholder}
+                </tbody>
+            )}
+        </Droppable>
+    </DragDropContext>
     return (
         <div className='resumeDiv'>
             <p className='sRTitle'>병역</p>
@@ -90,37 +151,27 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                         <th>보훈대상</th>
                     </tr>
                 </thead>
+                {dnd}
                 <tbody>
-                    {military.map((military, idx) => (
-                        <tr key={idx}>
-                            <td onClick={() => onRemove(military.mili_num,military.mili_title,military.mili_army)}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRDeleteBtn' src={btnDelete}/>
-                                    </div></td>
-                            <td><p>{military.mili_title}</p></td>
-                            <td><p>{military.mili_army}</p></td>
-                            <td><p>{military.mili_s_dt}</p></td>
-                            <td><p>{military.veteran_yn}</p></td>
-                        </tr>
-                        ))}
-                        <tr>
-                            <td onClick={addMilitary}>
-                                <div className='.sRBtnDiv'>
-                                    <img className='sRAddBtn' src={btnAdd}/>
-                                </div></td>
-                            <td><select name='mili_title' onChange={onChange} >
-                                {miliTitleList.map((mili_title) => (
-                                    <option value={mili_title} key={1 + mili_title}>
-                                        {mili_title}
-                                    </option>
-                                ))}
-                                </select></td>
-                            <td><input type='text' name='mili_army' className='miliArmy' onChange={onChange} value={inputs.mili_army} /></td>
-                            <td><input type='text' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} /></td>
-                            <td><input type='text' name='veteran_yn' onChange={onChange} value={inputs.veteran_yn} /></td>
-                        </tr>
+                    <tr>
+                        <td onClick={addMilitary}>
+                            <div className='.sRBtnDiv'>
+                                <img className='sRAddBtn' src={btnAdd} />
+                            </div></td>
+                        <td><select name='mili_title' onChange={onChange} >
+                            {miliTitleList.map((mili_title) => (
+                                <option value={mili_title} key={1 + mili_title}>
+                                    {mili_title}
+                                </option>
+                            ))}
+                        </select></td>
+                        <td><input type='text' name='mili_army' className='miliArmy' onChange={onChange} value={inputs.mili_army} /></td>
+                        <td><input type='text' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} /></td>
+                        <td><input type='text' name='veteran_yn' onChange={onChange} value={inputs.veteran_yn} /></td>
+                    </tr>
                 </tbody>
             </table>
+            <div><button className="resumeBtn" onClick={addMilitary}>추가하기</button></div>
         </div>
     )
 }
