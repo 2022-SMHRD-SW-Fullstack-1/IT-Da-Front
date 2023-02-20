@@ -21,7 +21,7 @@ const C_announcement_detail = (item) => {
 
    const navigate = useNavigate()
    const goToWrite = () => {
-      navigate('/announcement/write', { state: { title: '글 수정', b_title: post.b_title, b_content: post.b_content, b_num: post.b_num } })
+      navigate('/announcement/write', { state: { title: '글 수정', b_title: post.b_title, b_content: post.b_content, b_num: post.b_num, b_file:post.b_file } })
    }
    const deletePost = () => {
       axios

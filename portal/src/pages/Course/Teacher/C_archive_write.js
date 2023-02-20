@@ -22,13 +22,6 @@ const C_archive_write = () => {
    const [b_file, setBFile] = useState('');
    const [selectedFile, setSelectedFile] = useState(null)
 
-   // const onLoadFile = (e) => {
-   //    const file = e.target.files;
-   //    const reader = new FileReader();
-   //    reader.onload = () => (setFiles(reader.result))
-   //    reader.readAsDataURL(file[0])
-   //    console.log(file)
-   // }
 
    // 화면 로딩시 글 수정과 글 작성인지 구분하여 제목을 띄우기
    useEffect(() => {
@@ -44,7 +37,7 @@ const C_archive_write = () => {
    const clickWriteBtn = () => {
       console.log(title)
       console.log(content)
-
+      console.log(b_file)
       if (state.title == '글 수정') {
          axios
             .post('/announcement/editArchive', {
@@ -74,43 +67,14 @@ const C_archive_write = () => {
                selectedFile&&(uploadFile(selectedFile,state.b_num))
             })
             .catch((e) => console.log(e));
-      }
-
-      // const formdata = new FormData();
-      // formdata.append('uploadImage', files[0]);
-
-      // const config = {
-      //    Headers: {
-      //       'content-type': 'multipart/form-data',
-      //    },
-      // };
-
-      // axios.post(`api`, formdata, config)    
+      } 
    }
 
-   // useEffect(() => {
-      // preview();
-      // return () => preview();
-   // })
-
-   // const preview = () => {
-   //    if (!files) return false;
-
-   //    const imgEL = document.querySelector('.img_box');
-
-   //    const reader = new FileReader();
-   //    reader.onload = () => (imgEL.getElementsByClassName.backgroundImage = `url(${reader.result})`)
-   //    reader.readAsDataURL(files[0])
-
-   // }
    const handleFileInput = (e) => {
       const file = e.target.files[0];
-      const { name } = e.target;
       console.log('파일선택', file)
       setSelectedFile(e.target.files[0]);
-      setBFile({
-         [name]: file.name
-      })
+      setBFile(e.target.files[0].name)
    }
    const fileInput = useRef();
    const onClickFileInput= () => {
