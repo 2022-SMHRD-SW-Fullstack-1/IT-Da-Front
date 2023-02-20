@@ -24,7 +24,11 @@ const Wish_fieldWrite = ({ wish_field, setWishField }) => {
                     id: sessionStorage.getItem("loginId")
                 })
                 .then((res) => {
-                    console.log(res)
+                    axios
+                    .post('/student/wish_field/update',{
+                        wish_field:wish_field.concat(newWishField),
+                        id: sessionStorage.getItem("loginId")
+                    })
                 })
                 .catch((e) => console.log(e));
             setWishField(wish_field.concat(newWishField))
@@ -48,7 +52,11 @@ const Wish_fieldWrite = ({ wish_field, setWishField }) => {
                     id: sessionStorage.getItem("loginId")
                 })
                 .then((res) => {
-                    console.log(res)
+                    axios
+                    .post('/student/wish_field/update',{
+                        wish_field:wish_field.filter(newWishField => (newWishField.field_num != field_num)),
+                        id: sessionStorage.getItem("loginId")
+                    })
                 })
                 .catch((e) => console.log(e));
         }

@@ -29,7 +29,11 @@ const SkillsWrite = ({ skills, setSkill }) => {
                     id: sessionStorage.getItem("loginId")
                 })
                 .then((res) => {
-                    console.log(res)
+                    axios
+                    .post('/student/skill/update',{
+                        skill:skills.concat(newSkill),
+                        id: sessionStorage.getItem("loginId")
+                    })
                 })
                 .catch((e) => console.log(e));
             setSkill(skills.concat(newSkill))
@@ -54,12 +58,19 @@ const SkillsWrite = ({ skills, setSkill }) => {
                     id: sessionStorage.getItem("loginId")
                 })
                 .then((res) => {
-                    console.log(res)
+                    axios
+                    .post('/student/skill/update',{
+                        skill:skills.filter(newSkill => (newSkill.skill_num != skill_num)),
+                        id: sessionStorage.getItem("loginId")
+                    })
+                    .then((res)=>{
+                        console.log(res)
+                    })
+                    .catch((e)=> console.log(e))
                 })
                 .catch((e) => console.log(e));
         }
     }
-
     return (
         <div className='resumeDiv'>
             <p className='sRTitle'>기술스택</p>
