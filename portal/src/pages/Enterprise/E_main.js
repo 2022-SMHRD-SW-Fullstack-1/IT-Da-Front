@@ -51,6 +51,9 @@ const E_main = () => {
   const [skill, setSkill] = useState("전체");
   const [hope_job, setHope_job] = useState("전체");
   const [certificate_info, setCertificate_info] = useState("");
+  
+
+
   const onCertiChange = (e) => {
     setCertificate_info(e.target.value);
   };
@@ -94,6 +97,7 @@ const E_main = () => {
       state: {
         mb_id: e.currentTarget.getAttribute("mb_id"),
         name: e.currentTarget.getAttribute("name"),
+        portfolio_title:e.currentTarget.getAttribute("portfolio_title"),
         isBookmark: bookmark_info.includes(
           e.currentTarget.getAttribute("mb_id")
         ),
@@ -196,14 +200,20 @@ const E_main = () => {
   useEffect(() => {
     axios
       .get("/bookmark/select_bookmark", {
-        params: { enter_id: window.sessionStorage.getItem("loginId") },
+        params: { enter_id: window.sessionStorage.getItem("loginId"),},
       })
       .then((res) => {
+        console.log(res.data)
         setCertification_info(res.data.certification);
         setSimple_info(res.data.resume);
         setFilterData(res.data.resume);
         setBookmark_info(res.data.bookmark);
         setMember_info(res.data.member);
+        setSimple_info({
+          ...simple_info,
+          update_dt:res.data.member.mb_update
+      })
+        
       })
       .catch(function (error) {
         console.log(error);

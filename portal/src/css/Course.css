@@ -20,9 +20,15 @@
 }
 .content>table td {
    padding: 0.5rem 0;
+  
 }
 .content>table>tbody>tr {
    border-top: 1px solid rgb(214, 214, 214);
+   
+}
+.tt12{
+   margin-bottom: 3rem;
+   background-color: aqua;
 }
 
 

@@ -8,7 +8,7 @@ import GalleryList from './Portfolio/GalleryList';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-const S_portfolio_detail = () => {
+const S_portfolio_detail = ({portfolio_info}) => {
     //S3 정보 설정
     //aws iam 엑세스 키,패스워드
     const ACCESS_KEY = aws.ACCESS_KEY;
@@ -44,7 +44,7 @@ const S_portfolio_detail = () => {
             portfolio_stack_back: state.portfolio_stack_back,
             portfolio_stack_db: state.portfolio_stack_db,
             portfolio_url: state.portfolio_url,
-            portfolio_file: state.portfolio_file
+            portfolio_file: state.portfolio_file,
             
         }})
     }
@@ -77,35 +77,12 @@ const S_portfolio_detail = () => {
         })
     }
 
-    //이미지 슬라이드를 위한 변수
-    let images = []
-    let imgIdxLength=images.length
-    let imgIdx = 1
-    useEffect(()=>{
-        images = []
-        if((state.portfolio_img1!=='')&&(state.portfolio_img1!==null)){
-            images.push(1)
-        }
-        if((state.portfolio_img2!=='')&&(state.portfolio_img2!==null)){
-            images.push(2)          
-        }
-        if((state.portfolio_img3!=='')&&(state.portfolio_img3!==null)){
-            images.push(3)
-        }
-    },[state])
-    const onClickE = () => {
-        imgIdxLength=images.length
-        if(imgIdx<imgIdxLength){
-            ++imgIdx
-        } else{
-            imgIdx=1
-        }
-        console.log('click')
-    }
+    
+    
     const img = [
-        (state.portfolio_img1!=='')?{id:1, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${1}`}:null,
-        (state.portfolio_img2!=='')?{id:2, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${2}`}:null,
-        (state.portfolio_img3!=='')?{id:3, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${3}`}:null
+        (state.portfolio_img1!==undefined)?{id:1, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${1}`}:{id:1, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${portfolio_info.mb_id}/${portfolio_info.portfolio_num}/${1}`},
+        (state.portfolio_img2!==undefined)?{id:2, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${2}`}:{id:2, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${portfolio_info.mb_id}/${portfolio_info.portfolio_num}/${2}`},
+        (state.portfolio_img3!==undefined)?{id:3, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${sessionStorage.getItem("loginId")}/${state.portfolio_num}/${3}`}:{id:3, image:`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/portfolio/${portfolio_info.mb_id}/${portfolio_info.portfolio_num}/${3}`},
     ]
     const [datas, setDatas] = useState(img) //고양이 데이터
     const [currItem, setCurrItem] = useState(datas[0]) //선택한 사진 상태설정
@@ -118,11 +95,11 @@ const S_portfolio_detail = () => {
     return (
         <div>
             <div className='portfolioDiv'>
-                <p>{state.portfolio_title}</p>
+                <p>{state.portfolio_title||portfolio_info.portfolio_title}</p>
                 <div>
                     <div>
-                        <p>{state.portfolio_period}</p>
-                        <p>{state.portfolio_etc}</p>
+                        <p>{state.portfolio_period||portfolio_info.portfolio_period}</p>
+                        <p>{state.portfolio_etc||portfolio_info.portfolio_etc}</p>
                     </div>
                     <div>
                     <Container>
@@ -142,7 +119,7 @@ const S_portfolio_detail = () => {
                                     <th>내용</th>
                                 </tr>
                                 <tr>
-                                    <td>{state.portfolio_content||''}</td>
+                                    <td>{state.portfolio_content||portfolio_info.portfolio_content}</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -150,7 +127,7 @@ const S_portfolio_detail = () => {
                                     <th>front-ent</th>
                                 </tr>
                                 <tr>
-                                    <td>{state.portfolio_stack_front||''}</td>
+                                    <td>{state.portfolio_stack_front||portfolio_info.portfolio_stack_front}</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -158,7 +135,7 @@ const S_portfolio_detail = () => {
                                     <th>back-end</th>
                                 </tr>
                                 <tr>
-                                    <td>{state.portfolio_stack_back||''}</td>
+                                    <td>{state.portfolio_stack_back||portfolio_info.portfolio_stack_back}</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -166,7 +143,7 @@ const S_portfolio_detail = () => {
                                     <th>database</th>
                                 </tr>
                                 <tr>
-                                    <td>{state.portfolio_stack_db||''}</td>
+                                    <td>{state.portfolio_stack_db||portfolio_info.portfolio_stack_db}</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -174,7 +151,7 @@ const S_portfolio_detail = () => {
                                     <th>Github</th>
                                 </tr>
                                 <tr>
-                                    <td>{state.portfolio_url||''}</td>
+                                    <td>{state.portfolio_url||portfolio_info.portfolio_url}</td>
                                 </tr>
                             </tbody>
                             <tbody>
@@ -182,7 +159,7 @@ const S_portfolio_detail = () => {
                                     <th>첨부파일</th>
                                 </tr>
                                 <tr>
-                                    <td>{state.portfolio_file||''}</td>
+                                    <td>{state.portfolio_file||portfolio_info.portfolio_file}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -192,11 +169,12 @@ const S_portfolio_detail = () => {
                     </div>
                 </div>
                 </div>
-            <div className="content annViewButton">
+            {window.sessionStorage.getItem("role")==="s" ? <div className="content annViewButton">
                 <button onClick={goToWrite}>수정</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button onClick={deletePost}>삭제</button>
-            </div>
+            </div>:<></>}
+            
         </div>
     )
 }
