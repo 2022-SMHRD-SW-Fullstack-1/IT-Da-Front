@@ -8,11 +8,11 @@ import E_select_company from '../pages/Enterprise/E_select_company';
 import ResumeFrame from "../pages/Course/Student/Resume/ResumeFrame";
 import CoverLetterFrame from "../pages/Course/Student/Resume/CoverLetterFrame";
 
-const E_Routes = () => {
+const E_Routes = ({socket}) => {
   return (
     <Routes>
       <Route path="/" element={<E_main />}></Route>
-      <Route path="/detail_user" element={<E_main_detail />} />
+      <Route path="/detail_user" element={<E_main_detail socket={socket}/>} />
       <Route path="/detail_bookmark" element={<E_main_bookmark />} />
       <Route path='/make_company' element={<E_make_company />}></Route>
       <Route path='/select_one_company' element={<E_select_company />}></Route>

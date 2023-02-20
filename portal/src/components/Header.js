@@ -7,7 +7,6 @@ import logo from '../asset/img/logo_sbl.png'
 import profileImg from '../asset/img/img_user.PNG'
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import { HiBellAlert } from "react-icons/hi2";
-import Dropdown from 'react-bootstrap/Dropdown';
 import AllAlarm_list from '../pages/Alarm/AllAlarm_list';
 import ListGroup from 'react-bootstrap/ListGroup';
 

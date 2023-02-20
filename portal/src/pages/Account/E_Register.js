@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const E_Register = () => {
+const E_Register = ({socket}) => {
 
    //오류 메시지 상태
    const [enterpriseMessage, setEnterpriseMessage] = useState('');
@@ -127,6 +127,17 @@ const E_Register = () => {
    }, [isId, isPw, isPwCheck, isName, isTel, isEnterprise]);
 
    const onClickRegister = () => {
+      if (socket) {
+         socket.send(JSON.stringify({
+            alarm_num: 0,
+            mb_id_from: id,
+            mb_id_to: 'admin',
+            alarm_content: `${enterprise}님이 가입신청을 하셨습니다.`,
+            alarm_check: 'N',
+            alarm_dt: '방금 전'
+         }))
+      }
+
       //back으로 회원가입 데이터 전송
       axios
          .post('/enterprise/register', {
@@ -153,7 +164,7 @@ const E_Register = () => {
 
       axios
          .post('/alarm/enterRegisterAlarm', {
-            mb_id_from : id,
+            mb_id_from: id,
             mb_id_to: 'admin',
             alarm_content: `${enterprise}님이 가입신청을 하셨습니다.`
          })

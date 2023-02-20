@@ -6,7 +6,7 @@ import logo from '../../asset/img/logo_sbl.png'
 import { LoginFooter } from './LoginFooter';
 import { Personal_Info } from './Login/Personal_Info';
 
-const Login = ({connect}) => {
+const Login = () => {
 
   const navigate = useNavigate();
   const onClickRegister = () => {
@@ -44,7 +44,6 @@ const Login = ({connect}) => {
           window.sessionStorage.setItem('userName', res.data.mb_name);
           window.sessionStorage.setItem('course_key', res.data.course_key);
           window.location.replace('/');
-
         } else if (res.data.mb_job == 't') {
           window.sessionStorage.setItem('loginId', res.data.mb_id);
           window.sessionStorage.setItem('role', 't');

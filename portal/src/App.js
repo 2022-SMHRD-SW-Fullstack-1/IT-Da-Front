@@ -9,8 +9,6 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Alarm from './pages/Alarm/Alarm';
 
-import { useBeforeunload } from "react-beforeunload";
-
 function App() {
 
   const location = useLocation();
@@ -19,7 +17,8 @@ function App() {
   const [socket, setSocket] = useState();
 
   function connect(id) {
-    let ws = new WebSocket("ws://localhost:8083/replyEcho/" + id)
+    let ws = new WebSocket(encodeURI("ws://localhost:8083/replyEcho/" + id))
+    console.log(ws)
     setSocket(ws)
     ws.onopen = () => {
       console.log("websocket: connected")
@@ -41,11 +40,9 @@ function App() {
       && setHeader(<Header socket={socket} />)
   }, [url])
 
-  useBeforeunload((event) => event.preventDefault());
-
   return window.sessionStorage.getItem("loginId") == null ? (
     <div className='T_mainTopDiv'>
-      <LoginRoutes connect={connect} socket={socket} />
+      <LoginRoutes socket={socket}/>
     </div>
   ) : (
     <div className='T_mainTopDiv'>
@@ -53,7 +50,7 @@ function App() {
         && <Header connect={connect} socket={socket} setHeader={setHeader} />}
 
       <Alarm connect={connect} socket={socket} />
-      <ITDaRoutes />
+      <ITDaRoutes connect={connect} socket={socket} />
       {location.pathname !== "/consulting"
         && <Footer />}
     </div>

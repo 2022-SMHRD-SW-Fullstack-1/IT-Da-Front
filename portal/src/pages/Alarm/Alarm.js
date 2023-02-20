@@ -5,52 +5,51 @@ import Alarm_list from './Alarm_list';
 
 import '../../css/alarm.css'
 
-function Alarm({socket}) {
+function Alarm({ socket, connect }) {
 
   const [newAlarm, setNewAlarm] = useState([])
-
-  useEffect(() => {
-    window.sessionStorage.getItem("role") !== null &&
-    axios
-      .get("/alarm/selectNewAlarm",
-        {
-          params: {
-            mb_id_to: window.sessionStorage.getItem("loginId")
-          }
-        })
-      .then(function (res) {
-        setNewAlarm(res.data)
-      })
-      .catch(function (error) {
-        console.log("error")
-      })
-  }, [])
 
   const newAlarmList =
     newAlarm.map((item) => <Alarm_list newAlarm={newAlarm} setNewAlarm={setNewAlarm} item={item} key={item.alarm_num} />)
 
-  // //알림 실시간으로 띄우기
-  // socket.onAlarm = function (event) {
-  //   let alarm = JSON.parse(event.data);
-  //   if (alarm.talker !== undefined) {
-  //     let newRecentAlarm = {
-  //       alarm_num: alarm.alarm_num, 
-  //       mb_id_to: alarm.mb_id_to,
-  //       alarm_content: alarm.alarm_content,
-  //       alarm_check: alarm.alarm_check, 
-  //       alarm_dt: alarm.alarm_dt, 
-  //     }
-  //     setNewAlarm(newAlarm.concat(newRecentAlarm))
-  //     axios
-  //       .post('gigwork/alert/addChatAlert', newRecentAlarm)
-  //       .then(res => console.log(res))
-  //       .catch(e => console.log(e));
-  //   }
-  // }
+  // 소켓에서 오는 메세지를 받는 함수
+
+  useEffect(()=>{
+    axios
+  .get("/alarm/selectNewAlarm",
+    {
+      params: {
+        mb_id_to: window.sessionStorage.getItem("loginId")
+      }
+    })
+  .then(function (res) {
+    setNewAlarm(res.data)
+  })
+  .catch(function (error) {
+    console.log("error")
+  })
+  }, [])
+
+  if (socket) {
+    socket.onmessage = function (msg) {
+      let message = JSON.parse(msg.data)
+      console.log("소켓" + socket);
+      console.log("메시지 : " + message)
+      let newNewAlarm = {
+        alarm_num : message.alarm_num,
+        mb_id_to: message.mb_id_to,
+        mb_id_from: message.mb_id_from,
+        alarm_content: message.alarm_content,
+        alarm_check : message.alarm_check,
+        alarm_dt : message.alarm_dt,
+      }
+        setNewAlarm(newAlarm.concat(newNewAlarm))
+    }
+  }
 
   return (
     <div className='alarmPosition'>
-      <ToastContainer autoclose={3000}>
+      <ToastContainer autoclose={3000} style={{ margin: '1rem' }}>
         {newAlarmList}
       </ToastContainer>
     </div>
