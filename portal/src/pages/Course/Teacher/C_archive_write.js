@@ -104,7 +104,7 @@ const C_archive_write = () => {
         Body: file,
         Bucket: S3_BUCKET,
         //업로드라는 폴더 안에 file.name을 넣겠다
-        Key: `upload/board/${sessionStorage.getItem("loginId")}/${num}`
+        Key: `upload/board/${sessionStorage.getItem("loginId")}/${num}/${file.name}`
       };
       myBucket.putObject(params)
         .send((err) => {

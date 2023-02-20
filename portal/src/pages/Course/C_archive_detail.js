@@ -29,7 +29,7 @@ const C_archive_detail = () => {
          .then(res => navigate('/archive'))
          .catch(e => console.log(e));
    }
-   const url = `https://smhrdd-portal.s3.ap-northeast-2.amazonaws.com/upload/board/${sessionStorage.getItem("loginId")}/${post.b_num}`
+   const url = `https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/board/${sessionStorage.getItem("loginId")}/${post.b_num}/${post.b_file}`
    return (
       <div className='container'>
          <p>공유 자료실</p>
