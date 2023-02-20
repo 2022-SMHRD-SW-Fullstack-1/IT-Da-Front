@@ -29,7 +29,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>성<br/>장<br/>과<br/>정</th>
-                            <td>{state.coverLetter.growth}</td>
+                            <td><p dangerouslySetInnerHTML={ {__html: state.growth} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>성격<br/>의<br/>장단점</th>
-                            <td>{state.coverLetter.pros_cons}</td>
+                            <td><p dangerouslySetInnerHTML={ {__html: state.pros_cons} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>위기<br/>극복<br/>·<br/>목표<br/>달성</th>
-                            <td>{state.coverLetter.goal_and_crisis}</td>
+                            <td><p dangerouslySetInnerHTML={ {__html: state.goal_and_crisis} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>지원<br/>동기<br/>·<br/>포부</th>
-                            <td>{state.coverLetter.motivation}</td>
+                            <td><p dangerouslySetInnerHTML={ {__html: state.motivation} }></p></td>
                         </tr>
                     </thead>
                     <tbody>

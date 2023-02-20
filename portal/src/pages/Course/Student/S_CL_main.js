@@ -63,7 +63,7 @@ const S_CL_main = () => {
   const navigate = useNavigate()
   const goToCoverLetterFrame = () => {
     navigate('/cover_letter/frame',
-      { state: { coverLetter: coverLetter } })
+      { state: { growth:growth, pros_cons:pros_cons, goal_and_crisis:goal_and_crisis, motivation:motivation } })
   }
 
   const goToFrame = useRef()
