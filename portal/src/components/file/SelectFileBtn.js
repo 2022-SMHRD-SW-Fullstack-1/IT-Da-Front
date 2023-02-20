@@ -5,7 +5,7 @@ import React, { useRef } from 'react'
  * 3. 파일 타입 리스트 예시) const fileTypes=['/image/jpeg', 'image/jpg']
  * 4. 파일 확장자 리스트 예시) const fileExts=['jpeg', 'jpg']
 */
-const SelectFileBtn = ({ btnText, setSelectedFile, fileTypes, fileExts }) => {
+const SelectFileBtn = ({ btnText,setFileImage, setSelectedFile, fileTypes, fileExts }) => {
 
   const imageInput = useRef();
   const onClickFileInput = () => {
@@ -20,6 +20,7 @@ const SelectFileBtn = ({ btnText, setSelectedFile, fileTypes, fileExts }) => {
     //jpg만 받겠다
     if ((fileTypes.includes(file.type) || fileExts.includes(fileExt)) &&file.size<=5000000) {
       setSelectedFile(e.target.files[0]);
+      setFileImage(URL.createObjectURL(e.target.files[0]));
     }
     else {
       alert('지원하지 않는 파일형식입니다.');
@@ -27,7 +28,7 @@ const SelectFileBtn = ({ btnText, setSelectedFile, fileTypes, fileExts }) => {
     }
   }
   return (
-    <div>
+    <div className='imgSelBtn'>
       <input type='file' style={{ display: "none" }} onChange={handleFileInput} ref={imageInput} />
       <button onClick={onClickFileInput}>{btnText}</button>
     </div>
