@@ -21,7 +21,7 @@ const C_archive_detail = () => {
 
    const navigate = useNavigate()
    const goToWrite = () => {
-      navigate('/archive/write', { state: { title: '글 수정', b_title: post.b_title, b_content: post.b_content, b_num: post.b_num } })
+      navigate('/archive/write', { state: { title: '글 수정', b_title: post.b_title, b_content: post.b_content, b_num: post.b_num, b_file: post.b_file } })
    }
    const deletePost = () => {
       axios
@@ -29,7 +29,7 @@ const C_archive_detail = () => {
          .then(res => navigate('/archive'))
          .catch(e => console.log(e));
    }
-
+   const url = `https://smhrdd-portal.s3.ap-northeast-2.amazonaws.com/upload/board/${sessionStorage.getItem("loginId")}/${post.b_num}`
    return (
       <div className='container'>
          <p>공유 자료실</p>
@@ -41,6 +41,7 @@ const C_archive_detail = () => {
             <div className='annViewContent'>
                <p dangerouslySetInnerHTML={ {__html: post.b_content} }></p>
             </div>
+            <p>첨부파일 <span onClick={()=> window.open(url)}>{post.b_file}</span></p>
          </div>
          {window.sessionStorage.getItem("role") === 't' &&
             <div className='content annViewButton'>

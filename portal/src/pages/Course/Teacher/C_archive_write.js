@@ -5,7 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import '../../../css/Course.css'
 import 'react-quill/dist/quill.snow.css';
-
+import aws from '../../../asset/json/aws.json'
+import AWS from 'aws-sdk';
 const C_archive_write = () => {
 
    const navigate = useNavigate();
@@ -18,22 +19,25 @@ const C_archive_write = () => {
       setTitle(e.target.value)
    };
    const [content, setContent] = useState('');
-   const [files, setFiles] = useState('');
-   const onLoadFile = (e) => {
-      const file = e.target.files;
-      const reader = new FileReader();
-      reader.onload = () => (setFiles(reader.result))
-      reader.readAsDataURL(file[0])
-      console.log(file)
-   }
-   
+   const [b_file, setBFile] = useState('');
+   const [selectedFile, setSelectedFile] = useState(null)
+
+   // const onLoadFile = (e) => {
+   //    const file = e.target.files;
+   //    const reader = new FileReader();
+   //    reader.onload = () => (setFiles(reader.result))
+   //    reader.readAsDataURL(file[0])
+   //    console.log(file)
+   // }
+
    // 화면 로딩시 글 수정과 글 작성인지 구분하여 제목을 띄우기
-   useEffect(()=>{
+   useEffect(() => {
       if (state.title == '글 수정') {
          setTitle(state.b_title)
          setContent(state.b_content)
+         setBFile(state.b_file)
       }
-   },[])
+   }, [])
 
 
    // 글 작성 버튼 누르면 작성된 내용 가져오기
@@ -43,58 +47,106 @@ const C_archive_write = () => {
 
       if (state.title == '글 수정') {
          axios
-         .post('/announcement/editArchive', {
-            title: title,
-            content: content,
-            b_num: state.b_num,
-         })
-         .then((res) => {
-            console.log(res)
-            navigate('/archive', { state: { state: title } })
-         })
-         .catch((e) => console.log(e));
+            .post('/announcement/editArchive', {
+               title: title,
+               content: content,
+               b_num: state.b_num,
+               b_file: b_file,
+            })
+            .then((res) => {
+               console.log(res)
+               navigate('/archive', { state: { state: title } })
+               selectedFile&&(uploadFile(selectedFile,state.b_num))
+            })
+            .catch((e) => console.log(e));
       } else {
          axios
-         .post('/announcement/addArchive', {
-            title: title,
-            content: content,
-            id: window.sessionStorage.getItem("loginId"),
-            key: window.sessionStorage.getItem("course_key"),
-         })
-         .then((res) => {
-            console.log(res)
-            navigate('/archive', { state: { state: title } })
-         })
-         .catch((e) => console.log(e));
+            .post('/announcement/addArchive', {
+               title: title,
+               content: content,
+               id: window.sessionStorage.getItem("loginId"),
+               key: window.sessionStorage.getItem("course_key"),
+               b_file:b_file,
+            })
+            .then((res) => {
+               console.log(res)
+               navigate('/archive', { state: { state: title } })
+               selectedFile&&(uploadFile(selectedFile,state.b_num))
+            })
+            .catch((e) => console.log(e));
       }
 
-      const formdata = new FormData();
-      formdata.append('uploadImage', files[0]);
+      // const formdata = new FormData();
+      // formdata.append('uploadImage', files[0]);
 
-      const config = {
-         Headers: {
-            'content-type': 'multipart/form-data',
-         },
+      // const config = {
+      //    Headers: {
+      //       'content-type': 'multipart/form-data',
+      //    },
+      // };
+
+      // axios.post(`api`, formdata, config)    
+   }
+
+   // useEffect(() => {
+      // preview();
+      // return () => preview();
+   // })
+
+   // const preview = () => {
+   //    if (!files) return false;
+
+   //    const imgEL = document.querySelector('.img_box');
+
+   //    const reader = new FileReader();
+   //    reader.onload = () => (imgEL.getElementsByClassName.backgroundImage = `url(${reader.result})`)
+   //    reader.readAsDataURL(files[0])
+
+   // }
+   const handleFileInput = (e) => {
+      const file = e.target.files[0];
+      const { name } = e.target;
+      console.log('파일선택', file)
+      setSelectedFile(e.target.files[0]);
+      setBFile({
+         [name]: file.name
+      })
+   }
+   const fileInput = useRef();
+   const onClickFileInput= () => {
+      fileInput.current.click()
+    }
+    //S3 정보 설정
+    //aws iam 엑세스 키,패스워드
+    const ACCESS_KEY = aws.ACCESS_KEY;
+    const SECRET_ACCESS_KEY = aws.SECRET_ACCESS_KEY;
+    //aws S3 지역, 버킷명
+    const REGION = aws.REGION;
+    const S3_BUCKET = aws.S3_BUCKET;
+    
+    AWS.config.update({ 
+      accessKeyId: ACCESS_KEY,
+      secretAccessKey: SECRET_ACCESS_KEY
+    });
+    
+    const myBucket = new AWS.S3({
+      params: { Bucket: S3_BUCKET},
+      region: REGION,
+    });
+    const uploadFile = (file, num) => {
+      //업로드를 위한 파라미터 설정
+      const params = {
+        ACL: 'public-read',
+        Body: file,
+        Bucket: S3_BUCKET,
+        //업로드라는 폴더 안에 file.name을 넣겠다
+        Key: `upload/board/${sessionStorage.getItem("loginId")}/${num}`
       };
-
-      axios.post(`api`, formdata, config)    
-   }
-
-   useEffect(()=>{
-      preview();
-      return () => preview();
-   })
-
-   const preview = () => {
-      if (!files) return false;
-
-      const imgEL = document.querySelector('.img_box');
-
-      const reader = new FileReader();
-      reader.onload = () => (imgEL.getElementsByClassName.backgroundImage = `url(${reader.result})`)
-      reader.readAsDataURL(files[0])
-
-   }
+      myBucket.putObject(params)
+        .send((err) => {
+          if (err) console.log(err)
+        })
+  }
 
    return (
       <div className='container annContainer'>
@@ -105,8 +157,10 @@ const C_archive_write = () => {
 
             <p>내용</p>
             <ReactQuill theme="snow" value={content} onChange={setContent} />
-            <input type='file' accept='img/*' onChange={onLoadFile} />
-            <img src={files && files}/>
+            <button onClick={onClickFileInput}>{'파일첨부'}</button>
+            <input type='file' style={{ display: "none" }} name='b_file' onChange={handleFileInput} ref={fileInput} />
+            <input name='b_file' value={selectedFile?(selectedFile.name):(b_file)} type='text' readOnly/>
+            {/* <img src={files && files}/> */}
             <div className='annWriteButton'>
                <button onClick={clickWriteBtn}>저장하기</button>
             </div>
