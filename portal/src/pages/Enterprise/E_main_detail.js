@@ -103,15 +103,11 @@ const E_main_detail = ({ socket }) => {
       veteran_yn: "",
     },
   ]);
-  const [cover_letter, setCover_letter] = useState([
-    {
-      goal_and_crisis: "",
-      growth: "",
-      motivation: "",
-      pros_cons: "",
-    },
-  ]);
-
+  const [skills, setSkill] = useState([{
+    skill_num: '',
+    skill_name:'',
+    skill_grade:''
+}])
 
   // 인적사항, 학력, 경력/교육, 자격증, 수상내역, 병역, 기술스택 정보 백에서 가져옴
   useEffect(() => {
@@ -130,8 +126,9 @@ const E_main_detail = ({ socket }) => {
         setPrize(res.data[4]);
         // console.log(res.data[4]);
         setMilitary(res.data[5]);
+        setSkill(res.data[6])
         // console.log(res.data[5]);
-        setCover_letter(res.data[7]);
+        setCoverLetter(res.data[7]);
       })
       .then(() => {
         axios
@@ -249,12 +246,12 @@ const E_main_detail = ({ socket }) => {
       .catch(function (error) {
       });
     navigate('/resume/frame',
-      { state: { resume: resume, graduation: graduation, career: career, certification: certification, prize: prize, military: military } })
+      { state: { resume: resume, graduation: graduation, career: career, certification: certification, prize: prize, military: military, skills:skills } })
   }
 
   // 자기소개서 컨택
 
-  const [coverLetter, SetCoverLetter] = useState({
+  const [coverLetter, setCoverLetter] = useState({
     growth: "",
     pros_cons: "",
     goal_and_crisis: "",
@@ -304,7 +301,7 @@ const E_main_detail = ({ socket }) => {
       .catch(function (error) {
       });
     navigate('/cover_letter/frame',
-      { state: { coverLetter: coverLetter } })
+      { state: { coverLetter: coverLetter, mb_name: state.name } })
   }
 
 
@@ -563,19 +560,19 @@ const E_main_detail = ({ socket }) => {
           <br></br>
           <div>
             <p>성장배경</p>
-            <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.growth }} />
+            <p className="cLview" dangerouslySetInnerHTML={{ __html: coverLetter.growth }} />
           </div>
           <div>
             <p>위기 극복</p>
-            <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.goal_and_crisis }} />
+            <p className="cLview" dangerouslySetInnerHTML={{ __html: coverLetter.goal_and_crisis }} />
           </div>
           <div>
             <p>장단점</p>
-            <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.pros_cons }} />
+            <p className="cLview" dangerouslySetInnerHTML={{ __html: coverLetter.pros_cons }} />
           </div>
           <div>
             <p>지원동기</p>
-            <p className="cLview" dangerouslySetInnerHTML={{ __html: cover_letter.motivation }} />
+            <p className="cLview" dangerouslySetInnerHTML={{ __html: coverLetter.motivation }} />
           </div>
         </div>
         <button className='headerBtn' onClick={goToCoverLetterFrame}>자기소개서 출력하기</button>

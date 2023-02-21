@@ -24,12 +24,12 @@ const CoverLetterFrame = () => {
                 <div id='coverLetterTitle'>
                     <span>자기소개서</span>
                 </div>
-                <div>지원자 : {sessionStorage.getItem("userName")}</div>
+                <div>지원자 : {sessionStorage.getItem("role")=='s'?sessionStorage.getItem("userName"):state.mb_name}</div>
                 <table>
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>성<br/>장<br/>과<br/>정</th>
-                            <td><p dangerouslySetInnerHTML={ {__html: state.growth} }></p></td>
+                            <td><p dangerouslySetInnerHTML={ state.growth?{__html: state.growth}:{__html: state.coverLetter.growth} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,7 +39,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>성격<br/>의<br/>장단점</th>
-                            <td><p dangerouslySetInnerHTML={ {__html: state.pros_cons} }></p></td>
+                            <td><p dangerouslySetInnerHTML={ state.pros_cons?{__html: state.pros_cons}:{__html: state.coverLetter.pros_cons} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>위기<br/>극복<br/>·<br/>목표<br/>달성</th>
-                            <td><p dangerouslySetInnerHTML={ {__html: state.goal_and_crisis} }></p></td>
+                            <td><p dangerouslySetInnerHTML={ state.goal_and_crisis?{__html: state.goal_and_crisis}:{__html: state.coverLetter.goal_and_crisis} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,7 @@ const CoverLetterFrame = () => {
                     <thead>
                         <tr>
                             <th className='resumePrintTitle page-break'>지원<br/>동기<br/>·<br/>포부</th>
-                            <td><p dangerouslySetInnerHTML={ {__html: state.motivation} }></p></td>
+                            <td><p dangerouslySetInnerHTML={ state.motivation?{__html: state.motivation}:{__html: state.coverLetter.motivation} }></p></td>
                         </tr>
                     </thead>
                     <tbody>
