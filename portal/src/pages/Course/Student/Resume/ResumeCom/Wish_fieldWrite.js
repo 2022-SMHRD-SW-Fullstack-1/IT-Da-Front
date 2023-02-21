@@ -63,8 +63,8 @@ const Wish_fieldWrite = ({ wish_field, setWishField }) => {
     }
 
     return (
-        <div className='resumeDiv'>
-            <p className='sRTitle'>희망분야</p>
+        <div className='resumeDiv' id='smallTable'>
+            <p className='sRTitle'>희망분야</p> 
             <table className='resumeTable'>
                 <thead>
                     <tr>
@@ -78,13 +78,15 @@ const Wish_fieldWrite = ({ wish_field, setWishField }) => {
                         </td>
                     </tr>
                     <tr>
-                        <td><input type='text' name='wish_field_name' onChange={(e) => setWishFieldInput({ ...inputWishField, wish_field_name: e.target.value })}
+                        <td>
+                        <input type='text' name='wish_field_name' onChange={(e) => setWishFieldInput({ ...inputWishField, wish_field_name: e.target.value })}
                             value={inputWishField.wish_field_name} />
-                            <button className="resumeBtn" onClick={addWishField}>추가하기</button>
+             <button className="resumeBtn" onClick={addWishField}>추가</button>
                         </td>
                     </tr>
                 </thead>
             </table>
+           
         </div>
     )
 }

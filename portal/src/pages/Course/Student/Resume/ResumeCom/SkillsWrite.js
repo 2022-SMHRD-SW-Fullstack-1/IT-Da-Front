@@ -29,6 +29,7 @@ const SkillsWrite = ({ skills, setSkill }) => {
                     id: sessionStorage.getItem("loginId")
                 })
                 .then((res) => {
+                    console.log(res)
                     axios
                     .post('/student/skill/update',{
                         skill:skills.concat(newSkill),
@@ -71,8 +72,9 @@ const SkillsWrite = ({ skills, setSkill }) => {
                 .catch((e) => console.log(e));
         }
     }
+
     return (
-        <div className='resumeDiv'>
+        <div className='resumeDiv' id='smallTable'>
             <p className='sRTitle'>기술스택</p>
             <table className='resumeTable'>
                 <thead>
@@ -98,7 +100,7 @@ const SkillsWrite = ({ skills, setSkill }) => {
                                     </option>
                                 ))}
                             </select>
-                            <button className="resumeBtn" onClick={addSkill}>추가하기</button>
+                            <button className="resumeBtn" onClick={addSkill}>추가</button>
                         </td>
                     </tr>
                 </thead>

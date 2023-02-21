@@ -126,9 +126,9 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                     <td><p>{military.mili_s_dt}</p></td>
                                     <td><p>{military.veteran_yn}</p></td>
                                     <td>
-                                        <span id='sRBtnDiv'>
+                                        <div id='sRBtnDiv'>
                                         <button onClick={() => onRemove(military.mili_num, military.mili_title, military.mili_army)} className="resumeBtn">삭제</button>
-                                        </span></td>
+                                        </div></td>
                                 </tr>
                             )}
                         </Draggable>
