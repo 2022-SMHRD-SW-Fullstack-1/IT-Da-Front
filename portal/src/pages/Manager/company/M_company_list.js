@@ -151,8 +151,8 @@ const M_company_list = (props) => {
 
                 
              {window.sessionStorage.getItem("role")==="s"&&(props.bookmarkList.includes(company.company_num.toString()) ?
-              <td  company_num={company.company_num} onClick={onHandleBookmark}><span className='tt12'><RiStarFill /></span><p >{company.company_count}</p></td> :
-               <td  company_num={company.company_num} onClick={onHandleBookmark}><p className='tt12'><RiStarLine /></p><p >{company.company_count}</p></td>)}
+              <td  company_num={company.company_num} onClick={onHandleBookmark}><span ><RiStarFill /></span><p >{company.company_count}</p></td> :
+               <td  company_num={company.company_num} onClick={onHandleBookmark}><span ><RiStarLine /></span><p >{company.company_count}</p></td>)}
             
             
             <td className='company_register'>
