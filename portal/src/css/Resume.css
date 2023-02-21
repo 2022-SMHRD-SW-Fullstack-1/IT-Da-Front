@@ -84,7 +84,7 @@
 
 
 /*이름 성별 태어난연도 div, 각 div 제목 p 태그*/
-.r_basic>div:last-child>div:first-child, .topDiv_resume>div>p, .r_basic>div:last-child>div:last-child>p:first-child {
+.r_basic>div:last-child>div:first-child, .topDiv_resume>div>p, .r_basic>div:last-child>div:last-child>p:first-child,.topDiv_resume>div>span {
    display: flex;
    align-items: center;
    border-bottom: 2px solid rgb(209, 209, 209);
