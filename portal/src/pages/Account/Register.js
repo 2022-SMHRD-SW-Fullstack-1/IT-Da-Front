@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../css/Register.css';
 import Agreement from './Agreement';
 
-const Register = () => {
+const Register = ({ socket }) => {
   //오류 메시지 상태
   const [idMessage, setIdMessage] = useState('');
   const [pwMessage, setPwMessage] = useState('');
@@ -158,7 +158,12 @@ const Register = () => {
     setNotAllow(true);
   }, [isId, isPw, isPwCheck, isName, isBd, isTel, isAddr, isKey]);
 
+  // const [teacher, setTeacher] = useState('')
+
   const onClickRegister = () => {
+
+    let teacher = ""
+
     // console.log(id)
     // console.log(pw)
     // console.log(pwCheck)
@@ -168,6 +173,7 @@ const Register = () => {
     // console.log(tel)
     // console.log(address)
     // console.log(expire)
+
 
     //back으로 회원가입 데이터 전송
     axios
@@ -190,15 +196,44 @@ const Register = () => {
         console.log(e)
         alert('회원가입에 실패했습니다.')
       });
-    navigate('/');
+    // navigate('/');
 
 
     // 학생 회원가입 알림
+
+    axios
+      .get('/alarm/selectTeacher2', {
+        params: {
+          course_key: course_key
+        }
+      })
+      .then((res) => {
+        console.log(res.data)
+        // 실시간 알림
+        if (socket) {
+          console.log(res.data)
+          socket.send(JSON.stringify({
+            alarm_num: 0,
+            mb_id_from: '',
+            mb_id_to: res.data,
+            alarm_content: `${name}님이 회원가입을 하셨습니다`,
+            alarm_check: 'N',
+            alarm_dt: '방금 전'
+          }))
+        }
+      })
+      .catch((e) => {
+        console.log('선생님가져오기 실패')
+        alert('회원가입에 실패했습니다.')
+      });
+
+
+
     axios
       .post('/alarm/stdRegisterAlarm', {
-        mb_id_from : id,
-        course_key : '00F2A8AB',
-        alarm_content : `${name}님이 회원가입을 하셨습니다`
+        mb_id_from: id,
+        course_key: course_key,
+        alarm_content: `${name}님이 회원가입을 하셨습니다`
       })
       .then((res) => {
         console.log(res)
@@ -206,7 +241,6 @@ const Register = () => {
       .catch((e) => {
         console.log(e)
       });
-    navigate('/');
   };
 
   return (
@@ -325,7 +359,7 @@ const Register = () => {
         </div>
 
         <button
-        className='registerBtn'
+          className='registerBtn'
           disabled={notAllow}
           onClick={(e) => {
             onClickRegister(e);

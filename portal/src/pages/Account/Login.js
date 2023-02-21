@@ -6,7 +6,7 @@ import logo from '../../asset/img/logo_sbl.png'
 import { LoginFooter } from './LoginFooter';
 import { Personal_Info } from './Login/Personal_Info';
 
-const Login = () => {
+const Login = ({socket}) => {
 
   const navigate = useNavigate();
   const onClickRegister = () => {
