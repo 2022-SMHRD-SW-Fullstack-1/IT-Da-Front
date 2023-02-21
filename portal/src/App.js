@@ -42,14 +42,14 @@ function App() {
 
   return window.sessionStorage.getItem("loginId") == null ? (
     <div className='T_mainTopDiv'>
-      <LoginRoutes socket={socket} connect={connect}/>
+      <LoginRoutes socket={socket} connect={connect} />
     </div>
   ) : (
     <div className='T_mainTopDiv'>
       {location.pathname !== "/consulting"
         && <Header connect={connect} socket={socket} setHeader={setHeader} />}
-
-      <Alarm connect={connect} socket={socket} />
+      {location.pathname !== "/consulting"
+        < Alarm connect={connect} socket={socket} />}
       <ITDaRoutes connect={connect} socket={socket} />
       {location.pathname !== "/consulting"
         && <Footer />}
