@@ -98,7 +98,7 @@ const ResumeWrite = ({ resume, setResume }) => {
                         <p><select style={edit_style_op} name='wish_area1' onChange={(e) => { setResume({ ...resume, wish_area1: e.target.value }) }} >
                             {areaList.map((area) => (
                                 <option value={area} key={1 + area}>
-                                    {resume.wish_area1}
+                                    {area}
                                 </option>
                             ))}
                         </select>
@@ -106,7 +106,7 @@ const ResumeWrite = ({ resume, setResume }) => {
                             <select style={edit_style_op} name='wish_area2' onChange={(e) => { setResume({ ...resume, wish_area2: e.target.value }) }} >
                                 {areaList.map((area) => (
                                     <option value={area} key={2 + area}>
-                                        {resume.wish_area2}
+                                        {area}
                                     </option>
                                 ))}
                             </select>
@@ -114,7 +114,7 @@ const ResumeWrite = ({ resume, setResume }) => {
                             <select style={edit_style_op} name='wish_area3' onChange={(e) => { setResume({ ...resume, wish_area3: e.target.value }) }} >
                                 {areaList.map((area) => (
                                     <option value={area} key={3 + area}>
-                                        {resume.wish_area3}
+                                        {area}
                                     </option>
                                 ))}
                             </select>
