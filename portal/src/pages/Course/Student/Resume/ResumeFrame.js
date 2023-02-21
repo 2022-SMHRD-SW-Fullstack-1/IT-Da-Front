@@ -96,11 +96,11 @@ const ResumeFrame = () => {
                     <tbody>
                         <tr>
                             <td id='resumePrintPhoto' rowSpan={4}>
-                                {state.resume.photo ? (<img id='resumePrintPhoto' src={`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/photo/${sessionStorage.getItem("loginId")}/${state.resume.photo}`} />)
+                                {state.resume.photo ? (<img id='resumePrintPhoto' src={`https://smhrd-portal.s3.ap-northeast-2.amazonaws.com/upload/photo/${state.resume.mb_id}/photo`} />)
                                     : <img id='resumePrintPhoto' />}
                             </td>
                             <td className='resumePrintTitle resumePrintTitle1'>지원분야</td>
-                            <td>{state.resume.wish_field}</td>
+                            <td>{state.resume.wish_field.slice(0,-1)}</td>
                             <td className='resumePrintTitle resumePrintTitle1'>희망연봉</td>
                             <td>{state.resume.wish_salary}</td>
                         </tr>
@@ -127,7 +127,7 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={3}>학<br />력</th>
+                            <th className='resumePrintTitle' rowSpan={10}>학<br />력</th>
                             <th className='resumePrintTitle resumePrintDt2'>기간</th>
                             <th className='resumePrintTitle resumePrintName'>학교명</th>
                             <th className='resumePrintTitle '>전공</th>
@@ -142,7 +142,7 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle printCareer' rowSpan={4}>경<br />력<br />·<br />교<br />육</th>
+                            <th className='resumePrintTitle printCareer' rowSpan={10}>경<br />력<br />·<br />교<br />육</th>
                             <th className='resumePrintTitle resumePrintDt2'>기간</th>
                             <th className='resumePrintTitle resumePrintName'>기관명</th>
                             <th className='resumePrintTitle'>직책</th>
@@ -157,7 +157,7 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={3}>자<br />격</th>
+                            <th className='resumePrintTitle' rowSpan={10}>자<br />격</th>
                             <th className='resumePrintTitle'>자격증명</th>
                             <th className='resumePrintTitle resumePrintName'>기관명</th>
                             <th className='resumePrintTitle resumePrintDt1'>발행일자</th>
@@ -173,7 +173,7 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={3}>수<br />상</th>
+                            <th className='resumePrintTitle' rowSpan={10}>수<br />상</th>
                             <th className='resumePrintTitle'>수상명</th>
                             <th className='resumePrintTitle resumePrintDt1'>수상일자</th>
                             <th className='resumePrintTitle resumePrintName'>기관명</th>
@@ -189,7 +189,7 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' rowSpan={2}>병<br />역</th>
+                            <th className='resumePrintTitle' rowSpan={10}>병<br />역</th>
                             <th className='resumePrintTitle resumePrintName'>구분</th>
                             <th className='resumePrintTitle '>군별</th>
                             <th className='resumePrintTitle resumePrintDt2'>복무기간(면제사유)</th>
@@ -206,7 +206,7 @@ const ResumeFrame = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <th className='resumePrintTitle' id='skill' rowSpan={5}>전<br />산<br />관<br />련</th>
+                            <th className='resumePrintTitle' id='skill' rowSpan={10}>전<br />산<br />관<br />련</th>
                             <th className='resumePrintTitle resumeSkill'>구분</th>
                             <th className='resumePrintTitle resumeSkill'>활용수준</th>
                         </tr>

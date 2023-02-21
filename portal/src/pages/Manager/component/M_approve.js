@@ -33,7 +33,7 @@ const M_approve = (props) => {
       <tr key={item.enter_id}>
          <td className='annItem_manager'>{item.enter_name}</td>
          <td className='annItem_manager'>{item.enter_id}</td>
-         <td className='annItem_manager'><button enter_id={item.enter_id} onClick={enter_approve_submit}>승인</button></td>
+         <td className='annItem_manager'><button enter_id={item.enter_id} onClick={enter_approve_submit} className='btbtbtbt'>승인</button></td>
       </tr>))
 
    return (

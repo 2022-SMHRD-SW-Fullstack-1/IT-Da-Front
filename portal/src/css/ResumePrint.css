@@ -7,7 +7,11 @@
   .print>p {
     margin: 0;
   }
-
+}
+@media print {
+  #coverLetter p{
+    margin: 0;
+  }
 }
 
 .resumePrintTopDiv{

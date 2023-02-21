@@ -350,7 +350,7 @@ const E_main_detail = ({ socket }) => {
             <div className="e_detail_name">
               <p>{resume.name}</p>
               <p>
-                {resume.gender} / {resume.birthday} / {ageCaculate(resume.birthday.substring(0, 4))}세
+                {resume.gender=='m'&&'남성'||'여성'} / {resume.birthday} / {ageCaculate(resume.birthday.substring(0, 4))}세
               </p>
               <div className="" onClick={onHandleBookmark} style={{ marginLeft: '0.5rem' }}>
                 {window.sessionStorage.getItem('role') === 'e' && (isBookmark ? <RiStarFill /> : <RiStarLine />)}
@@ -381,7 +381,7 @@ const E_main_detail = ({ socket }) => {
               </div>
               <div>
                 <p>희망분야</p>
-                <p>{resume.wish_field}</p>
+                <p>{resume.wish_field.slice(0,-1)}</p>
               </div>
               <div>
                 <p>희망연봉</p>
@@ -542,7 +542,7 @@ const E_main_detail = ({ socket }) => {
           </table>
         </div><div>
           <p>기술스택</p>
-          <div>{resume.skills}</div>
+          <div>{resume.skills.slice(0,-1)}</div>
         </div><button className='headerBtn' onClick={goToResumeFrame}>이력서 출력하기</button>
       </div>
     )
