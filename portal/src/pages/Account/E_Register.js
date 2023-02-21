@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import uuid from 'react-uuid'
 
 const E_Register = ({socket}) => {
 
@@ -127,12 +128,14 @@ const E_Register = ({socket}) => {
    }, [isId, isPw, isPwCheck, isName, isTel, isEnterprise]);
 
    const onClickRegister = () => {
+
+      // 실시간 알림
       if (socket) {
          socket.send(JSON.stringify({
             alarm_num: 0,
-            mb_id_from: id,
+            mb_id_from: '',
             mb_id_to: 'admin',
-            alarm_content: `${enterprise}님이 가입신청을 하셨습니다.`,
+            alarm_content: `'${enterprise}'기업이 가입신청을 하였습니다.`,
             alarm_check: 'N',
             alarm_dt: '방금 전'
          }))
@@ -161,12 +164,11 @@ const E_Register = ({socket}) => {
       navigate('/');
 
       // 기업회원가입 알람
-
       axios
          .post('/alarm/enterRegisterAlarm', {
             mb_id_from: id,
             mb_id_to: 'admin',
-            alarm_content: `${enterprise}님이 가입신청을 하셨습니다.`
+            alarm_content: `'${enterprise}'기업이 가입신청을 하였습니다.`,
          })
          .then((res) => {
             console.log(res)

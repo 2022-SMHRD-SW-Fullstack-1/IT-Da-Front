@@ -1,15 +1,22 @@
-import React from "react";
+import {useEffect, React, uuid, useState} from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Login from "../pages/Account/Login";
 import Register from "../pages/Account/Register";
 import E_Register from "../pages/Account/E_Register";
 
-const LoginRoutes = ({socket}) => {
+const LoginRoutes = ({socket, connect}) => {
+
+  const [id, setId] = useState(uuid)
+
+  useEffect(() => {
+    connect(id)
+ }, [])
+
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route path="/" element={<Login socket={socket}/>} />
+      <Route path="/register" element={<Register socket={socket}/>} />
       <Route path="/e_register" element={<E_Register socket={socket}/>} />
     </Routes>
   );

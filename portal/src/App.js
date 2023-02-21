@@ -42,7 +42,7 @@ function App() {
 
   return window.sessionStorage.getItem("loginId") == null ? (
     <div className='T_mainTopDiv'>
-      <LoginRoutes socket={socket}/>
+      <LoginRoutes socket={socket} connect={connect}/>
     </div>
   ) : (
     <div className='T_mainTopDiv'>
