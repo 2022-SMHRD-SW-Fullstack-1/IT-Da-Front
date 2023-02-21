@@ -10,22 +10,11 @@ import { RiStarLine } from "react-icons/ri";
 import { RiStarFill } from "react-icons/ri";
 import E_main_detail from "./E_main_detail";
 import ageCaculate from "../../utils/ageCaculate";
+import location from "../../asset/list/Area"
 const E_main = () => {
   //필터 데이터
   const month = ["전체", "1주일전", "1개월전", "3개월전", "6개월전"];
-  const location = [
-    "전체",
-    "서울",
-    "부산",
-    "대구",
-    "광주",
-    "세종특별자치",
-    "경기",
-    "강원",
-    "전남",
-    "전북",
-    "제주",
-  ];
+  
   const skill_stack = [
     "전체",
     "java",
@@ -180,7 +169,7 @@ const E_main = () => {
             item.wish_area3 == hope_location) &&
           (skill == "전체" ||
             (item.skills != null && item.skills.includes(skill))) &&
-          (hope_job == "전체" || item.wish_field.includes(hope_job)) &&
+          (hope_job == "전체" || item.wish_field!=null&& item.wish_field.includes(hope_job)) &&
           dateCompare(update_month, item.update_dt) &&
           certification_info
             .filter((i) => i.cert_name.includes(certificate_info))
@@ -203,7 +192,7 @@ const E_main = () => {
         params: { enter_id: window.sessionStorage.getItem("loginId"),},
       })
       .then((res) => {
-        console.log(res.data)
+        console.log("데이터",res.data)
         setCertification_info(res.data.certification);
         setSimple_info(res.data.resume);
         setFilterData(res.data.resume);
