@@ -196,7 +196,7 @@ const Register = ({ socket }) => {
         console.log(e)
         alert('회원가입에 실패했습니다.')
       });
-    // navigate('/');
+    navigate('/');
 
 
     // 학생 회원가입 알림
