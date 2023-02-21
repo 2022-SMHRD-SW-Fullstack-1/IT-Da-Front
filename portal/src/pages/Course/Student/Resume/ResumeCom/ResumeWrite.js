@@ -5,10 +5,10 @@ import SelectFileBtn from '../../../../../components/file/SelectFileBtn'
 import UploadBtn from '../../../../../components/file/UploadBtn'
 import ageCaculate from '../../../../../utils/ageCaculate'
 import MajorList from "../../../../../asset/list/Major"
+import areaList from "../../../../../asset/list/Area"
 
 const ResumeWrite = ({ resume, setResume }) => {
     /**지역 전체 리스트 */
-    const areaList = ['전체', '서울', '부산', '대구', '인천', '광주', '대전', '울산', '경기', '강원', '충북', '충남', '전북', '전남', '경북', '경남', '제주', '해외']
     // simple_comment:'',
     // photo:'',
     // project1:'1',
