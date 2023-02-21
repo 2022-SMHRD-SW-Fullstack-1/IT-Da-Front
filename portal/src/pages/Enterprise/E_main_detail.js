@@ -7,10 +7,11 @@ import uuid from 'react-uuid'
 import "../../css/E_main_detail.css";
 import ageCaculate from "../../utils/ageCaculate";
 import S_portfolio_detail from "../Course/Student/S_portfolio_detail";
+import Major from "../../asset/list/Major";
 
 const E_main_detail = ({ socket }) => {
   const { state } = useLocation();
-
+  const majorList = Major;
   const [isBookmark, setIsBookmark] = useState(state.isBookmark);
   const [portfolio_info, setPortfolio_info] = useState([
     {
@@ -370,7 +371,7 @@ const E_main_detail = ({ socket }) => {
               </div>
               <div>
                 <p>전공</p>
-                <p>{resume.major}</p>
+                <p>{majorList.includes(resume.major)&&'전 공'||'비전공'}</p>
               </div>
               <div>
                 <p>희망지역</p>

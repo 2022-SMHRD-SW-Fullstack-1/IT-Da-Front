@@ -40,12 +40,18 @@ const E_main = () => {
   const [skill, setSkill] = useState("전체");
   const [hope_job, setHope_job] = useState("전체");
   const [certificate_info, setCertificate_info] = useState("");
-  
-
+  const [wishfield_info,setWishfield_info]=useState("");
+  const [skill_info,setskill_info]=useState("");
 
   const onCertiChange = (e) => {
     setCertificate_info(e.target.value);
   };
+  const onWishfieldChange=(e)=>{
+    setWishfield_info(e.target.value);
+  }
+  const onskillChange=(e)=>{
+    setskill_info(e.target.value);
+  }
 
   //필터링 한 후 데이터 list
   const [filterDate, setFilterData] = useState([]);
@@ -157,9 +163,13 @@ const E_main = () => {
   const certificate_filter = (e) => {
     const { value } = e.target;
   };
-
+  
+console.log("1212",simple_info.wish_field);
   //상세보기 필터 적용 버튼
   const button_filterclick = () => {
+
+    console.log("데이터",simple_info)
+    
     setFilterData(
       simple_info.filter(
         (item) =>
@@ -167,22 +177,32 @@ const E_main = () => {
             item.wish_area1 == hope_location ||
             item.wish_area2 == hope_location ||
             item.wish_area3 == hope_location) &&
-          (skill == "전체" ||
-            (item.skills != null && item.skills.includes(skill))) &&
-          (hope_job == "전체" || item.wish_field!=null&& item.wish_field.includes(hope_job)) &&
+          // (skill == "전체" ||
+          //   (item.skills != null && item.skills.includes(skill))) &&
+          // (hope_job == "전체" || item.wish_field!=null&& item.wish_field.includes(hope_job)) &&
           dateCompare(update_month, item.update_dt) &&
-          certification_info
-            .filter((i) => i.cert_name.includes(certificate_info))
-            .findIndex((e) => e.mb_id === item.mb_id) !== -1
+          (certification_info
+            .filter((i) =>i.cert_name!=null && i.cert_name.includes(certificate_info))
+            .findIndex((e) => e.mb_id === item.mb_id) !== -1)
+            &&
+            (simple_info
+            .filter((i) =>i.wish_field!=null && i.wish_field.includes(wishfield_info))
+            .findIndex((e) => e.mb_id === item.mb_id) !== -1)
+            &&
+            (simple_info)
+            .filter((i)=>i.skills!=null && i.skills.toLowerCase().includes(skill_info))
+            .findIndex((e) => e.mb_id === item.mb_id) !== -1)
       )
-    );
+      
+    ;
     console.log(skill);
     console.log(typeof (new Date() - new Date("2022-01-20")));
-    console.log(
-      certification_info
-        .filter((i) => i.cert_name.includes(certificate_info))
-        .findIndex((e) => e.mb_id === "jingu@naver.com") !== -1
-    );
+    console.log("인포",certificate_info);
+    // console.log("데이터12",
+    //   wishfield_info
+    //     .filter((i) => i.cert_name.includes(simple_info.wish_field))
+    //     .findIndex((e) => e.mb_id === "jingu@naver.com") !== -1
+    // );
   };
 
   // 이력서 입력한 정보 /기업이 저장한 인재 북마크 데이터
@@ -192,7 +212,7 @@ const E_main = () => {
         params: { enter_id: window.sessionStorage.getItem("loginId"),},
       })
       .then((res) => {
-        console.log("데이터",res.data)
+        // console.log("데이터",res.data)
         setCertification_info(res.data.certification);
         setSimple_info(res.data.resume);
         setFilterData(res.data.resume);
@@ -284,11 +304,16 @@ const E_main = () => {
                     <div className="E_main_input_detail_three_div">
                       <div>기술스택</div>
                       <div>
-                        <select onChange={skill_filter}>
+                      <input
+                          value={skill_info}
+                          onChange={onskillChange}
+                        ></input>
+                        
+                        {/* <select onChange={skill_filter}>
                           {skill_stack.map((item) => (
                             <option key={item}>{item}</option>
                           ))}
-                        </select>
+                        </select> */}
                       </div>
                     </div>
                     <div className="E_main_input_detail_three_div">
@@ -303,11 +328,16 @@ const E_main = () => {
                     <div className="E_main_input_detail_three_div">
                       <div>희망 직무</div>
                       <div>
-                        <select onChange={hope_job_filter}>
+                        {/* <select onChange={hope_job_filter}>
                           {wanted_job.map((item) => (
                             <option key={item}>{item}</option>
                           ))}
-                        </select>
+                        </select> */}
+                        <input
+                          value={wishfield_info}
+                          onChange={onWishfieldChange}
+
+                        ></input>
                       </div>
                     </div>
                   </div>
