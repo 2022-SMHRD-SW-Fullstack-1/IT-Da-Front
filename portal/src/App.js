@@ -49,7 +49,7 @@ function App() {
       {location.pathname !== "/consulting"
         && <Header connect={connect} socket={socket} setHeader={setHeader} />}
       {location.pathname !== "/consulting"
-        < Alarm connect={connect} socket={socket} />}
+        && <Alarm connect={connect} socket={socket} />}
       <ITDaRoutes connect={connect} socket={socket} />
       {location.pathname !== "/consulting"
         && <Footer />}
