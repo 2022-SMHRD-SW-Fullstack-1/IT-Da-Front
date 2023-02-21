@@ -30,7 +30,7 @@ const UploadBtn = ({ btn_text, selectedFile, resume, setResume }) => {
           Body: selectedFile,
           Bucket: S3_BUCKET,
           //upload/사용자아이디 폴더 안에 file.name을 넣겠다
-          Key: `upload/photo/${sessionStorage.getItem("loginId")}/` + selectedFile.name
+          Key: `upload/photo/${sessionStorage.getItem("loginId")}/photo`
         };
         myBucket.putObject(params)
         .send((err)=>{
