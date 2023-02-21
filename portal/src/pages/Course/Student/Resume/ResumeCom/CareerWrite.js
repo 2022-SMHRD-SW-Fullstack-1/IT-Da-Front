@@ -142,10 +142,9 @@ const CareerWrite = ({ career, setCareer }) => {
                                         {career.cr_s_dt.replace(/-/g, '.')} ~ {career.cr_e_dt.replace(/-/g, '.')}
                                     </p></td>
                                     <td><p>{career.cr_activity}</p></td>
-                                    <td onClick={() => onRemove(career.cr_num, career.cr_organization, career.cr_position, career.cr_s_dt, career.cr_e_dt)}>
+                                    <td>
                                         <div className='sRBtnDiv'>
-                                            {/* <img className='sRDeleteBtn' src={btnDelete} /> */}
-                                            X
+                                        <button onClick={() => onRemove(career.cr_num, career.cr_organization, career.cr_position, career.cr_s_dt, career.cr_e_dt)} className="resumeBtn">삭제</button>
                                         </div></td>
                                 </tr>
                             )}
@@ -182,13 +181,11 @@ const CareerWrite = ({ career, setCareer }) => {
                         </td>
                         <td><input type='text' name='cr_activity' onChange={onChange} value={inputs.cr_activity} /></td>
                         <td onClick={addCareer}>
-                            <div className='sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
+                             <div><button className="resumeBtn" onClick={addCareer}>추가</button></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div><button className="resumeBtn" onClick={addCareer}>추가하기</button></div>
+          
         </div>
     )
 }

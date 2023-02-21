@@ -121,9 +121,9 @@ const PrizeWrite = ({ prize, setPrize }) => {
                                     <td><p>{prize.prize_name}</p></td>
                                     <td><p>{prize.prize_dt.replace(/-/g, '.')} </p></td>
                                     <td><p>{prize.prize_org}</p></td>
-                                    <td onClick={() => onRemove(prize.prize_num, prize.prize_org, prize.prize_name, prize.prize_dt)}>
+                                    <td>
                                         <div className='sRBtnDiv'>
-                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        <button onClick={() => onRemove(prize.prize_num, prize.prize_org, prize.prize_name, prize.prize_dt)} className="resumeBtn">삭제</button>
                                         </div></td>
                                 </tr>
                             )}
@@ -153,13 +153,11 @@ const PrizeWrite = ({ prize, setPrize }) => {
                         <td><input type='date' className='dateInput' name='prize_dt' onChange={onChange} value={inputs.prize_dt} /></td>
                         <td><input type='text' name='prize_org' onChange={onChange} value={inputs.prize_org} /></td>
                         <td onClick={addPrize}>
-                            <div className='sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
+                        <div><button className="resumeBtn" onClick={addPrize}>추가</button></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div><button className="resumeBtn" onClick={addPrize}>추가하기</button></div>
+         
         </div>
     )
 }

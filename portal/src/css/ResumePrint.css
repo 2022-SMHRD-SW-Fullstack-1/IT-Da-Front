@@ -3,6 +3,12 @@
   margin-right: 15mm;
   margin-top: 25mm;
 }
+@media print {
+  .print>p {
+    margin: 0;
+  }
+
+}
 
 .resumePrintTopDiv{
   margin: 20mm;
@@ -153,4 +159,8 @@
 
 #coverLetter{
   height: auto;
+}
+
+.resumePrintTopDiv p {
+  margin: 0;
 }

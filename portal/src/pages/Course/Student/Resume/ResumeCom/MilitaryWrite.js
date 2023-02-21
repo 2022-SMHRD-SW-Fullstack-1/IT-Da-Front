@@ -125,10 +125,10 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                                     <td><p>{military.mili_army}</p></td>
                                     <td><p>{military.mili_s_dt}</p></td>
                                     <td><p>{military.veteran_yn}</p></td>
-                                    <td onClick={() => onRemove(military.mili_num, military.mili_title, military.mili_army)}>
-                                        <div className='sRBtnDiv'>
-                                            <img className='sRDeleteBtn' src={btnDelete} />
-                                        </div></td>
+                                    <td>
+                                        <span id='sRBtnDiv'>
+                                        <button onClick={() => onRemove(military.mili_num, military.mili_title, military.mili_army)} className="resumeBtn">삭제</button>
+                                        </span></td>
                                 </tr>
                             )}
                         </Draggable>
@@ -165,13 +165,11 @@ const MilitaryWrite = ({ military, setMilitary }) => {
                         <td><input type='text' className='dateInput' name='mili_s_dt' onChange={onChange} value={inputs.mili_s_dt} /></td>
                         <td><input type='text' name='veteran_yn' onChange={onChange} value={inputs.veteran_yn} /></td>
                         <td onClick={addMilitary}>
-                            <div className='sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
+                        <div><button className="resumeBtn" onClick={addMilitary}>추가</button></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div><button className="resumeBtn" onClick={addMilitary}>추가하기</button></div>
+    
         </div>
     )
 }

@@ -35,7 +35,7 @@
 
 .sRTitle{
    border-bottom: 3px solid rgb(209, 209, 209);
-   margin-bottom: 0.5rem;
+   margin-bottom: 2.5rem;
    font-size: 1.4rem;
    font-weight: bold;
    /* margin-right: 1rem; */
@@ -43,4 +43,5 @@
 .sRContentDiv{
    display: flex;
    justify-content: space-between;
+   margin-top: 10rem;
 }

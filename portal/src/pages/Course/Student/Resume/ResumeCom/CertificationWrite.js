@@ -117,10 +117,9 @@ const CertificationWrite = ({ certification, setCertification }) => {
                             <td><p>{certification.cert_name}</p></td>
                             <td><p>{certification.cert_org}</p></td>
                             <td><p>{certification.cert_dt.replace(/-/g,'.')} </p></td>
-                            <td onClick={() => onRemove(certification.cert_num,certification.cert_org,certification.cert_name,certification.cert_dt)}>
+                            <td>
                                 <div className='sRBtnDiv'>
-                                    {/* <img className='sRDeleteBtn' src={btnDelete}/> */}
-                                    X
+                                <button onClick={() => onRemove(certification.cert_num,certification.cert_org,certification.cert_name,certification.cert_dt)} className="resumeBtn">삭제</button>
                                     </div></td>
                                 </tr>
                             )}
@@ -151,13 +150,11 @@ const CertificationWrite = ({ certification, setCertification }) => {
                         <td><input type='text' name='cert_org' onChange={onChange} value={inputs.cert_org} /></td>
                         <td><input type='date' className='dateInput' name='cert_dt' onChange={onChange} value={inputs.cert_dt} /></td>
                         <td onClick={addCertification}>
-                            <div className='sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd}/>
-                            </div></td>
+                        <div><button className="resumeBtn" onClick={addCertification}>추가</button></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div><button className="resumeBtn" onClick={addCertification}>추가하기</button></div>
+          
         </div>
     )
 }

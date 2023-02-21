@@ -137,9 +137,9 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                                     <td><p>{graduation.grad_dt.replace(/-/g, '.')}</p></td>
                                     <td><p>{graduation.grad_type}</p></td>
                                     <td><p>{graduation.grad_score}</p></td>
-                                    <td onClick={() => onRemove(graduation.grad_num, graduation.grad_dt, graduation.grad_school, graduation.school_type, graduation.grad_type)}>
+                                    <td>
                                         <div className='sRBtnDiv'>
-                                            <img className='sRDeleteBtn' src={btnDelete} />
+                                        <button onClick={() => onRemove(graduation.grad_num, graduation.grad_dt, graduation.grad_school, graduation.school_type, graduation.grad_type)} className="resumeBtn">삭제</button>
                                         </div></td>
                                 </tr>
                             )}
@@ -181,13 +181,11 @@ const GraduationWrite = ({ graduation, setGraduation }) => {
                         </td>
                         <td><input type='text' name='grad_score' className='gradScore' onChange={onChange} value={inputs.grad_score} /></td>
                         <td onClick={addGraduation}>
-                            <div className='sRBtnDiv'>
-                                <img className='sRAddBtn' src={btnAdd} />
-                            </div></td>
+                        <div><button className="resumeBtn" onClick={addGraduation}>추가</button></div></td>
                     </tr>
                 </tbody>
             </table>
-            <div><button className="resumeBtn" onClick={addGraduation}>추가하기</button></div>
+            
         </div>
     )
 }

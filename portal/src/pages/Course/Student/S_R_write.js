@@ -133,8 +133,8 @@ const [wish_field, setWishField] = useState([{
         <CertificationWrite certification={certification} setCertification={setCertification} />
         <PrizeWrite prize={prize} setPrize={setPrize} />
         <MilitaryWrite military={military} setMilitary={setMilitary} />
+        <button className="blueBtn" onClick={goToResumeFrame}>출력페이지</button>
       </div>
-      <button className="blueBtn" onClick={goToResumeFrame}>출력페이지</button>
       <p></p>
     </div>
   );

@@ -41,6 +41,7 @@ const S_CL_main = () => {
       })
       .then((res) => {
         console.log(res);
+        alert('저장되었습니다.')
       })
       .catch((e) => console.log(e));
   };
