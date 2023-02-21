@@ -41,7 +41,7 @@ const C_archive_detail = () => {
             <div className='annViewContent'>
                <p dangerouslySetInnerHTML={ {__html: post.b_content} }></p>
             </div>
-            <p>첨부파일 <span onClick={()=> window.open(url)}>{post.b_file}</span></p>
+            <p>첨부파일 <span className='fileColor' onClick={()=> window.open(url)}>{post.b_file}</span></p>
          </div>
          {window.sessionStorage.getItem("role") === 't' &&
             <div className='content annViewButton'>

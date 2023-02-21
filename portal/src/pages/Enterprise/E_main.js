@@ -256,10 +256,10 @@ console.log("1212",simple_info.wish_field);
               .map((i) => i.cert_name + "  ")}
           </td>
           <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
-            {item.skills}
+            {item.skills&&item.skills.slice(0,-1)}
           </td>
           <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
-            {item.wish_field}
+            {item.wish_field!='전체'&&item.wish_field.slice(0,-1)||'전체'}
           </td>
           <td mb_id={item.mb_id} name={item.name} onClick={go_to_userdetail}>
             {item.wish_area1},{item.wish_area2},{item.wish_area3}
@@ -343,11 +343,7 @@ console.log("1212",simple_info.wish_field);
                   </div>
                 </div>
                 <div className="filter">
-                  <div
-                    onClick={button_filterclick}
-                    id="btn_filter"
-                    className="test hoverHand"
-                  >
+                  <div onClick={button_filterclick} id="btn_filter" className="test filterBtn">
                     적용
                   </div>
                 </div>
