@@ -62,9 +62,9 @@
 
 
 /*Navbar 컴포넌트*/
-#navbarTopDiv {
+.navbarTopDiv {
    background-color: var(--mainGray);
-   width: 18rem;
+   width: 17rem;
    height: 100%;
 border-right:1px solid #e3e3e3;
 }

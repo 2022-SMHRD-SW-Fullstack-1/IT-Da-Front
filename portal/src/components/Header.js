@@ -110,7 +110,7 @@ const Header = ({socket}) => {
              <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
                         <p className='head_userName1'>{window.sessionStorage.getItem("userName")}</p>
-                        <p className='head_userName2'>마이페이지</p>         
+                        <p onClick={onClickEdit} className='head_userName2'>마이페이지</p>         
                           <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
                          
                         <div className="AllAlarmListGroup">
@@ -125,7 +125,7 @@ const Header = ({socket}) => {
                  <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
                         <p className='head_userName1'>{window.sessionStorage.getItem("userName")} 연구원</p>
-                        <p className='head_userName2' >마이페이지</p>         
+                        <p onClick={onClickEdit} className='head_userName2' >마이페이지</p>         
                           <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
                         
                         <div className="AllAlarmListGroup">
@@ -140,7 +140,7 @@ const Header = ({socket}) => {
                    <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
                         <p className='head_userName1'>{window.sessionStorage.getItem("userName")}님</p>
-                        <p className='head_userName2'>마이페이지</p>         
+                        <p onClick={onClickEdit} className='head_userName2'>마이페이지</p>         
                           <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
                          
                         <div className="AllAlarmListGroup">
@@ -155,7 +155,7 @@ const Header = ({socket}) => {
                        <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>  
                         <p className='head_userName1'>{window.sessionStorage.getItem("userName")}</p>
-                        <p className='head_userName2'>마이페이지</p>         
+                        <p onClick={onClickEdit} className='head_userName2'>마이페이지</p>         
                           <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
                         <div className="AllAlarmListGroup">
                             <ListGroup style={allAlarmShow} >
