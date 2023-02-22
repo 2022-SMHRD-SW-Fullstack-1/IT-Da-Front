@@ -75,7 +75,7 @@ const SkillsWrite = ({ skills, setSkill }) => {
 
     return (
         <div className='resumeDiv' id='smallTable'>
-            <p className='sRTitle'>기술스택</p>
+            <p className='sRTitle'>기술스택<span id='resume_sub'>사용 가능한 기술을 입력하고 수준에 따라 상 중 하를 선택해주세요. </span></p>
             <table className='resumeTable'>
                 <thead>
                     <tr>
