@@ -64,7 +64,7 @@ const Wish_fieldWrite = ({ wish_field, setWishField }) => {
 
     return (
         <div className='resumeDiv' id='smallTable'>
-            <p className='sRTitle'>희망분야</p> 
+           <p className='sRTitle'>희망분야<span id='resume_sub'>희망하는 분야를 입력해주세요. </span></p>
             <table className='resumeTable'>
                 <thead>
                     <tr>
