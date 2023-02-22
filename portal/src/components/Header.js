@@ -7,6 +7,7 @@ import logo from '../asset/img/logo_sbl.png'
 import profileImg from '../asset/img/img_user.PNG'
 import { HiOutlineBellAlert } from "react-icons/hi2";
 import { HiBellAlert } from "react-icons/hi2";
+import Dropdown from 'react-bootstrap/Dropdown';
 import AllAlarm_list from '../pages/Alarm/AllAlarm_list';
 import ListGroup from 'react-bootstrap/ListGroup';
 
@@ -106,11 +107,12 @@ const Header = ({socket}) => {
                 <img onClick={onClickLogo} className='headerLogo hoverHand' src={logo} />
                 {(window.sessionStorage.getItem("role") === 's') && (
                     <div className='headerRight'>
-                        <p>{window.sessionStorage.getItem("userName")}</p>
-                        <img className='headerImgProfile' onClick={onClickEdit} src={profileImg} />
-                        <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
-                        <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
+             <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
+                        <p className='head_userName1'>{window.sessionStorage.getItem("userName")}</p>
+                        <p className='head_userName2'>마이페이지</p>         
+                          <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
+                         
                         <div className="AllAlarmListGroup">
                             <ListGroup style={allAlarmShow} >
                                 {allAlarmList}
@@ -120,11 +122,12 @@ const Header = ({socket}) => {
                 )}
                 {(window.sessionStorage.getItem("role") === 't') && (
                     <div className='headerRight'>
-                        <p>{window.sessionStorage.getItem("userName")} 연구원</p>
-                        <img className='headerImgProfile' src={profileImg} />
-                        <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
-                        <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
+                 <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
+                        <p className='head_userName1'>{window.sessionStorage.getItem("userName")} 연구원</p>
+                        <p className='head_userName2' >마이페이지</p>         
+                          <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
+                        
                         <div className="AllAlarmListGroup">
                             <ListGroup style={allAlarmShow} >
                                 {allAlarmList}
@@ -134,11 +137,12 @@ const Header = ({socket}) => {
                 )}
                 {(window.sessionStorage.getItem("role") === 'a') && (
                     <div className='headerRight'>
-                        <p>{window.sessionStorage.getItem("userName")}님</p>
-                        <img className='headerImgProfile' src={profileImg} />
-                        <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
-                        <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
+                   <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
                         <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
+                        <p className='head_userName1'>{window.sessionStorage.getItem("userName")}님</p>
+                        <p className='head_userName2'>마이페이지</p>         
+                          <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
+                         
                         <div className="AllAlarmListGroup">
                             <ListGroup style={allAlarmShow} >
                                 {allAlarmList}
@@ -148,11 +152,11 @@ const Header = ({socket}) => {
                 )}
                 {(window.sessionStorage.getItem("role") === 'e') && (
                     <div className='headerRight'>
-                        <p>{window.sessionStorage.getItem("userName")}</p>
-                        <img className='headerImgProfile' src={profileImg} />
-                        <button onClick={onClickLogout} className='headerBtn'>로그아웃</button>
-                        <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
-                        <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>
+                       <div><HiOutlineBellAlert onClick={allAlarmClick} style={alarmIconPo} className='alarmIcon' /></div>
+                        <div><HiBellAlert onClick={allAlarmClick} style={alarmIconOp} className='alarmIcon' /></div>  
+                        <p className='head_userName1'>{window.sessionStorage.getItem("userName")}</p>
+                        <p className='head_userName2'>마이페이지</p>         
+                          <p onClick={onClickLogout} className='head_userName3'>로그아웃</p>  
                         <div className="AllAlarmListGroup">
                             <ListGroup style={allAlarmShow} >
                                 {allAlarmList}

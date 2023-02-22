@@ -28,17 +28,19 @@
 
 .headerInnerDiv {
     height: 5rem;
-    width: 80%;
-
+    width: 97.5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 1rem;
 }
 
 .headerLogo {
     height: 2.8rem;
 }
-
+.headerRight p{
+    padding-left: 1.5rem;
+}
 .headerRight {
     display: flex;
     align-items: center;
@@ -66,4 +68,25 @@
     background-color: rgb(0, 138, 204);
     font-weight: bold;
     color: white;
+}
+.head_userName1{
+    font-weight: bold;
+    font-size: 1rem;
+  
+}
+.head_userName2:hover{
+    cursor: pointer;
+}
+
+.head_userName2{
+    font-weight: bold;
+    font-size: 1rem;
+
+}
+.head_userName3{
+    font-weight: bold;
+    font-size: 1rem;
+}
+.head_userName3:hover{
+    cursor: pointer;
 }

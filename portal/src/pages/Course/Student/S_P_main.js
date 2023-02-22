@@ -63,9 +63,9 @@ const S_P_main = () => {
       <td>{portfolio.portfolio_dt}</td>
     </tr>))
     return (
-        <div className='container'>
+        <div className='container' id='container_div'>
             <p>포트폴리오</p>
-            <div className='content'>
+            <div className='content' id='content_div'>
                 <table>
                     <thead>
                         <tr>

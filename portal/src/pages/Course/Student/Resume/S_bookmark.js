@@ -73,7 +73,7 @@ const S_bookmark = () => {
     newCompany.map((item) => <M_company_bookmark_list setBookmarkList={setBookmarkList} bookmarkList={bookmarkList} item={item} key={item.company_num} />)
 
   return (
-    <div className='container'>
+    <div className='container' id='container_title'>
       <p>기업 공고</p>
       <div className="filter_input_div">
         <div><input type='text' name='f_company_name' placeholder='기업명으로 검색하기' onChange={onChange} /></div>

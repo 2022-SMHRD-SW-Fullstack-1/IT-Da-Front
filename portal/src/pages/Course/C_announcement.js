@@ -36,9 +36,9 @@ const C_announcement = () => {
 
 
   return (
-    <div className='container'>
+    <div className='container'id='container_div'>
       <p>공지사항</p>
-      <div className='content'>
+      <div className='content' id='content_div'>
         <table>
           <thead>
             <tr>

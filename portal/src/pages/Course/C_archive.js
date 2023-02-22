@@ -34,9 +34,9 @@ const C_archive = () => {
 
 
   return (
-    <div className='container'>
+    <div className='container' id='container_div'>
       <p>공유 자료실</p>
-      <div className='content'>
+      <div className='content' id='content_div'>
         <table>
           <thead>
             <tr>
