@@ -155,14 +155,14 @@ const M_company_list = (props) => {
                <td  company_num={company.company_num} onClick={onHandleBookmark}><span ><RiStarLine /></span><p >{company.company_count}</p></td>)}
             
             
+            <td className='company_name'>{props.item.company_name} </td>
+
             <td className='company_register'>
                 
                 {props.item.company_register} 
                 </td>
 
-            <td className='company_name'>{props.item.company_name} </td>
-
-            <td style={edit_style_po} className='company_deadline'>{props.item.company_deadline} </td>
+            <td style={edit_style_po} className='company_deadline'>{props.item.company_deadline.substr(0,4)+"-"+props.item.company_deadline.substr(4,2)+"-"+props.item.company_deadline.substr(6,2)} </td>
             <td style={edit_style_op} className='company_deadline'><input type='text' value={company.company_deadline} onChange={onChange} name="company_deadline"></input></td>
 
             

@@ -64,8 +64,8 @@ const M_select_company = (props) => {
                 <table style={{ minWidth: '80rem' }}>
                     <thead>
                         <tr>
-                            <th>등록일</th>
                             <th>기업명</th>
+                            <th>등록일</th>
                             <th>마감일</th>
                             <th>구인정보</th>
                             <th></th>

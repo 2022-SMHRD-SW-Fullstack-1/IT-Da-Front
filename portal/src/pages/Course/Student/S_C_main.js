@@ -89,8 +89,8 @@ const S_C_main = () => {
                   <thead>
                       <tr>
                           <th className="comapny_bookmark_th"></th>
-                          <th>등록일</th>
                           <th>기업명</th>
+                          <th>등록일</th>
                           <th>마감일</th>
                           <th>구인정보</th>
                       </tr>
